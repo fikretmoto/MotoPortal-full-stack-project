@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+backend/venv/
+venv/
+
+# Django
+backend/db.sqlite3
+backend/media/
+*.log
+
+# Environment variables
+.env
+.env.*
+
+# Next.js
+motoportal-next/node_modules/
+motoportal-next/.next/
+motoportal-next/out/
+motoportal-next/.env.local
+motoportal-next/.env.development.local
+motoportal-next/.env.production.local
+motoportal-next/npm-debug.log*
+motoportal-next/yarn-debug.log*
+motoportal-next/yarn-error.log*
+motoportal-next/pnpm-debug.log*
+
+# Editors
+.vscode/
+.idea/
+
+# Operating system
+.DS_Store
+Thumbs.db
