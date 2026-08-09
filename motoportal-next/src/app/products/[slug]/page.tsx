@@ -4,7 +4,7 @@ import ProductHero from "@/components/product/ProductHero";
 import ProductDescription from "@/components/product/ProductDescription";
 import ProductHighlights from "@/components/product/ProductHighlights";
 import ProductTechnicalTabs from "@/components/product/ProductTechnicalTabs";
-import ProductGallery from "@/components/product/ProductGallery";
+
 
 import {
   getProductBySlug,
@@ -43,7 +43,7 @@ export default async function ProductDetailPage({
     );
   }
 
-console.log(product.attributes);
+
   return (
     <main className="mx-auto max-w-6xl px-6 py-10">
       <Link
@@ -69,10 +69,7 @@ console.log(product.attributes);
   attributes={product.attributes}
 />
 
-<ProductGallery
-  images={product.images}
-  productName={product.name}
-/>
+
 
     </main>
   );
