@@ -1,4 +1,4 @@
-﻿[
+[
 {
   "model": "catalog.category",
   "pk": 1,
@@ -63,7 +63,7 @@
   "model": "catalog.category",
   "pk": 6,
   "fields": {
-    "name": "Yedek Para",
+    "name": "Yedek Parça",
     "slug": "yedek-parca",
     "parent": null,
     "is_active": true,
@@ -243,7 +243,7 @@
   "model": "catalog.category",
   "pk": 21,
   "fields": {
-    "name": "E-Kasal²",
+    "name": "E-Kasalı",
     "slug": "e-kasali",
     "parent": 2,
     "is_active": true,
@@ -291,7 +291,7 @@
   "model": "catalog.category",
   "pk": 25,
   "fields": {
-    "name": "Motor Paralar²",
+    "name": "Motor Parçaları",
     "slug": "motor-parcalari",
     "parent": 6,
     "is_active": true,
@@ -315,7 +315,7 @@
   "model": "catalog.category",
   "pk": 27,
   "fields": {
-    "name": "S³spansiyon Sistemi",
+    "name": "Süspansiyon Sistemi",
     "slug": "suspansiyon-sistemi",
     "parent": 6,
     "is_active": true,
@@ -339,7 +339,7 @@
   "model": "catalog.category",
   "pk": 29,
   "fields": {
-    "name": "Temizlik ▄r³nleri",
+    "name": "Temizlik Ürünleri",
     "slug": "temizlik-urunleri",
     "parent": 8,
     "is_active": true,
@@ -351,7 +351,7 @@
   "model": "catalog.category",
   "pk": 30,
   "fields": {
-    "name": "Bak²m ▄r³nleri",
+    "name": "Bakım Ürünleri",
     "slug": "bakim-urunleri",
     "parent": 8,
     "is_active": true,
@@ -363,7 +363,7 @@
   "model": "catalog.category",
   "pk": 31,
   "fields": {
-    "name": "Motor Ya­²",
+    "name": "Motor Yağı",
     "slug": "motor-yagi",
     "parent": 8,
     "is_active": true,
@@ -375,7 +375,7 @@
   "model": "catalog.category",
   "pk": 32,
   "fields": {
-    "name": "Zincir Ya­²",
+    "name": "Zincir Yağı",
     "slug": "zincir-yagi",
     "parent": 8,
     "is_active": true,
@@ -387,7 +387,7 @@
   "model": "catalog.category",
   "pk": 33,
   "fields": {
-    "name": "Bisiklet Aksesuarlar²",
+    "name": "Bisiklet Aksesuarları",
     "slug": "bisiklet-aksesuarlari",
     "parent": 7,
     "is_active": true,
@@ -399,7 +399,7 @@
   "model": "catalog.category",
   "pk": 34,
   "fields": {
-    "name": "Motosiklet Aksesuarlar²",
+    "name": "Motosiklet Aksesuarları",
     "slug": "motosiklet-aksesuarlari",
     "parent": 7,
     "is_active": true,
@@ -411,7 +411,7 @@
   "model": "catalog.category",
   "pk": 35,
   "fields": {
-    "name": "Elektrikli Aksesuarlar²",
+    "name": "Elektrikli Aksesuarları",
     "slug": "elektrikli-aksesuarlari",
     "parent": 7,
     "is_active": true,
@@ -662,7 +662,7 @@
   "fields": {
     "product": 10,
     "sku": "212",
-    "color": "k²rm²z²",
+    "color": "kırmızı",
     "size": "xl",
     "price": "524552.00",
     "stock_quantity": 2,
@@ -679,7 +679,7 @@
   "fields": {
     "product": 11,
     "sku": "111",
-    "color": "k²rm²z²",
+    "color": "kırmızı",
     "size": "",
     "price": null,
     "stock_quantity": 0,
@@ -713,7 +713,7 @@
   "fields": {
     "product": 12,
     "sku": "1111",
-    "color": "sar²",
+    "color": "sarı",
     "size": "",
     "price": null,
     "stock_quantity": 0,
@@ -767,7 +767,7 @@
   "model": "catalog.attributegroup",
   "pk": 4,
   "fields": {
-    "name": "Ìanz²man",
+    "name": "Şanzıman",
     "slug": "sanziman",
     "description": "",
     "display_order": 40,
@@ -793,7 +793,7 @@
   "model": "catalog.attributegroup",
   "pk": 6,
   "fields": {
-    "name": "Yak²t",
+    "name": "Yakıt",
     "slug": "yakit",
     "description": "",
     "display_order": 60,
@@ -819,7 +819,7 @@
   "model": "catalog.attributegroup",
   "pk": 8,
   "fields": {
-    "name": "S³spansiyon",
+    "name": "Süspansiyon",
     "slug": "suspansiyon",
     "description": "",
     "display_order": 80,
@@ -858,7 +858,7 @@
   "model": "catalog.attributegroup",
   "pk": 11,
   "fields": {
-    "name": "G³venlik",
+    "name": "Güvenlik",
     "slug": "guvenlik",
     "description": "",
     "display_order": 110,
@@ -871,7 +871,7 @@
   "model": "catalog.attributegroup",
   "pk": 12,
   "fields": {
-    "name": "Donan²m",
+    "name": "Donanım",
     "slug": "donanim",
     "description": "",
     "display_order": 120,
@@ -910,7 +910,7 @@
   "model": "catalog.attributegroup",
   "pk": 15,
   "fields": {
-    "name": "Viz÷r",
+    "name": "Vizör",
     "slug": "vizor",
     "description": "",
     "display_order": 150,
@@ -936,7 +936,7 @@
   "model": "catalog.attributegroup",
   "pk": 17,
   "fields": {
-    "name": "Havaland²rma",
+    "name": "Havalandırma",
     "slug": "havalandirma",
     "description": "",
     "display_order": 170,
@@ -950,7 +950,7 @@
   "pk": 1,
   "fields": {
     "group": 1,
-    "name": "Model Y²l²",
+    "name": "Model Yılı",
     "slug": "model-yili",
     "data_type": "integer",
     "unit": "",
@@ -988,7 +988,7 @@
   "pk": 3,
   "fields": {
     "group": 13,
-    "name": "Garanti S³resi",
+    "name": "Garanti Süresi",
     "slug": "garanti-suresi",
     "data_type": "integer",
     "unit": "Ay",
@@ -1026,7 +1026,7 @@
   "pk": 5,
   "fields": {
     "group": 2,
-    "name": "Silindir Say²s²",
+    "name": "Silindir Sayısı",
     "slug": "silindir-sayisi",
     "data_type": "integer",
     "unit": "",
@@ -1064,7 +1064,7 @@
   "pk": 7,
   "fields": {
     "group": 2,
-    "name": "So­utma Sistemi",
+    "name": "Soğutma Sistemi",
     "slug": "sogutma-sistemi",
     "data_type": "text",
     "unit": "",
@@ -1083,7 +1083,7 @@
   "pk": 8,
   "fields": {
     "group": 2,
-    "name": "Yak²t Sistemi",
+    "name": "Yakıt Sistemi",
     "slug": "yakit-sistemi",
     "data_type": "text",
     "unit": "",
@@ -1102,7 +1102,7 @@
   "pk": 9,
   "fields": {
     "group": 3,
-    "name": "Maksimum G³",
+    "name": "Maksimum Güç",
     "slug": "maksimum-guc",
     "data_type": "decimal",
     "unit": "HP",
@@ -1140,7 +1140,7 @@
   "pk": 11,
   "fields": {
     "group": 3,
-    "name": "Maksimum H²z",
+    "name": "Maksimum Hız",
     "slug": "maksimum-hiz",
     "data_type": "integer",
     "unit": "km/h",
@@ -1159,7 +1159,7 @@
   "pk": 12,
   "fields": {
     "group": 3,
-    "name": "Yak²t T³ketimi",
+    "name": "Yakıt Tüketimi",
     "slug": "yakit-tuketimi",
     "data_type": "decimal",
     "unit": "L/100 km",
@@ -1178,7 +1178,7 @@
   "pk": 13,
   "fields": {
     "group": 2,
-    "name": "Ìanz²man Tipi",
+    "name": "Şanzıman Tipi",
     "slug": "sanziman-tipi",
     "data_type": "text",
     "unit": "",
@@ -1197,7 +1197,7 @@
   "pk": 14,
   "fields": {
     "group": 4,
-    "name": "Vites Say²s²",
+    "name": "Vites Sayısı",
     "slug": "vites-sayisi",
     "data_type": "integer",
     "unit": "",
@@ -1235,7 +1235,7 @@
   "pk": 16,
   "fields": {
     "group": 5,
-    "name": "Geni■lik",
+    "name": "Genişlik",
     "slug": "genislik",
     "data_type": "integer",
     "unit": "mm",
@@ -1254,7 +1254,7 @@
   "pk": 17,
   "fields": {
     "group": 5,
-    "name": "Y³kseklik",
+    "name": "Yükseklik",
     "slug": "yukseklik",
     "data_type": "integer",
     "unit": "mm",
@@ -1292,7 +1292,7 @@
   "pk": 19,
   "fields": {
     "group": 5,
-    "name": "Sele Y³ksekli­i",
+    "name": "Sele Yüksekliği",
     "slug": "sele-yuksekligi",
     "data_type": "integer",
     "unit": "mm",
@@ -1311,7 +1311,7 @@
   "pk": 20,
   "fields": {
     "group": 5,
-    "name": "Yerden Y³kseklik",
+    "name": "Yerden Yükseklik",
     "slug": "yerden-yukseklik",
     "data_type": "integer",
     "unit": "mm",
@@ -1330,7 +1330,7 @@
   "pk": 21,
   "fields": {
     "group": 5,
-    "name": "Bo■ A­²rl²k",
+    "name": "Boş Ağırlık",
     "slug": "bos-agirlik",
     "data_type": "decimal",
     "unit": "kg",
@@ -1349,7 +1349,7 @@
   "pk": 22,
   "fields": {
     "group": 5,
-    "name": "Yak²t Deposu",
+    "name": "Yakıt Deposu",
     "slug": "yakit-deposu",
     "data_type": "decimal",
     "unit": "L",
@@ -1368,7 +1368,7 @@
   "pk": 23,
   "fields": {
     "group": 5,
-    "name": "Maksimum Ta■²ma Kapasitesi",
+    "name": "Maksimum Taşıma Kapasitesi",
     "slug": "maksimum-tasima-kapasitesi",
     "data_type": "decimal",
     "unit": "kg",
@@ -1387,7 +1387,7 @@
   "pk": 24,
   "fields": {
     "group": 7,
-    "name": "Ín Fren",
+    "name": "Ön Fren",
     "slug": "on-fren",
     "data_type": "text",
     "unit": "",
@@ -1463,7 +1463,7 @@
   "pk": 28,
   "fields": {
     "group": 8,
-    "name": "Ín S³spansiyon",
+    "name": "Ön Süspansiyon",
     "slug": "on-suspansiyon",
     "data_type": "text",
     "unit": "",
@@ -1482,7 +1482,7 @@
   "pk": 29,
   "fields": {
     "group": 8,
-    "name": "Arka S³spansiyon",
+    "name": "Arka Süspansiyon",
     "slug": "arka-suspansiyon",
     "data_type": "text",
     "unit": "",
@@ -1501,7 +1501,7 @@
   "pk": 30,
   "fields": {
     "group": 9,
-    "name": "Ak³",
+    "name": "Akü",
     "slug": "aku",
     "data_type": "text",
     "unit": "",
@@ -1539,7 +1539,7 @@
   "pk": 32,
   "fields": {
     "group": 9,
-    "name": "G÷sterge Paneli",
+    "name": "Gösterge Paneli",
     "slug": "gosterge-paneli",
     "data_type": "text",
     "unit": "",
@@ -1558,7 +1558,7 @@
   "pk": 33,
   "fields": {
     "group": 10,
-    "name": "Ín Lastik",
+    "name": "Ön Lastik",
     "slug": "on-lastik",
     "data_type": "text",
     "unit": "",
@@ -1615,7 +1615,7 @@
   "pk": 36,
   "fields": {
     "group": 11,
-    "name": "Ãeki■ Kontrol³",
+    "name": "Çekiş Kontrolü",
     "slug": "cekis-kontrolu",
     "data_type": "boolean",
     "unit": "",
@@ -1634,7 +1634,7 @@
   "pk": 37,
   "fields": {
     "group": 11,
-    "name": "¦mmobilizer",
+    "name": "İmmobilizer",
     "slug": "immobilizer",
     "data_type": "boolean",
     "unit": "",
@@ -1710,7 +1710,7 @@
   "pk": 41,
   "fields": {
     "group": 5,
-    "name": "Sele Alt² Bagaj Hacmi",
+    "name": "Sele Altı Bagaj Hacmi",
     "slug": "sele-alti-bagaj-hacmi",
     "data_type": "decimal",
     "unit": "L",
@@ -1729,7 +1729,7 @@
   "pk": 42,
   "fields": {
     "group": 12,
-    "name": "Ín Cam",
+    "name": "Ön Cam",
     "slug": "on-cam",
     "data_type": "boolean",
     "unit": "",
@@ -1748,7 +1748,7 @@
   "pk": 43,
   "fields": {
     "group": 12,
-    "name": "D³z Taban",
+    "name": "Düz Taban",
     "slug": "duz-taban",
     "data_type": "boolean",
     "unit": "",
@@ -1786,7 +1786,7 @@
   "pk": 45,
   "fields": {
     "group": 12,
-    "name": "Anahtars²z Ãal²■t²rma",
+    "name": "Anahtarsız Çalıştırma",
     "slug": "anahtarsiz-calistirma",
     "data_type": "boolean",
     "unit": "",
@@ -1843,7 +1843,7 @@
   "pk": 48,
   "fields": {
     "group": 5,
-    "name": "A­²rl²k",
+    "name": "Ağırlık",
     "slug": "kask-agirligi",
     "data_type": "decimal",
     "unit": "g",
@@ -1881,7 +1881,7 @@
   "pk": 50,
   "fields": {
     "group": 11,
-    "name": "ECE Sertifikas²",
+    "name": "ECE Sertifikası",
     "slug": "ece-sertifikasi",
     "data_type": "text",
     "unit": "",
@@ -1900,7 +1900,7 @@
   "pk": 51,
   "fields": {
     "group": 15,
-    "name": "Viz÷r Tipi",
+    "name": "Vizör Tipi",
     "slug": "vizor-tipi",
     "data_type": "text",
     "unit": "",
@@ -1919,7 +1919,7 @@
   "pk": 52,
   "fields": {
     "group": 15,
-    "name": "G³ne■ Viz÷r³",
+    "name": "Güneş Vizörü",
     "slug": "gunes-vizoru",
     "data_type": "boolean",
     "unit": "",
@@ -1938,7 +1938,7 @@
   "pk": 53,
   "fields": {
     "group": 15,
-    "name": "Pinlock Haz²r",
+    "name": "Pinlock Hazır",
     "slug": "pinlock-hazir",
     "data_type": "boolean",
     "unit": "",
@@ -1957,7 +1957,7 @@
   "pk": 54,
   "fields": {
     "group": 16,
-    "name": "¦ Ped Ã²kar²labilir",
+    "name": "İç Ped Çıkarılabilir",
     "slug": "ic-ped-cikarilabilir",
     "data_type": "boolean",
     "unit": "",
@@ -1976,7 +1976,7 @@
   "pk": 55,
   "fields": {
     "group": 17,
-    "name": "Havaland²rma",
+    "name": "Havalandırma",
     "slug": "havalandirma",
     "data_type": "text",
     "unit": "",
@@ -1995,7 +1995,7 @@
   "pk": 56,
   "fields": {
     "group": 11,
-    "name": "Ãene Ba­lant² Tipi",
+    "name": "Çene Bağlantı Tipi",
     "slug": "cene-baglanti-tipi",
     "data_type": "text",
     "unit": "",
