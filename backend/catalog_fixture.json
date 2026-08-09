@@ -1,0 +1,8145 @@
+[
+{
+  "model": "catalog.category",
+  "pk": 1,
+  "fields": {
+    "name": "Motosiklet",
+    "slug": "motosiklet",
+    "parent": null,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.288Z",
+    "updated_at": "2026-08-06T12:20:52.858Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 2,
+  "fields": {
+    "name": "Elektrikli",
+    "slug": "elektrikli",
+    "parent": null,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.291Z",
+    "updated_at": "2026-08-06T12:20:52.861Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 3,
+  "fields": {
+    "name": "ATV",
+    "slug": "atv",
+    "parent": null,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.292Z",
+    "updated_at": "2026-08-06T12:20:52.862Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 4,
+  "fields": {
+    "name": "UTV",
+    "slug": "utv",
+    "parent": null,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.292Z",
+    "updated_at": "2026-08-06T12:20:52.863Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 5,
+  "fields": {
+    "name": "Bisiklet",
+    "slug": "bisiklet",
+    "parent": null,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.293Z",
+    "updated_at": "2026-08-06T12:20:52.864Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 6,
+  "fields": {
+    "name": "Yedek Parça",
+    "slug": "yedek-parca",
+    "parent": null,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.294Z",
+    "updated_at": "2026-08-06T12:20:52.865Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 7,
+  "fields": {
+    "name": "Aksesuar",
+    "slug": "aksesuar",
+    "parent": null,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.294Z",
+    "updated_at": "2026-08-06T12:20:52.866Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 8,
+  "fields": {
+    "name": "Bakim ve Temizlik",
+    "slug": "bakim-ve-temizlik",
+    "parent": null,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.295Z",
+    "updated_at": "2026-08-06T12:20:52.868Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 9,
+  "fields": {
+    "name": "Scooter",
+    "slug": "scooter",
+    "parent": 1,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.295Z",
+    "updated_at": "2026-08-06T12:20:52.869Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 10,
+  "fields": {
+    "name": "Naked",
+    "slug": "naked",
+    "parent": 1,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.296Z",
+    "updated_at": "2026-08-06T12:20:52.870Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 11,
+  "fields": {
+    "name": "Enduro",
+    "slug": "enduro",
+    "parent": 1,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.297Z",
+    "updated_at": "2026-08-06T12:20:52.872Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 12,
+  "fields": {
+    "name": "Adventure",
+    "slug": "adventure",
+    "parent": 1,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.298Z",
+    "updated_at": "2026-08-06T12:20:52.873Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 13,
+  "fields": {
+    "name": "Touring",
+    "slug": "touring",
+    "parent": 1,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.299Z",
+    "updated_at": "2026-08-06T12:20:52.874Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 14,
+  "fields": {
+    "name": "Sport",
+    "slug": "sport",
+    "parent": 1,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.300Z",
+    "updated_at": "2026-08-06T12:20:52.875Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 15,
+  "fields": {
+    "name": "Chopper",
+    "slug": "chopper",
+    "parent": 1,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.301Z",
+    "updated_at": "2026-08-06T12:20:52.876Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 16,
+  "fields": {
+    "name": "Cross",
+    "slug": "cross",
+    "parent": 1,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.302Z",
+    "updated_at": "2026-08-06T12:20:52.876Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 17,
+  "fields": {
+    "name": "Elektrikli Motosiklet",
+    "slug": "elektrikli-motosiklet",
+    "parent": 2,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.303Z",
+    "updated_at": "2026-08-06T12:20:52.877Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 18,
+  "fields": {
+    "name": "E-Scooter",
+    "slug": "e-scooter",
+    "parent": 2,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.304Z",
+    "updated_at": "2026-08-06T12:20:52.878Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 19,
+  "fields": {
+    "name": "E-Bisiklet",
+    "slug": "e-bisiklet",
+    "parent": 2,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.304Z",
+    "updated_at": "2026-08-06T12:20:52.879Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 20,
+  "fields": {
+    "name": "E-Car",
+    "slug": "e-car",
+    "parent": 2,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.305Z",
+    "updated_at": "2026-08-06T12:20:52.880Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 21,
+  "fields": {
+    "name": "E-Kasalý",
+    "slug": "e-kasali",
+    "parent": 2,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.305Z",
+    "updated_at": "2026-08-06T12:20:52.881Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 22,
+  "fields": {
+    "name": "Ayna",
+    "slug": "ayna",
+    "parent": 6,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.306Z",
+    "updated_at": "2026-08-06T12:20:52.882Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 23,
+  "fields": {
+    "name": "Granaj",
+    "slug": "granaj",
+    "parent": 6,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.307Z",
+    "updated_at": "2026-08-06T12:20:52.883Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 24,
+  "fields": {
+    "name": "Fren Sistemi",
+    "slug": "fren-sistemi",
+    "parent": 6,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.307Z",
+    "updated_at": "2026-08-06T12:20:52.884Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 25,
+  "fields": {
+    "name": "Motor Parçalarý",
+    "slug": "motor-parcalari",
+    "parent": 6,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.308Z",
+    "updated_at": "2026-08-06T12:20:52.886Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 26,
+  "fields": {
+    "name": "Elektrik Sistemi",
+    "slug": "elektrik-sistemi",
+    "parent": 6,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.309Z",
+    "updated_at": "2026-08-06T12:20:52.887Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 27,
+  "fields": {
+    "name": "Süspansiyon Sistemi",
+    "slug": "suspansiyon-sistemi",
+    "parent": 6,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.309Z",
+    "updated_at": "2026-08-06T12:20:52.889Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 28,
+  "fields": {
+    "name": "Egzoz Sistemi",
+    "slug": "egzoz-sistemi",
+    "parent": 6,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.310Z",
+    "updated_at": "2026-08-06T12:20:52.890Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 29,
+  "fields": {
+    "name": "Temizlik Ürünleri",
+    "slug": "temizlik-urunleri",
+    "parent": 8,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.310Z",
+    "updated_at": "2026-08-06T12:20:52.891Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 30,
+  "fields": {
+    "name": "Bakým Ürünleri",
+    "slug": "bakim-urunleri",
+    "parent": 8,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.311Z",
+    "updated_at": "2026-08-06T12:20:52.893Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 31,
+  "fields": {
+    "name": "Motor Yaðý",
+    "slug": "motor-yagi",
+    "parent": 8,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.312Z",
+    "updated_at": "2026-08-06T12:20:52.894Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 32,
+  "fields": {
+    "name": "Zincir Yaðý",
+    "slug": "zincir-yagi",
+    "parent": 8,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.312Z",
+    "updated_at": "2026-08-06T12:20:52.895Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 33,
+  "fields": {
+    "name": "Bisiklet Aksesuarlarý",
+    "slug": "bisiklet-aksesuarlari",
+    "parent": 7,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.313Z",
+    "updated_at": "2026-08-06T12:20:52.896Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 34,
+  "fields": {
+    "name": "Motosiklet Aksesuarlarý",
+    "slug": "motosiklet-aksesuarlari",
+    "parent": 7,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.314Z",
+    "updated_at": "2026-08-06T12:20:52.897Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 35,
+  "fields": {
+    "name": "Elektrikli Aksesuarlarý",
+    "slug": "elektrikli-aksesuarlari",
+    "parent": 7,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.318Z",
+    "updated_at": "2026-08-06T12:20:52.898Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 36,
+  "fields": {
+    "name": "Mont",
+    "slug": "mont",
+    "parent": 7,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.320Z",
+    "updated_at": "2026-08-06T12:20:52.899Z"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 37,
+  "fields": {
+    "name": "Kask",
+    "slug": "kask",
+    "parent": 7,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.321Z",
+    "updated_at": "2026-08-06T12:20:52.900Z"
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 1,
+  "fields": {
+    "name": "Honda",
+    "slug": "honda",
+    "logo": "",
+    "country": "",
+    "founded_year": null,
+    "website": "",
+    "description": "",
+    "is_active": true,
+    "created_at": "2026-08-06T07:41:33.454Z",
+    "updated_at": "2026-08-06T07:41:33.454Z"
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 2,
+  "fields": {
+    "name": "Yamaha",
+    "slug": "yamaha",
+    "logo": "",
+    "country": "",
+    "founded_year": null,
+    "website": "",
+    "description": "",
+    "is_active": true,
+    "created_at": "2026-08-06T07:41:42.501Z",
+    "updated_at": "2026-08-06T07:41:42.501Z"
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 3,
+  "fields": {
+    "name": "Rks",
+    "slug": "rks",
+    "logo": "",
+    "country": "",
+    "founded_year": null,
+    "website": "",
+    "description": "",
+    "is_active": true,
+    "created_at": "2026-08-06T07:41:53.545Z",
+    "updated_at": "2026-08-06T07:41:53.545Z"
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 4,
+  "fields": {
+    "name": "Kuba",
+    "slug": "kuba",
+    "logo": "",
+    "country": "",
+    "founded_year": null,
+    "website": "",
+    "description": "",
+    "is_active": true,
+    "created_at": "2026-08-06T07:41:59.476Z",
+    "updated_at": "2026-08-06T07:41:59.476Z"
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 5,
+  "fields": {
+    "name": "Arora",
+    "slug": "arora",
+    "logo": "",
+    "country": "",
+    "founded_year": null,
+    "website": "",
+    "description": "",
+    "is_active": true,
+    "created_at": "2026-08-06T07:42:04.632Z",
+    "updated_at": "2026-08-06T07:42:04.632Z"
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 6,
+  "fields": {
+    "name": "Mondial",
+    "slug": "mondial",
+    "logo": "",
+    "country": "",
+    "founded_year": null,
+    "website": "",
+    "description": "",
+    "is_active": true,
+    "created_at": "2026-08-06T07:42:10.903Z",
+    "updated_at": "2026-08-06T07:42:10.903Z"
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 7,
+  "fields": {
+    "name": "Yuki",
+    "slug": "yuki",
+    "logo": "",
+    "country": "",
+    "founded_year": null,
+    "website": "",
+    "description": "",
+    "is_active": true,
+    "created_at": "2026-08-06T07:42:15.154Z",
+    "updated_at": "2026-08-06T07:42:15.154Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 10,
+  "fields": {
+    "name": "honda pcx 125",
+    "slug": "honda-pcx-125",
+    "product_code": null,
+    "brand": 1,
+    "category": 9,
+    "price": "250000.00",
+    "currency": "TRY",
+    "stock_status": "in_stock",
+    "short_description": "ewrqewr",
+    "description": "ferewqrwqre",
+    "cover_image": "products/defender_2_qrjCbUO.png",
+    "is_featured": false,
+    "is_active": true,
+    "created_at": "2026-08-07T08:23:11.162Z",
+    "updated_at": "2026-08-08T18:26:14.590Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 11,
+  "fields": {
+    "name": "rks freccia 150",
+    "slug": "rks-freccia-150",
+    "product_code": null,
+    "brand": 3,
+    "category": 9,
+    "price": "150000.00",
+    "currency": "TRY",
+    "stock_status": "in_stock",
+    "short_description": "adfad",
+    "description": "dsdsadsaf",
+    "cover_image": "products/defender_3.PNG",
+    "is_featured": false,
+    "is_active": true,
+    "created_at": "2026-08-09T15:41:01.004Z",
+    "updated_at": "2026-08-09T15:41:01.004Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 12,
+  "fields": {
+    "name": "rks spontini 125",
+    "slug": "rks-spontini-125",
+    "product_code": null,
+    "brand": 3,
+    "category": 9,
+    "price": "100000.00",
+    "currency": "TRY",
+    "stock_status": "in_stock",
+    "short_description": "dfadsfds",
+    "description": "dsfadsfdsf\r\nadfdsafdsf",
+    "cover_image": "products/SR1-4.jpg",
+    "is_featured": false,
+    "is_active": true,
+    "created_at": "2026-08-09T15:43:28.718Z",
+    "updated_at": "2026-08-09T15:43:28.718Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 13,
+  "fields": {
+    "name": "voge 125r",
+    "slug": "voge-125r",
+    "product_code": null,
+    "brand": 7,
+    "category": 10,
+    "price": "121211.00",
+    "currency": "TRY",
+    "stock_status": "in_stock",
+    "short_description": "fdsfdsaf",
+    "description": "fadsfdsafa",
+    "cover_image": "products/neron-x-20240121-174727-1.png",
+    "is_featured": false,
+    "is_active": true,
+    "created_at": "2026-08-09T15:44:28.751Z",
+    "updated_at": "2026-08-09T15:44:28.751Z"
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 1,
+  "fields": {
+    "product": 10,
+    "sku": "211",
+    "color": "erqewr",
+    "size": "343",
+    "price": "1212121.00",
+    "stock_quantity": 2,
+    "barcode": null,
+    "is_default": false,
+    "is_active": true,
+    "created_at": "2026-08-07T08:23:11.166Z",
+    "updated_at": "2026-08-08T09:41:00.268Z"
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 2,
+  "fields": {
+    "product": 10,
+    "sku": "212",
+    "color": "kýrmýzý",
+    "size": "xl",
+    "price": "524552.00",
+    "stock_quantity": 2,
+    "barcode": null,
+    "is_default": false,
+    "is_active": true,
+    "created_at": "2026-08-08T09:41:00.270Z",
+    "updated_at": "2026-08-08T09:41:00.270Z"
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 3,
+  "fields": {
+    "product": 11,
+    "sku": "111",
+    "color": "kýrmýzý",
+    "size": "",
+    "price": null,
+    "stock_quantity": 0,
+    "barcode": null,
+    "is_default": false,
+    "is_active": true,
+    "created_at": "2026-08-09T15:41:01.007Z",
+    "updated_at": "2026-08-09T15:41:01.007Z"
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 4,
+  "fields": {
+    "product": 11,
+    "sku": "112",
+    "color": "mavi",
+    "size": "",
+    "price": null,
+    "stock_quantity": 0,
+    "barcode": null,
+    "is_default": false,
+    "is_active": true,
+    "created_at": "2026-08-09T15:41:01.008Z",
+    "updated_at": "2026-08-09T15:41:01.008Z"
+  }
+},
+{
+  "model": "catalog.productvariant",
+  "pk": 5,
+  "fields": {
+    "product": 12,
+    "sku": "1111",
+    "color": "sarý",
+    "size": "",
+    "price": null,
+    "stock_quantity": 0,
+    "barcode": null,
+    "is_default": false,
+    "is_active": true,
+    "created_at": "2026-08-09T15:43:28.721Z",
+    "updated_at": "2026-08-09T15:43:28.721Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 1,
+  "fields": {
+    "name": "Genel Bilgiler",
+    "slug": "genel-bilgiler",
+    "description": "",
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.322Z",
+    "updated_at": "2026-08-06T12:20:52.901Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 2,
+  "fields": {
+    "name": "Motor",
+    "slug": "motor",
+    "description": "",
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.323Z",
+    "updated_at": "2026-08-06T12:20:52.902Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 3,
+  "fields": {
+    "name": "Performans",
+    "slug": "performans",
+    "description": "",
+    "display_order": 30,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.324Z",
+    "updated_at": "2026-08-06T12:20:52.903Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 4,
+  "fields": {
+    "name": "Þanzýman",
+    "slug": "sanziman",
+    "description": "",
+    "display_order": 40,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.324Z",
+    "updated_at": "2026-08-06T12:20:52.903Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 5,
+  "fields": {
+    "name": "Boyutlar",
+    "slug": "boyutlar",
+    "description": "",
+    "display_order": 50,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.325Z",
+    "updated_at": "2026-08-06T12:20:52.905Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 6,
+  "fields": {
+    "name": "Yakýt",
+    "slug": "yakit",
+    "description": "",
+    "display_order": 60,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.326Z",
+    "updated_at": "2026-08-06T12:20:52.906Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 7,
+  "fields": {
+    "name": "Fren",
+    "slug": "fren",
+    "description": "",
+    "display_order": 70,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.327Z",
+    "updated_at": "2026-08-06T12:20:52.907Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 8,
+  "fields": {
+    "name": "Süspansiyon",
+    "slug": "suspansiyon",
+    "description": "",
+    "display_order": 80,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.328Z",
+    "updated_at": "2026-08-06T12:20:52.908Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 9,
+  "fields": {
+    "name": "Elektrik ve Batarya",
+    "slug": "elektrik-batarya",
+    "description": "",
+    "display_order": 90,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.329Z",
+    "updated_at": "2026-08-06T12:20:52.909Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 10,
+  "fields": {
+    "name": "Lastikler",
+    "slug": "lastikler",
+    "description": "",
+    "display_order": 100,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.330Z",
+    "updated_at": "2026-08-06T12:20:52.910Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 11,
+  "fields": {
+    "name": "Güvenlik",
+    "slug": "guvenlik",
+    "description": "",
+    "display_order": 110,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.331Z",
+    "updated_at": "2026-08-06T12:20:52.911Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 12,
+  "fields": {
+    "name": "Donaným",
+    "slug": "donanim",
+    "description": "",
+    "display_order": 120,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.332Z",
+    "updated_at": "2026-08-06T12:20:52.912Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 13,
+  "fields": {
+    "name": "Garanti",
+    "slug": "garanti",
+    "description": "",
+    "display_order": 130,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.333Z",
+    "updated_at": "2026-08-06T12:20:52.913Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 14,
+  "fields": {
+    "name": "Malzeme",
+    "slug": "malzeme",
+    "description": "",
+    "display_order": 140,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.334Z",
+    "updated_at": "2026-08-06T12:20:52.914Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 15,
+  "fields": {
+    "name": "Vizör",
+    "slug": "vizor",
+    "description": "",
+    "display_order": 150,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.335Z",
+    "updated_at": "2026-08-06T12:20:52.914Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 16,
+  "fields": {
+    "name": "Konfor",
+    "slug": "konfor",
+    "description": "",
+    "display_order": 160,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.336Z",
+    "updated_at": "2026-08-06T12:20:52.915Z"
+  }
+},
+{
+  "model": "catalog.attributegroup",
+  "pk": 17,
+  "fields": {
+    "name": "Havalandýrma",
+    "slug": "havalandirma",
+    "description": "",
+    "display_order": 170,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.337Z",
+    "updated_at": "2026-08-06T12:20:52.916Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 1,
+  "fields": {
+    "group": 1,
+    "name": "Model Yýlý",
+    "slug": "model-yili",
+    "data_type": "integer",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": true,
+    "display_order": 30,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.338Z",
+    "updated_at": "2026-08-06T12:20:52.984Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 2,
+  "fields": {
+    "group": 1,
+    "name": "Renk",
+    "slug": "renk",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": true,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.339Z",
+    "updated_at": "2026-08-06T12:20:52.982Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 3,
+  "fields": {
+    "group": 13,
+    "name": "Garanti Süresi",
+    "slug": "garanti-suresi",
+    "data_type": "integer",
+    "unit": "Ay",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.341Z",
+    "updated_at": "2026-08-06T12:20:52.983Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 4,
+  "fields": {
+    "group": 2,
+    "name": "Motor Hacmi",
+    "slug": "motor-hacmi",
+    "data_type": "integer",
+    "unit": "cc",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": true,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.342Z",
+    "updated_at": "2026-08-06T12:20:52.921Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 5,
+  "fields": {
+    "group": 2,
+    "name": "Silindir Sayýsý",
+    "slug": "silindir-sayisi",
+    "data_type": "integer",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.343Z",
+    "updated_at": "2026-08-06T12:20:52.922Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 6,
+  "fields": {
+    "group": 2,
+    "name": "Motor Tipi",
+    "slug": "motor-tipi",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 30,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.344Z",
+    "updated_at": "2026-08-06T12:20:52.923Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 7,
+  "fields": {
+    "group": 2,
+    "name": "Soðutma Sistemi",
+    "slug": "sogutma-sistemi",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 40,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.345Z",
+    "updated_at": "2026-08-06T12:20:52.924Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 8,
+  "fields": {
+    "group": 2,
+    "name": "Yakýt Sistemi",
+    "slug": "yakit-sistemi",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 50,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.346Z",
+    "updated_at": "2026-08-06T12:20:52.925Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 9,
+  "fields": {
+    "group": 3,
+    "name": "Maksimum Güç",
+    "slug": "maksimum-guc",
+    "data_type": "decimal",
+    "unit": "HP",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": true,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.347Z",
+    "updated_at": "2026-08-06T12:20:52.926Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 10,
+  "fields": {
+    "group": 3,
+    "name": "Maksimum Tork",
+    "slug": "maksimum-tork",
+    "data_type": "decimal",
+    "unit": "Nm",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.348Z",
+    "updated_at": "2026-08-06T12:20:52.926Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 11,
+  "fields": {
+    "group": 3,
+    "name": "Maksimum Hýz",
+    "slug": "maksimum-hiz",
+    "data_type": "integer",
+    "unit": "km/h",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 30,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.348Z",
+    "updated_at": "2026-08-06T12:20:52.927Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 12,
+  "fields": {
+    "group": 3,
+    "name": "Yakýt Tüketimi",
+    "slug": "yakit-tuketimi",
+    "data_type": "decimal",
+    "unit": "L/100 km",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 40,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.350Z",
+    "updated_at": "2026-08-06T12:20:52.928Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 13,
+  "fields": {
+    "group": 2,
+    "name": "Þanzýman Tipi",
+    "slug": "sanziman-tipi",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": true,
+    "display_order": 110,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.353Z",
+    "updated_at": "2026-08-06T12:20:52.977Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 14,
+  "fields": {
+    "group": 4,
+    "name": "Vites Sayýsý",
+    "slug": "vites-sayisi",
+    "data_type": "integer",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.355Z",
+    "updated_at": "2026-08-06T12:20:52.929Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 15,
+  "fields": {
+    "group": 5,
+    "name": "Uzunluk",
+    "slug": "uzunluk",
+    "data_type": "integer",
+    "unit": "mm",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.356Z",
+    "updated_at": "2026-08-06T12:20:52.930Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 16,
+  "fields": {
+    "group": 5,
+    "name": "Geniþlik",
+    "slug": "genislik",
+    "data_type": "integer",
+    "unit": "mm",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.356Z",
+    "updated_at": "2026-08-06T12:20:52.931Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 17,
+  "fields": {
+    "group": 5,
+    "name": "Yükseklik",
+    "slug": "yukseklik",
+    "data_type": "integer",
+    "unit": "mm",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 30,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.357Z",
+    "updated_at": "2026-08-06T12:20:52.932Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 18,
+  "fields": {
+    "group": 5,
+    "name": "Dingil Mesafesi",
+    "slug": "dingil-mesafesi",
+    "data_type": "integer",
+    "unit": "mm",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 40,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.358Z",
+    "updated_at": "2026-08-06T12:20:52.933Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 19,
+  "fields": {
+    "group": 5,
+    "name": "Sele Yüksekliði",
+    "slug": "sele-yuksekligi",
+    "data_type": "integer",
+    "unit": "mm",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 50,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.359Z",
+    "updated_at": "2026-08-06T12:20:52.934Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 20,
+  "fields": {
+    "group": 5,
+    "name": "Yerden Yükseklik",
+    "slug": "yerden-yukseklik",
+    "data_type": "integer",
+    "unit": "mm",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 60,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.360Z",
+    "updated_at": "2026-08-06T12:20:52.935Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 21,
+  "fields": {
+    "group": 5,
+    "name": "Boþ Aðýrlýk",
+    "slug": "bos-agirlik",
+    "data_type": "decimal",
+    "unit": "kg",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 70,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.361Z",
+    "updated_at": "2026-08-06T12:20:52.936Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 22,
+  "fields": {
+    "group": 5,
+    "name": "Yakýt Deposu",
+    "slug": "yakit-deposu",
+    "data_type": "decimal",
+    "unit": "L",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 80,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.362Z",
+    "updated_at": "2026-08-06T12:20:52.937Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 23,
+  "fields": {
+    "group": 5,
+    "name": "Maksimum Taþýma Kapasitesi",
+    "slug": "maksimum-tasima-kapasitesi",
+    "data_type": "decimal",
+    "unit": "kg",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 90,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.363Z",
+    "updated_at": "2026-08-06T12:20:52.939Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 24,
+  "fields": {
+    "group": 7,
+    "name": "Ön Fren",
+    "slug": "on-fren",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.364Z",
+    "updated_at": "2026-08-06T12:20:52.940Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 25,
+  "fields": {
+    "group": 7,
+    "name": "Arka Fren",
+    "slug": "arka-fren",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.364Z",
+    "updated_at": "2026-08-06T12:20:52.940Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 26,
+  "fields": {
+    "group": 7,
+    "name": "ABS",
+    "slug": "abs",
+    "data_type": "boolean",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 30,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.365Z",
+    "updated_at": "2026-08-06T12:20:52.941Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 27,
+  "fields": {
+    "group": 7,
+    "name": "CBS",
+    "slug": "cbs",
+    "data_type": "boolean",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 40,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.366Z",
+    "updated_at": "2026-08-06T12:20:52.942Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 28,
+  "fields": {
+    "group": 8,
+    "name": "Ön Süspansiyon",
+    "slug": "on-suspansiyon",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.368Z",
+    "updated_at": "2026-08-06T12:20:52.943Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 29,
+  "fields": {
+    "group": 8,
+    "name": "Arka Süspansiyon",
+    "slug": "arka-suspansiyon",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.370Z",
+    "updated_at": "2026-08-06T12:20:52.943Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 30,
+  "fields": {
+    "group": 9,
+    "name": "Akü",
+    "slug": "aku",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.371Z",
+    "updated_at": "2026-08-06T12:20:52.944Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 31,
+  "fields": {
+    "group": 9,
+    "name": "Far Tipi",
+    "slug": "far-tipi",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.372Z",
+    "updated_at": "2026-08-06T12:20:52.945Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 32,
+  "fields": {
+    "group": 9,
+    "name": "Gösterge Paneli",
+    "slug": "gosterge-paneli",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 30,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.373Z",
+    "updated_at": "2026-08-06T12:20:52.946Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 33,
+  "fields": {
+    "group": 10,
+    "name": "Ön Lastik",
+    "slug": "on-lastik",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.374Z",
+    "updated_at": "2026-08-06T12:20:52.947Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 34,
+  "fields": {
+    "group": 10,
+    "name": "Arka Lastik",
+    "slug": "arka-lastik",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.375Z",
+    "updated_at": "2026-08-06T12:20:52.947Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 35,
+  "fields": {
+    "group": 10,
+    "name": "Lastik Tipi",
+    "slug": "lastik-tipi",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 30,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.376Z",
+    "updated_at": "2026-08-06T12:20:52.948Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 36,
+  "fields": {
+    "group": 11,
+    "name": "Çekiþ Kontrolü",
+    "slug": "cekis-kontrolu",
+    "data_type": "boolean",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.377Z",
+    "updated_at": "2026-08-06T12:20:52.950Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 37,
+  "fields": {
+    "group": 11,
+    "name": "Ýmmobilizer",
+    "slug": "immobilizer",
+    "data_type": "boolean",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.378Z",
+    "updated_at": "2026-08-06T12:20:52.952Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 38,
+  "fields": {
+    "group": 4,
+    "name": "Debriyaj Tipi",
+    "slug": "debriyaj-tipi",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 30,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.378Z",
+    "updated_at": "2026-08-06T12:20:52.953Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 39,
+  "fields": {
+    "group": 4,
+    "name": "Son Aktarma Tipi",
+    "slug": "son-aktarma-tipi",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 40,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.379Z",
+    "updated_at": "2026-08-06T12:20:52.954Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 40,
+  "fields": {
+    "group": 12,
+    "name": "Quickshifter",
+    "slug": "quickshifter",
+    "data_type": "boolean",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.380Z",
+    "updated_at": "2026-08-06T12:20:52.956Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 41,
+  "fields": {
+    "group": 5,
+    "name": "Sele Altý Bagaj Hacmi",
+    "slug": "sele-alti-bagaj-hacmi",
+    "data_type": "decimal",
+    "unit": "L",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 120,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.381Z",
+    "updated_at": "2026-08-06T12:20:52.978Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 42,
+  "fields": {
+    "group": 12,
+    "name": "Ön Cam",
+    "slug": "on-cam",
+    "data_type": "boolean",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 130,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.382Z",
+    "updated_at": "2026-08-06T12:20:52.979Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 43,
+  "fields": {
+    "group": 12,
+    "name": "Düz Taban",
+    "slug": "duz-taban",
+    "data_type": "boolean",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 140,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.383Z",
+    "updated_at": "2026-08-06T12:20:52.980Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 44,
+  "fields": {
+    "group": 12,
+    "name": "Start-Stop",
+    "slug": "start-stop",
+    "data_type": "boolean",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 150,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.385Z",
+    "updated_at": "2026-08-06T12:20:52.980Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 45,
+  "fields": {
+    "group": 12,
+    "name": "Anahtarsýz Çalýþtýrma",
+    "slug": "anahtarsiz-calistirma",
+    "data_type": "boolean",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 160,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.387Z",
+    "updated_at": "2026-08-06T12:20:52.981Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 46,
+  "fields": {
+    "group": 1,
+    "name": "Kask Tipi",
+    "slug": "kask-tipi",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": true,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.388Z",
+    "updated_at": "2026-08-06T12:20:52.963Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 47,
+  "fields": {
+    "group": 5,
+    "name": "Beden",
+    "slug": "beden",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": false,
+    "is_searchable": false,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.390Z",
+    "updated_at": "2026-08-06T12:20:52.964Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 48,
+  "fields": {
+    "group": 5,
+    "name": "Aðýrlýk",
+    "slug": "kask-agirligi",
+    "data_type": "decimal",
+    "unit": "g",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.391Z",
+    "updated_at": "2026-08-06T12:20:52.965Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 49,
+  "fields": {
+    "group": 14,
+    "name": "Kabuk Malzemesi",
+    "slug": "kabuk-malzemesi",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.392Z",
+    "updated_at": "2026-08-06T12:20:52.966Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 50,
+  "fields": {
+    "group": 11,
+    "name": "ECE Sertifikasý",
+    "slug": "ece-sertifikasi",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": true,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.393Z",
+    "updated_at": "2026-08-06T12:20:52.967Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 51,
+  "fields": {
+    "group": 15,
+    "name": "Vizör Tipi",
+    "slug": "vizor-tipi",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.393Z",
+    "updated_at": "2026-08-06T12:20:52.968Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 52,
+  "fields": {
+    "group": 15,
+    "name": "Güneþ Vizörü",
+    "slug": "gunes-vizoru",
+    "data_type": "boolean",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.394Z",
+    "updated_at": "2026-08-06T12:20:52.970Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 53,
+  "fields": {
+    "group": 15,
+    "name": "Pinlock Hazýr",
+    "slug": "pinlock-hazir",
+    "data_type": "boolean",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 30,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.396Z",
+    "updated_at": "2026-08-06T12:20:52.972Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 54,
+  "fields": {
+    "group": 16,
+    "name": "Ýç Ped Çýkarýlabilir",
+    "slug": "ic-ped-cikarilabilir",
+    "data_type": "boolean",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.396Z",
+    "updated_at": "2026-08-06T12:20:52.974Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 55,
+  "fields": {
+    "group": 17,
+    "name": "Havalandýrma",
+    "slug": "havalandirma",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": false,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 10,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.397Z",
+    "updated_at": "2026-08-06T12:20:52.975Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 56,
+  "fields": {
+    "group": 11,
+    "name": "Çene Baðlantý Tipi",
+    "slug": "cene-baglanti-tipi",
+    "data_type": "text",
+    "unit": "",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 20,
+    "is_active": true,
+    "created_at": "2026-08-05T15:09:11.398Z",
+    "updated_at": "2026-08-06T12:20:52.976Z"
+  }
+},
+{
+  "model": "catalog.attribute",
+  "pk": 57,
+  "fields": {
+    "group": 1,
+    "name": "Fiyat",
+    "slug": "fiyat",
+    "data_type": "decimal",
+    "unit": "TL",
+    "description": "",
+    "is_filterable": true,
+    "is_comparable": true,
+    "is_searchable": false,
+    "display_order": 40,
+    "is_active": true,
+    "created_at": "2026-08-06T10:19:10.721Z",
+    "updated_at": "2026-08-06T12:20:52.984Z"
+  }
+},
+{
+  "model": "catalog.attributeoption",
+  "pk": 1,
+  "fields": {
+    "attribute": 13,
+    "value": "mauel",
+    "display_order": 0,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.attributeoption",
+  "pk": 2,
+  "fields": {
+    "attribute": 8,
+    "value": "benzin",
+    "display_order": 0,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.attributeoption",
+  "pk": 3,
+  "fields": {
+    "attribute": 13,
+    "value": "cvt",
+    "display_order": 0,
+    "is_active": true
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 1,
+  "fields": {
+    "category": 1,
+    "attribute": 2,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 2,
+  "fields": {
+    "category": 1,
+    "attribute": 3,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 3,
+  "fields": {
+    "category": 1,
+    "attribute": 4,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 4,
+  "fields": {
+    "category": 1,
+    "attribute": 5,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 5,
+  "fields": {
+    "category": 1,
+    "attribute": 6,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 6,
+  "fields": {
+    "category": 1,
+    "attribute": 7,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 7,
+  "fields": {
+    "category": 1,
+    "attribute": 8,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 8,
+  "fields": {
+    "category": 1,
+    "attribute": 9,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 9,
+  "fields": {
+    "category": 1,
+    "attribute": 10,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 10,
+  "fields": {
+    "category": 1,
+    "attribute": 11,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 11,
+  "fields": {
+    "category": 1,
+    "attribute": 12,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 12,
+  "fields": {
+    "category": 1,
+    "attribute": 15,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 13,
+  "fields": {
+    "category": 1,
+    "attribute": 16,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 14,
+  "fields": {
+    "category": 1,
+    "attribute": 17,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 15,
+  "fields": {
+    "category": 1,
+    "attribute": 18,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 16,
+  "fields": {
+    "category": 1,
+    "attribute": 19,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 17,
+  "fields": {
+    "category": 1,
+    "attribute": 20,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 60
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 18,
+  "fields": {
+    "category": 1,
+    "attribute": 21,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 70
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 19,
+  "fields": {
+    "category": 1,
+    "attribute": 22,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 80
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 20,
+  "fields": {
+    "category": 1,
+    "attribute": 23,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 90
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 21,
+  "fields": {
+    "category": 1,
+    "attribute": 24,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 22,
+  "fields": {
+    "category": 1,
+    "attribute": 25,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 23,
+  "fields": {
+    "category": 1,
+    "attribute": 26,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 24,
+  "fields": {
+    "category": 1,
+    "attribute": 27,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 25,
+  "fields": {
+    "category": 1,
+    "attribute": 28,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 26,
+  "fields": {
+    "category": 1,
+    "attribute": 29,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 27,
+  "fields": {
+    "category": 1,
+    "attribute": 30,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 28,
+  "fields": {
+    "category": 1,
+    "attribute": 31,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 29,
+  "fields": {
+    "category": 1,
+    "attribute": 32,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 30,
+  "fields": {
+    "category": 1,
+    "attribute": 33,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 31,
+  "fields": {
+    "category": 1,
+    "attribute": 34,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 32,
+  "fields": {
+    "category": 1,
+    "attribute": 35,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 33,
+  "fields": {
+    "category": 1,
+    "attribute": 37,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 34,
+  "fields": {
+    "category": 1,
+    "attribute": 13,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 110
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 35,
+  "fields": {
+    "category": 1,
+    "attribute": 14,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 36,
+  "fields": {
+    "category": 1,
+    "attribute": 38,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 37,
+  "fields": {
+    "category": 1,
+    "attribute": 39,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 38,
+  "fields": {
+    "category": 1,
+    "attribute": 40,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 39,
+  "fields": {
+    "category": 1,
+    "attribute": 36,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 40,
+  "fields": {
+    "category": 10,
+    "attribute": 2,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 41,
+  "fields": {
+    "category": 10,
+    "attribute": 3,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 42,
+  "fields": {
+    "category": 10,
+    "attribute": 4,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 43,
+  "fields": {
+    "category": 10,
+    "attribute": 5,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 44,
+  "fields": {
+    "category": 10,
+    "attribute": 6,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 45,
+  "fields": {
+    "category": 10,
+    "attribute": 7,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 46,
+  "fields": {
+    "category": 10,
+    "attribute": 8,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 47,
+  "fields": {
+    "category": 10,
+    "attribute": 9,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 48,
+  "fields": {
+    "category": 10,
+    "attribute": 10,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 49,
+  "fields": {
+    "category": 10,
+    "attribute": 11,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 50,
+  "fields": {
+    "category": 10,
+    "attribute": 12,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 51,
+  "fields": {
+    "category": 10,
+    "attribute": 15,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 52,
+  "fields": {
+    "category": 10,
+    "attribute": 16,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 53,
+  "fields": {
+    "category": 10,
+    "attribute": 17,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 54,
+  "fields": {
+    "category": 10,
+    "attribute": 18,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 55,
+  "fields": {
+    "category": 10,
+    "attribute": 19,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 56,
+  "fields": {
+    "category": 10,
+    "attribute": 20,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 60
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 57,
+  "fields": {
+    "category": 10,
+    "attribute": 21,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 70
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 58,
+  "fields": {
+    "category": 10,
+    "attribute": 22,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 80
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 59,
+  "fields": {
+    "category": 10,
+    "attribute": 23,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 90
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 60,
+  "fields": {
+    "category": 10,
+    "attribute": 24,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 61,
+  "fields": {
+    "category": 10,
+    "attribute": 25,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 62,
+  "fields": {
+    "category": 10,
+    "attribute": 26,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 63,
+  "fields": {
+    "category": 10,
+    "attribute": 27,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 64,
+  "fields": {
+    "category": 10,
+    "attribute": 28,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 65,
+  "fields": {
+    "category": 10,
+    "attribute": 29,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 66,
+  "fields": {
+    "category": 10,
+    "attribute": 30,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 67,
+  "fields": {
+    "category": 10,
+    "attribute": 31,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 68,
+  "fields": {
+    "category": 10,
+    "attribute": 32,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 69,
+  "fields": {
+    "category": 10,
+    "attribute": 33,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 70,
+  "fields": {
+    "category": 10,
+    "attribute": 34,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 71,
+  "fields": {
+    "category": 10,
+    "attribute": 35,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 72,
+  "fields": {
+    "category": 10,
+    "attribute": 37,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 73,
+  "fields": {
+    "category": 10,
+    "attribute": 13,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 110
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 74,
+  "fields": {
+    "category": 10,
+    "attribute": 14,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 75,
+  "fields": {
+    "category": 10,
+    "attribute": 38,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 76,
+  "fields": {
+    "category": 10,
+    "attribute": 39,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 77,
+  "fields": {
+    "category": 10,
+    "attribute": 40,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 78,
+  "fields": {
+    "category": 10,
+    "attribute": 36,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 79,
+  "fields": {
+    "category": 11,
+    "attribute": 2,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 80,
+  "fields": {
+    "category": 11,
+    "attribute": 3,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 81,
+  "fields": {
+    "category": 11,
+    "attribute": 4,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 82,
+  "fields": {
+    "category": 11,
+    "attribute": 5,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 83,
+  "fields": {
+    "category": 11,
+    "attribute": 6,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 84,
+  "fields": {
+    "category": 11,
+    "attribute": 7,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 85,
+  "fields": {
+    "category": 11,
+    "attribute": 8,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 86,
+  "fields": {
+    "category": 11,
+    "attribute": 9,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 87,
+  "fields": {
+    "category": 11,
+    "attribute": 10,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 88,
+  "fields": {
+    "category": 11,
+    "attribute": 11,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 89,
+  "fields": {
+    "category": 11,
+    "attribute": 12,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 90,
+  "fields": {
+    "category": 11,
+    "attribute": 15,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 91,
+  "fields": {
+    "category": 11,
+    "attribute": 16,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 92,
+  "fields": {
+    "category": 11,
+    "attribute": 17,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 93,
+  "fields": {
+    "category": 11,
+    "attribute": 18,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 94,
+  "fields": {
+    "category": 11,
+    "attribute": 19,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 95,
+  "fields": {
+    "category": 11,
+    "attribute": 20,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 60
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 96,
+  "fields": {
+    "category": 11,
+    "attribute": 21,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 70
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 97,
+  "fields": {
+    "category": 11,
+    "attribute": 22,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 80
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 98,
+  "fields": {
+    "category": 11,
+    "attribute": 23,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 90
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 99,
+  "fields": {
+    "category": 11,
+    "attribute": 24,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 100,
+  "fields": {
+    "category": 11,
+    "attribute": 25,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 101,
+  "fields": {
+    "category": 11,
+    "attribute": 26,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 102,
+  "fields": {
+    "category": 11,
+    "attribute": 27,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 103,
+  "fields": {
+    "category": 11,
+    "attribute": 28,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 104,
+  "fields": {
+    "category": 11,
+    "attribute": 29,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 105,
+  "fields": {
+    "category": 11,
+    "attribute": 30,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 106,
+  "fields": {
+    "category": 11,
+    "attribute": 31,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 107,
+  "fields": {
+    "category": 11,
+    "attribute": 32,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 108,
+  "fields": {
+    "category": 11,
+    "attribute": 33,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 109,
+  "fields": {
+    "category": 11,
+    "attribute": 34,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 110,
+  "fields": {
+    "category": 11,
+    "attribute": 35,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 111,
+  "fields": {
+    "category": 11,
+    "attribute": 37,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 112,
+  "fields": {
+    "category": 11,
+    "attribute": 13,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 110
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 113,
+  "fields": {
+    "category": 11,
+    "attribute": 14,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 114,
+  "fields": {
+    "category": 11,
+    "attribute": 38,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 115,
+  "fields": {
+    "category": 11,
+    "attribute": 39,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 116,
+  "fields": {
+    "category": 11,
+    "attribute": 40,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 117,
+  "fields": {
+    "category": 11,
+    "attribute": 36,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 118,
+  "fields": {
+    "category": 12,
+    "attribute": 2,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 119,
+  "fields": {
+    "category": 12,
+    "attribute": 3,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 120,
+  "fields": {
+    "category": 12,
+    "attribute": 4,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 121,
+  "fields": {
+    "category": 12,
+    "attribute": 5,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 122,
+  "fields": {
+    "category": 12,
+    "attribute": 6,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 123,
+  "fields": {
+    "category": 12,
+    "attribute": 7,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 124,
+  "fields": {
+    "category": 12,
+    "attribute": 8,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 125,
+  "fields": {
+    "category": 12,
+    "attribute": 9,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 126,
+  "fields": {
+    "category": 12,
+    "attribute": 10,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 127,
+  "fields": {
+    "category": 12,
+    "attribute": 11,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 128,
+  "fields": {
+    "category": 12,
+    "attribute": 12,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 129,
+  "fields": {
+    "category": 12,
+    "attribute": 15,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 130,
+  "fields": {
+    "category": 12,
+    "attribute": 16,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 131,
+  "fields": {
+    "category": 12,
+    "attribute": 17,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 132,
+  "fields": {
+    "category": 12,
+    "attribute": 18,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 133,
+  "fields": {
+    "category": 12,
+    "attribute": 19,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 134,
+  "fields": {
+    "category": 12,
+    "attribute": 20,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 60
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 135,
+  "fields": {
+    "category": 12,
+    "attribute": 21,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 70
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 136,
+  "fields": {
+    "category": 12,
+    "attribute": 22,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 80
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 137,
+  "fields": {
+    "category": 12,
+    "attribute": 23,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 90
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 138,
+  "fields": {
+    "category": 12,
+    "attribute": 24,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 139,
+  "fields": {
+    "category": 12,
+    "attribute": 25,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 140,
+  "fields": {
+    "category": 12,
+    "attribute": 26,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 141,
+  "fields": {
+    "category": 12,
+    "attribute": 27,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 142,
+  "fields": {
+    "category": 12,
+    "attribute": 28,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 143,
+  "fields": {
+    "category": 12,
+    "attribute": 29,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 144,
+  "fields": {
+    "category": 12,
+    "attribute": 30,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 145,
+  "fields": {
+    "category": 12,
+    "attribute": 31,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 146,
+  "fields": {
+    "category": 12,
+    "attribute": 32,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 147,
+  "fields": {
+    "category": 12,
+    "attribute": 33,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 148,
+  "fields": {
+    "category": 12,
+    "attribute": 34,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 149,
+  "fields": {
+    "category": 12,
+    "attribute": 35,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 150,
+  "fields": {
+    "category": 12,
+    "attribute": 37,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 151,
+  "fields": {
+    "category": 12,
+    "attribute": 13,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 110
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 152,
+  "fields": {
+    "category": 12,
+    "attribute": 14,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 153,
+  "fields": {
+    "category": 12,
+    "attribute": 38,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 154,
+  "fields": {
+    "category": 12,
+    "attribute": 39,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 155,
+  "fields": {
+    "category": 12,
+    "attribute": 40,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 156,
+  "fields": {
+    "category": 12,
+    "attribute": 36,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 157,
+  "fields": {
+    "category": 13,
+    "attribute": 2,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 158,
+  "fields": {
+    "category": 13,
+    "attribute": 3,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 159,
+  "fields": {
+    "category": 13,
+    "attribute": 4,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 160,
+  "fields": {
+    "category": 13,
+    "attribute": 5,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 161,
+  "fields": {
+    "category": 13,
+    "attribute": 6,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 162,
+  "fields": {
+    "category": 13,
+    "attribute": 7,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 163,
+  "fields": {
+    "category": 13,
+    "attribute": 8,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 164,
+  "fields": {
+    "category": 13,
+    "attribute": 9,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 165,
+  "fields": {
+    "category": 13,
+    "attribute": 10,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 166,
+  "fields": {
+    "category": 13,
+    "attribute": 11,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 167,
+  "fields": {
+    "category": 13,
+    "attribute": 12,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 168,
+  "fields": {
+    "category": 13,
+    "attribute": 15,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 169,
+  "fields": {
+    "category": 13,
+    "attribute": 16,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 170,
+  "fields": {
+    "category": 13,
+    "attribute": 17,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 171,
+  "fields": {
+    "category": 13,
+    "attribute": 18,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 172,
+  "fields": {
+    "category": 13,
+    "attribute": 19,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 173,
+  "fields": {
+    "category": 13,
+    "attribute": 20,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 60
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 174,
+  "fields": {
+    "category": 13,
+    "attribute": 21,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 70
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 175,
+  "fields": {
+    "category": 13,
+    "attribute": 22,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 80
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 176,
+  "fields": {
+    "category": 13,
+    "attribute": 23,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 90
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 177,
+  "fields": {
+    "category": 13,
+    "attribute": 24,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 178,
+  "fields": {
+    "category": 13,
+    "attribute": 25,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 179,
+  "fields": {
+    "category": 13,
+    "attribute": 26,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 180,
+  "fields": {
+    "category": 13,
+    "attribute": 27,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 181,
+  "fields": {
+    "category": 13,
+    "attribute": 28,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 182,
+  "fields": {
+    "category": 13,
+    "attribute": 29,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 183,
+  "fields": {
+    "category": 13,
+    "attribute": 30,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 184,
+  "fields": {
+    "category": 13,
+    "attribute": 31,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 185,
+  "fields": {
+    "category": 13,
+    "attribute": 32,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 186,
+  "fields": {
+    "category": 13,
+    "attribute": 33,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 187,
+  "fields": {
+    "category": 13,
+    "attribute": 34,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 188,
+  "fields": {
+    "category": 13,
+    "attribute": 35,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 189,
+  "fields": {
+    "category": 13,
+    "attribute": 37,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 190,
+  "fields": {
+    "category": 13,
+    "attribute": 13,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 110
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 191,
+  "fields": {
+    "category": 13,
+    "attribute": 14,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 192,
+  "fields": {
+    "category": 13,
+    "attribute": 38,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 193,
+  "fields": {
+    "category": 13,
+    "attribute": 39,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 194,
+  "fields": {
+    "category": 13,
+    "attribute": 40,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 195,
+  "fields": {
+    "category": 13,
+    "attribute": 36,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 196,
+  "fields": {
+    "category": 14,
+    "attribute": 2,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 197,
+  "fields": {
+    "category": 14,
+    "attribute": 3,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 198,
+  "fields": {
+    "category": 14,
+    "attribute": 4,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 199,
+  "fields": {
+    "category": 14,
+    "attribute": 5,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 200,
+  "fields": {
+    "category": 14,
+    "attribute": 6,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 201,
+  "fields": {
+    "category": 14,
+    "attribute": 7,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 202,
+  "fields": {
+    "category": 14,
+    "attribute": 8,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 203,
+  "fields": {
+    "category": 14,
+    "attribute": 9,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 204,
+  "fields": {
+    "category": 14,
+    "attribute": 10,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 205,
+  "fields": {
+    "category": 14,
+    "attribute": 11,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 206,
+  "fields": {
+    "category": 14,
+    "attribute": 12,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 207,
+  "fields": {
+    "category": 14,
+    "attribute": 15,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 208,
+  "fields": {
+    "category": 14,
+    "attribute": 16,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 209,
+  "fields": {
+    "category": 14,
+    "attribute": 17,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 210,
+  "fields": {
+    "category": 14,
+    "attribute": 18,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 211,
+  "fields": {
+    "category": 14,
+    "attribute": 19,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 212,
+  "fields": {
+    "category": 14,
+    "attribute": 20,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 60
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 213,
+  "fields": {
+    "category": 14,
+    "attribute": 21,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 70
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 214,
+  "fields": {
+    "category": 14,
+    "attribute": 22,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 80
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 215,
+  "fields": {
+    "category": 14,
+    "attribute": 23,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 90
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 216,
+  "fields": {
+    "category": 14,
+    "attribute": 24,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 217,
+  "fields": {
+    "category": 14,
+    "attribute": 25,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 218,
+  "fields": {
+    "category": 14,
+    "attribute": 26,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 219,
+  "fields": {
+    "category": 14,
+    "attribute": 27,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 220,
+  "fields": {
+    "category": 14,
+    "attribute": 28,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 221,
+  "fields": {
+    "category": 14,
+    "attribute": 29,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 222,
+  "fields": {
+    "category": 14,
+    "attribute": 30,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 223,
+  "fields": {
+    "category": 14,
+    "attribute": 31,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 224,
+  "fields": {
+    "category": 14,
+    "attribute": 32,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 225,
+  "fields": {
+    "category": 14,
+    "attribute": 33,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 226,
+  "fields": {
+    "category": 14,
+    "attribute": 34,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 227,
+  "fields": {
+    "category": 14,
+    "attribute": 35,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 228,
+  "fields": {
+    "category": 14,
+    "attribute": 37,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 229,
+  "fields": {
+    "category": 14,
+    "attribute": 13,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 110
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 230,
+  "fields": {
+    "category": 14,
+    "attribute": 14,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 231,
+  "fields": {
+    "category": 14,
+    "attribute": 38,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 232,
+  "fields": {
+    "category": 14,
+    "attribute": 39,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 233,
+  "fields": {
+    "category": 14,
+    "attribute": 40,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 234,
+  "fields": {
+    "category": 14,
+    "attribute": 36,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 235,
+  "fields": {
+    "category": 15,
+    "attribute": 2,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 236,
+  "fields": {
+    "category": 15,
+    "attribute": 3,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 237,
+  "fields": {
+    "category": 15,
+    "attribute": 4,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 238,
+  "fields": {
+    "category": 15,
+    "attribute": 5,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 239,
+  "fields": {
+    "category": 15,
+    "attribute": 6,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 240,
+  "fields": {
+    "category": 15,
+    "attribute": 7,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 241,
+  "fields": {
+    "category": 15,
+    "attribute": 8,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 242,
+  "fields": {
+    "category": 15,
+    "attribute": 9,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 243,
+  "fields": {
+    "category": 15,
+    "attribute": 10,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 244,
+  "fields": {
+    "category": 15,
+    "attribute": 11,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 245,
+  "fields": {
+    "category": 15,
+    "attribute": 12,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 246,
+  "fields": {
+    "category": 15,
+    "attribute": 15,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 247,
+  "fields": {
+    "category": 15,
+    "attribute": 16,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 248,
+  "fields": {
+    "category": 15,
+    "attribute": 17,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 249,
+  "fields": {
+    "category": 15,
+    "attribute": 18,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 250,
+  "fields": {
+    "category": 15,
+    "attribute": 19,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 251,
+  "fields": {
+    "category": 15,
+    "attribute": 20,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 60
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 252,
+  "fields": {
+    "category": 15,
+    "attribute": 21,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 70
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 253,
+  "fields": {
+    "category": 15,
+    "attribute": 22,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 80
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 254,
+  "fields": {
+    "category": 15,
+    "attribute": 23,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 90
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 255,
+  "fields": {
+    "category": 15,
+    "attribute": 24,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 256,
+  "fields": {
+    "category": 15,
+    "attribute": 25,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 257,
+  "fields": {
+    "category": 15,
+    "attribute": 26,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 258,
+  "fields": {
+    "category": 15,
+    "attribute": 27,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 259,
+  "fields": {
+    "category": 15,
+    "attribute": 28,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 260,
+  "fields": {
+    "category": 15,
+    "attribute": 29,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 261,
+  "fields": {
+    "category": 15,
+    "attribute": 30,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 262,
+  "fields": {
+    "category": 15,
+    "attribute": 31,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 263,
+  "fields": {
+    "category": 15,
+    "attribute": 32,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 264,
+  "fields": {
+    "category": 15,
+    "attribute": 33,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 265,
+  "fields": {
+    "category": 15,
+    "attribute": 34,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 266,
+  "fields": {
+    "category": 15,
+    "attribute": 35,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 267,
+  "fields": {
+    "category": 15,
+    "attribute": 37,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 268,
+  "fields": {
+    "category": 15,
+    "attribute": 13,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 110
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 269,
+  "fields": {
+    "category": 15,
+    "attribute": 14,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 270,
+  "fields": {
+    "category": 15,
+    "attribute": 38,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 271,
+  "fields": {
+    "category": 15,
+    "attribute": 39,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 272,
+  "fields": {
+    "category": 15,
+    "attribute": 40,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 273,
+  "fields": {
+    "category": 15,
+    "attribute": 36,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 274,
+  "fields": {
+    "category": 16,
+    "attribute": 2,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 275,
+  "fields": {
+    "category": 16,
+    "attribute": 3,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 276,
+  "fields": {
+    "category": 16,
+    "attribute": 4,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 277,
+  "fields": {
+    "category": 16,
+    "attribute": 5,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 278,
+  "fields": {
+    "category": 16,
+    "attribute": 6,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 279,
+  "fields": {
+    "category": 16,
+    "attribute": 7,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 280,
+  "fields": {
+    "category": 16,
+    "attribute": 8,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 281,
+  "fields": {
+    "category": 16,
+    "attribute": 9,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 282,
+  "fields": {
+    "category": 16,
+    "attribute": 10,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 283,
+  "fields": {
+    "category": 16,
+    "attribute": 11,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 284,
+  "fields": {
+    "category": 16,
+    "attribute": 12,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 285,
+  "fields": {
+    "category": 16,
+    "attribute": 15,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 286,
+  "fields": {
+    "category": 16,
+    "attribute": 16,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 287,
+  "fields": {
+    "category": 16,
+    "attribute": 17,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 288,
+  "fields": {
+    "category": 16,
+    "attribute": 18,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 289,
+  "fields": {
+    "category": 16,
+    "attribute": 19,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 290,
+  "fields": {
+    "category": 16,
+    "attribute": 20,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 60
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 291,
+  "fields": {
+    "category": 16,
+    "attribute": 21,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 70
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 292,
+  "fields": {
+    "category": 16,
+    "attribute": 22,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 80
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 293,
+  "fields": {
+    "category": 16,
+    "attribute": 23,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 90
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 294,
+  "fields": {
+    "category": 16,
+    "attribute": 24,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 295,
+  "fields": {
+    "category": 16,
+    "attribute": 25,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 296,
+  "fields": {
+    "category": 16,
+    "attribute": 26,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 297,
+  "fields": {
+    "category": 16,
+    "attribute": 27,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 298,
+  "fields": {
+    "category": 16,
+    "attribute": 28,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 299,
+  "fields": {
+    "category": 16,
+    "attribute": 29,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 300,
+  "fields": {
+    "category": 16,
+    "attribute": 30,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 301,
+  "fields": {
+    "category": 16,
+    "attribute": 31,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 302,
+  "fields": {
+    "category": 16,
+    "attribute": 32,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 303,
+  "fields": {
+    "category": 16,
+    "attribute": 33,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 304,
+  "fields": {
+    "category": 16,
+    "attribute": 34,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 305,
+  "fields": {
+    "category": 16,
+    "attribute": 35,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 306,
+  "fields": {
+    "category": 16,
+    "attribute": 37,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 307,
+  "fields": {
+    "category": 16,
+    "attribute": 13,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 110
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 308,
+  "fields": {
+    "category": 16,
+    "attribute": 14,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 309,
+  "fields": {
+    "category": 16,
+    "attribute": 38,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 310,
+  "fields": {
+    "category": 16,
+    "attribute": 39,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 311,
+  "fields": {
+    "category": 16,
+    "attribute": 40,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 312,
+  "fields": {
+    "category": 16,
+    "attribute": 36,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 313,
+  "fields": {
+    "category": 37,
+    "attribute": 46,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 314,
+  "fields": {
+    "category": 37,
+    "attribute": 2,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 315,
+  "fields": {
+    "category": 37,
+    "attribute": 3,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 316,
+  "fields": {
+    "category": 37,
+    "attribute": 47,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": false,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 317,
+  "fields": {
+    "category": 37,
+    "attribute": 48,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 318,
+  "fields": {
+    "category": 37,
+    "attribute": 49,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 319,
+  "fields": {
+    "category": 37,
+    "attribute": 50,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 320,
+  "fields": {
+    "category": 37,
+    "attribute": 56,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 321,
+  "fields": {
+    "category": 37,
+    "attribute": 51,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 322,
+  "fields": {
+    "category": 37,
+    "attribute": 52,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 323,
+  "fields": {
+    "category": 37,
+    "attribute": 53,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 324,
+  "fields": {
+    "category": 37,
+    "attribute": 54,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 325,
+  "fields": {
+    "category": 37,
+    "attribute": 55,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 326,
+  "fields": {
+    "category": 9,
+    "attribute": 2,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 327,
+  "fields": {
+    "category": 9,
+    "attribute": 3,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 328,
+  "fields": {
+    "category": 9,
+    "attribute": 4,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 329,
+  "fields": {
+    "category": 9,
+    "attribute": 5,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 330,
+  "fields": {
+    "category": 9,
+    "attribute": 6,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 331,
+  "fields": {
+    "category": 9,
+    "attribute": 7,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 332,
+  "fields": {
+    "category": 9,
+    "attribute": 8,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 333,
+  "fields": {
+    "category": 9,
+    "attribute": 9,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 334,
+  "fields": {
+    "category": 9,
+    "attribute": 10,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 335,
+  "fields": {
+    "category": 9,
+    "attribute": 11,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 336,
+  "fields": {
+    "category": 9,
+    "attribute": 12,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 337,
+  "fields": {
+    "category": 9,
+    "attribute": 15,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 338,
+  "fields": {
+    "category": 9,
+    "attribute": 16,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 339,
+  "fields": {
+    "category": 9,
+    "attribute": 17,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 340,
+  "fields": {
+    "category": 9,
+    "attribute": 18,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 341,
+  "fields": {
+    "category": 9,
+    "attribute": 19,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 50
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 342,
+  "fields": {
+    "category": 9,
+    "attribute": 20,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 60
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 343,
+  "fields": {
+    "category": 9,
+    "attribute": 21,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 70
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 344,
+  "fields": {
+    "category": 9,
+    "attribute": 22,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 80
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 345,
+  "fields": {
+    "category": 9,
+    "attribute": 23,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 90
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 346,
+  "fields": {
+    "category": 9,
+    "attribute": 24,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 347,
+  "fields": {
+    "category": 9,
+    "attribute": 25,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 348,
+  "fields": {
+    "category": 9,
+    "attribute": 26,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 349,
+  "fields": {
+    "category": 9,
+    "attribute": 27,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 350,
+  "fields": {
+    "category": 9,
+    "attribute": 28,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 351,
+  "fields": {
+    "category": 9,
+    "attribute": 29,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 352,
+  "fields": {
+    "category": 9,
+    "attribute": 30,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 353,
+  "fields": {
+    "category": 9,
+    "attribute": 31,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 354,
+  "fields": {
+    "category": 9,
+    "attribute": 32,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 355,
+  "fields": {
+    "category": 9,
+    "attribute": 33,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 10
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 356,
+  "fields": {
+    "category": 9,
+    "attribute": 34,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 357,
+  "fields": {
+    "category": 9,
+    "attribute": 35,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 358,
+  "fields": {
+    "category": 9,
+    "attribute": 37,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 20
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 359,
+  "fields": {
+    "category": 9,
+    "attribute": 13,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 110
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 360,
+  "fields": {
+    "category": 9,
+    "attribute": 41,
+    "is_required": false,
+    "is_filterable": false,
+    "is_comparable": true,
+    "display_order": 120
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 361,
+  "fields": {
+    "category": 9,
+    "attribute": 42,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 130
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 362,
+  "fields": {
+    "category": 9,
+    "attribute": 43,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 140
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 363,
+  "fields": {
+    "category": 9,
+    "attribute": 44,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 150
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 364,
+  "fields": {
+    "category": 9,
+    "attribute": 45,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 160
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 365,
+  "fields": {
+    "category": 1,
+    "attribute": 1,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 366,
+  "fields": {
+    "category": 1,
+    "attribute": 57,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 367,
+  "fields": {
+    "category": 10,
+    "attribute": 1,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 368,
+  "fields": {
+    "category": 10,
+    "attribute": 57,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 369,
+  "fields": {
+    "category": 11,
+    "attribute": 1,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 370,
+  "fields": {
+    "category": 11,
+    "attribute": 57,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 371,
+  "fields": {
+    "category": 12,
+    "attribute": 1,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 372,
+  "fields": {
+    "category": 12,
+    "attribute": 57,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 373,
+  "fields": {
+    "category": 13,
+    "attribute": 1,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 374,
+  "fields": {
+    "category": 13,
+    "attribute": 57,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 375,
+  "fields": {
+    "category": 14,
+    "attribute": 1,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 376,
+  "fields": {
+    "category": 14,
+    "attribute": 57,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 377,
+  "fields": {
+    "category": 15,
+    "attribute": 1,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 378,
+  "fields": {
+    "category": 15,
+    "attribute": 57,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 379,
+  "fields": {
+    "category": 16,
+    "attribute": 1,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 380,
+  "fields": {
+    "category": 16,
+    "attribute": 57,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 381,
+  "fields": {
+    "category": 9,
+    "attribute": 1,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 30
+  }
+},
+{
+  "model": "catalog.categoryattribute",
+  "pk": 382,
+  "fields": {
+    "category": 9,
+    "attribute": 57,
+    "is_required": false,
+    "is_filterable": true,
+    "is_comparable": true,
+    "display_order": 40
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 163,
+  "fields": {
+    "product": 10,
+    "attribute": 30,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 164,
+  "fields": {
+    "product": 10,
+    "attribute": 9,
+    "value": "13"
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 165,
+  "fields": {
+    "product": 10,
+    "attribute": 4,
+    "value": "1300"
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 166,
+  "fields": {
+    "product": 10,
+    "attribute": 2,
+    "value": "mavi"
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 167,
+  "fields": {
+    "product": 10,
+    "attribute": 15,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 168,
+  "fields": {
+    "product": 10,
+    "attribute": 24,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 169,
+  "fields": {
+    "product": 10,
+    "attribute": 33,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 170,
+  "fields": {
+    "product": 10,
+    "attribute": 28,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 171,
+  "fields": {
+    "product": 10,
+    "attribute": 25,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 172,
+  "fields": {
+    "product": 10,
+    "attribute": 34,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 173,
+  "fields": {
+    "product": 10,
+    "attribute": 29,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 174,
+  "fields": {
+    "product": 10,
+    "attribute": 31,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 175,
+  "fields": {
+    "product": 10,
+    "attribute": 3,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 176,
+  "fields": {
+    "product": 10,
+    "attribute": 16,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 177,
+  "fields": {
+    "product": 10,
+    "attribute": 10,
+    "value": "12"
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 178,
+  "fields": {
+    "product": 10,
+    "attribute": 5,
+    "value": "5"
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 179,
+  "fields": {
+    "product": 10,
+    "attribute": 37,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 180,
+  "fields": {
+    "product": 10,
+    "attribute": 26,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 181,
+  "fields": {
+    "product": 10,
+    "attribute": 32,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 182,
+  "fields": {
+    "product": 10,
+    "attribute": 35,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 183,
+  "fields": {
+    "product": 10,
+    "attribute": 11,
+    "value": "130"
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 184,
+  "fields": {
+    "product": 10,
+    "attribute": 1,
+    "value": "2026"
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 185,
+  "fields": {
+    "product": 10,
+    "attribute": 6,
+    "value": "honda"
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 186,
+  "fields": {
+    "product": 10,
+    "attribute": 17,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 187,
+  "fields": {
+    "product": 10,
+    "attribute": 27,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 188,
+  "fields": {
+    "product": 10,
+    "attribute": 18,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 189,
+  "fields": {
+    "product": 10,
+    "attribute": 57,
+    "value": "250000"
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 190,
+  "fields": {
+    "product": 10,
+    "attribute": 7,
+    "value": "su"
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 191,
+  "fields": {
+    "product": 10,
+    "attribute": 12,
+    "value": "2"
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 192,
+  "fields": {
+    "product": 10,
+    "attribute": 19,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 193,
+  "fields": {
+    "product": 10,
+    "attribute": 8,
+    "value": "benzin"
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 194,
+  "fields": {
+    "product": 10,
+    "attribute": 20,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 195,
+  "fields": {
+    "product": 10,
+    "attribute": 21,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 196,
+  "fields": {
+    "product": 10,
+    "attribute": 22,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 197,
+  "fields": {
+    "product": 10,
+    "attribute": 23,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 198,
+  "fields": {
+    "product": 10,
+    "attribute": 13,
+    "value": "cvt"
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 199,
+  "fields": {
+    "product": 10,
+    "attribute": 41,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 200,
+  "fields": {
+    "product": 10,
+    "attribute": 42,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 201,
+  "fields": {
+    "product": 10,
+    "attribute": 43,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 202,
+  "fields": {
+    "product": 10,
+    "attribute": 44,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 203,
+  "fields": {
+    "product": 10,
+    "attribute": 45,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 204,
+  "fields": {
+    "product": 11,
+    "attribute": 30,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 205,
+  "fields": {
+    "product": 11,
+    "attribute": 9,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 206,
+  "fields": {
+    "product": 11,
+    "attribute": 4,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 207,
+  "fields": {
+    "product": 11,
+    "attribute": 2,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 208,
+  "fields": {
+    "product": 11,
+    "attribute": 15,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 209,
+  "fields": {
+    "product": 11,
+    "attribute": 24,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 210,
+  "fields": {
+    "product": 11,
+    "attribute": 33,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 211,
+  "fields": {
+    "product": 11,
+    "attribute": 28,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 212,
+  "fields": {
+    "product": 11,
+    "attribute": 25,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 213,
+  "fields": {
+    "product": 11,
+    "attribute": 34,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 214,
+  "fields": {
+    "product": 11,
+    "attribute": 29,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 215,
+  "fields": {
+    "product": 11,
+    "attribute": 31,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 216,
+  "fields": {
+    "product": 11,
+    "attribute": 3,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 217,
+  "fields": {
+    "product": 11,
+    "attribute": 16,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 218,
+  "fields": {
+    "product": 11,
+    "attribute": 10,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 219,
+  "fields": {
+    "product": 11,
+    "attribute": 5,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 220,
+  "fields": {
+    "product": 11,
+    "attribute": 37,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 221,
+  "fields": {
+    "product": 11,
+    "attribute": 26,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 222,
+  "fields": {
+    "product": 11,
+    "attribute": 32,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 223,
+  "fields": {
+    "product": 11,
+    "attribute": 35,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 224,
+  "fields": {
+    "product": 11,
+    "attribute": 11,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 225,
+  "fields": {
+    "product": 11,
+    "attribute": 1,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 226,
+  "fields": {
+    "product": 11,
+    "attribute": 6,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 227,
+  "fields": {
+    "product": 11,
+    "attribute": 17,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 228,
+  "fields": {
+    "product": 11,
+    "attribute": 27,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 229,
+  "fields": {
+    "product": 11,
+    "attribute": 18,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 230,
+  "fields": {
+    "product": 11,
+    "attribute": 57,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 231,
+  "fields": {
+    "product": 11,
+    "attribute": 7,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 232,
+  "fields": {
+    "product": 11,
+    "attribute": 12,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 233,
+  "fields": {
+    "product": 11,
+    "attribute": 19,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 234,
+  "fields": {
+    "product": 11,
+    "attribute": 8,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 235,
+  "fields": {
+    "product": 11,
+    "attribute": 20,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 236,
+  "fields": {
+    "product": 11,
+    "attribute": 21,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 237,
+  "fields": {
+    "product": 11,
+    "attribute": 22,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 238,
+  "fields": {
+    "product": 11,
+    "attribute": 23,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 239,
+  "fields": {
+    "product": 11,
+    "attribute": 13,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 240,
+  "fields": {
+    "product": 11,
+    "attribute": 41,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 241,
+  "fields": {
+    "product": 11,
+    "attribute": 42,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 242,
+  "fields": {
+    "product": 11,
+    "attribute": 43,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 243,
+  "fields": {
+    "product": 11,
+    "attribute": 44,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 244,
+  "fields": {
+    "product": 11,
+    "attribute": 45,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 245,
+  "fields": {
+    "product": 12,
+    "attribute": 30,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 246,
+  "fields": {
+    "product": 12,
+    "attribute": 9,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 247,
+  "fields": {
+    "product": 12,
+    "attribute": 4,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 248,
+  "fields": {
+    "product": 12,
+    "attribute": 2,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 249,
+  "fields": {
+    "product": 12,
+    "attribute": 15,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 250,
+  "fields": {
+    "product": 12,
+    "attribute": 24,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 251,
+  "fields": {
+    "product": 12,
+    "attribute": 33,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 252,
+  "fields": {
+    "product": 12,
+    "attribute": 28,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 253,
+  "fields": {
+    "product": 12,
+    "attribute": 25,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 254,
+  "fields": {
+    "product": 12,
+    "attribute": 34,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 255,
+  "fields": {
+    "product": 12,
+    "attribute": 29,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 256,
+  "fields": {
+    "product": 12,
+    "attribute": 31,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 257,
+  "fields": {
+    "product": 12,
+    "attribute": 3,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 258,
+  "fields": {
+    "product": 12,
+    "attribute": 16,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 259,
+  "fields": {
+    "product": 12,
+    "attribute": 10,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 260,
+  "fields": {
+    "product": 12,
+    "attribute": 5,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 261,
+  "fields": {
+    "product": 12,
+    "attribute": 37,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 262,
+  "fields": {
+    "product": 12,
+    "attribute": 26,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 263,
+  "fields": {
+    "product": 12,
+    "attribute": 32,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 264,
+  "fields": {
+    "product": 12,
+    "attribute": 35,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 265,
+  "fields": {
+    "product": 12,
+    "attribute": 11,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 266,
+  "fields": {
+    "product": 12,
+    "attribute": 1,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 267,
+  "fields": {
+    "product": 12,
+    "attribute": 6,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 268,
+  "fields": {
+    "product": 12,
+    "attribute": 17,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 269,
+  "fields": {
+    "product": 12,
+    "attribute": 27,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 270,
+  "fields": {
+    "product": 12,
+    "attribute": 18,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 271,
+  "fields": {
+    "product": 12,
+    "attribute": 57,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 272,
+  "fields": {
+    "product": 12,
+    "attribute": 7,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 273,
+  "fields": {
+    "product": 12,
+    "attribute": 12,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 274,
+  "fields": {
+    "product": 12,
+    "attribute": 19,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 275,
+  "fields": {
+    "product": 12,
+    "attribute": 8,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 276,
+  "fields": {
+    "product": 12,
+    "attribute": 20,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 277,
+  "fields": {
+    "product": 12,
+    "attribute": 21,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 278,
+  "fields": {
+    "product": 12,
+    "attribute": 22,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 279,
+  "fields": {
+    "product": 12,
+    "attribute": 23,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 280,
+  "fields": {
+    "product": 12,
+    "attribute": 13,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 281,
+  "fields": {
+    "product": 12,
+    "attribute": 41,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 282,
+  "fields": {
+    "product": 12,
+    "attribute": 42,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 283,
+  "fields": {
+    "product": 12,
+    "attribute": 43,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 284,
+  "fields": {
+    "product": 12,
+    "attribute": 44,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 285,
+  "fields": {
+    "product": 12,
+    "attribute": 45,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 286,
+  "fields": {
+    "product": 13,
+    "attribute": 30,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 287,
+  "fields": {
+    "product": 13,
+    "attribute": 9,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 288,
+  "fields": {
+    "product": 13,
+    "attribute": 4,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 289,
+  "fields": {
+    "product": 13,
+    "attribute": 40,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 290,
+  "fields": {
+    "product": 13,
+    "attribute": 2,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 291,
+  "fields": {
+    "product": 13,
+    "attribute": 15,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 292,
+  "fields": {
+    "product": 13,
+    "attribute": 36,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 293,
+  "fields": {
+    "product": 13,
+    "attribute": 24,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 294,
+  "fields": {
+    "product": 13,
+    "attribute": 33,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 295,
+  "fields": {
+    "product": 13,
+    "attribute": 28,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 296,
+  "fields": {
+    "product": 13,
+    "attribute": 25,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 297,
+  "fields": {
+    "product": 13,
+    "attribute": 34,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 298,
+  "fields": {
+    "product": 13,
+    "attribute": 29,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 299,
+  "fields": {
+    "product": 13,
+    "attribute": 31,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 300,
+  "fields": {
+    "product": 13,
+    "attribute": 3,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 301,
+  "fields": {
+    "product": 13,
+    "attribute": 16,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 302,
+  "fields": {
+    "product": 13,
+    "attribute": 10,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 303,
+  "fields": {
+    "product": 13,
+    "attribute": 5,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 304,
+  "fields": {
+    "product": 13,
+    "attribute": 14,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 305,
+  "fields": {
+    "product": 13,
+    "attribute": 37,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 306,
+  "fields": {
+    "product": 13,
+    "attribute": 26,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 307,
+  "fields": {
+    "product": 13,
+    "attribute": 38,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 308,
+  "fields": {
+    "product": 13,
+    "attribute": 32,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 309,
+  "fields": {
+    "product": 13,
+    "attribute": 35,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 310,
+  "fields": {
+    "product": 13,
+    "attribute": 11,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 311,
+  "fields": {
+    "product": 13,
+    "attribute": 1,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 312,
+  "fields": {
+    "product": 13,
+    "attribute": 6,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 313,
+  "fields": {
+    "product": 13,
+    "attribute": 17,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 314,
+  "fields": {
+    "product": 13,
+    "attribute": 27,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 315,
+  "fields": {
+    "product": 13,
+    "attribute": 18,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 316,
+  "fields": {
+    "product": 13,
+    "attribute": 57,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 317,
+  "fields": {
+    "product": 13,
+    "attribute": 39,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 318,
+  "fields": {
+    "product": 13,
+    "attribute": 7,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 319,
+  "fields": {
+    "product": 13,
+    "attribute": 12,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 320,
+  "fields": {
+    "product": 13,
+    "attribute": 19,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 321,
+  "fields": {
+    "product": 13,
+    "attribute": 8,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 322,
+  "fields": {
+    "product": 13,
+    "attribute": 20,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 323,
+  "fields": {
+    "product": 13,
+    "attribute": 21,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 324,
+  "fields": {
+    "product": 13,
+    "attribute": 22,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 325,
+  "fields": {
+    "product": 13,
+    "attribute": 23,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productattributevalue",
+  "pk": 326,
+  "fields": {
+    "product": 13,
+    "attribute": 13,
+    "value": ""
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 1,
+  "fields": {
+    "product": 10,
+    "image": "products/gallery/defender.PNG",
+    "alt_text": "",
+    "is_primary": false,
+    "display_order": 0,
+    "created_at": "2026-08-08T18:26:14.596Z"
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 2,
+  "fields": {
+    "product": 10,
+    "image": "products/gallery/defender_3_xGisFZA.PNG",
+    "alt_text": "",
+    "is_primary": false,
+    "display_order": 0,
+    "created_at": "2026-08-08T18:26:14.598Z"
+  }
+}
+]
