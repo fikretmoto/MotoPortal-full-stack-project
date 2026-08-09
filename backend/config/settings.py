@@ -44,7 +44,7 @@ DJANGO_APPS = [
 
 
 THIRD_PARTY_APPS = [
-    "rest_framework","django_filters", "drf_spectacular", "rest_framework_simplejwt.token_blacklist", "corsheaders",
+    "rest_framework","django_filters", "drf_spectacular", "rest_framework_simplejwt.token_blacklist", "corsheaders", "cloudinary", "cloudinary_storage",
 ]
 
 LOCAL_APPS = [
@@ -144,13 +144,12 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-
 
 
 REST_FRAMEWORK = {
