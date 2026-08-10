@@ -47,13 +47,14 @@ CATEGORY_DATA = [
         "parent_slug": None,
     },
 
-
-    # Motosiklet alt kategorileri
-    {
+  {
         "name": "Scooter",
         "slug": "scooter",
-        "parent_slug": "motosiklet",
+        "parent_slug": None,
     },
+
+    # Motosiklet alt kategorileri
+  
     {
         "name": "Naked",
         "slug": "naked",
@@ -116,6 +117,10 @@ CATEGORY_DATA = [
         "slug": "e-kasali",
         "parent_slug": "elektrikli",
     },
+
+    { "name": "E-Market Tipi", 
+     "slug": "e-market-tipi", 
+     "parent_slug": "elektrikli" },
 
 
     #yedek parca alt kategorileri
