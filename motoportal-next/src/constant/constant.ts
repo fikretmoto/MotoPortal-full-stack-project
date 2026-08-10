@@ -77,6 +77,12 @@ export const categoryMenuSections: CategoryMenuSection[] = [
         label: "Scooter",
         href: "/vehicles/scooter",
       },
+
+      {
+        label: "E-Scooter",
+        href: "/vehicles/e-scooter",
+      },
+
       {
         label: "ATV",
         href: "/vehicles/atv",
@@ -84,6 +90,26 @@ export const categoryMenuSections: CategoryMenuSection[] = [
       {
         label: "UTV",
         href: "/vehicles/utv",
+      },
+
+      {
+        label: "Kasalı",
+        href: "/vehicles/kasali",
+      },
+
+      {
+        label: "E-Pikap",
+        href: "/vehicles/e-pikap",
+      },
+
+      {
+        label: "E-Car",
+        href: "/vehicles/e-car",
+      },
+
+      {
+        label: "E-Market tipi",
+        href: "/vehicles/e-market-tipi",
       },
     ],
   },
@@ -128,6 +154,12 @@ export const homeCategoryItems: HomeCategoryItem[] = [
     label: "Scooter",
     href: "/vehicles/scooter",
   },
+
+  {
+    label: "E-Scooter",
+    href: "/vehicles/e-scooter",
+  },
+
   {
     label: "ATV",
     href: "/vehicles/atv",
@@ -136,6 +168,27 @@ export const homeCategoryItems: HomeCategoryItem[] = [
     label: "UTV",
     href: "/vehicles/utv",
   },
+
+  {
+        label: "Kasalı",
+        href: "/vehicles/kasali",
+      },
+
+      {
+        label: "E-Pikap",
+        href: "/vehicles/e-pikap",
+      },
+
+      {
+        label: "E-Car",
+        href: "/vehicles/e-car",
+      },
+
+      {
+        label: "E-Market tipi",
+        href: "/vehicles/e-market-tipi",
+      },
+
   {
     label: "Bisiklet",
     href: "/bicycles/bisiklet",
