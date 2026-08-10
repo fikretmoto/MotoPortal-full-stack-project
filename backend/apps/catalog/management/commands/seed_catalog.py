@@ -1,10 +1,10 @@
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
+from apps.catalog.attributes.ecommerce import ECOMMERCE_ATTRIBUTE_DATA
 from apps.catalog.attributes.scooter import SCOOTER_ATTRIBUTE_DATA
-from apps.catalog.attributes.core import CORE_ATTRIBUTE_DATA
 
-from backend.apps.catalog.attribute_groups_old import ATTRIBUTE_GROUP_DATA
+from apps.catalog.attribute_groups import ATTRIBUTE_GROUP_DATA
 from apps.catalog.attributes.helmet import HELMET_ATTRIBUTE_DATA
 from apps.catalog.attributes.motorcycle import MOTORCYCLE_ATTRIBUTE_DATA
 from apps.catalog.categories import CATEGORY_DATA
@@ -154,7 +154,7 @@ class Command(BaseCommand):
             *MOTORCYCLE_ATTRIBUTE_DATA,
             *HELMET_ATTRIBUTE_DATA,
             *SCOOTER_ATTRIBUTE_DATA,
-            *CORE_ATTRIBUTE_DATA
+            *ECOMMERCE_ATTRIBUTE_DATA
         ]
 
         for item in all_attribute_data:
@@ -248,7 +248,7 @@ class Command(BaseCommand):
                     self.stdout.write(
                         self.style.SUCCESS(
                             "OLUŞTURULDU: "
-                            f"{category.name} → "
+                            f"{category.name} -> "
                             f"{attribute.name}"
                         )
                     )
@@ -269,11 +269,11 @@ class Command(BaseCommand):
         if created:
             self.stdout.write(
                 self.style.SUCCESS(
-                    f"OLUŞTURULDU: {model_name} → {name}"
+                    f"OLUŞTURULDU: {model_name} -> {name}"
                 )
             )
             return
 
         self.stdout.write(
-            f"GÜNCELLENDİ: {model_name} → {name}"
+            f"GÜNCELLENDİ: {model_name} -> {name}"
         )

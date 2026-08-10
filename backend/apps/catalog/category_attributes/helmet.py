@@ -6,10 +6,6 @@ from .ecommerce import (
 
 HELMET_CATEGORY_SLUGS = [
     "kask",
-    "integral-kask",
-    "moduler-kask",
-    "acik-kask",
-    "cross-kask",
 ]
 
 
