@@ -28,8 +28,6 @@ CATEGORY_DATA = [
     
     
    
-    
-   
     {
         "name": "Yedek Parça",
         "slug": "yedek-parca",
