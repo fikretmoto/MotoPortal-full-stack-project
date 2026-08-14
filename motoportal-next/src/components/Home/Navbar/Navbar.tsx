@@ -5,7 +5,7 @@ import TopBar from "./TopBar";
 
 const Navbar = () => {
   return (
-    <header className="relative z-20 bg-white text-neutral-950">
+    <header className="relative z-50 bg-[#050505] text-white">
       <TopBar />
       <MainNav />
       <CategoryNav />

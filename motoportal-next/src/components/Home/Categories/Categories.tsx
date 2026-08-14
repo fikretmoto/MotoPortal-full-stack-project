@@ -4,7 +4,10 @@ import { homeCategoryItems } from "@/constant/constant";
 
 const Categories = () => {
   return (
-    <section className="border-b border-neutral-200 bg-white">
+    <section
+      id="kategoriler"
+      className="border-b border-neutral-200 bg-white"
+    >
       <div className="mx-auto max-w-6xl px-6 py-14 md:py-16">
         <div className="max-w-2xl">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">

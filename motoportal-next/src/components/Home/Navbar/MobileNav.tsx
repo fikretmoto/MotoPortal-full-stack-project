@@ -5,23 +5,14 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 import {
-  categoryMenuSections,
-  mainMenuItems,
-  mobileNavContent,
+  headerActions,
+  mobileMenuSections,
+  topBarContent,
 } from "@/constant/constant";
 
 const MobileNav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openSections, setOpenSections] = useState<string[]>([]);
-
-  const toggleMenu = () => {
-    setIsMenuOpen((previousState) => !previousState);
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-    setOpenSections([]);
-  };
 
   const toggleSection = (sectionTitle: string) => {
     setOpenSections((previousState) =>
@@ -31,101 +22,126 @@ const MobileNav = () => {
     );
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    setOpenSections([]);
+  };
+
   return (
-    <div className="border-b border-neutral-200 md:hidden">
-      <div className="mx-auto max-w-6xl px-6 py-4">
+    <div className="border-b border-white/10 bg-[#050505] lg:hidden">
+      <div className="mx-auto max-w-[1560px] px-4 py-4 sm:px-6">
         <div className="flex items-center justify-between gap-4">
           <button
             type="button"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-navigation-panel"
-            onClick={toggleMenu}
-            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-neutral-900"
+            onClick={() => setIsMenuOpen((previousState) => !previousState)}
+            className="inline-flex items-center gap-2 rounded-full border border-white/12 px-4 py-2 text-sm font-semibold uppercase tracking-[0.14em] text-white"
           >
             <Menu className="h-4 w-4" />
-            <span>{mobileNavContent.label}</span>
+            Menü
           </button>
 
-          {isMenuOpen && (
-            <button
-              type="button"
-              onClick={closeMenu}
-              className="inline-flex items-center gap-2 text-sm font-medium text-neutral-700"
-            >
-              <X className="h-4 w-4" />
-              <span>Kapat</span>
-            </button>
-          )}
+          <div className="text-right">
+            <p className="text-sm font-black uppercase tracking-tight text-white">
+              MotoPortal
+            </p>
+            <p className="text-xs text-white/55">
+              {topBarContent.brandSuffix}
+            </p>
+          </div>
         </div>
 
-        {isMenuOpen && (
+        {isMenuOpen ? (
           <div
             id="mobile-navigation-panel"
-            className="mt-5 space-y-6 rounded-2xl border border-neutral-200 bg-white p-4"
+            className="mt-4 overflow-hidden rounded-[1.8rem] border border-white/10 bg-[#101012] text-white shadow-[0_18px_50px_rgba(0,0,0,0.35)]"
           >
-            <nav
-              aria-label="Mobile main navigation"
-              className="flex flex-col gap-3"
-            >
-              {mainMenuItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={closeMenu}
-                  className="text-sm font-medium text-neutral-800"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
+            <div className="flex items-center justify-between border-b border-white/10 px-4 py-4">
+              <div>
+                <p className="text-base font-semibold">Kategoriler</p>
+                <p className="text-sm text-white/60">
+                  Alt kategorilere hızlı erişim
+                </p>
+              </div>
 
-            <div className="space-y-3">
-              {categoryMenuSections.map((section) => {
-                const isSectionOpen = openSections.includes(section.title);
+              <button
+                type="button"
+                onClick={closeMenu}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 text-white/82 transition hover:text-white"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
 
-                return (
-                  <div
-                    key={section.title}
-                    className="rounded-2xl border border-neutral-200"
+            <div className="border-b border-white/10 px-4 py-4">
+              <div className="grid grid-cols-3 gap-3">
+                {headerActions.map((action) => (
+                  <Link
+                    key={action.label}
+                    href={action.href}
+                    onClick={closeMenu}
+                    className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-3 text-center text-xs font-medium text-white/82"
                   >
-                    <button
-                      type="button"
-                      onClick={() => toggleSection(section.title)}
-                      className="flex w-full items-center justify-between px-4 py-3 text-left"
+                    {action.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="max-h-[72vh] overflow-y-auto px-3 py-3">
+              <div className="space-y-3">
+                {mobileMenuSections.map((section) => {
+                  const isOpen = openSections.includes(section.title);
+
+                  return (
+                    <div
+                      key={section.title}
+                      className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]"
                     >
-                      <span className="text-sm font-semibold text-neutral-900">
-                        {section.title}
-                      </span>
+                      <button
+                        type="button"
+                        onClick={() => toggleSection(section.title)}
+                        className="flex w-full items-center justify-between px-4 py-4 text-left"
+                      >
+                        <span className="text-sm font-semibold uppercase tracking-[0.08em] text-white">
+                          {section.title}
+                        </span>
+                        <ChevronDown
+                          className={`h-4 w-4 text-white/68 transition ${
+                            isOpen ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
 
-                      <ChevronDown
-                        className={`h-4 w-4 text-neutral-500 transition ${
-                          isSectionOpen ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-
-                    {isSectionOpen && (
-                      <div className="border-t border-neutral-200 px-4 py-3">
-                        <div className="flex flex-col gap-3">
-                          {section.items.map((item) => (
-                            <Link
-                              key={item.label}
-                              href={item.href}
-                              onClick={closeMenu}
-                              className="text-sm text-neutral-700"
-                            >
-                              {item.label}
-                            </Link>
-                          ))}
+                      {isOpen ? (
+                        <div className="border-t border-white/10 px-4 py-3">
+                          <div className="space-y-2">
+                            {section.items.map((item) => (
+                              <Link
+                                key={item.label}
+                                href={item.href}
+                                onClick={closeMenu}
+                                className="flex items-center justify-between rounded-xl px-3 py-3 text-sm text-white/86 transition hover:bg-white/6 hover:text-white"
+                              >
+                                <span>{item.label}</span>
+                                {item.badge ? (
+                                  <span className="rounded-md bg-[#e10600] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">
+                                    {item.badge}
+                                  </span>
+                                ) : null}
+                              </Link>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+                      ) : null}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

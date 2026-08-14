@@ -14,7 +14,10 @@ export default async function Brands() {
   }
 
   return (
-    <section className="border-b border-neutral-200 bg-white">
+    <section
+      id="markalar"
+      className="border-b border-neutral-200 bg-white"
+    >
       <div className="mx-auto max-w-6xl px-6 py-14 md:py-16">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
@@ -33,7 +36,7 @@ export default async function Brands() {
           </div>
 
           <Link
-            href="/brands"
+            href="#markalar"
             className="text-sm font-medium text-neutral-950 transition hover:text-neutral-700"
           >
             Tum Markalari Gor
@@ -44,7 +47,7 @@ export default async function Brands() {
           {displayedBrands.map((brand) => (
             <Link
               key={brand.id}
-              href="/brands"
+              href="#markalar"
               className="group rounded-3xl border border-neutral-200 bg-neutral-50 p-6 transition hover:border-neutral-300 hover:bg-white"
             >
               <div className="flex min-h-32 flex-col justify-between gap-6">
