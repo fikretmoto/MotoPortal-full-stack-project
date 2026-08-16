@@ -1,20 +1,34 @@
 @import "tailwindcss";
 
+/* =========================
+   ROOT VARIABLES
+   ========================= */
+
 :root {
   --background: #f3f4f6;
   --foreground: #111111;
 }
 
+/* =========================
+   TAILWIND THEME
+   ========================= */
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
+  /* Genel site fontları */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
+  /* MotoPortal özel fontları */
   --font-motoportal: var(--font-audiowide);
   --font-motoportal-tagline: var(--font-montserrat);
 }
+
+/* =========================
+   DARK MODE
+   ========================= */
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -23,22 +37,31 @@
   }
 }
 
+/* =========================
+   BASE
+   ========================= */
+
 html {
   background: #050505;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), "Segoe UI", sans-serif;
 }
 
-/* MotoPortal ana marka yazısı */
+/* =========================
+   MOTOPORTAL GLOBAL CLASSES
+   ========================= */
+
+/* Logo / marka yazısı */
 .font-motoportal {
   font-family: var(--font-audiowide), sans-serif;
 }
 
-/* MotoPortal slogan / description */
+/* Slogan / açıklama */
 .font-motoportal-tagline {
   font-family: var(--font-montserrat), sans-serif;
 }

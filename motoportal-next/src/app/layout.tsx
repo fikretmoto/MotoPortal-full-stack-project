@@ -1,33 +1,34 @@
 import type { Metadata } from "next";
 import {
+  Audiowide,
   Geist,
   Geist_Mono,
-  Audiowide,
   Montserrat,
 } from "next/font/google";
+
 import "./globals.css";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
   subsets: ["latin"],
+  variable: "--font-geist-sans",
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
+  variable: "--font-geist-mono",
 });
 
 const audiowide = Audiowide({
-  variable: "--font-audiowide",
-  subsets: ["latin"],
   weight: "400",
+  subsets: ["latin"],
+  variable: "--font-audiowide",
 });
 
 const montserrat = Montserrat({
-  variable: "--font-montserrat",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  variable: "--font-montserrat",
 });
+
 
 
 export const metadata: Metadata = {
@@ -40,12 +41,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-   <html
-  lang="tr"
-  className={`${geistSans.variable} ${geistMono.variable} ${audiowide.variable} ${montserrat.variable} h-full antialiased`}
->
-      <body className="min-h-full flex flex-col">{children}</body>
+ return (
+    <html lang="tr">
+      <body
+        className={`
+          ${geistSans.variable}
+          ${geistMono.variable}
+          ${audiowide.variable}
+          ${montserrat.variable}
+        `}
+      >
+        {children}
+      </body>
     </html>
   );
 }

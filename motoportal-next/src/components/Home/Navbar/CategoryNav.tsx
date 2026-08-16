@@ -17,7 +17,7 @@ import {
   mainMenuItems,
   megaMenuSections,
   megaMenuSupplementaryLinks,
-  popularBrandStripItems,
+ 
 } from "@/constant/constant";
 
 const iconMap = {
@@ -297,22 +297,7 @@ const CategoryNav = () => {
         </div>
       ) : null}
 
-      <div className="border-t border-white/10 bg-[#0d0d10]">
-        <div className="mx-auto max-w-[1560px] px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 py-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-white/74 xl:text-[13px]">
-            <span className="text-white">Popüler Markalar</span>
-            {popularBrandStripItems.map((brand) => (
-              <Link
-                key={brand.label}
-                href={brand.href}
-                className="transition hover:text-white"
-              >
-                {brand.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 };

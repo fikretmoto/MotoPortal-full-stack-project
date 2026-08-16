@@ -19,3 +19,4 @@ motoportal-next/.env.local
 # General
 .DS_Store
 Thumbs.db
+.env

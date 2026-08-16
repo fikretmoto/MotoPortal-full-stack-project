@@ -51,6 +51,12 @@ CATEGORY_DATA = [
         "parent_slug": None,
     },
 
+{
+        "name": "Ekipman",
+        "slug": "ekipman",
+        "parent_slug": None,
+    },
+
     # Motosiklet alt kategorileri
   
     {
@@ -200,12 +206,12 @@ CATEGORY_DATA = [
                     {
                             "name": "Mont",
                             "slug": "mont",
-                            "parent_slug": "aksesuar",
+                            "parent_slug": "ekipman",
                         },
 
                         {
                                 "name": "Kask",
                                 "slug": "kask",
-                                "parent_slug": "aksesuar",
+                                "parent_slug": "ekipman",
                             },
 ]

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import type { ProductImage } from "@/services/catalog";
 
@@ -52,14 +52,15 @@ export default function ProductHeroGallery({
   const [selectedImageId, setSelectedImageId] = useState<string | null>(
     galleryImages[0]?.id ?? null
   );
-
-  useEffect(() => {
-    setSelectedImageId(galleryImages[0]?.id ?? null);
-  }, [galleryImages]);
+  const resolvedSelectedImageId =
+    selectedImageId &&
+    galleryImages.some((image) => image.id === selectedImageId)
+      ? selectedImageId
+      : galleryImages[0]?.id ?? null;
 
   const selectedImage =
     galleryImages.find(
-      (image) => image.id === selectedImageId
+      (image) => image.id === resolvedSelectedImageId
     ) ?? galleryImages[0] ?? null;
 
   if (!selectedImage) {
