@@ -103,21 +103,19 @@ export default function ProductTechnicalTabs({
         <div>
           {activeGroup.attributes.map(
             (attribute) => (
-              <div
-                key={attribute.id}
-                className="grid grid-cols-2 gap-6 border-b border-gray-100 px-6 py-4 last:border-b-0"
-              >
-                <span className="text-sm text-gray-500">
-                  {attribute.name}
-                </span>
+             <div
+  key={attribute.id}
+  className="grid grid-cols-[220px_1fr] items-center gap-6 border-b border-gray-100 px-6 py-4 last:border-b-0"
+>
+  <span className="text-sm text-gray-500">
+    {attribute.name}
+  </span>
 
-                <span className="text-right font-medium text-gray-900">
-                  {attribute.value}
-                  {attribute.unit
-                    ? ` ${attribute.unit}`
-                    : ""}
-                </span>
-              </div>
+  <span className="font-medium text-gray-900">
+    {attribute.value}
+    {attribute.unit ? ` ${attribute.unit}` : ""}
+  </span>
+</div>
             )
           )}
         </div>

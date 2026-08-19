@@ -109,27 +109,62 @@ const brands = [
     panelSlotClass: "w-[106px] xl:w-[120px] 2xl:w-[126px]",
     panelImageClass: "max-h-[22px] xl:max-h-[23px]",
   },
+
+  {
+  name: "Hero",
+  logo: "/brands/hero.svg",
+  href: "#brands",
+  slotClass: "w-[92px] xl:w-[104px] 2xl:w-[112px]",
+  imageClass: "max-h-[26px] xl:max-h-[28px]",
+},
+
+ 
+
+  {
+    name: "QJ Motor",
+    logo: "/brands/qj.svg",
+    href: "#brands",
+  },
+
+   {
+    name: "Zontes",
+    logo: "/brands/zontes.svg",
+    href: "#brands",
+  },
+
+];
+  
+
+
+
+const popularMotorcycleBrandNames = [
+  "Honda",
+  "Yamaha",
+  "Suzuki",
+  "TVS",
+  "SYM",
+  "Kymco",
+  "CFMOTO",
+  "Hero",
+  "QJ Motor",
+  "Zontes",
 ];
 
-const getCollapsedVisibilityClass = (index: number) => {
-  if (index < 8) {
-    return "flex";
-  }
+const popularBicycleBrands = [
+  "Bisan",
+  "Carraro",
+  "Salcano",
+];
 
-  if (index < 10) {
-    return "hidden lg:flex";
-  }
+const popularMotorcycleBrands = brands.filter((brand) =>
+  popularMotorcycleBrandNames.includes(brand.name),
+);
 
-  if (index < 12) {
-    return "hidden min-[1440px]:flex";
-  }
+const otherMotorcycleBrands = brands.filter(
+  (brand) => !popularMotorcycleBrandNames.includes(brand.name),
+);
 
-  if (index < 14) {
-    return "hidden 2xl:flex";
-  }
-
-  return "hidden";
-};
+// 👆 BURAYA KADAR
 
 const BrandLogo = ({
   brand,
@@ -181,63 +216,110 @@ const BrandLogo = ({
   );
 };
 
-const PopularBrandsBar = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
 
-  return (
-    <div className="border-y border-white/10 bg-[#09090b]">
-      <div className="mx-auto max-w-[1560px] px-4 sm:px-6 lg:px-8">
-        <div className="flex min-h-[60px] items-center gap-2.5 py-2 lg:gap-3">
+  const PopularBrandsBar = () => {
+  const [isMotorcycleExpanded, setIsMotorcycleExpanded] = useState(false);
+  const [isBicycleExpanded, setIsBicycleExpanded] = useState(false);
+
+return (
+  <div className="border-y border-white/10 bg-[#09090b]">
+    <div className="mx-auto max-w-[1560px] px-4 sm:px-6 lg:px-8">
+
+      {/* POPÜLER MOTOSİKLET MARKALARI */}
+      <div className="border-b border-white/10 py-3">
+       <div className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-3 lg:flex lg:flex-wrap">
           <span className="shrink-0 text-[11px] font-bold uppercase tracking-[0.1em] text-white xl:text-[12px]">
-            Popüler Markalar
+            Popüler Motosiklet Markaları
           </span>
 
-          <div className="flex flex-1 items-center justify-start gap-0.5 overflow-hidden xl:gap-1">
-            {brands.map((brand, index) => (
+         <div className="col-span-2 grid w-full grid-cols-[repeat(auto-fit,minmax(82px,1fr))] items-center gap-x-3 gap-y-3 lg:flex lg:min-w-0 lg:flex-1 lg:flex-wrap">
+            {popularMotorcycleBrands.map((brand) => (
               <BrandLogo
                 key={brand.name}
                 brand={brand}
-                className={getCollapsedVisibilityClass(index)}
+                className="flex"
               />
             ))}
           </div>
 
           <button
             type="button"
-            onClick={() => setIsExpanded((previousState) => !previousState)}
-            aria-expanded={isExpanded}
-            aria-controls="popular-brands-panel"
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-white/10 px-2.5 py-2 text-[10px] font-semibold uppercase tracking-[0.04em] text-white/70 transition hover:border-white/25 hover:text-white xl:px-3.5"
+            onClick={() =>
+              setIsMotorcycleExpanded((previousState) => !previousState)
+            }
+            aria-expanded={isMotorcycleExpanded}
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-white/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.04em] text-white/70 transition hover:border-white/25 hover:text-white"
           >
-            <span>Tüm Markalar</span>
+            Tüm Markalar
+
             <ChevronDown
               className={`h-4 w-4 transition ${
-                isExpanded ? "rotate-180" : ""
+                isMotorcycleExpanded ? "rotate-180" : ""
               }`}
             />
           </button>
         </div>
 
-        {isExpanded ? (
-          <div
-            id="popular-brands-panel"
-            className="border-t border-white/10 py-4"
-          >
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-4 xl:gap-x-4">
-              {brands.map((brand) => (
-                <BrandLogo
-                  key={brand.name}
-                  brand={brand}
-                  size="expanded"
-                  className="flex rounded-lg border border-transparent px-1 py-1 transition hover:border-white/10 hover:bg-white/[0.02]"
-                />
-              ))}
-            </div>
+        {isMotorcycleExpanded ? (
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-4 border-t border-white/10 pt-3">
+            {otherMotorcycleBrands.map((brand) => (
+              <BrandLogo
+                key={brand.name}
+                brand={brand}
+                size="expanded"
+                className="flex rounded-lg border border-transparent px-1 py-1 transition hover:border-white/10 hover:bg-white/[0.02]"
+              />
+            ))}
           </div>
         ) : null}
       </div>
-    </div>
-  );
-};
 
+      {/* POPÜLER BİSİKLET MARKALARI */}
+      <div className="py-3">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+          <span className="shrink-0 text-[11px] font-bold uppercase tracking-[0.1em] text-white xl:text-[12px]">
+            Popüler Bisiklet Markaları
+          </span>
+
+          <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2">
+            {popularBicycleBrands.map((brand) => (
+              <Link
+                key={brand}
+                href="#brands"
+                className="rounded-lg border border-white/10 px-4 py-2 text-sm font-semibold text-white/80 transition hover:border-white/25 hover:bg-white/[0.03] hover:text-white"
+              >
+                {brand}
+              </Link>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() =>
+              setIsBicycleExpanded((previousState) => !previousState)
+            }
+            aria-expanded={isBicycleExpanded}
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-white/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.04em] text-white/70 transition hover:border-white/25 hover:text-white"
+          >
+            Tüm Markalar
+
+            <ChevronDown
+              className={`h-4 w-4 transition ${
+                isBicycleExpanded ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+        </div>
+
+        {isBicycleExpanded ? (
+          <div className="mt-3 border-t border-white/10 pt-3 text-sm text-white/55">
+            Diğer bisiklet markaları buraya eklenecek.
+          </div>
+        ) : null}
+      </div>
+
+    </div>
+  </div>
+);
+};
 export default PopularBrandsBar;

@@ -6,12 +6,22 @@ import { useState } from "react";
 
 import {
   headerActions,
+  mainMenuItems,
   mobileMenuSections,
   topBarContent,
 } from "@/constant/constant";
 
-const MobileNav = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+type MobileNavProps = {
+  showNav: boolean;
+  toggleNav: () => void;
+  closeNav: () => void;
+};
+
+const MobileNav = ({
+  showNav,
+  toggleNav,
+  closeNav,
+}: MobileNavProps) => {
   const [openSections, setOpenSections] = useState<string[]>([]);
 
   const toggleSection = (sectionTitle: string) => {
@@ -22,20 +32,19 @@ const MobileNav = () => {
     );
   };
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-    setOpenSections([]);
-  };
-
+ const closeMenu = () => {
+  closeNav();
+  setOpenSections([]);
+};
   return (
     <div className="border-b border-white/10 bg-[#050505] lg:hidden">
       <div className="mx-auto max-w-[1560px] px-4 py-4 sm:px-6">
         <div className="flex items-center justify-between gap-4">
           <button
             type="button"
-            aria-expanded={isMenuOpen}
+            aria-expanded={showNav}
             aria-controls="mobile-navigation-panel"
-            onClick={() => setIsMenuOpen((previousState) => !previousState)}
+            onClick={toggleNav}
             className="inline-flex items-center gap-2 rounded-full border border-white/12 px-4 py-2 text-sm font-semibold uppercase tracking-[0.14em] text-white"
           >
             <Menu className="h-4 w-4" />
@@ -52,7 +61,7 @@ const MobileNav = () => {
           </div>
         </div>
 
-        {isMenuOpen ? (
+        {showNav ? (
           <div
             id="mobile-navigation-panel"
             className="mt-4 overflow-hidden rounded-[1.8rem] border border-white/10 bg-[#101012] text-white shadow-[0_18px_50px_rgba(0,0,0,0.35)]"
@@ -74,6 +83,23 @@ const MobileNav = () => {
               </button>
             </div>
 
+
+<div className="border-b border-white/10 px-4 py-4">
+  <div className="flex gap-3">
+    {mainMenuItems
+      .filter((item) => !item.isMegaTrigger)
+      .map((item) => (
+        <Link
+          key={item.label}
+          href={item.href}
+          onClick={closeMenu}
+          className="rounded-xl border border-white/10 px-4 py-3 text-sm font-semibold text-white/85 transition hover:bg-white/5 hover:text-white"
+        >
+          {item.label}
+        </Link>
+      ))}
+  </div>
+</div>
             <div className="border-b border-white/10 px-4 py-4">
               <div className="grid grid-cols-3 gap-3">
                 {headerActions.map((action) => (

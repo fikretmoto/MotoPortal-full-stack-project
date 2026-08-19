@@ -152,7 +152,7 @@ const CategoryNav = () => {
       <div className="mx-auto max-w-[1560px] px-4 sm:px-6 lg:px-8">
         <nav
           aria-label="Category navigation"
-          className="flex min-h-[58px] items-center justify-between gap-1"
+         className="flex min-h-[58px] items-center justify-center gap-8"
         >
           {mainMenuItems.map((item) => {
             const isMegaTrigger = Boolean(item.isMegaTrigger);

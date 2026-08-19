@@ -68,7 +68,6 @@ export const headerActions: HeaderAction[] = [
 
 export const mainMenuItems: NavItem[] = [
   { label: "Ana Sayfa", href: "/" },
-  { label: "Markalar", href: "#markalar", hasCaret: true },
   {
     label: "Kategoriler",
     href: "#kategoriler",
@@ -76,18 +75,9 @@ export const mainMenuItems: NavItem[] = [
     hasCaret: true,
     isMegaTrigger: true,
   },
-  { label: "Elektrikli", href: "#elektrikli" },
-  { label: "Benzinli", href: "#benzinli" },
-  { label: "Scooter", href: "#scooter" },
-  { label: "Naked", href: "#naked" },
-  { label: "Enduro", href: "#enduro" },
-  { label: "ATV", href: "#atv" },
-  { label: "UTV", href: "#utv" },
-  { label: "Bisiklet", href: "#bisiklet" },
-  { label: "Yedek Parça", href: "#yedek-parca" },
-  { label: "Aksesuar", href: "#aksesuar" },
   { label: "Blog", href: "#blog" },
 ];
+
 
 export const megaMenuSections: MegaMenuSection[] = [
   {
