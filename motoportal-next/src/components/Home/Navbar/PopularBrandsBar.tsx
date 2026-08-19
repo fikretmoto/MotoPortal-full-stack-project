@@ -232,7 +232,7 @@ return (
             Popüler Motosiklet Markaları
           </span>
 
-         <div className="col-span-2 grid w-full grid-cols-[repeat(auto-fit,minmax(82px,1fr))] items-center gap-x-3 gap-y-3 lg:flex lg:min-w-0 lg:flex-1 lg:flex-wrap">
+         <div className="col-span-2 grid w-full grid-cols-[repeat(auto-fit,minmax(82px,1fr))] items-center gap-x-3 gap-y-3 lg:flex lg:min-w-0 lg:flex-1 lg:flex-nowrap lg:justify-between">
             {popularMotorcycleBrands.map((brand) => (
               <BrandLogo
                 key={brand.name}
