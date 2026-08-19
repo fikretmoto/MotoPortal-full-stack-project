@@ -35,13 +35,13 @@ const brands = [
   },
   {
     name: "Kymco",
-    logo: "/brands/kymco.svg",
-    href: "#brands",
-    slotClass: "w-[74px] xl:w-[84px] 2xl:w-[90px]",
-    imageClass: "max-h-[19px] xl:max-h-[20px]",
-    topClassName: "mr-[-5px] xl:mr-[-6px]",
-    panelSlotClass: "w-[100px] xl:w-[112px] 2xl:w-[118px]",
-    panelImageClass: "max-h-[21px] xl:max-h-[22px]",
+  logo: "/brands/kymco.svg",
+  href: "#brands",
+  slotClass: "w-[74px] xl:w-[84px] 2xl:w-[90px]",
+  imageClass: "max-h-[19px] xl:max-h-[20px]",
+  topClassName: "mr-[-12px] xl:mr-[-14px]",
+  panelSlotClass: "w-[100px] xl:w-[112px] 2xl:w-[118px]",
+  panelImageClass: "max-h-[21px] xl:max-h-[22px]",
   },
   {
     name: "Yuki",
@@ -111,27 +111,24 @@ const brands = [
   },
 
   {
-  name: "Hero",
+ name: "Hero",
   logo: "/brands/hero.svg",
   href: "#brands",
-  slotClass: "w-[92px] xl:w-[104px] 2xl:w-[112px]",
-  imageClass: "max-h-[26px] xl:max-h-[28px]",
+  slotClass: "w-[100px] xl:w-[110px] 2xl:w-[116px]",
+  imageClass: "max-h-[25px] xl:max-h-[27px] 2xl:max-h-[28px]",
+  topClassName: "mr-[-12px] xl:mr-[-14px]",
 },
-
- 
-
-  {
-    name: "QJ Motor",
-    logo: "/brands/qj.svg",
-    href: "#brands",
-  },
-
-   {
-    name: "Zontes",
-    logo: "/brands/zontes.svg",
-    href: "#brands",
-  },
-
+{
+  name: "QJ Motor",
+  logo: "/brands/qj.svg",
+  href: "#brands",
+  topClassName: "mr-[-12px] xl:mr-[-14px]",
+},
+{
+  name: "Zontes",
+  logo: "/brands/zontes.svg",
+  href: "#brands",
+},
 ];
   
 
