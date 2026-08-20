@@ -75,7 +75,7 @@ export default async function FeaturedProducts() {
     featuredProducts.length > 0
       ? featuredProducts
       : activeProducts
-  ).slice(0, 4);
+  ).slice(0, 8);
 
   if (displayedProducts.length === 0) {
     return null;

@@ -6,16 +6,7 @@ import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 const brands = [
-  {
-    name: "Honda",
-    logo: "/brands/honda.svg",
-    href: "#brands",
-    slotClass: "w-[70px] xl:w-[78px] 2xl:w-[84px]",
-    imageClass: "max-h-[21px] xl:max-h-[22px]",
-    topClassName: "mr-[-8px] xl:mr-[-10px]",
-    panelSlotClass: "w-[102px] xl:w-[114px] 2xl:w-[120px]",
-    panelImageClass: "max-h-[21px] xl:max-h-[22px]",
-  },
+  { name: "Honda", logo: "/brands/honda.svg", href: "#brands" },
   { name: "Yamaha", logo: "/brands/yamaha.svg", href: "#brands" },
   { name: "Suzuki", logo: "/brands/suzuki.svg", href: "#brands" },
   { name: "TVS", logo: "/brands/tvs.svg", href: "#brands" },
@@ -23,116 +14,20 @@ const brands = [
   { name: "RKS", logo: "/brands/rks.svg", href: "#brands" },
   { name: "Mondial", logo: "/brands/mondial.svg", href: "#brands" },
   { name: "CFMOTO", logo: "/brands/cfmoto.svg", href: "#brands" },
-  {
-    name: "SYM",
-    logo: "/brands/sym.svg",
-    href: "#brands",
-    slotClass: "w-[72px] xl:w-[80px] 2xl:w-[86px]",
-    imageClass: "max-h-[20px] xl:max-h-[21px]",
-    topClassName: "mr-[-5px] xl:mr-[-6px]",
-    panelSlotClass: "w-[98px] xl:w-[110px] 2xl:w-[116px]",
-    panelImageClass: "max-h-[21px] xl:max-h-[22px]",
-  },
-  {
-    name: "Kymco",
-  logo: "/brands/kymco.svg",
-  href: "#brands",
-  slotClass: "w-[74px] xl:w-[84px] 2xl:w-[90px]",
-  imageClass: "max-h-[19px] xl:max-h-[20px]",
-  topClassName: "mr-[-12px] xl:mr-[-14px]",
-  panelSlotClass: "w-[100px] xl:w-[112px] 2xl:w-[118px]",
-  panelImageClass: "max-h-[21px] xl:max-h-[22px]",
-  },
-  {
-    name: "Yuki",
-    logo: "/brands/yuki.svg",
-    href: "#brands",
-    slotClass: "w-[76px] xl:w-[86px] 2xl:w-[92px]",
-    topClassName: "mr-[-4px] xl:mr-[-5px]",
-    panelSlotClass: "w-[108px] xl:w-[122px] 2xl:w-[128px]",
-    panelImageClass: "max-h-[22px] xl:max-h-[23px]",
-  },
-  {
-    name: "Arora",
-    logo: "/brands/arora.svg",
-    href: "#brands",
-    panelSlotClass: "w-[108px] xl:w-[122px] 2xl:w-[128px]",
-    panelImageClass: "max-h-[22px] xl:max-h-[23px]",
-  },
-  {
-    name: "Benda",
-    logo: "/brands/benda.svg",
-    href: "#brands",
-    slotClass: "w-[88px] xl:w-[98px] 2xl:w-[104px]",
-    imageClass: "max-h-[18px] xl:max-h-[19px]",
-    panelSlotClass: "w-[108px] xl:w-[122px] 2xl:w-[128px]",
-    panelImageClass: "max-h-[22px] xl:max-h-[23px]",
-  },
-  {
-    name: "Peugeot",
-    logo: "/brands/peugeot.svg",
-    href: "#brands",
-    slotClass: "w-[96px] xl:w-[108px] 2xl:w-[114px]",
-    imageClass: "max-h-[18px] xl:max-h-[19px]",
-    panelSlotClass: "w-[108px] xl:w-[122px] 2xl:w-[128px]",
-    panelImageClass: "max-h-[22px] xl:max-h-[23px]",
-  },
-  {
-    name: "Regal Raptor",
-    logo: "/brands/regal-raptor.svg",
-    href: "#brands",
-    panelSlotClass: "w-[108px] xl:w-[122px] 2xl:w-[128px]",
-    panelImageClass: "max-h-[21px] xl:max-h-[22px]",
-  },
-  {
-    name: "Voge",
-    logo: "/brands/voge.svg",
-    href: "#brands",
-    slotClass: "w-[82px] xl:w-[92px] 2xl:w-[98px]",
-    imageClass: "max-h-[21px] xl:max-h-[22px]",
-    panelSlotClass: "w-[108px] xl:w-[122px] 2xl:w-[128px]",
-    panelImageClass: "max-h-[22px] xl:max-h-[23px]",
-  },
-  {
-    name: "Taro",
-    logo: "/brands/taro.svg",
-    href: "#brands",
-    panelSlotClass: "w-[102px] xl:w-[114px] 2xl:w-[120px]",
-    panelImageClass: "max-h-[22px] xl:max-h-[23px]",
-  },
-  {
-    name: "Volta",
-    logo: "/brands/volta.svg",
-    href: "#brands",
-    slotClass: "w-[90px] xl:w-[100px] 2xl:w-[106px]",
-    imageClass: "max-h-[20px] xl:max-h-[21px]",
-    panelSlotClass: "w-[106px] xl:w-[120px] 2xl:w-[126px]",
-    panelImageClass: "max-h-[22px] xl:max-h-[23px]",
-  },
-
-  {
- name: "Hero",
-  logo: "/brands/hero.svg",
-  href: "#brands",
-  slotClass: "w-[100px] xl:w-[110px] 2xl:w-[116px]",
-  imageClass: "max-h-[25px] xl:max-h-[27px] 2xl:max-h-[28px]",
-  topClassName: "mr-[-12px] xl:mr-[-14px]",
-},
-{
-  name: "QJ Motor",
-  logo: "/brands/qj.svg",
-  href: "#brands",
-  topClassName: "mr-[-12px] xl:mr-[-14px]",
-},
-{
-  name: "Zontes",
-  logo: "/brands/zontes.svg",
-  href: "#brands",
-},
+  { name: "SYM", logo: "/brands/sym.svg", href: "#brands" },
+  { name: "Kymco", logo: "/brands/kymco.svg", href: "#brands" },
+  { name: "Yuki", logo: "/brands/yuki.svg", href: "#brands" },
+  { name: "Arora", logo: "/brands/arora.svg", href: "#brands" },
+  { name: "Benda", logo: "/brands/benda.svg", href: "#brands" },
+  { name: "Peugeot", logo: "/brands/peugeot.svg", href: "#brands" },
+  { name: "Regal Raptor", logo: "/brands/regal-raptor.svg", href: "#brands" },
+  { name: "Voge", logo: "/brands/voge.svg", href: "#brands" },
+  { name: "Taro", logo: "/brands/taro.svg", href: "#brands" },
+  { name: "Volta", logo: "/brands/volta.svg", href: "#brands" },
+  { name: "Hero", logo: "/brands/hero.svg", href: "#brands" },
+  { name: "QJ Motor", logo: "/brands/qj.svg", href: "#brands" },
+  { name: "Zontes", logo: "/brands/zontes.svg", href: "#brands" },
 ];
-  
-
-
 
 const popularMotorcycleBrandNames = [
   "Honda",
@@ -147,11 +42,7 @@ const popularMotorcycleBrandNames = [
   "Zontes",
 ];
 
-const popularBicycleBrands = [
-  "Bisan",
-  "Carraro",
-  "Salcano",
-];
+const popularBicycleBrands = ["Bisan", "Carraro", "Salcano"];
 
 const popularMotorcycleBrands = brands.filter((brand) =>
   popularMotorcycleBrandNames.includes(brand.name),
@@ -161,162 +52,123 @@ const otherMotorcycleBrands = brands.filter(
   (brand) => !popularMotorcycleBrandNames.includes(brand.name),
 );
 
-// 👆 BURAYA KADAR
-
 const BrandLogo = ({
   brand,
-  className,
-  size = "default",
 }: {
   brand: (typeof brands)[number];
-  className?: string;
-  size?: "default" | "expanded";
 }) => {
-  const slotClassName =
-    size === "expanded"
-      ? `flex h-[26px] w-[102px] items-center justify-center xl:h-[28px] xl:w-[114px] 2xl:w-[120px] ${
-          brand.panelSlotClass ?? ""
-        }`
-      : `flex h-[22px] w-[82px] items-center justify-center xl:h-[24px] xl:w-[92px] 2xl:w-[98px] ${
-          brand.slotClass ?? ""
-        }`;
-
-  const imageClassName =
-    size === "expanded"
-      ? `h-auto max-h-[20px] w-auto max-w-full object-contain brightness-0 invert opacity-90 transition group-hover:opacity-100 ${
-          brand.panelImageClass ?? brand.imageClass ?? ""
-        }`
-      : `h-auto max-h-[18px] w-auto max-w-full object-contain brightness-0 invert opacity-85 transition group-hover:opacity-100 ${
-          brand.imageClass ?? ""
-        }`;
-
-  const spacingClassName = size === "default" ? brand.topClassName ?? "" : "";
-
   return (
     <Link
       href={brand.href}
       aria-label={brand.name}
-      className={`group items-center justify-center ${spacingClassName} ${
-        className ?? ""
-      }`}
+      className="group flex h-10 min-w-0 items-center justify-center"
     >
-      <span className={slotClassName}>
-        <Image
-          src={brand.logo}
-          alt={brand.name}
-          width={120}
-          height={32}
-          className={imageClassName}
-        />
-      </span>
+      <Image
+        src={brand.logo}
+        alt={brand.name}
+        width={120}
+        height={32}
+        className="h-auto max-h-6 w-auto max-w-full object-contain brightness-0 invert opacity-90 transition group-hover:opacity-100"
+      />
     </Link>
   );
 };
 
-
-  const PopularBrandsBar = () => {
+const PopularBrandsBar = () => {
   const [isMotorcycleExpanded, setIsMotorcycleExpanded] = useState(false);
   const [isBicycleExpanded, setIsBicycleExpanded] = useState(false);
 
-return (
-  <div className="border-y border-white/10 bg-[#09090b]">
-    <div className="mx-auto max-w-[1560px] px-4 sm:px-6 lg:px-8">
+  return (
+    <div className="border-y border-white/10 bg-[#09090b]">
+      <div className="mx-auto max-w-[1560px] px-4 sm:px-6 lg:px-8">
 
-      {/* POPÜLER MOTOSİKLET MARKALARI */}
-      <div className="border-b border-white/10 py-3">
-       <div className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-3 lg:flex lg:flex-wrap">
-          <span className="shrink-0 text-[11px] font-bold uppercase tracking-[0.1em] text-white xl:text-[12px]">
+        {/* POPÜLER MOTOSİKLET MARKALARI */}
+        <section className="border-b border-white/10 py-4">
+          <h2 className="mb-4 text-[11px] font-bold uppercase tracking-[0.1em] text-white xl:text-[12px]">
             Popüler Motosiklet Markaları
-          </span>
+          </h2>
 
-         <div className="col-span-2 grid w-full grid-cols-[repeat(auto-fit,minmax(82px,1fr))] items-center gap-x-3 gap-y-3 lg:flex lg:min-w-0 lg:flex-1 lg:flex-nowrap lg:justify-between">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(72px,96px))] items-center justify-center gap-x-3 gap-y-3 sm:grid-cols-[repeat(auto-fit,minmax(82px,100px))] lg:grid-cols-5 lg:justify-stretch lg:gap-x-4">
             {popularMotorcycleBrands.map((brand) => (
-              <BrandLogo
-                key={brand.name}
-                brand={brand}
-                className="flex"
-              />
+              <BrandLogo key={brand.name} brand={brand} />
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={() =>
-              setIsMotorcycleExpanded((previousState) => !previousState)
-            }
-            aria-expanded={isMotorcycleExpanded}
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-white/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.04em] text-white/70 transition hover:border-white/25 hover:text-white"
-          >
-            Tüm Markalar
+          <div className="mt-4 flex justify-end">
+            <button
+              type="button"
+              onClick={() =>
+                setIsMotorcycleExpanded((previousState) => !previousState)
+              }
+              aria-expanded={isMotorcycleExpanded}
+              className="inline-flex w-fit items-center gap-1.5 rounded-lg border border-white/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.04em] text-white/70 transition hover:border-white/25 hover:text-white"
+            >
+              Tüm Markalar
 
-            <ChevronDown
-              className={`h-4 w-4 transition ${
-                isMotorcycleExpanded ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-        </div>
-
-        {isMotorcycleExpanded ? (
-          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-4 border-t border-white/10 pt-3">
-            {otherMotorcycleBrands.map((brand) => (
-              <BrandLogo
-                key={brand.name}
-                brand={brand}
-                size="expanded"
-                className="flex rounded-lg border border-transparent px-1 py-1 transition hover:border-white/10 hover:bg-white/[0.02]"
+              <ChevronDown
+                className={`h-4 w-4 transition ${
+                  isMotorcycleExpanded ? "rotate-180" : ""
+                }`}
               />
-            ))}
+            </button>
           </div>
-        ) : null}
-      </div>
 
-      {/* POPÜLER BİSİKLET MARKALARI */}
-      <div className="py-3">
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
-          <span className="shrink-0 text-[11px] font-bold uppercase tracking-[0.1em] text-white xl:text-[12px]">
+          {isMotorcycleExpanded ? (
+            <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(72px,96px))] items-center justify-center gap-x-3 gap-y-3 border-t border-white/10 pt-4 sm:grid-cols-[repeat(auto-fit,minmax(82px,100px))] lg:grid-cols-6 lg:justify-stretch lg:gap-x-4">
+              {otherMotorcycleBrands.map((brand) => (
+                <BrandLogo key={brand.name} brand={brand} />
+              ))}
+            </div>
+          ) : null}
+        </section>
+
+        {/* POPÜLER BİSİKLET MARKALARI */}
+        <section className="py-4">
+          <h2 className="mb-4 text-[11px] font-bold uppercase tracking-[0.1em] text-white xl:text-[12px]">
             Popüler Bisiklet Markaları
-          </span>
+          </h2>
 
-          <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(88px,110px))] items-center justify-center gap-3 sm:justify-start">
             {popularBicycleBrands.map((brand) => (
               <Link
                 key={brand}
                 href="#brands"
-                className="rounded-lg border border-white/10 px-4 py-2 text-sm font-semibold text-white/80 transition hover:border-white/25 hover:bg-white/[0.03] hover:text-white"
+                className="flex items-center justify-center rounded-lg border border-white/10 px-4 py-2 text-sm font-semibold text-white/80 transition hover:border-white/25 hover:bg-white/[0.03] hover:text-white"
               >
                 {brand}
               </Link>
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={() =>
-              setIsBicycleExpanded((previousState) => !previousState)
-            }
-            aria-expanded={isBicycleExpanded}
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-white/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.04em] text-white/70 transition hover:border-white/25 hover:text-white"
-          >
-            Tüm Markalar
+          <div className="mt-4 flex justify-end">
+            <button
+              type="button"
+              onClick={() =>
+                setIsBicycleExpanded((previousState) => !previousState)
+              }
+              aria-expanded={isBicycleExpanded}
+              className="inline-flex w-fit items-center gap-1.5 rounded-lg border border-white/10 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.04em] text-white/70 transition hover:border-white/25 hover:text-white"
+            >
+              Tüm Markalar
 
-            <ChevronDown
-              className={`h-4 w-4 transition ${
-                isBicycleExpanded ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-        </div>
-
-        {isBicycleExpanded ? (
-          <div className="mt-3 border-t border-white/10 pt-3 text-sm text-white/55">
-            Diğer bisiklet markaları buraya eklenecek.
+              <ChevronDown
+                className={`h-4 w-4 transition ${
+                  isBicycleExpanded ? "rotate-180" : ""
+                }`}
+              />
+            </button>
           </div>
-        ) : null}
-      </div>
 
+          {isBicycleExpanded ? (
+            <div className="mt-4 border-t border-white/10 pt-4 text-sm text-white/55">
+              Diğer bisiklet markaları buraya eklenecek.
+            </div>
+          ) : null}
+        </section>
+
+      </div>
     </div>
-  </div>
-);
+  );
 };
+
 export default PopularBrandsBar;
