@@ -20,3 +20,4 @@ motoportal-next/.env.local
 .DS_Store
 Thumbs.db
 .env
+backend/.env.production-import

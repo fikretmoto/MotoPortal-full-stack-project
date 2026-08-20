@@ -57,27 +57,31 @@ UNSUPPORTED_COLUMNS = {
 }
 
 TRUE_VALUES = {
-    "1",
+     "1",
     "true",
     "yes",
     "y",
     "evet",
+    "var",
+    "mevcut",
+    "aktif",
+    "dogru",
+    "doğru",
 }
 
 FALSE_VALUES = {
-    "0",
+   "0",
     "false",
     "no",
     "n",
     "hayir",
-    "hayir.",
-    "hayir!",
-    "hayir?",
-    "hayir;",
-    "hayir:",
-    "hayir,",
-    "hayir-",
-    "hayir_",
+    "hayır",
+    "yok",
+    "mevcut degil",
+    "mevcut değil",
+    "pasif",
+    "yanlis",
+    "yanlış",
 }
 
 OPTION_SEPARATORS = (
@@ -1045,13 +1049,20 @@ class ProductCSVImporter:
     def parse_decimal(
         self,
         value: str,
-    ) -> Decimal:
-        normalized = value.strip().replace(",", ".")
+) ->    Decimal:
+        normalized = value.strip().replace(" ", "")
+
+        if "," in normalized and "." in normalized:
+        # Türkçe sayı biçimi: 177.750,00
+            normalized = normalized.replace(".", "").replace(",", ".")
+        elif "," in normalized:
+        # 175000,50
+            normalized = normalized.replace(",", ".")
 
         try:
-            return Decimal(normalized)
+          return Decimal(normalized)
         except InvalidOperation as error:
-            raise ValueError(value) from error
+          raise ValueError(value) from error
 
     def format_decimal(
         self,
