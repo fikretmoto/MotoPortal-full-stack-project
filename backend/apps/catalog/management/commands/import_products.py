@@ -33,6 +33,7 @@ BASE_PRODUCT_COLUMNS = {
     "brand_slug",
     "category_slug",
     "price",
+    "discount_price",
     "currency",
     "stock_status",
     "short_description",
@@ -596,6 +597,7 @@ class ProductCSVImporter:
             brand=product.brand,
             category=product.category,
             price=product.price,
+            discount_price=product.discount_price,
             currency=product.currency,
             stock_status=product.stock_status,
             short_description=product.short_description,
@@ -631,6 +633,17 @@ class ProductCSVImporter:
                 row_errors.append(
                     f"Row {row_number}: Invalid price: {price}"
                 )
+
+        discount_price = row.get("discount_price", "")
+        if discount_price:
+            try:
+                product.discount_price = self.parse_decimal(discount_price)
+            except ValueError:
+                row_errors.append(
+                    f"Row {row_number}: Invalid discount_price: {discount_price}"
+        )
+        else:
+            product.discount_price = None
 
         currency = row.get("currency", "")
         if currency:

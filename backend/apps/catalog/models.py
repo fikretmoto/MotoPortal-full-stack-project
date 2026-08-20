@@ -169,6 +169,13 @@ class Product(models.Model):
         verbose_name="Ana Fiyat",
     )
 
+
+    discount_price = models.DecimalField(
+      max_digits=12,
+      decimal_places=2,
+      null=True,
+      blank=True,
+)
     currency = models.CharField(
         max_length=3,
         choices=ProductCurrency.choices,

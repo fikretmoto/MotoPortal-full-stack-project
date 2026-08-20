@@ -39,6 +39,7 @@ BASE_PRODUCT_HEADERS = [
     "category_slug",
     "product_code",
     "price",
+    "discount_price",
     "currency",
     "stock_status",
     "short_description",
