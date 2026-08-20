@@ -630,8 +630,8 @@ class ProductAttributeValue(models.Model):
         ]
         constraints = [
             models.UniqueConstraint(
-                fields=["product", "attribute"],
-                name="unique_product_attribute",
+                fields=["product", "attribute", "value"],
+                name="unique_product_attribute_value",
             ),
         ]
 
