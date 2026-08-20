@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import csv
+import re
+import unicodedata
 from collections import defaultdict
 from dataclasses import dataclass, field
 from decimal import Decimal, InvalidOperation
@@ -82,6 +84,36 @@ OPTION_SEPARATORS = (
     ";",
     ",",
 )
+
+
+# Kullanıcı dostu Türkçe girişleri teknik değerlere yaklaştıran ortak alias'lar.
+# Anahtarlar normalize_lookup_value() sonrasında karşılaştırılır.
+COMMON_VALUE_ALIASES = {
+    "dortzamanli": "4zamanli",
+    "ikizamanli": "2zamanli",
+    "stoktavar": "instock",
+    "stoktayok": "outofstock",
+    "stokdisi": "outofstock",
+    "stokdisinda": "outofstock",
+}
+
+# Belirli attribute'larda güvenli, bilinen eş anlamlılar.
+ATTRIBUTE_VALUE_ALIASES = {
+    "motor-tipi": {
+        "dortzamanli": "4zamanli",
+        "ikizamanli": "2zamanli",
+    },
+    "sogutma-sistemi": {
+        "havasogutmali": "havasogutmali",
+        "sivisogutmali": "sivisogutmali",
+        "yagsogutmali": "yagsogutmali",
+    },
+    "son-aktarma-tipi": {
+        "zincir": "zincir",
+        "kayis": "kayis",
+        "kardan": "kardan",
+    },
+}
 
 
 @dataclass
@@ -189,13 +221,32 @@ class ProductCSVImporter:
         ] = {}
 
         for attribute in self.attributes_by_slug.values():
-            options = {
-                self.normalize_lookup_value(option.value): option.value
-                for option in attribute.options.all()
-            }
+            options: dict[str, str] = {}
+            for option in attribute.options.all():
+                canonical_value = option.value
+                options[self.normalize_lookup_value(canonical_value)] = canonical_value
+
+                # "hava-sogutmali" ile "Hava Soğutmalı" gibi yazımları
+                # aynı anahtara yaklaştır.
+                options[self.normalize_match_value(canonical_value)] = canonical_value
+
             self.option_value_lookup_by_attribute_id[
                 attribute.id
             ] = options
+
+        self.stock_status_lookup: dict[str, str] = {}
+        for value, label in ProductStockStatus.choices:
+            self.stock_status_lookup[self.normalize_lookup_value(value)] = value
+            self.stock_status_lookup[self.normalize_match_value(value)] = value
+            self.stock_status_lookup[self.normalize_lookup_value(label)] = value
+            self.stock_status_lookup[self.normalize_match_value(label)] = value
+
+        # Kullanıcı doğal Türkçe yazabilsin.
+        self.stock_status_lookup.update({
+            "stoktavar": ProductStockStatus.IN_STOCK,
+            "stokvar": ProductStockStatus.IN_STOCK,
+            "var": ProductStockStatus.IN_STOCK,
+        })
 
     def run(
         self,
@@ -217,13 +268,12 @@ class ProductCSVImporter:
             report=report,
         )
 
-        if report.errors:
-            return report
-
         if dry_run:
             return report
 
-        self.apply_rows(parsed_rows)
+        # Satır bazlı hatalar diğer geçerli satırların importunu durdurmaz.
+        if parsed_rows:
+            self.apply_rows(parsed_rows)
         return report
 
     def read_csv(
@@ -356,6 +406,7 @@ class ProductCSVImporter:
                 extra_values = []
 
             row_errors: list[str] = []
+            row_warnings: list[str] = []
 
             if extra_values:
                 row_errors.append(
@@ -398,6 +449,7 @@ class ProductCSVImporter:
                 category_slug=product.category.slug,
                 category_attributes=category_attributes,
                 row_errors=row_errors,
+                row_warnings=row_warnings,
             )
 
             self.validate_required_attributes(
@@ -405,7 +457,10 @@ class ProductCSVImporter:
                 row=row,
                 category_attributes=category_attributes,
                 row_errors=row_errors,
+                row_warnings=row_warnings,
             )
+
+            report.warnings.extend(row_warnings)
 
             if row_errors:
                 report.errors.extend(row_errors)
@@ -595,13 +650,9 @@ class ProductCSVImporter:
 
         stock_status = row.get("stock_status", "")
         if stock_status:
-            normalized_stock_status = stock_status.lower()
-            allowed_stock_statuses = {
-                value
-                for value, _ in ProductStockStatus.choices
-            }
+            normalized_stock_status = self.resolve_stock_status(stock_status)
 
-            if normalized_stock_status not in allowed_stock_statuses:
+            if normalized_stock_status is None:
                 row_errors.append(
                     "Row "
                     f"{row_number}: Invalid stock_status: {stock_status}"
@@ -654,6 +705,7 @@ class ProductCSVImporter:
         category_slug: str,
         category_attributes: dict[str, CategoryAttribute],
         row_errors: list[str],
+        row_warnings: list[str],
     ) -> dict[int, str]:
         attribute_updates: dict[int, str] = {}
 
@@ -664,10 +716,10 @@ class ProductCSVImporter:
 
             category_attribute = category_attributes.get(header)
             if category_attribute is None:
-                row_errors.append(
+                row_warnings.append(
                     "Row "
                     f"{row_number}: Attribute {header} is not assigned "
-                    f"to category {category_slug}"
+                    f"to category {category_slug}; value skipped."
                 )
                 continue
 
@@ -677,6 +729,7 @@ class ProductCSVImporter:
                 attribute=attribute,
                 raw_value=raw_value,
                 row_errors=row_errors,
+                row_warnings=row_warnings,
             )
 
             if normalized_value is None:
@@ -693,6 +746,7 @@ class ProductCSVImporter:
         row: dict[str, str],
         category_attributes: dict[str, CategoryAttribute],
         row_errors: list[str],
+        row_warnings: list[str],
     ) -> None:
         for attribute_slug, category_attribute in (
             category_attributes.items()
@@ -703,10 +757,10 @@ class ProductCSVImporter:
             if row.get(attribute_slug, ""):
                 continue
 
-            row_errors.append(
+            row_warnings.append(
                 "Row "
                 f"{row_number}: Required attribute missing: "
-                f"{attribute_slug}"
+                f"{attribute_slug}; product will still be imported."
             )
 
     def normalize_attribute_value(
@@ -716,6 +770,7 @@ class ProductCSVImporter:
         attribute: Attribute,
         raw_value: str,
         row_errors: list[str],
+        row_warnings: list[str],
     ) -> str | None:
         option_lookup = self.option_value_lookup_by_attribute_id.get(
             attribute.id,
@@ -727,10 +782,10 @@ class ProductCSVImporter:
             Attribute.DataType.MULTI_SELECT,
         }:
             if not option_lookup:
-                row_errors.append(
+                row_warnings.append(
                     "Row "
                     f"{row_number}: Attribute {attribute.slug} expects "
-                    "configured options but none are active."
+                    "configured options but none are active; value skipped."
                 )
                 return None
 
@@ -739,15 +794,17 @@ class ProductCSVImporter:
                 resolved_values: list[str] = []
 
                 for option_value in option_values:
-                    resolved_option = option_lookup.get(
-                        self.normalize_lookup_value(option_value)
+                    resolved_option = self.resolve_attribute_option(
+                        attribute=attribute,
+                        raw_value=option_value,
+                        option_lookup=option_lookup,
                     )
 
                     if resolved_option is None:
-                        row_errors.append(
+                        row_warnings.append(
                             "Row "
                             f"{row_number}: Invalid option for "
-                            f"{attribute.slug}: {option_value}"
+                            f"{attribute.slug}: {option_value}; value skipped."
                         )
                         return None
 
@@ -755,15 +812,17 @@ class ProductCSVImporter:
 
                 return ", ".join(resolved_values)
 
-            resolved_option = option_lookup.get(
-                self.normalize_lookup_value(raw_value)
+            resolved_option = self.resolve_attribute_option(
+                attribute=attribute,
+                raw_value=raw_value,
+                option_lookup=option_lookup,
             )
 
             if resolved_option is None:
-                row_errors.append(
+                row_warnings.append(
                     "Row "
                     f"{row_number}: Invalid option for "
-                    f"{attribute.slug}: {raw_value}"
+                    f"{attribute.slug}: {raw_value}; value skipped."
                 )
                 return None
 
@@ -773,10 +832,10 @@ class ProductCSVImporter:
             try:
                 return "true" if self.parse_boolean(raw_value) else "false"
             except ValueError:
-                row_errors.append(
+                row_warnings.append(
                     "Row "
                     f"{row_number}: Invalid boolean for "
-                    f"{attribute.slug}: {raw_value}"
+                    f"{attribute.slug}: {raw_value}; value skipped."
                 )
                 return None
 
@@ -784,10 +843,10 @@ class ProductCSVImporter:
             try:
                 return str(self.parse_integer(raw_value))
             except ValueError:
-                row_errors.append(
+                row_warnings.append(
                     "Row "
                     f"{row_number}: Invalid integer for "
-                    f"{attribute.slug}: {raw_value}"
+                    f"{attribute.slug}: {raw_value}; value skipped."
                 )
                 return None
 
@@ -795,10 +854,10 @@ class ProductCSVImporter:
             try:
                 decimal_value = self.parse_decimal(raw_value)
             except ValueError:
-                row_errors.append(
+                row_warnings.append(
                     "Row "
                     f"{row_number}: Invalid decimal for "
-                    f"{attribute.slug}: {raw_value}"
+                    f"{attribute.slug}: {raw_value}; value skipped."
                 )
                 return None
 
@@ -890,6 +949,64 @@ class ProductCSVImporter:
         value: str,
     ) -> str:
         return value.strip().casefold()
+
+    def normalize_match_value(
+        self,
+        value: str,
+    ) -> str:
+        normalized = unicodedata.normalize("NFKD", value.strip().casefold())
+        ascii_text = "".join(
+            character
+            for character in normalized
+            if not unicodedata.combining(character)
+        )
+        ascii_text = (
+            ascii_text
+            .replace("ı", "i")
+            .replace("ş", "s")
+            .replace("ğ", "g")
+            .replace("ü", "u")
+            .replace("ö", "o")
+            .replace("ç", "c")
+        )
+        return re.sub(r"[^a-z0-9]+", "", ascii_text)
+
+    def resolve_stock_status(
+        self,
+        value: str,
+    ) -> str | None:
+        direct_key = self.normalize_lookup_value(value)
+        if direct_key in self.stock_status_lookup:
+            return self.stock_status_lookup[direct_key]
+
+        match_key = self.normalize_match_value(value)
+        return self.stock_status_lookup.get(match_key)
+
+    def resolve_attribute_option(
+        self,
+        *,
+        attribute: Attribute,
+        raw_value: str,
+        option_lookup: dict[str, str],
+    ) -> str | None:
+        direct_key = self.normalize_lookup_value(raw_value)
+        if direct_key in option_lookup:
+            return option_lookup[direct_key]
+
+        match_key = self.normalize_match_value(raw_value)
+        if match_key in option_lookup:
+            return option_lookup[match_key]
+
+        attribute_aliases = ATTRIBUTE_VALUE_ALIASES.get(attribute.slug, {})
+        alias_target = attribute_aliases.get(match_key)
+        if alias_target and alias_target in option_lookup:
+            return option_lookup[alias_target]
+
+        common_alias_target = COMMON_VALUE_ALIASES.get(match_key)
+        if common_alias_target and common_alias_target in option_lookup:
+            return option_lookup[common_alias_target]
+
+        return None
 
     def parse_boolean(
         self,
@@ -1015,9 +1132,17 @@ class Command(BaseCommand):
             f"Warnings: {report.warning_count}"
         )
 
-        if report.errors:
+        if report.errors and report.success_count == 0:
             raise CommandError(
-                "Import aborted due to validation errors."
+                "Import aborted because no valid rows were available."
+            )
+
+        if report.errors:
+            self.stdout.write(
+                self.style.WARNING(
+                    "Import completed with row-level errors. "
+                    "Valid rows were imported; invalid rows were skipped."
+                )
             )
 
         if dry_run:
