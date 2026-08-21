@@ -1,18 +1,20 @@
+from django.db.models import Prefetch
 from rest_framework import generics
+from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
 
 from .filters import ProductFilter
-from rest_framework.filters import OrderingFilter, SearchFilter
 
-from .models import Brand, Category, Product
+from .models import AttributeOption, Brand, Category, CategoryAttribute, Product
 from .serializers import (
-    BrandSerializer,
+   BrandSerializer,
+    CategoryAttributesResponseSerializer,
     CategorySerializer,
     ProductDetailSerializer,
     ProductListSerializer,
+    ProductWriteSerializer,
 )
-
 
 class CategoryListAPIView(generics.ListAPIView):
     serializer_class = CategorySerializer
@@ -117,3 +119,89 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
                 "attribute_values__attribute__group",
             )
         )
+
+class ProductCreateAPIView(generics.CreateAPIView):
+    serializer_class = ProductWriteSerializer
+    queryset = Product.objects.all()
+
+
+class ProductUpdateAPIView(generics.RetrieveUpdateAPIView):
+    serializer_class = ProductWriteSerializer
+    lookup_field = "slug"
+    queryset = Product.objects.all()
+
+class CategoryAttributesAPIView(generics.GenericAPIView):
+    serializer_class = CategoryAttributesResponseSerializer
+    lookup_field = "slug"
+
+    def get_queryset(self):
+        return (
+            Category.objects
+            .filter(is_active=True)
+        )
+
+    def get(self, request, *args, **kwargs):
+        category = self.get_object()
+
+        category_attributes = (
+            CategoryAttribute.objects
+            .filter(
+                category=category,
+            )
+            .select_related(
+                "attribute",
+                "attribute__group",
+            )
+            .prefetch_related(
+                Prefetch(
+                    "attribute__options",
+                    queryset=(
+                        AttributeOption.objects
+                        .filter(is_active=True)
+                        .order_by("display_order", "value")
+                    ),
+                )
+            )
+            .order_by(
+                "attribute__group__display_order",
+                "display_order",
+                "attribute__display_order",
+            )
+        )
+
+        attribute_groups = self.group_by_attribute_group(
+            category_attributes
+        )
+
+        response_data = {
+            "category": category,
+            "attribute_groups": attribute_groups,
+        }
+
+        serializer = self.get_serializer(response_data)
+        return Response(serializer.data)
+
+    def group_by_attribute_group(self, category_attributes):
+        groups_by_id = {}
+        ordered_group_ids = []
+
+        for category_attribute in category_attributes:
+            group = category_attribute.attribute.group
+
+            if group.id not in groups_by_id:
+                groups_by_id[group.id] = {
+                    "name": group.name,
+                    "slug": group.slug,
+                    "display_order": group.display_order,
+                    "attributes": [],
+                }
+                ordered_group_ids.append(group.id)
+
+            groups_by_id[group.id]["attributes"].append(
+                category_attribute
+            )
+
+        return [
+            groups_by_id[group_id]
+            for group_id in ordered_group_ids
+        ]

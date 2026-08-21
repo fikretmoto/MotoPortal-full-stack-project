@@ -2,12 +2,15 @@ from rest_framework import serializers
 
 from .models import (
     AttributeGroup,
+    AttributeOption,
     Brand,
     Category,
+    CategoryAttribute,
     Product,
     ProductAttributeValue,
     ProductImage,
     ProductVariant,
+
 )
 
 
@@ -256,3 +259,131 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             )
 
         return obj.cover_image.url
+
+
+class ProductWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = (
+            "id",
+            "name",
+            "slug",
+            "brand",
+            "category",
+            "product_code",
+            "price",
+            "discount_price",
+            "currency",
+            "stock_status",
+            "short_description",
+            "description",
+            "cover_image",
+            "is_featured",
+            "is_active",
+        )
+        read_only_fields = (
+            "id",
+        )
+
+    def validate(self, attrs):
+        price = attrs.get(
+            "price",
+            getattr(self.instance, "price", None),
+        )
+        discount_price = attrs.get(
+            "discount_price",
+            getattr(self.instance, "discount_price", None),
+        )
+
+        if (
+            price is not None
+            and discount_price is not None
+            and discount_price >= price
+        ):
+            raise serializers.ValidationError(
+                {
+                    "discount_price": (
+                        "İndirimli fiyat, normal fiyattan düşük olmalı."
+                    ),
+                }
+            )
+
+        return attrs
+class AttributeOptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AttributeOption
+        fields = (
+            "id",
+            "value",
+        )
+
+
+class CategoryAttributeSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(
+        source="attribute.id",
+        read_only=True,
+    )
+
+    slug = serializers.CharField(
+        source="attribute.slug",
+        read_only=True,
+    )
+
+    name = serializers.CharField(
+        source="attribute.name",
+        read_only=True,
+    )
+
+    data_type = serializers.CharField(
+        source="attribute.data_type",
+        read_only=True,
+    )
+
+    unit = serializers.CharField(
+        source="attribute.unit",
+        read_only=True,
+    )
+
+    display_order = serializers.IntegerField(
+        read_only=True,
+    )
+
+    options = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CategoryAttribute
+        fields = (
+            "id",
+            "slug",
+            "name",
+            "data_type",
+            "unit",
+            "is_required",
+            "is_filterable",
+            "display_order",
+            "options",
+        )
+
+    def get_options(self, obj):
+        active_options = obj.attribute.options.all()
+
+        return AttributeOptionSerializer(
+        active_options,
+        many=True,
+    ).data
+
+
+class AttributeGroupWithAttributesSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    slug = serializers.CharField()
+    display_order = serializers.IntegerField()
+    attributes = CategoryAttributeSerializer(
+        many=True,
+    )
+
+
+class CategoryAttributesResponseSerializer(serializers.Serializer):
+    category = CategorySerializer()
+    attribute_groups = AttributeGroupWithAttributesSerializer(
+        many=True,
+    )

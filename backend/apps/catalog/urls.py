@@ -3,10 +3,12 @@ from django.urls import path
 from .views import (
     BrandDetailAPIView,
     BrandListAPIView,
+    CategoryAttributesAPIView,
     CategoryDetailAPIView,
     CategoryListAPIView,
     ProductDetailAPIView,
     ProductListAPIView,
+    
 )
 
 
@@ -25,6 +27,12 @@ urlpatterns = [
         name="category-detail",
     ),
 
+path(
+        "categories/<slug:slug>/attributes/",
+        CategoryAttributesAPIView.as_view(),
+        name="category-attributes",
+    ),
+    
     path(
         "brands/",
         BrandListAPIView.as_view(),

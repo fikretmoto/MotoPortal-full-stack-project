@@ -1272,4 +1272,4 @@ class Command(BaseCommand):
 
         self.stdout.write(
             "Import completed successfully."
-        )
+        )               
