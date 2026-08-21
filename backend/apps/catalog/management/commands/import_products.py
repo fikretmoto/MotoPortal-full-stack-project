@@ -126,7 +126,7 @@ class ParsedRow:
     row_number: int
     action: str
     product: Product
-    attribute_updates: dict[int, str]
+    attribute_updates: dict[int, list[str]]
 
 
 @dataclass
@@ -188,6 +188,11 @@ class ProductCSVImporter:
         self.attributes_by_slug = {
             attribute.slug: attribute
             for attribute in attribute_queryset
+        }
+
+        self.attributes_by_id = {
+            attribute.id: attribute
+            for attribute in self.attributes_by_slug.values()
         }
 
         self.category_attributes_by_category_id: dict[
@@ -723,8 +728,8 @@ class ProductCSVImporter:
         category_attributes: dict[str, CategoryAttribute],
         row_errors: list[str],
         row_warnings: list[str],
-    ) -> dict[int, str]:
-        attribute_updates: dict[int, str] = {}
+    ) -> dict[int, list[str]]:
+        attribute_updates: dict[int, list[str]] = {}
 
         for header in attribute_headers:
             raw_value = row.get(header, "")
@@ -741,7 +746,7 @@ class ProductCSVImporter:
                 continue
 
             attribute = self.attributes_by_slug[header]
-            normalized_value = self.normalize_attribute_value(
+            normalized_values = self.normalize_attribute_value(
                 row_number=row_number,
                 attribute=attribute,
                 raw_value=raw_value,
@@ -749,10 +754,10 @@ class ProductCSVImporter:
                 row_warnings=row_warnings,
             )
 
-            if normalized_value is None:
+            if not normalized_values:
                 continue
 
-            attribute_updates[attribute.id] = normalized_value
+            attribute_updates[attribute.id] = normalized_values
 
         return attribute_updates
 
@@ -788,7 +793,7 @@ class ProductCSVImporter:
         raw_value: str,
         row_errors: list[str],
         row_warnings: list[str],
-    ) -> str | None:
+    ) -> list[str] | None:
         option_lookup = self.option_value_lookup_by_attribute_id.get(
             attribute.id,
             {},
@@ -809,6 +814,7 @@ class ProductCSVImporter:
             if attribute.data_type == Attribute.DataType.MULTI_SELECT:
                 option_values = self.split_option_values(raw_value)
                 resolved_values: list[str] = []
+                seen_values: set[str] = set()
 
                 for option_value in option_values:
                     resolved_option = self.resolve_attribute_option(
@@ -825,9 +831,22 @@ class ProductCSVImporter:
                         )
                         return None
 
+                    if resolved_option in seen_values:
+                        row_warnings.append(
+                            "Row "
+                            f"{row_number}: Duplicate option for "
+                            f"{attribute.slug}: {resolved_option}; "
+                            "duplicate skipped."
+                        )
+                        continue
+
+                    seen_values.add(resolved_option)
                     resolved_values.append(resolved_option)
 
-                return ", ".join(resolved_values)
+                if not resolved_values:
+                    return None
+
+                return resolved_values
 
             resolved_option = self.resolve_attribute_option(
                 attribute=attribute,
@@ -843,11 +862,11 @@ class ProductCSVImporter:
                 )
                 return None
 
-            return resolved_option
+            return [resolved_option]
 
         if attribute.data_type == Attribute.DataType.BOOLEAN:
             try:
-                return "true" if self.parse_boolean(raw_value) else "false"
+                return ["true" if self.parse_boolean(raw_value) else "false"]
             except ValueError:
                 row_warnings.append(
                     "Row "
@@ -858,7 +877,7 @@ class ProductCSVImporter:
 
         if attribute.data_type == Attribute.DataType.INTEGER:
             try:
-                return str(self.parse_integer(raw_value))
+                return [str(self.parse_integer(raw_value))]
             except ValueError:
                 row_warnings.append(
                     "Row "
@@ -878,9 +897,9 @@ class ProductCSVImporter:
                 )
                 return None
 
-            return self.format_decimal(decimal_value)
+            return [self.format_decimal(decimal_value)]
 
-        return raw_value
+        return [raw_value]
 
     def apply_rows(
         self,
@@ -893,16 +912,82 @@ class ProductCSVImporter:
                     parsed_row.product
                 )
 
-                for attribute_id, value in (
+                for attribute_id, values in (
                     parsed_row.attribute_updates.items()
                 ):
-                    ProductAttributeValue.objects.update_or_create(
-                        product=parsed_row.product,
-                        attribute_id=attribute_id,
-                        defaults={
-                            "value": value,
-                        },
-                    )
+                    attribute = self.attributes_by_id[attribute_id]
+
+                    if attribute.data_type == Attribute.DataType.MULTI_SELECT:
+                        self.apply_multi_select_values(
+                            product=parsed_row.product,
+                            attribute_id=attribute_id,
+                            values=values,
+                        )
+                    else:
+                        self.apply_single_value(
+                            product=parsed_row.product,
+                            attribute_id=attribute_id,
+                            value=values[0],
+                        )
+
+    def apply_single_value(
+        self,
+        *,
+        product: Product,
+        attribute_id: int,
+        value: str,
+    ) -> None:
+        existing_ids = list(
+            ProductAttributeValue.objects
+            .filter(
+                product=product,
+                attribute_id=attribute_id,
+            )
+            .order_by("id")
+            .values_list("id", flat=True)
+        )
+
+        if not existing_ids:
+            ProductAttributeValue.objects.create(
+                product=product,
+                attribute_id=attribute_id,
+                value=value,
+            )
+            return
+
+        keep_id = existing_ids[0]
+        ProductAttributeValue.objects.filter(
+            id=keep_id,
+        ).update(value=value)
+
+        extra_ids = existing_ids[1:]
+        if extra_ids:
+            ProductAttributeValue.objects.filter(
+                id__in=extra_ids,
+            ).delete()
+
+    def apply_multi_select_values(
+        self,
+        *,
+        product: Product,
+        attribute_id: int,
+        values: list[str],
+    ) -> None:
+        ProductAttributeValue.objects.filter(
+            product=product,
+            attribute_id=attribute_id,
+        ).delete()
+
+        ProductAttributeValue.objects.bulk_create(
+            [
+                ProductAttributeValue(
+                    product=product,
+                    attribute_id=attribute_id,
+                    value=value,
+                )
+                for value in values
+            ]
+        )
 
     def ensure_category_attribute_shells(
         self,
@@ -916,11 +1001,21 @@ class ProductCSVImporter:
         if not attribute_ids:
             return
 
+        shell_attribute_ids = [
+            attribute_id
+            for attribute_id in attribute_ids
+            if self.attributes_by_id[attribute_id].data_type
+            != Attribute.DataType.MULTI_SELECT
+        ]
+
+        if not shell_attribute_ids:
+            return
+
         existing_attribute_ids = set(
             ProductAttributeValue.objects
             .filter(
                 product=product,
-                attribute_id__in=attribute_ids,
+                attribute_id__in=shell_attribute_ids,
             )
             .values_list(
                 "attribute_id",
@@ -934,7 +1029,7 @@ class ProductCSVImporter:
                 attribute_id=attribute_id,
                 value="",
             )
-            for attribute_id in attribute_ids
+            for attribute_id in shell_attribute_ids
             if attribute_id not in existing_attribute_ids
         ]
 
