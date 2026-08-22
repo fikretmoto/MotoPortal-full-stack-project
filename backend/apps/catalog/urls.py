@@ -1,14 +1,15 @@
 from django.urls import path
 
 from .views import (
-    BrandDetailAPIView,
+   BrandDetailAPIView,
     BrandListAPIView,
     CategoryAttributesAPIView,
     CategoryDetailAPIView,
     CategoryListAPIView,
+    ProductCreateAPIView,
     ProductDetailAPIView,
     ProductListAPIView,
-    
+    ProductUpdateAPIView,
 )
 
 
@@ -27,12 +28,12 @@ urlpatterns = [
         name="category-detail",
     ),
 
-path(
+    path(
         "categories/<slug:slug>/attributes/",
         CategoryAttributesAPIView.as_view(),
         name="category-attributes",
     ),
-    
+
     path(
         "brands/",
         BrandListAPIView.as_view(),
@@ -49,9 +50,23 @@ path(
         ProductListAPIView.as_view(),
         name="product-list",
     ),
+
+
+    path(
+        "products/create/",
+        ProductCreateAPIView.as_view(),
+        name="product-create",
+    ),
+
     path(
         "products/<slug:slug>/",
         ProductDetailAPIView.as_view(),
         name="product-detail",
+    ),
+
+    path(
+        "products/<slug:slug>/edit/",
+        ProductUpdateAPIView.as_view(),
+        name="product-update",
     ),
 ]

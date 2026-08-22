@@ -20,7 +20,11 @@ from apps.catalog.models import (
     ProductAttributeValue,
 )
 
+from rest_framework.test import APIClient
+from rest_framework_simplejwt.tokens import RefreshToken
 
+from apps.accounts.models import User
+from apps.accounts.models import UserRole
 class ImportProductsCommandTests(TestCase):
     def setUp(self) -> None:
         self.temp_files: list[Path] = []
@@ -809,3 +813,264 @@ class ReportProductionAttributeLinksCommandTests(
             cursor.execute.call_args_list[-1].args,
             ("ROLLBACK",),
         )
+
+
+class ProductCreateUpdateAuthTests(TestCase):
+    def setUp(self) -> None:
+        self.client = APIClient()
+
+        self.brand = Brand.objects.create(
+            name="Test Marka",
+            slug="test-marka",
+        )
+        self.category = Category.objects.create(
+            name="Motosiklet",
+            slug="motosiklet",
+        )
+
+        self.user = User.objects.create_user(
+            email="tester@motoportal.com",
+            password="Str0ngPassw0rd!",
+        )
+
+        self.access_token = str(
+            RefreshToken.for_user(self.user).access_token
+        )
+
+        self.create_url = "/api/products/create/"
+
+        self.existing_product = Product.objects.create(
+            name="Mevcut Ürün",
+            slug="mevcut-urun",
+            brand=self.brand,
+            category=self.category,
+            price="100000.00",
+        )
+        self.update_url = (
+            f"/api/products/{self.existing_product.slug}/edit/"
+        )
+
+    def base_payload(self, slug):
+        return {
+            "name": "Yeni Ürün",
+            "slug": slug,
+            "brand": self.brand.id,
+            "category": self.category.id,
+            "price": "150000.00",
+        }
+
+    def test_create_without_authentication_returns_401(self):
+        response = self.client.post(
+            self.create_url,
+            data=self.base_payload("yeni-urun-1"),
+            format="json",
+        )
+        self.assertEqual(response.status_code, 401)
+
+    def test_update_without_authentication_returns_401(self):
+        response = self.client.patch(
+            self.update_url,
+            data={"name": "Güncellenmiş İsim"},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 401)
+
+    def test_create_with_valid_token_succeeds(self):
+        self.client.credentials(
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}",
+        )
+        response = self.client.post(
+            self.create_url,
+            data=self.base_payload("yeni-urun-2"),
+            format="json",
+        )
+        self.assertEqual(response.status_code, 201)
+
+    def test_update_with_valid_token_succeeds(self):
+        self.client.credentials(
+            HTTP_AUTHORIZATION=f"Bearer {self.access_token}",
+        )
+        response = self.client.patch(
+            self.update_url,
+            data={"name": "Güncellenmiş İsim"},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.existing_product.refresh_from_db()
+        self.assertEqual(
+            self.existing_product.name,
+            "Güncellenmiş İsim",
+        )
+
+class ProductRoleAuthorizationTests(TestCase):
+    def setUp(self) -> None:
+        self.client = APIClient()
+
+        self.brand = Brand.objects.create(
+            name="Rol Test Marka",
+            slug="rol-test-marka",
+        )
+        self.category = Category.objects.create(
+            name="Rol Test Kategori",
+            slug="rol-test-kategori",
+        )
+
+        self.existing_product = Product.objects.create(
+            name="Rol Test Ürün",
+            slug="rol-test-urun",
+            brand=self.brand,
+            category=self.category,
+            price="100000.00",
+        )
+
+        self.create_url = "/api/products/create/"
+        self.update_url = (
+            f"/api/products/{self.existing_product.slug}/edit/"
+        )
+
+          self.user = User.objects.create_user(
+            email="tester@motoportal.com",
+            password="Str0ngPassw0rd!",
+            role=UserRole.ADMIN,
+        )
+
+            for role in (
+                UserRole.SUPER_ADMIN,
+                UserRole.ADMIN,
+                UserRole.EDITOR,
+                UserRole.DEALER,
+                UserRole.CUSTOMER,
+            )
+        }
+
+    def authenticate_as(self, role):
+        user = self.users_by_role[role]
+        access_token = str(
+            RefreshToken.for_user(user).access_token
+        )
+        self.client.credentials(
+            HTTP_AUTHORIZATION=f"Bearer {access_token}",
+        )
+
+    def create_payload(self, slug):
+        return {
+            "name": "Yeni Rol Testi Ürünü",
+            "slug": slug,
+            "brand": self.brand.id,
+            "category": self.category.id,
+            "price": "120000.00",
+        }
+
+    # 1. Anonymous -> create -> 401
+    def test_anonymous_create_returns_401(self):
+        response = self.client.post(
+            self.create_url,
+            data=self.create_payload("anon-create"),
+            format="json",
+        )
+        self.assertEqual(response.status_code, 401)
+
+    # 2. Anonymous -> update -> 401
+    def test_anonymous_update_returns_401(self):
+        response = self.client.patch(
+            self.update_url,
+            data={"name": "Anon Güncelleme"},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 401)
+
+    # 3. customer -> create -> 403
+    def test_customer_create_returns_403(self):
+        self.authenticate_as(UserRole.CUSTOMER)
+        response = self.client.post(
+            self.create_url,
+            data=self.create_payload("customer-create"),
+            format="json",
+        )
+        self.assertEqual(response.status_code, 403)
+
+    # 4. customer -> update -> 403
+    def test_customer_update_returns_403(self):
+        self.authenticate_as(UserRole.CUSTOMER)
+        response = self.client.patch(
+            self.update_url,
+            data={"name": "Customer Güncelleme"},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 403)
+
+    # 5 & 6. dealer -> create/update -> başarılı
+    def test_dealer_create_succeeds(self):
+        self.authenticate_as(UserRole.DEALER)
+        response = self.client.post(
+            self.create_url,
+            data=self.create_payload("dealer-create"),
+            format="json",
+        )
+        self.assertEqual(response.status_code, 201)
+
+    def test_dealer_update_succeeds(self):
+        self.authenticate_as(UserRole.DEALER)
+        response = self.client.patch(
+            self.update_url,
+            data={"name": "Dealer Güncelleme"},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 200)
+
+    # 7 & 8. editor -> create/update -> başarılı
+    def test_editor_create_succeeds(self):
+        self.authenticate_as(UserRole.EDITOR)
+        response = self.client.post(
+            self.create_url,
+            data=self.create_payload("editor-create"),
+            format="json",
+        )
+        self.assertEqual(response.status_code, 201)
+
+    def test_editor_update_succeeds(self):
+        self.authenticate_as(UserRole.EDITOR)
+        response = self.client.patch(
+            self.update_url,
+            data={"name": "Editor Güncelleme"},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 200)
+
+    # 9. admin -> create/update -> başarılı
+    def test_admin_create_succeeds(self):
+        self.authenticate_as(UserRole.ADMIN)
+        response = self.client.post(
+            self.create_url,
+            data=self.create_payload("admin-create"),
+            format="json",
+        )
+        self.assertEqual(response.status_code, 201)
+
+    def test_admin_update_succeeds(self):
+        self.authenticate_as(UserRole.ADMIN)
+        response = self.client.patch(
+            self.update_url,
+            data={"name": "Admin Güncelleme"},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 200)
+
+    # 10. super_admin -> create/update -> başarılı
+    def test_super_admin_create_succeeds(self):
+        self.authenticate_as(UserRole.SUPER_ADMIN)
+        response = self.client.post(
+            self.create_url,
+            data=self.create_payload("super-admin-create"),
+            format="json",
+        )
+        self.assertEqual(response.status_code, 201)
+
+    def test_super_admin_update_succeeds(self):
+        self.authenticate_as(UserRole.SUPER_ADMIN)
+        response = self.client.patch(
+            self.update_url,
+            data={"name": "Super Admin Güncelleme"},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 200)

@@ -1,6 +1,11 @@
+from decimal import Decimal, InvalidOperation
+
+from django.db import transaction
+from django.db.models import Prefetch
 from rest_framework import serializers
 
 from .models import (
+    Attribute,
     AttributeGroup,
     AttributeOption,
     Brand,
@@ -10,7 +15,6 @@ from .models import (
     ProductAttributeValue,
     ProductImage,
     ProductVariant,
-
 )
 
 
@@ -262,6 +266,12 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 
 
 class ProductWriteSerializer(serializers.ModelSerializer):
+    attributes = serializers.DictField(
+        child=serializers.JSONField(),
+        write_only=True,
+        required=False,
+    )
+
     class Meta:
         model = Product
         fields = (
@@ -280,6 +290,7 @@ class ProductWriteSerializer(serializers.ModelSerializer):
             "cover_image",
             "is_featured",
             "is_active",
+            "attributes",
         )
         read_only_fields = (
             "id",
@@ -308,7 +319,291 @@ class ProductWriteSerializer(serializers.ModelSerializer):
                 }
             )
 
+        raw_attributes = attrs.get("attributes")
+
+        if raw_attributes is not None:
+            category = attrs.get(
+                "category",
+                getattr(self.instance, "category", None),
+            )
+
+            if category is None:
+                raise serializers.ValidationError(
+                    {
+                        "attributes": (
+                            "Özellik girebilmek için önce kategori "
+                            "seçilmiş olmalı."
+                        ),
+                    }
+                )
+
+            attrs["attributes"] = self.validate_attribute_payload(
+                category=category,
+                raw_attributes=raw_attributes,
+            )
+
         return attrs
+
+    def validate_attribute_payload(self, *, category, raw_attributes):
+        category_attributes = (
+            CategoryAttribute.objects
+            .filter(category=category)
+            .select_related("attribute")
+            .prefetch_related(
+                Prefetch(
+                    "attribute__options",
+                    queryset=AttributeOption.objects.filter(
+                        is_active=True,
+                    ),
+                )
+            )
+        )
+
+        category_attributes_by_slug = {
+            category_attribute.attribute.slug: category_attribute
+            for category_attribute in category_attributes
+        }
+
+        resolved: dict[int, dict] = {}
+
+        for attribute_slug, raw_value in raw_attributes.items():
+            category_attribute = category_attributes_by_slug.get(
+                attribute_slug
+            )
+
+            if category_attribute is None:
+                raise serializers.ValidationError(
+                    {
+                        "attributes": (
+                            f"'{attribute_slug}' bu kategoriye atanmış "
+                            "bir özellik değil."
+                        ),
+                    }
+                )
+
+            attribute = category_attribute.attribute
+
+            resolved[attribute.id] = {
+                "data_type": attribute.data_type,
+                "values": self.normalize_attribute_value(
+                    attribute=attribute,
+                    raw_value=raw_value,
+                ),
+            }
+
+        return resolved
+
+    def normalize_attribute_value(self, *, attribute, raw_value):
+        data_type = attribute.data_type
+
+        if data_type == Attribute.DataType.MULTI_SELECT:
+            if not isinstance(raw_value, list):
+                raise serializers.ValidationError(
+                    {
+                        "attributes": (
+                            f"'{attribute.slug}' için değerler bir "
+                            "liste olmalı."
+                        ),
+                    }
+                )
+
+            option_lookup = {
+                option.value.strip().casefold(): option.value
+                for option in attribute.options.all()
+            }
+
+            resolved_values: list[str] = []
+            seen_values: set[str] = set()
+
+            for item in raw_value:
+                lookup_key = str(item).strip().casefold()
+                resolved_option = option_lookup.get(lookup_key)
+
+                if resolved_option is None:
+                    raise serializers.ValidationError(
+                        {
+                            "attributes": (
+                                f"'{attribute.slug}' için geçersiz "
+                                f"seçenek: {item}"
+                            ),
+                        }
+                    )
+
+                if resolved_option in seen_values:
+                    continue
+
+                seen_values.add(resolved_option)
+                resolved_values.append(resolved_option)
+
+            if not resolved_values:
+                raise serializers.ValidationError(
+                    {
+                        "attributes": (
+                            f"'{attribute.slug}' için en az bir "
+                            "geçerli değer girilmeli."
+                        ),
+                    }
+                )
+
+            return resolved_values
+
+        if data_type == Attribute.DataType.SINGLE_SELECT:
+            option_lookup = {
+                option.value.strip().casefold(): option.value
+                for option in attribute.options.all()
+            }
+
+            lookup_key = str(raw_value).strip().casefold()
+            resolved_option = option_lookup.get(lookup_key)
+
+            if resolved_option is None:
+                raise serializers.ValidationError(
+                    {
+                        "attributes": (
+                            f"'{attribute.slug}' için geçersiz "
+                            f"seçenek: {raw_value}"
+                        ),
+                    }
+                )
+
+            return [resolved_option]
+
+        if data_type == Attribute.DataType.BOOLEAN:
+            if isinstance(raw_value, bool):
+                return ["true" if raw_value else "false"]
+
+            normalized = str(raw_value).strip().casefold()
+
+            if normalized in {"true", "1", "evet", "var"}:
+                return ["true"]
+
+            if normalized in {"false", "0", "hayir", "hayır", "yok"}:
+                return ["false"]
+
+            raise serializers.ValidationError(
+                {
+                    "attributes": (
+                        f"'{attribute.slug}' için geçersiz boolean "
+                        f"değer: {raw_value}"
+                    ),
+                }
+            )
+
+        if data_type == Attribute.DataType.INTEGER:
+            try:
+                return [str(int(raw_value))]
+            except (TypeError, ValueError):
+                raise serializers.ValidationError(
+                    {
+                        "attributes": (
+                            f"'{attribute.slug}' için geçersiz tam "
+                            f"sayı: {raw_value}"
+                        ),
+                    }
+                )
+
+        if data_type == Attribute.DataType.DECIMAL:
+            try:
+                decimal_value = Decimal(str(raw_value))
+            except (InvalidOperation, TypeError):
+                raise serializers.ValidationError(
+                    {
+                        "attributes": (
+                            f"'{attribute.slug}' için geçersiz "
+                            f"ondalık sayı: {raw_value}"
+                        ),
+                    }
+                )
+
+            formatted = format(decimal_value, "f")
+            if "." in formatted:
+                formatted = formatted.rstrip("0").rstrip(".")
+
+            return [formatted or "0"]
+
+        # TEXT
+        return [str(raw_value)]
+
+    def create(self, validated_data):
+        attribute_updates = validated_data.pop("attributes", None)
+        product = super().create(validated_data)
+
+        if attribute_updates:
+            self.apply_attribute_updates(product, attribute_updates)
+
+        return product
+
+    def update(self, instance, validated_data):
+        attribute_updates = validated_data.pop("attributes", None)
+        product = super().update(instance, validated_data)
+
+        if attribute_updates:
+            self.apply_attribute_updates(product, attribute_updates)
+
+        return product
+
+    def apply_attribute_updates(self, product, attribute_updates):
+        with transaction.atomic():
+            for attribute_id, payload in attribute_updates.items():
+                if payload["data_type"] == Attribute.DataType.MULTI_SELECT:
+                    self.apply_multi_select_values(
+                        product=product,
+                        attribute_id=attribute_id,
+                        values=payload["values"],
+                    )
+                else:
+                    self.apply_single_value(
+                        product=product,
+                        attribute_id=attribute_id,
+                        value=payload["values"][0],
+                    )
+
+    def apply_single_value(self, *, product, attribute_id, value):
+        existing_ids = list(
+            ProductAttributeValue.objects
+            .filter(
+                product=product,
+                attribute_id=attribute_id,
+            )
+            .order_by("id")
+            .values_list("id", flat=True)
+        )
+
+        if not existing_ids:
+            ProductAttributeValue.objects.create(
+                product=product,
+                attribute_id=attribute_id,
+                value=value,
+            )
+            return
+
+        keep_id = existing_ids[0]
+        ProductAttributeValue.objects.filter(
+            id=keep_id,
+        ).update(value=value)
+
+        extra_ids = existing_ids[1:]
+        if extra_ids:
+            ProductAttributeValue.objects.filter(
+                id__in=extra_ids,
+            ).delete()
+
+    def apply_multi_select_values(self, *, product, attribute_id, values):
+        ProductAttributeValue.objects.filter(
+            product=product,
+            attribute_id=attribute_id,
+        ).delete()
+
+        ProductAttributeValue.objects.bulk_create(
+            [
+                ProductAttributeValue(
+                    product=product,
+                    attribute_id=attribute_id,
+                    value=value,
+                )
+                for value in values
+            ]
+        )
 class AttributeOptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttributeOption

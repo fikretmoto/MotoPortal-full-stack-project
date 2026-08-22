@@ -109,6 +109,9 @@ type PaginatedResponse<T> = {
   results: T[];
 };
 
+
+
+
 export async function getCategories(): Promise<Category[]> {
   const response = await fetch(`${API_URL}/categories/`, {
     cache: "no-store",
@@ -120,10 +123,7 @@ export async function getCategories(): Promise<Category[]> {
     );
   }
 
-  const data: PaginatedResponse<Category> =
-    await response.json();
-
-  return data.results;
+  return response.json();
 }
 
 
@@ -144,8 +144,6 @@ export async function getBrands(): Promise<Brand[]> {
 
   return data.results;
 }
-
-
 
 export async function getProducts(): Promise<Product[]> {
   const response = await fetch(
@@ -182,6 +180,61 @@ export async function getProductBySlug(
   if (!response.ok) {
     throw new Error(
       `Ürün detayı alınamadı. HTTP ${response.status}`
+    );
+  }
+
+  return response.json();
+}
+
+
+export type AttributeOption = {
+  id: number;
+  value: string;
+};
+
+export type CategoryAttribute = {
+  id: number;
+  slug: string;
+  name: string;
+  data_type:
+    | "text"
+    | "integer"
+    | "decimal"
+    | "boolean"
+    | "single_select"
+    | "multi_select";
+  unit: string;
+  is_required: boolean;
+  is_filterable: boolean;
+  display_order: number;
+  options: AttributeOption[];
+};
+
+export type AttributeGroupWithAttributes = {
+  name: string;
+  slug: string;
+  display_order: number;
+  attributes: CategoryAttribute[];
+};
+
+export type CategoryAttributesResponse = {
+  category: Category;
+  attribute_groups: AttributeGroupWithAttributes[];
+};
+
+export async function getCategoryAttributes(
+  slug: string
+): Promise<CategoryAttributesResponse> {
+  const response = await fetch(
+    `${API_URL}/categories/${slug}/attributes/`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Kategori özellikleri alınamadı. HTTP ${response.status}`
     );
   }
 

@@ -1,5 +1,6 @@
 from django.db.models import Prefetch
-from rest_framework import generics
+from rest_framework import generics, permissions
+from .permissions import CanManageProducts
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
@@ -18,6 +19,7 @@ from .serializers import (
 
 class CategoryListAPIView(generics.ListAPIView):
     serializer_class = CategorySerializer
+    pagination_class = None
 
     def get_queryset(self):
         return (
@@ -123,12 +125,18 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
 class ProductCreateAPIView(generics.CreateAPIView):
     serializer_class = ProductWriteSerializer
     queryset = Product.objects.all()
+    permission_classes = (
+         CanManageProducts,
+    )
 
 
 class ProductUpdateAPIView(generics.RetrieveUpdateAPIView):
     serializer_class = ProductWriteSerializer
     lookup_field = "slug"
     queryset = Product.objects.all()
+    permission_classes = (
+         CanManageProducts,
+    )
 
 class CategoryAttributesAPIView(generics.GenericAPIView):
     serializer_class = CategoryAttributesResponseSerializer
