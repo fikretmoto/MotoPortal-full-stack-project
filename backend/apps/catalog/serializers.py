@@ -296,6 +296,37 @@ class ProductWriteSerializer(serializers.ModelSerializer):
             "id",
         )
 
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["attributes"] = self.get_current_attribute_values(instance)
+        return data
+
+    def get_current_attribute_values(self, instance):
+        values: dict[str, Any] = {}
+
+        attribute_values = (
+            instance.attribute_values
+            .select_related("attribute")
+            .order_by(
+                "attribute__group__display_order",
+                "attribute__display_order",
+                "id",
+            )
+        )
+
+        for attribute_value in attribute_values:
+            attribute = attribute_value.attribute
+
+            if attribute.data_type == Attribute.DataType.MULTI_SELECT:
+                values.setdefault(attribute.slug, []).append(
+                    attribute_value.value
+                )
+            else:
+                values[attribute.slug] = attribute_value.value
+
+        return values
+
     def validate(self, attrs):
         price = attrs.get(
             "price",

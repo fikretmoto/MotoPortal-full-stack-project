@@ -14,10 +14,12 @@ import {
   type Category,
   type CategoryAttributesResponse,
 } from "@/services/catalog";
+import type { ProductEditData } from "@/services/products";
 
 type ProductFormProps = {
   categories: Category[];
   brands: Brand[];
+  initialData?: ProductEditData;
 };
 
 const EMPTY_BASIC_VALUES: BasicProductValues = {
@@ -35,16 +37,54 @@ const EMPTY_PRICING_VALUES: PricingValues = {
   stockStatus: "in_stock",
 };
 
-export function ProductForm({ categories, brands }: ProductFormProps) {
-  const router = useRouter();
+function buildInitialBasicValues(
+  data: ProductEditData | undefined,
+  brands: Brand[]
+): BasicProductValues {
+  if (!data) return EMPTY_BASIC_VALUES;
 
-  const [selectedCategorySlug, setSelectedCategorySlug] = useState<string | null>(null);
+  return {
+    name: data.name,
+    slug: data.slug,
+    brandSlug: brands.find((b) => b.id === data.brand)?.slug ?? null,
+    productCode: data.product_code,
+    shortDescription: data.short_description,
+    description: data.description,
+  };
+}
+
+function buildInitialPricingValues(
+  data: ProductEditData | undefined
+): PricingValues {
+  if (!data) return EMPTY_PRICING_VALUES;
+
+  return {
+    price: data.price,
+    discountPrice: data.discount_price ?? "",
+    stockStatus: data.stock_status,
+  };
+}
+
+export function ProductForm({ categories, brands, initialData }: ProductFormProps) {
+  const router = useRouter();
+  const isEditMode = Boolean(initialData);
+
+  const [selectedCategorySlug, setSelectedCategorySlug] = useState<string | null>(
+    () => categories.find((c) => c.id === initialData?.category)?.slug ?? null
+  );
   const [categoryAttributes, setCategoryAttributes] = useState<CategoryAttributesResponse | null>(null);
   const [isLoadingAttributes, setIsLoadingAttributes] = useState(false);
-  const [attributeValues, setAttributeValues] = useState<Record<string, AttributeValue>>({});
 
-  const [basicValues, setBasicValues] = useState<BasicProductValues>(EMPTY_BASIC_VALUES);
-  const [pricingValues, setPricingValues] = useState<PricingValues>(EMPTY_PRICING_VALUES);
+  const [attributeValues, setAttributeValues] = useState<Record<string, AttributeValue>>(
+    () => (initialData?.attributes as Record<string, AttributeValue>) ?? {}
+  );
+
+  const [basicValues, setBasicValues] = useState<BasicProductValues>(() =>
+    buildInitialBasicValues(initialData, brands)
+  );
+  const [pricingValues, setPricingValues] = useState<PricingValues>(() =>
+    buildInitialPricingValues(initialData)
+  );
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -52,7 +92,6 @@ export function ProductForm({ categories, brands }: ProductFormProps) {
   useEffect(() => {
     if (!selectedCategorySlug) {
       setCategoryAttributes(null);
-      setAttributeValues({});
       return;
     }
 
@@ -63,7 +102,6 @@ export function ProductForm({ categories, brands }: ProductFormProps) {
       .then((data) => {
         if (!isCancelled) {
           setCategoryAttributes(data);
-          setAttributeValues({});
         }
       })
       .finally(() => {
@@ -75,6 +113,10 @@ export function ProductForm({ categories, brands }: ProductFormProps) {
     return () => {
       isCancelled = true;
     };
+    // Not: kategori formun ilk açılışında zaten initialData.attributes ile
+    // doluyken tekrar sıfırlanmasın diye, attributeValues burada resetlenmiyor.
+    // Kullanıcı gerçekten farklı bir kategori SEÇERSE, bu davranış create
+    // modundaki gibi çalışsın istersen ayrıca ele alabiliriz.
   }, [selectedCategorySlug]);
 
   function handleAttributeChange(slug: string, value: AttributeValue) {
@@ -92,6 +134,64 @@ export function ProductForm({ categories, brands }: ProductFormProps) {
     (brand) => brand.slug === basicValues.brandSlug
   )?.id;
 
+  function buildAttributesDiff(): Record<string, AttributeValue> {
+    if (!isEditMode || !initialData) {
+      return attributeValues;
+    }
+
+    const diff: Record<string, AttributeValue> = {};
+    const initialAttributes = initialData.attributes;
+
+    for (const [slug, value] of Object.entries(attributeValues)) {
+      const initialValue = initialAttributes[slug];
+      const changed =
+        JSON.stringify(value) !== JSON.stringify(initialValue);
+
+      if (changed) {
+        diff[slug] = value;
+      }
+    }
+
+    return diff;
+  }
+
+  function buildBasicPayload() {
+    if (!isEditMode || !initialData) {
+      return {
+        name: basicValues.name,
+        slug: basicValues.slug,
+        category: selectedCategoryId,
+        brand: selectedBrandId,
+        product_code: basicValues.productCode,
+        short_description: basicValues.shortDescription,
+        description: basicValues.description,
+        price: pricingValues.price,
+        discount_price: pricingValues.discountPrice || null,
+        stock_status: pricingValues.stockStatus,
+      };
+    }
+
+    const payload: Record<string, unknown> = {};
+
+    if (basicValues.name !== initialData.name) payload.name = basicValues.name;
+    if (basicValues.slug !== initialData.slug) payload.slug = basicValues.slug;
+    if (selectedCategoryId !== initialData.category) payload.category = selectedCategoryId;
+    if (selectedBrandId !== initialData.brand) payload.brand = selectedBrandId;
+    if (basicValues.productCode !== initialData.product_code)
+      payload.product_code = basicValues.productCode;
+    if (basicValues.shortDescription !== initialData.short_description)
+      payload.short_description = basicValues.shortDescription;
+    if (basicValues.description !== initialData.description)
+      payload.description = basicValues.description;
+    if (pricingValues.price !== initialData.price) payload.price = pricingValues.price;
+    if ((pricingValues.discountPrice || null) !== initialData.discount_price)
+      payload.discount_price = pricingValues.discountPrice || null;
+    if (pricingValues.stockStatus !== initialData.stock_status)
+      payload.stock_status = pricingValues.stockStatus;
+
+    return payload;
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitError(null);
@@ -103,23 +203,23 @@ export function ProductForm({ categories, brands }: ProductFormProps) {
 
     setIsSubmitting(true);
 
+    const attributesDiff = buildAttributesDiff();
+    const basicPayload = buildBasicPayload();
+
     const payload = {
-      name: basicValues.name,
-      slug: basicValues.slug,
-      category: selectedCategoryId,
-      brand: selectedBrandId,
-      product_code: basicValues.productCode,
-      short_description: basicValues.shortDescription,
-      description: basicValues.description,
-      price: pricingValues.price,
-      discount_price: pricingValues.discountPrice || null,
-      stock_status: pricingValues.stockStatus,
-      attributes: attributeValues,
+      ...basicPayload,
+      ...(Object.keys(attributesDiff).length > 0
+        ? { attributes: attributesDiff }
+        : {}),
     };
 
     try {
-      const response = await fetch("/api/products/create", {
-        method: "POST",
+      const endpoint = isEditMode
+        ? `/api/products/update/${initialData!.slug}`
+        : "/api/products/create";
+
+      const response = await fetch(endpoint, {
+        method: isEditMode ? "PATCH" : "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
@@ -130,8 +230,8 @@ export function ProductForm({ categories, brands }: ProductFormProps) {
         return;
       }
 
-      const created = await response.json();
-      router.push(`/dashboard/products/${created.slug}/edit`);
+      const saved = await response.json();
+      router.push(`/dashboard/products/${saved.slug}/edit`);
       router.refresh();
     } catch {
       setSubmitError("Bir hata oluştu, lütfen tekrar deneyin.");
@@ -171,7 +271,11 @@ export function ProductForm({ categories, brands }: ProductFormProps) {
       )}
 
       <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Kaydediliyor..." : "Ürünü Kaydet"}
+        {isSubmitting
+          ? "Kaydediliyor..."
+          : isEditMode
+          ? "Değişiklikleri Kaydet"
+          : "Ürünü Kaydet"}
       </Button>
     </form>
   );
