@@ -6,6 +6,16 @@ import ProductHighlights from "@/components/product/ProductHighlights";
 import ProductTechnicalTabs from "@/components/product/ProductTechnicalTabs";
 import ProductReviews from "@/components/product/ProductReviews";
 
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+
+
 
 import {
   getProductBySlug,
@@ -47,12 +57,25 @@ export default async function ProductDetailPage({
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-10">
-      <Link
-        href="/"
-        className="text-sm text-gray-600 transition hover:text-gray-900"
-      >
-        ← Ürünlere dön
-      </Link>
+    <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link href="/">Anasayfa</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <span className="text-muted-foreground">
+              {product.category.name}
+            </span>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{product.name}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
 
       <ProductHero product={product} />
       
