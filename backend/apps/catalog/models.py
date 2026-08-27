@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 class Category(models.Model):
@@ -201,6 +202,20 @@ class Product(models.Model):
         verbose_name="Ürün Açıklaması",
     )
 
+    instagram_url = models.URLField(
+        max_length=255,
+        null=True,
+        blank=True,
+        verbose_name="Instagram Bağlantısı",
+    )
+
+    whatsapp_number = models.CharField(
+        max_length=20,
+        null=True,
+        blank=True,
+        verbose_name="WhatsApp Numarası",
+    )
+
     cover_image = models.ImageField(
         upload_to="products/",
         null=True,
@@ -238,6 +253,53 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.brand.name} {self.name}"
+
+
+
+class ProductReview(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="reviews",
+        verbose_name="Ürün",
+    )
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="product_reviews",
+        verbose_name="Kullanıcı",
+    )
+
+    rating = models.PositiveSmallIntegerField(
+        verbose_name="Puan",
+    )
+
+    comment = models.TextField(
+        verbose_name="Yorum",
+    )
+
+    is_approved = models.BooleanField(
+        default=False,
+        verbose_name="Onaylandı mı?",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Oluşturulma Tarihi",
+    )
+
+    class Meta:
+        verbose_name = "Ürün Yorumu"
+        verbose_name_plural = "Ürün Yorumları"
+        ordering = ("-created_at",)
+        unique_together = ("product", "user")
+
+    def __str__(self):
+        return f"{self.product.name} - {self.user} ({self.rating}/5)"
+
+
+    
 class ProductVariant(models.Model):
     product = models.ForeignKey(
         Product,

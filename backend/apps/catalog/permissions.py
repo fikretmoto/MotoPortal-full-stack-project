@@ -30,3 +30,24 @@ class CanManageProducts(BasePermission):
             return False
 
         return user.role in self.allowed_roles
+
+class IsCustomerRole(BasePermission):
+    """
+    Ürün yorumu/puanlama oluşturma için rol bazlı yetkilendirme.
+
+    Yetkili rol: customer.
+    Diğer roller (super_admin, admin, editor, dealer) ve
+    anonim/rolsüz kullanıcılar reddedilir.
+
+    has_permission False döndüğünde DRF'in kendi mekanizması
+    devreye girer: kullanıcı authenticate olmamışsa 401,
+    authenticate olmuş ama customer değilse 403 döner.
+    """
+
+    def has_permission(self, request, view):
+        user = request.user
+
+        if not user or not user.is_authenticated:
+            return False
+
+        return user.role == UserRole.CUSTOMER

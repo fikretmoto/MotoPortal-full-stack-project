@@ -9,6 +9,7 @@ from .views import (
     ProductCreateAPIView,
     ProductDetailAPIView,
     ProductListAPIView,
+    ProductReviewListCreateAPIView,
     ProductUpdateAPIView,
 )
 
@@ -68,5 +69,11 @@ urlpatterns = [
         "products/<slug:slug>/edit/",
         ProductUpdateAPIView.as_view(),
         name="product-update",
+    ),
+
+    path(
+        "products/<slug:slug>/reviews/",
+        ProductReviewListCreateAPIView.as_view(),
+        name="product-review-list-create",
     ),
 ]

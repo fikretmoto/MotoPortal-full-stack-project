@@ -1,13 +1,14 @@
 from django.db.models import Prefetch
 from rest_framework import generics, permissions
-from .permissions import CanManageProducts
+from .permissions import CanManageProducts, IsCustomerRole
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.permissions import AllowAny
 
 from .filters import ProductFilter
 
-from .models import AttributeOption, Brand, Category, CategoryAttribute, Product
+from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductReview, 
 from .serializers import (
    BrandSerializer,
     CategoryAttributesResponseSerializer,
@@ -15,6 +16,7 @@ from .serializers import (
     ProductDetailSerializer,
     ProductListSerializer,
     ProductWriteSerializer,
+    ProductReviewSerializer,
 )
 
 class CategoryListAPIView(generics.ListAPIView):
@@ -213,3 +215,36 @@ class CategoryAttributesAPIView(generics.GenericAPIView):
             groups_by_id[group_id]
             for group_id in ordered_group_ids
         ]
+
+class ProductReviewListCreateAPIView(generics.ListCreateAPIView):
+    """
+    GET: bir ürünün ONAYLI yorumlarını listeler (herkese açık).
+    POST: yeni yorum oluşturur (sadece customer rolü, giriş şart).
+    """
+    serializer_class = ProductReviewSerializer
+
+    def get_permissions(self):
+        if self.request.method == "POST":
+            return (IsCustomerRole(),)
+        return (AllowAny(),)
+
+    def get_queryset(self):
+        return (
+            ProductReview.objects
+            .filter(
+                product__slug=self.kwargs["slug"],
+                is_approved=True,
+            )
+            .select_related("user")
+            .order_by("-created_at")
+        )
+
+    def perform_create(self, serializer):
+        product = generics.get_object_or_404(
+            Product,
+            slug=self.kwargs["slug"],
+        )
+        serializer.save(
+            user=self.request.user,
+            product=product,
+        )

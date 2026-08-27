@@ -287,6 +287,8 @@ class ProductWriteSerializer(serializers.ModelSerializer):
             "stock_status",
             "short_description",
             "description",
+            "instagram_url",
+            "whatsapp_number",
             "cover_image",
             "is_featured",
             "is_active",
@@ -635,6 +637,35 @@ class ProductWriteSerializer(serializers.ModelSerializer):
                 for value in values
             ]
         )
+
+
+class ProductReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductReview
+        fields = (
+            "id",
+            "product",
+            "user",
+            "rating",
+            "comment",
+            "is_approved",
+            "created_at",
+        )
+        read_only_fields = (
+            "id",
+            "user",
+            "is_approved",
+            "created_at",
+        )
+
+    def validate_rating(self, value):
+        if value < 1 or value > 5:
+            raise serializers.ValidationError(
+                "Puan 1 ile 5 arasında olmalı."
+            )
+        return value
+
+    
 class AttributeOptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = AttributeOption
