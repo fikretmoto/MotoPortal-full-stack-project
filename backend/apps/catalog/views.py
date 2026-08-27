@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny
 
 from .filters import ProductFilter
 
-from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductReview, 
+from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductReview
 from .serializers import (
    BrandSerializer,
     CategoryAttributesResponseSerializer,

@@ -12,6 +12,7 @@ from .models import (
     Product,
     ProductAttributeValue,
     ProductImage,
+    ProductReview,
     ProductVariant,
 )
 
@@ -548,3 +549,46 @@ class AttributeOptionAdmin(admin.ModelAdmin):
     autocomplete_fields = (
         "attribute",
     )
+
+
+@admin.register(ProductReview)
+class ProductReviewAdmin(admin.ModelAdmin):
+    list_display = (
+        "product",
+        "user",
+        "rating",
+        "is_approved",
+        "created_at",
+    )
+
+    list_filter = (
+        "is_approved",
+        "rating",
+    )
+
+    search_fields = (
+        "product__name",
+        "user__email",
+        "comment",
+    )
+
+    autocomplete_fields = (
+        "product",
+        "user",
+    )
+
+    readonly_fields = (
+        "created_at",
+    )
+
+    actions = (
+        "approve_reviews",
+    )
+
+    @admin.action(description="Seçili yorumları onayla")
+    def approve_reviews(self, request, queryset):
+        updated_count = queryset.update(is_approved=True)
+        self.message_user(
+            request,
+            f"{updated_count} yorum onaylandı.",
+        )

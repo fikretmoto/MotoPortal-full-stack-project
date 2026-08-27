@@ -15,6 +15,7 @@ from .models import (
     ProductAttributeValue,
     ProductImage,
     ProductVariant,
+    ProductReview,
 )
 
 
