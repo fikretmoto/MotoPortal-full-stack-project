@@ -43,6 +43,10 @@ export type Product = {
 
   cover_image_url: string | null;
 
+  instagram_url: string | null;
+
+  whatsapp_number: string | null;
+
   is_featured: boolean;
 
   is_active: boolean;

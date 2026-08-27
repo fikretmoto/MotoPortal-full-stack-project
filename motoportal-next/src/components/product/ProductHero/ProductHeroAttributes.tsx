@@ -27,7 +27,7 @@ export default function ProductHeroAttributes({
         {product.name}
       </h1>
 
-       <div className="mt-3">
+      <div className="mt-3">
         <ProductRatingSummary slug={product.slug} />
       </div>
 
@@ -49,6 +49,36 @@ export default function ProductHeroAttributes({
       <ProductVariantSelector
         variants={product.variants}
       />
-    </div>
+     <div className="mt-6 flex flex-wrap gap-3">
+        {product.instagram_url && (
+          
+           <a href={product.instagram_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+          >
+            Instagram&apos;da İncele
+          </a>
+        )}
+
+        {product.whatsapp_number && (
+          
+            <a href={`https://wa.me/${product.whatsapp_number}?text=${encodeURIComponent(
+              `Merhaba, ${product.name} hakkında bilgi almak istiyorum.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-green-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-green-700"
+          >
+            WhatsApp&apos;tan Yaz
+          </a>
+        )}
+      </div>
+    
+      
+
+      </div >
+
+    
   );
 }
