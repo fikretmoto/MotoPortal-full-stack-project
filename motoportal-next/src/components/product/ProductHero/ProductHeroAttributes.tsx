@@ -3,7 +3,7 @@ import type { ProductDetail } from "@/services/catalog";
 import ProductPrice from "./ProductPrice";
 import ProductStock from "./ProductStock";
 import ProductVariantSelector from "./ProductVariantSelector";
-
+import ProductRatingSummary from "./ProductRatingSummary";
 type ProductHeroAttributesProps = {
   product: ProductDetail;
 };
@@ -26,6 +26,10 @@ export default function ProductHeroAttributes({
       <h1 className="mt-5 text-4xl font-bold tracking-tight text-gray-900 lg:text-5xl">
         {product.name}
       </h1>
+
+       <div className="mt-3">
+        <ProductRatingSummary slug={product.slug} />
+      </div>
 
       {product.short_description && (
         <p className="mt-5 text-lg leading-8 text-gray-600">

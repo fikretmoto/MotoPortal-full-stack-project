@@ -29,6 +29,8 @@ const EMPTY_BASIC_VALUES: BasicProductValues = {
   productCode: "",
   shortDescription: "",
   description: "",
+  instagramUrl: "",
+  whatsappNumber: "",
 };
 
 const EMPTY_PRICING_VALUES: PricingValues = {
@@ -50,6 +52,8 @@ function buildInitialBasicValues(
     productCode: data.product_code,
     shortDescription: data.short_description,
     description: data.description,
+    instagramUrl: data.instagram_url ?? "",
+    whatsappNumber: data.whatsapp_number ?? "",
   };
 }
 
@@ -168,6 +172,8 @@ export function ProductForm({ categories, brands, initialData }: ProductFormProp
         price: pricingValues.price,
         discount_price: pricingValues.discountPrice || null,
         stock_status: pricingValues.stockStatus,
+        instagram_url: basicValues.instagramUrl || null,
+        whatsapp_number: basicValues.whatsappNumber || null,
       };
     }
 
@@ -183,6 +189,10 @@ export function ProductForm({ categories, brands, initialData }: ProductFormProp
       payload.short_description = basicValues.shortDescription;
     if (basicValues.description !== initialData.description)
       payload.description = basicValues.description;
+     if (basicValues.instagramUrl !== (initialData.instagram_url ?? ""))
+      payload.instagram_url = basicValues.instagramUrl || null;
+    if (basicValues.whatsappNumber !== (initialData.whatsapp_number ?? ""))
+      payload.whatsapp_number = basicValues.whatsappNumber || null;
     if (pricingValues.price !== initialData.price) payload.price = pricingValues.price;
     if ((pricingValues.discountPrice || null) !== initialData.discount_price)
       payload.discount_price = pricingValues.discountPrice || null;

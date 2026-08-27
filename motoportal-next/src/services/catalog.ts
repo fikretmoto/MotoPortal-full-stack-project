@@ -109,6 +109,15 @@ type PaginatedResponse<T> = {
   results: T[];
 };
 
+export type ProductReview = {
+  id: number;
+  product: number;
+  user: number;
+  rating: number;
+  comment: string;
+  is_approved: boolean;
+  created_at: string;
+};
 
 
 
@@ -192,6 +201,28 @@ export type AttributeOption = {
   value: string;
 };
 
+
+export async function getProductReviews(
+  slug: string
+): Promise<ProductReview[]> {
+  const response = await fetch(
+    `${API_URL}/products/${slug}/reviews/`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Yorumlar alınamadı. HTTP ${response.status}`
+    );
+  }
+
+  const data: PaginatedResponse<ProductReview> =
+    await response.json();
+
+  return data.results;
+}
 export type CategoryAttribute = {
   id: number;
   slug: string;

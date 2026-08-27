@@ -14,6 +14,8 @@ export type BasicProductValues = {
   productCode: string;
   shortDescription: string;
   description: string;
+  instagramUrl: string;
+  whatsappNumber: string;
 };
 
 type BasicProductFieldsProps = {
@@ -80,6 +82,30 @@ export function BasicProductFields({ brands, values, onChange }: BasicProductFie
           rows={5}
         />
       </div>
+
+     <div className="space-y-2">
+        <Label htmlFor="instagramUrl">Instagram Bağlantısı</Label>
+        <Input
+          id="instagramUrl"
+          type="url"
+          placeholder="https://instagram.com/p/..."
+          value={values.instagramUrl}
+          onChange={(e) => onChange({ ...values, instagramUrl: e.target.value })}
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="whatsappNumber">WhatsApp Numarası</Label>
+        <Input
+          id="whatsappNumber"
+          type="tel"
+          placeholder="905XXXXXXXXX"
+          value={values.whatsappNumber}
+          onChange={(e) => onChange({ ...values, whatsappNumber: e.target.value })}
+        />
+      </div>
     </div>
+   
+
   );
 }

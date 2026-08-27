@@ -19,6 +19,8 @@ export type ProductEditData = {
   description: string;
   is_featured: boolean;
   is_active: boolean;
+  instagram_url: string | null;
+  whatsapp_number: string | null;
   attributes: ProductAttributeValues;
 };
 

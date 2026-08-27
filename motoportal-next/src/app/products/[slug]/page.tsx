@@ -4,6 +4,7 @@ import ProductHero from "@/components/product/ProductHero";
 import ProductDescription from "@/components/product/ProductDescription";
 import ProductHighlights from "@/components/product/ProductHighlights";
 import ProductTechnicalTabs from "@/components/product/ProductTechnicalTabs";
+import ProductReviews from "@/components/product/ProductReviews";
 
 
 import {
@@ -69,6 +70,9 @@ export default async function ProductDetailPage({
   attributes={product.attributes}
 />
 
+<ProductReviews
+  slug={product.slug}
+/>
 
 
     </main>
