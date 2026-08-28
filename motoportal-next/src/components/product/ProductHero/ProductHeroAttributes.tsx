@@ -37,10 +37,11 @@ export default function ProductHeroAttributes({
         </p>
       )}
 
-      <ProductPrice
-        price={product.price}
-        currency={product.currency}
-      />
+        <ProductPrice
+          price={product.price}
+          discountPrice={product.discount_price}
+          currency={product.currency}
+        />
 
       <ProductStock
         stockStatus={product.stock_status}

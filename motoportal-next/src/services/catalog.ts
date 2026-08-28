@@ -94,6 +94,7 @@ export type ProductAttribute = {
 
 export type ProductDetail = Product & {
   price: string | null;
+  discount_price: string | null;
   currency: string;
   stock_status: string;
 

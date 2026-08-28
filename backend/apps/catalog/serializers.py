@@ -235,11 +235,14 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             "category",
 
             "price",
+            "discount_price",
             "currency",
             "stock_status",
 
             "short_description",
             "description",
+            "instagram_url",
+            "whatsapp_number",
 
             "cover_image_url",
             "images",

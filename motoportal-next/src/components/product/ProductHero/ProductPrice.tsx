@@ -1,30 +1,35 @@
 type ProductPriceProps = {
   price: string | null;
+  discountPrice?: string | null;
   currency: string;
 };
 
 export default function ProductPrice({
   price,
+  discountPrice,
   currency,
 }: ProductPriceProps) {
-  return (
-    <div className="mt-8 border-y border-gray-200 py-6">
-      {price ? (
-        <>
-          <p className="text-sm font-medium text-gray-500">
-            Satış Fiyatı
-          </p>
+  if (!price) {
+    return (
+      <p className="whitespace-nowrap text-lg font-semibold text-gray-700">
+        Fiyat için iletişime geçin
+      </p>
+    );
+  }
 
-          <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900">
-            {Number(price).toLocaleString("tr-TR")}{" "}
-            {currency === "TRY" ? "₺" : currency}
-          </p>
-        </>
-      ) : (
-        <p className="text-lg font-semibold text-gray-700">
-          Fiyat için iletişime geçin
-        </p>
+  return (
+    <div className="flex flex-wrap items-baseline gap-2">
+      {discountPrice && (
+        <span className="whitespace-nowrap text-lg text-gray-400 line-through">
+          {Number(price).toLocaleString("tr-TR")}{" "}
+          {currency === "TRY" ? "₺" : currency}
+        </span>
       )}
+
+      <span className="whitespace-nowrap text-3xl font-bold text-gray-900">
+        {Number(discountPrice ?? price).toLocaleString("tr-TR")}{" "}
+        {currency === "TRY" ? "₺" : currency}
+      </span>
     </div>
   );
 }
