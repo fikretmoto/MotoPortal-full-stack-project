@@ -4,6 +4,8 @@ import ProductPrice from "./ProductPrice";
 import ProductStock from "./ProductStock";
 import ProductVariantSelector from "./ProductVariantSelector";
 import ProductRatingSummary from "./ProductRatingSummary";
+import ProductHighlights from "../ProductHighlights";
+
 type ProductHeroAttributesProps = {
   product: ProductDetail;
 };
@@ -13,73 +15,79 @@ export default function ProductHeroAttributes({
 }: ProductHeroAttributesProps) {
   return (
     <div className="flex flex-col justify-center">
-      <div className="flex flex-wrap items-center gap-3">
-        <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gray-600">
-          {product.brand.name}
-        </span>
+      
 
-        <span className="text-sm text-gray-500">
-          {product.category.name}
-        </span>
+      {/* SATIR 1: Ürün adı + fiyat aynı satırda, aynı eksende */}
+            {/* SATIR 1: Ürün adı + fiyat aynı satırda, aynı eksende */}
+      <div className="mt-5 flex flex-wrap items-start justify-between gap-4">
+                <div className="min-w-0 flex-1">
+          <h1 className="truncate text-2xl font-bold tracking-tight text-gray-900 lg:text-3xl">
+            {product.name}
+          </h1>
+        </div>
+
+        <div className="shrink-0">
+          <ProductPrice
+            price={product.price}
+            discountPrice={product.discount_price}
+            currency={product.currency}
+          />
+        </div>
       </div>
 
-      <h1 className="mt-5 text-4xl font-bold tracking-tight text-gray-900 lg:text-5xl">
-        {product.name}
-      </h1>
-
-      <div className="mt-3">
+      {/* SATIR 2: Puan + yorum sayısı + stok rozeti aynı satırda */}
+      <div className="mt-3 flex flex-wrap items-center gap-4">
         <ProductRatingSummary slug={product.slug} />
+        <ProductStock stockStatus={product.stock_status} />
       </div>
 
+      {/* SATIR 3: Kısa açıklama */}
       {product.short_description && (
         <p className="mt-5 text-lg leading-8 text-gray-600">
           {product.short_description}
         </p>
       )}
 
-        <ProductPrice
-          price={product.price}
-          discountPrice={product.discount_price}
-          currency={product.currency}
-        />
+      {/* SATIR 4: Instagram / WhatsApp butonları */}
+       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+        {product.whatsapp_number && (
+          
+           <a href={`https://wa.me/${product.whatsapp_number}?text=${encodeURIComponent(
+              `Merhaba, ${product.name} hakkında bilgi almak istiyorum.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-green-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-green-700"
+          >
+            WhatsApp&apos;tan Yaz
+          </a>
+        )}
 
-      <ProductStock
-        stockStatus={product.stock_status}
-      />
-
-      <ProductVariantSelector
-        variants={product.variants}
-      />
-     <div className="mt-6 flex flex-wrap gap-3">
         {product.instagram_url && (
           
            <a href={product.instagram_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-300 px-6 py-3 text-base font-semibold text-gray-900 transition hover:bg-gray-50"
           >
             Instagram&apos;da İncele
           </a>
         )}
-
-        {product.whatsapp_number && (
-          
-            <a href={`https://wa.me/${product.whatsapp_number}?text=${encodeURIComponent(
-              `Merhaba, ${product.name} hakkında bilgi almak istiyorum.`
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-green-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-green-700"
-          >
-            WhatsApp&apos;tan Yaz
-          </a>
-        )}
       </div>
-    
-      
 
-      </div >
+      {/* SATIR 5: Varyant seçimi (renk, cc vb.) */}
+      <ProductVariantSelector variants={product.variants} />
 
-    
+      {/* SATIR 6: Ürün Detayları başlığı + öne çıkan özellik kartları */}
+      <div className="mt-10">
+        <h2 className="text-lg font-semibold text-gray-900">
+          Ürün Detayları
+        </h2>
+
+        <div className="mt-4">
+          <ProductHighlights attributes={product.attributes} compact />
+        </div>
+      </div>
+    </div>
   );
 }

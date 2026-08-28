@@ -1,8 +1,12 @@
+import { Star, StarHalf } from "lucide-react";
+
 import { getProductReviews } from "@/services/catalog";
 
 type ProductRatingSummaryProps = {
   slug: string;
 };
+
+const MAX_STARS = 5;
 
 export default async function ProductRatingSummary({
   slug,
@@ -21,25 +25,38 @@ export default async function ProductRatingSummary({
     reviews.reduce((total, review) => total + review.rating, 0) /
     reviews.length;
 
+  const fullStars = Math.floor(averageRating);
+  const hasHalfStar = averageRating % 1 >= 0.5;
+  const emptyStars = MAX_STARS - fullStars - (hasHalfStar ? 1 : 0);
+
   return (
-    <div className="flex items-center gap-1.5">
-      <div className="flex items-center">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <span
-            key={index}
-            className={
-              index < Math.round(averageRating)
-                ? "text-yellow-500"
-                : "text-muted-foreground"
-            }
-          >
-            ★
-          </span>
+    <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1">
+        {Array.from({ length: fullStars }).map((_, index) => (
+          <Star
+            key={`full-${index}`}
+            className="size-4 fill-yellow-500 stroke-yellow-500"
+          />
+        ))}
+
+        {hasHalfStar && (
+          <div className="relative size-4">
+            <StarHalf className="absolute top-0 right-0 size-full fill-yellow-500 stroke-yellow-500" />
+            <StarHalf className="absolute top-0 left-0 size-full -scale-x-100 fill-black/15 stroke-black/15" />
+          </div>
+        )}
+
+        {Array.from({ length: emptyStars }).map((_, index) => (
+          <Star
+            key={`empty-${index}`}
+            className="size-4 fill-black/15 stroke-black/15"
+          />
         ))}
       </div>
-      <span className="text-sm text-muted-foreground">
-        {averageRating.toFixed(1)} ({reviews.length} yorum)
-      </span>
+
+      <p className="text-sm font-medium text-muted-foreground">
+        {reviews.length} yorum
+      </p>
     </div>
   );
 }

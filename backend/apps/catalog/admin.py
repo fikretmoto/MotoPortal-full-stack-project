@@ -294,6 +294,8 @@ class ProductAdmin(admin.ModelAdmin):
                     "short_description",
                     "description",
                     "cover_image",
+                    "instagram_url",
+                    "whatsapp_number",
                 ),
             },
         ),

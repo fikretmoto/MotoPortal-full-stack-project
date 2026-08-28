@@ -2,7 +2,7 @@ import Link from "next/link";
 import ProductHero from "@/components/product/ProductHero";
 
 import ProductDescription from "@/components/product/ProductDescription";
-import ProductHighlights from "@/components/product/ProductHighlights";
+
 import ProductTechnicalTabs from "@/components/product/ProductTechnicalTabs";
 import ProductReviews from "@/components/product/ProductReviews";
 
@@ -85,9 +85,7 @@ export default async function ProductDetailPage({
 <ProductDescription
   description={product.description}
 />
-<ProductHighlights
-  attributes={product.attributes}
-/>
+
 
 <ProductTechnicalTabs
   attributes={product.attributes}
