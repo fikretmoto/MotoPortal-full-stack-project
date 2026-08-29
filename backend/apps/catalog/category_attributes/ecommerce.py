@@ -1,6 +1,7 @@
 COMMON_ATTRIBUTE_SLUGS = [
     # Genel
     "model-yili",
+    "renk",
     "mensei-ulke",
     "uretici",
 
