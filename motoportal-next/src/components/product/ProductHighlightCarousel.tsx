@@ -69,7 +69,7 @@ export function ProductHighlightCarousel() {
             return (
               <CarouselItem
                 key={item.id}
-                className="pl-4 basis-[75%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                 className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
               >
                 <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-neutral-900 shadow-sm transition-shadow duration-300 hover:shadow-xl">
                   <div className="relative aspect-[3/4] w-full overflow-hidden">
