@@ -5,6 +5,7 @@ import ProductDescription from "@/components/product/ProductDescription";
 
 import ProductTechnicalTabs from "@/components/product/ProductTechnicalTabs";
 import ProductReviews from "@/components/product/ProductReviews";
+import { ProductHighlightCarousel } from "@/components/product/ProductHighlightCarousel";
 
 import {
   Breadcrumb,
@@ -90,6 +91,8 @@ export default async function ProductDetailPage({
 <ProductTechnicalTabs
   attributes={product.attributes}
 />
+
+<ProductHighlightCarousel />
 
 <ProductReviews
   slug={product.slug}
