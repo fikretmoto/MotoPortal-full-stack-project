@@ -138,15 +138,27 @@ export function ProductForm({ categories, brands, initialData }: ProductFormProp
     (brand) => brand.slug === basicValues.brandSlug
   )?.id;
 
+  function sanitizeAttributeValue(value: AttributeValue): AttributeValue {
+    if (Array.isArray(value)) {
+      return value.filter((item) => item !== "");
+    }
+    return value;
+  }
+
   function buildAttributesDiff(): Record<string, AttributeValue> {
     if (!isEditMode || !initialData) {
-      return attributeValues;
+      const cleaned: Record<string, AttributeValue> = {};
+      for (const [slug, value] of Object.entries(attributeValues)) {
+        cleaned[slug] = sanitizeAttributeValue(value);
+      }
+      return cleaned;
     }
 
     const diff: Record<string, AttributeValue> = {};
     const initialAttributes = initialData.attributes;
 
-    for (const [slug, value] of Object.entries(attributeValues)) {
+    for (const [slug, rawValue] of Object.entries(attributeValues)) {
+      const value = sanitizeAttributeValue(rawValue);
       const initialValue = initialAttributes[slug];
       const changed =
         JSON.stringify(value) !== JSON.stringify(initialValue);
@@ -158,6 +170,7 @@ export function ProductForm({ categories, brands, initialData }: ProductFormProp
 
     return diff;
   }
+
 
   function buildBasicPayload() {
     if (!isEditMode || !initialData) {
