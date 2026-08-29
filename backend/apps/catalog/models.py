@@ -641,6 +641,11 @@ class CategoryAttribute(models.Model):
         verbose_name="Karşılaştırmada Gösterilsin mi?",
     )
 
+    is_highlight = models.BooleanField(
+        default=False,
+        verbose_name="Öne Çıkan Özellik mi?",
+    )
+
     display_order = models.PositiveIntegerField(
         default=0,
         verbose_name="Gösterim Sırası",

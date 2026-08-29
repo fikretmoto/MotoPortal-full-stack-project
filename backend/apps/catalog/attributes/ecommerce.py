@@ -11,6 +11,19 @@ ECOMMERCE_ATTRIBUTE_DATA = [
         "is_comparable": True,
         "is_searchable": True,
     },
+
+     {
+        "name": "Renk",
+        "slug": "renk",
+        "group_slug": "genel-bilgiler",
+        "data_type": "multi_select",
+        "unit": "",
+        "display_order": 15,
+        "is_filterable": True,
+        "is_comparable": True,
+        "is_searchable": True,
+    },
+    
     {
         "name": "Menşei Ülke",
         "slug": "mensei-ulke",

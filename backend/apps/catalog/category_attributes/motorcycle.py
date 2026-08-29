@@ -83,4 +83,14 @@ MOTORCYCLE_ATTRIBUTE_SLUGS = [
     # Donanım
     "usb-sarj-girisi",
     "anahtarsiz-calistirma",
+
+    
+]
+
+MOTORCYCLE_HIGHLIGHT_SLUGS = [
+    "model-yili",
+    "motor-hacmi",
+    "maksimum-guc",
+    "maksimum-tork",
+    "sanziman-tipi",
 ]
