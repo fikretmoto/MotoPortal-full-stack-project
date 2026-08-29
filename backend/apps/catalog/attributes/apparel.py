@@ -321,7 +321,7 @@ APPAREL_ATTRIBUTE_DATA = [
 
     # GÜVENLİK
     {
-        "name": "Reflektif Detay",
+        "name": "Giyim Reflektif Detay",
         "slug": "giyim-reflektif-detay",
         "group_slug": "guvenlik",
         "data_type": "boolean",

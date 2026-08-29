@@ -130,7 +130,7 @@ OIL_ATTRIBUTE_DATA = [
 
     # UYUMLULUK
     {
-        "name": "Uyumlu Motosiklet",
+        "name": "Yağ Uyumlu Motosiklet",
         "slug": "yag-uyumlu-motosiklet",
         "group_slug": "uyumluluk",
         "data_type": "text",

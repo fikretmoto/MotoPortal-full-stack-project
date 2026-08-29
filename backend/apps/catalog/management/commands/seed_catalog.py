@@ -7,6 +7,14 @@ from apps.catalog.attributes.scooter import SCOOTER_ATTRIBUTE_DATA
 from apps.catalog.attribute_groups import ATTRIBUTE_GROUP_DATA
 from apps.catalog.attributes.helmet import HELMET_ATTRIBUTE_DATA
 from apps.catalog.attributes.motorcycle import MOTORCYCLE_ATTRIBUTE_DATA
+from apps.catalog.attributes.apparel import APPAREL_ATTRIBUTE_DATA
+from apps.catalog.attributes.battery import BATTERY_ATTRIBUTE_DATA
+from apps.catalog.attributes.oil import OIL_ATTRIBUTE_DATA
+from apps.catalog.attributes.tire import TIRE_ATTRIBUTE_DATA
+from apps.catalog.attributes.bicycle import BICYCLE_ATTRIBUTE_DATA
+from apps.catalog.attributes.electric import ELECTRIC_ATTRIBUTE_DATA
+from apps.catalog.attributes.parts import PARTS_ATTRIBUTE_DATA
+from apps.catalog.attributes.accessories import ACCESSORIES_ATTRIBUTE_DATA
 from apps.catalog.categories import CATEGORY_DATA
 from apps.catalog.category_attributes.scooter import (
     SCOOTER_ATTRIBUTE_SLUGS,
@@ -20,6 +28,40 @@ from apps.catalog.category_attributes.motorcycle import (
     MOTORCYCLE_ATTRIBUTE_SLUGS,
     MOTORCYCLE_CATEGORY_SLUGS,
 )
+from apps.catalog.category_attributes.apparel import (
+    APPAREL_ATTRIBUTE_SLUGS,
+    APPAREL_CATEGORY_SLUGS,
+)
+from apps.catalog.category_attributes.battery import (
+    BATTERY_ATTRIBUTE_SLUGS,
+    BATTERY_CATEGORY_SLUGS,
+)
+from apps.catalog.category_attributes.oil import (
+    OIL_ATTRIBUTE_SLUGS,
+    OIL_CATEGORY_SLUGS,
+)
+from apps.catalog.category_attributes.tire import (
+    TIRE_ATTRIBUTE_SLUGS,
+    TIRE_CATEGORY_SLUGS,
+)
+from apps.catalog.category_attributes.bicycle import (
+    BICYCLE_ATTRIBUTE_SLUGS,
+    BICYCLE_CATEGORY_SLUGS,
+)
+from apps.catalog.category_attributes.electric import (
+    ELECTRIC_ATTRIBUTE_SLUGS,
+    ELECTRIC_CATEGORY_SLUGS,
+)
+from apps.catalog.category_attributes.parts import (
+    PARTS_ATTRIBUTE_SLUGS,
+    PARTS_CATEGORY_SLUGS,
+)
+from apps.catalog.category_attributes.accessories import (
+    ACCESSORIES_ATTRIBUTE_SLUGS,
+    ACCESSORIES_CATEGORY_SLUGS,
+)
+
+
 from apps.catalog.models import (
     Attribute,
     AttributeGroup,
@@ -154,7 +196,15 @@ class Command(BaseCommand):
             *MOTORCYCLE_ATTRIBUTE_DATA,
             *HELMET_ATTRIBUTE_DATA,
             *SCOOTER_ATTRIBUTE_DATA,
-            *ECOMMERCE_ATTRIBUTE_DATA
+            *ECOMMERCE_ATTRIBUTE_DATA,
+            *APPAREL_ATTRIBUTE_DATA,
+            *BATTERY_ATTRIBUTE_DATA,
+            *OIL_ATTRIBUTE_DATA,
+            *TIRE_ATTRIBUTE_DATA,
+            *BICYCLE_ATTRIBUTE_DATA,
+            *ELECTRIC_ATTRIBUTE_DATA,
+            *PARTS_ATTRIBUTE_DATA,
+            *ACCESSORIES_ATTRIBUTE_DATA,
         ]
 
         for item in all_attribute_data:
@@ -212,6 +262,30 @@ class Command(BaseCommand):
 
         for category_slug in SCOOTER_CATEGORY_SLUGS:
                 mappings[category_slug] = SCOOTER_ATTRIBUTE_SLUGS
+
+        for category_slug in APPAREL_CATEGORY_SLUGS:
+                mappings[category_slug] = APPAREL_ATTRIBUTE_SLUGS
+
+        for category_slug in BATTERY_CATEGORY_SLUGS:
+                mappings[category_slug] = BATTERY_ATTRIBUTE_SLUGS
+
+        for category_slug in OIL_CATEGORY_SLUGS:
+                mappings[category_slug] = OIL_ATTRIBUTE_SLUGS
+
+        for category_slug in TIRE_CATEGORY_SLUGS:
+                mappings[category_slug] = TIRE_ATTRIBUTE_SLUGS
+
+        for category_slug in BICYCLE_CATEGORY_SLUGS:
+                mappings[category_slug] = BICYCLE_ATTRIBUTE_SLUGS
+
+        for category_slug in ELECTRIC_CATEGORY_SLUGS:
+                mappings[category_slug] = ELECTRIC_ATTRIBUTE_SLUGS
+
+        for category_slug in PARTS_CATEGORY_SLUGS:
+                mappings[category_slug] = PARTS_ATTRIBUTE_SLUGS
+
+        for category_slug in ACCESSORIES_CATEGORY_SLUGS:
+                mappings[category_slug] = ACCESSORIES_ATTRIBUTE_SLUGS
 
         connection_count = 0
 

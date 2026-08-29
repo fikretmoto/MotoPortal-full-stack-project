@@ -1,8 +1,14 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 import type { ProductAttribute } from "@/services/catalog";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 type ProductTechnicalTabsProps = {
   attributes: ProductAttribute[];
@@ -42,18 +48,45 @@ export default function ProductTechnicalTabs({
     return Array.from(groupedAttributes.values());
   }, [attributes]);
 
-  const [activeGroupSlug, setActiveGroupSlug] = useState(
-    groups[0]?.slug ?? ""
-  );
-
   if (groups.length === 0) {
     return null;
   }
 
-  const activeGroup =
-    groups.find(
-      (group) => group.slug === activeGroupSlug
-    ) ?? groups[0];
+  // Grupları iki koluna dağıt (sırayla: 1. sol, 2. sağ, 3. sol, 4. sağ...)
+  const leftGroups = groups.filter((_, index) => index % 2 === 0);
+  const rightGroups = groups.filter((_, index) => index % 2 === 1);
+
+  const renderGroupAccordion = (groupList: AttributeGroup[]) => (
+    <Accordion type="multiple" className="w-full">
+      {groupList.map((group) => (
+        <AccordionItem key={group.slug} value={group.slug}>
+          <AccordionTrigger className="text-base font-semibold text-gray-900">
+            {group.name}
+          </AccordionTrigger>
+
+          <AccordionContent>
+            <div className="overflow-hidden rounded-xl border border-gray-200">
+              {group.attributes.map((attribute) => (
+                <div
+                  key={attribute.id}
+                  className="grid grid-cols-[160px_1fr] items-center gap-4 border-b border-gray-100 bg-white px-4 py-3 last:border-b-0"
+                >
+                  <span className="text-sm text-gray-500">
+                    {attribute.name}
+                  </span>
+
+                  <span className="text-sm font-medium text-gray-900">
+                    {attribute.value}
+                    {attribute.unit ? ` ${attribute.unit}` : ""}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
+  );
 
   return (
     <section className="mt-12">
@@ -67,58 +100,9 @@ export default function ProductTechnicalTabs({
         </h2>
       </div>
 
-      {/* GRUP BUTONLARI */}
-      <div className="mt-6 flex flex-wrap gap-3">
-        {groups.map((group) => {
-          const isActive =
-            group.slug === activeGroup.slug;
-
-          return (
-            <button
-              key={group.slug}
-              type="button"
-              onClick={() =>
-                setActiveGroupSlug(group.slug)
-              }
-              className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
-                isActive
-                  ? "border-gray-900 bg-gray-900 text-white"
-                  : "border-gray-200 bg-white text-gray-700 hover:border-gray-400"
-              }`}
-            >
-              {group.name}
-            </button>
-          );
-        })}
-      </div>
-
-      {/* SEÇİLİ GRUBUN ÖZELLİKLERİ */}
-      <div className="mt-6 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-        <div className="border-b border-gray-200 bg-gray-50 px-6 py-4">
-          <h3 className="text-lg font-semibold text-gray-900">
-            {activeGroup.name}
-          </h3>
-        </div>
-
-        <div>
-          {activeGroup.attributes.map(
-            (attribute) => (
-             <div
-  key={attribute.id}
-  className="grid grid-cols-[220px_1fr] items-center gap-6 border-b border-gray-100 px-6 py-4 last:border-b-0"
->
-  <span className="text-sm text-gray-500">
-    {attribute.name}
-  </span>
-
-  <span className="font-medium text-gray-900">
-    {attribute.value}
-    {attribute.unit ? ` ${attribute.unit}` : ""}
-  </span>
-</div>
-            )
-          )}
-        </div>
+      <div className="mt-6 grid gap-x-10 md:grid-cols-2">
+        <div>{renderGroupAccordion(leftGroups)}</div>
+        <div>{renderGroupAccordion(rightGroups)}</div>
       </div>
     </section>
   );

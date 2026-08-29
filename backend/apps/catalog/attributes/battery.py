@@ -165,7 +165,7 @@ BATTERY_ATTRIBUTE_DATA = [
 
     # STANDARTLAR
     {
-        "name": "Garanti Süresi",
+        "name": "Akü Garanti Süresi",
         "slug": "aku-garanti-suresi",
         "group_slug": "standartlar-ve-sertifikalar",
         "data_type": "integer",

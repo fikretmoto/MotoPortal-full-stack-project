@@ -164,6 +164,67 @@ CATEGORY_DATA = [
         "parent_slug": "yedek-parca",
     },
 
+     {
+        "name": "Akü",
+        "slug": "aku",
+        "parent_slug": "yedek-parca",
+    },
+
+
+     {
+        "name": "Lastik",
+        "slug": "lastik",
+        "parent_slug": "yedek-parca",
+    },
+    {
+        "name": "Ön Lastik",
+        "slug": "on-lastik",
+        "parent_slug": "yedek-parca",
+    },
+    {
+        "name": "Arka Lastik",
+        "slug": "arka-lastik",
+        "parent_slug": "yedek-parca",
+    },
+
+
+       
+    {
+        "name": "Kaporta / Plastik Aksam",
+        "slug": "kaporta-plastik-aksam",
+        "parent_slug": "yedek-parca",
+    },
+    {
+        "name": "Sele",
+        "slug": "sele",
+        "parent_slug": "yedek-parca",
+    },
+    {
+        "name": "Gidon ve Gaz Kolu",
+        "slug": "gidon-ve-gaz-kolu",
+        "parent_slug": "yedek-parca",
+    },
+    {
+        "name": "Zincir ve Dişli",
+        "slug": "zincir-ve-disli",
+        "parent_slug": "yedek-parca",
+    },
+    {
+        "name": "Debriyaj Parçaları",
+        "slug": "debriyaj-parcalari",
+        "parent_slug": "yedek-parca",
+    },
+    {
+        "name": "Hava Filtresi",
+        "slug": "hava-filtresi",
+        "parent_slug": "yedek-parca",
+    },
+    {
+        "name": "Kasa Koruma / Düşme Demiri",
+        "slug": "kasa-koruma-dusme-demiri",
+        "parent_slug": "yedek-parca",
+    },
+
     #bakim ve temizlik alt kategorileri
     {
         "name": "Temizlik Ürünleri",
@@ -186,6 +247,79 @@ CATEGORY_DATA = [
                 "parent_slug": "bakim-ve-temizlik",
             },
 
+
+
+            {
+                "name": "Şanzıman Yağı",
+                "slug": "sanziman-yagi",
+                "parent_slug": "bakim-ve-temizlik",
+            },
+        {
+                "name": "2T Yağı",
+                "slug": "2t-yagi",
+                "parent_slug": "bakim-ve-temizlik",
+            },
+        {
+                "name": "Fork Yağı",
+                "slug": "fork-yagi",
+                "parent_slug": "bakim-ve-temizlik",
+            },
+        {
+                "name": "Fren Hidroliği",
+                "slug": "fren-hidroligi",
+                "parent_slug": "bakim-ve-temizlik",
+            },
+        {
+                "name": "Soğutma Sıvısı",
+                "slug": "sogutma-sivisi",
+                "parent_slug": "bakim-ve-temizlik",
+            },
+
+
+            #ekipman alt kategorileri
+            {
+                "name": "Motosiklet Montu",
+                "slug": "motosiklet-montu",
+                "parent_slug": "ekipman",
+            },
+            {
+                    "name": "Motosiklet Pantolonu",
+                    "slug": "motosiklet-pantolonu",
+                    "parent_slug": "ekipman",
+                },
+            {
+                    "name": "Motosiklet Eldiveni",
+                    "slug": "motosiklet-eldiveni",
+                    "parent_slug": "ekipman",
+                },
+
+
+                         
+                    {
+                            "name": "Bot",
+                            "slug": "motosiklet-botu",
+                            "parent_slug": "ekipman",
+                        },
+                    {
+                            "name": "Yağmurluk",
+                            "slug": "yagmurluk",
+                            "parent_slug": "ekipman",
+                        },
+                    {
+                            "name": "Koruma Ekipmanı",
+                            "slug": "koruma-ekipmani",
+                            "parent_slug": "ekipman",
+                        },
+
+                        {
+                                "name": "Kask",
+                                "slug": "kask",
+                                "parent_slug": "ekipman",
+                            },
+                    
+
+
+
             #aksesuar alt kategorileri
             {
                 "name": "Bisiklet Aksesuarları",
@@ -203,15 +337,61 @@ CATEGORY_DATA = [
                         "parent_slug": "aksesuar",
                     },
 
-                    {
-                            "name": "Mont",
-                            "slug": "mont",
-                            "parent_slug": "ekipman",
-                        },
 
-                        {
-                                "name": "Kask",
-                                "slug": "kask",
-                                "parent_slug": "ekipman",
-                            },
+                    {
+                "name": "Çanta ve Bagaj Sistemleri",
+                "slug": "canta-ve-bagaj-sistemleri",
+                "parent_slug": "aksesuar",
+            },
+            {
+                "name": "Ön Cam / Rüzgarlık",
+                "slug": "on-cam-ruzgarlik",
+                "parent_slug": "aksesuar",
+            },
+            {
+                "name": "Kilit ve Güvenlik",
+                "slug": "kilit-ve-guvenlik",
+                "parent_slug": "aksesuar",
+            },
+            {
+                "name": "Intercom / Bluetooth İletişim",
+                "slug": "intercom-bluetooth-iletisim",
+                "parent_slug": "aksesuar",
+            },
+            {
+                "name": "Sele Kılıfı ve Örtü",
+                "slug": "sele-kilifi-ve-ortu",
+                "parent_slug": "aksesuar",
+            },
+            {
+                "name": "Kamera ve Navigasyon",
+                "slug": "kamera-ve-navigasyon",
+                "parent_slug": "aksesuar",
+            },
+
+
+
+                              # Bisiklet alt kategorileri
+
+
+    {
+        "name": "Dağ Bisikleti",
+        "slug": "dag-bisikleti",
+        "parent_slug": "bisiklet",
+    },
+    {
+        "name": "Yol Bisikleti",
+        "slug": "yol-bisikleti",
+        "parent_slug": "bisiklet",
+    },
+    {
+        "name": "Şehir Bisikleti",
+        "slug": "sehir-bisikleti",
+        "parent_slug": "bisiklet",
+    },
+    {
+        "name": "Çocuk Bisikleti",
+        "slug": "cocuk-bisikleti",
+        "parent_slug": "bisiklet",
+    },
 ]
