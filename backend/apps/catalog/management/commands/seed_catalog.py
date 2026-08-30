@@ -27,6 +27,7 @@ from apps.catalog.category_attributes.helmet import (
 from apps.catalog.category_attributes.motorcycle import (
     MOTORCYCLE_ATTRIBUTE_SLUGS,
     MOTORCYCLE_CATEGORY_SLUGS,
+    MOTORCYCLE_HIGHLIGHT_SLUGS,
 )
 from apps.catalog.category_attributes.apparel import (
     APPAREL_ATTRIBUTE_SLUGS,
@@ -253,9 +254,11 @@ class Command(BaseCommand):
         attributes,
     ):
         mappings = {}
+        highlight_mappings = {}
 
         for category_slug in MOTORCYCLE_CATEGORY_SLUGS:
             mappings[category_slug] = MOTORCYCLE_ATTRIBUTE_SLUGS
+            highlight_mappings[category_slug] = MOTORCYCLE_HIGHLIGHT_SLUGS
 
         for category_slug in HELMET_CATEGORY_SLUGS:
                 mappings[category_slug] = HELMET_ATTRIBUTE_SLUGS
@@ -305,6 +308,12 @@ class Command(BaseCommand):
                         f"Özellik bulunamadı: {attribute_slug}"
                     )
 
+
+                is_highlight = attribute_slug in highlight_mappings.get(
+                    category_slug, []
+                )
+
+                
                 _, created = CategoryAttribute.objects.update_or_create(
                     category=category,
                     attribute=attribute,
@@ -313,6 +322,7 @@ class Command(BaseCommand):
                         "is_filterable": attribute.is_filterable,
                         "is_comparable": attribute.is_comparable,
                         "display_order": attribute.display_order,
+                        "is_highlight": is_highlight,
                     },
                 )
 
