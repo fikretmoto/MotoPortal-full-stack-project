@@ -669,6 +669,39 @@ class CategoryAttribute(models.Model):
     def __str__(self):
         return f"{self.category.name} → {self.attribute.name}"
 
+class ProductHighlightImage(models.Model):
+    product = models.ForeignKey(
+        "Product",
+        on_delete=models.CASCADE,
+        related_name="highlight_images",
+        verbose_name="Ürün",
+    )
+
+    attribute = models.ForeignKey(
+        Attribute,
+        on_delete=models.CASCADE,
+        related_name="highlight_images",
+        verbose_name="Özellik",
+    )
+
+    image = models.ImageField(
+        upload_to="products/highlights/",
+        verbose_name="Görsel",
+    )
+
+    class Meta:
+        verbose_name = "Öne Çıkan Özellik Görseli"
+        verbose_name_plural = "Öne Çıkan Özellik Görselleri"
+        constraints = [
+            models.UniqueConstraint(
+                fields=["product", "attribute"],
+                name="unique_highlight_image_per_product_attribute",
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.product.name} → {self.attribute.name}"
+
 class ProductAttributeValue(models.Model):
     product = models.ForeignKey(
         Product,

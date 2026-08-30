@@ -11,6 +11,7 @@ from .models import (
     CategoryAttribute,
     Product,
     ProductAttributeValue,
+    ProductHighlightImage,
     ProductImage,
     ProductReview,
     ProductVariant,
@@ -233,6 +234,13 @@ class BrandAdmin(admin.ModelAdmin):
     )
 
 
+class ProductHighlightImageInline(admin.TabularInline):
+    model = ProductHighlightImage
+    extra = 1
+    autocomplete_fields = ("attribute",)
+    fields = ("attribute", "image")
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
@@ -322,6 +330,9 @@ class ProductAdmin(admin.ModelAdmin):
         ),
     )
 
+
+    inlines = [ProductHighlightImageInline]
+
     def get_inline_instances(self, request, obj=None):
         inline_instances = []
 
@@ -367,6 +378,14 @@ class ProductAdmin(admin.ModelAdmin):
 
         inline_instances.append(
             ProductImageInline(
+                self.model,
+                self.admin_site,
+            )
+        )
+
+
+        inline_instances.append(
+            ProductHighlightImageInline(
                 self.model,
                 self.admin_site,
             )
