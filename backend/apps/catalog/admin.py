@@ -237,10 +237,34 @@ class BrandAdmin(admin.ModelAdmin):
 class ProductHighlightImageInline(admin.TabularInline):
     model = ProductHighlightImage
     extra = 1
-    autocomplete_fields = ("attribute",)
     fields = ("attribute", "image")
 
+    def get_formset(self, request, obj=None, **kwargs):
+        formset = super().get_formset(request, obj, **kwargs)
 
+        queryset = Attribute.objects.none()
+
+        if obj is not None and obj.category_id:
+            highlight_attribute_ids = (
+                CategoryAttribute.objects
+                .filter(
+                    category_id=obj.category_id,
+                    is_highlight=True,
+                )
+                .values_list(
+                    "attribute_id",
+                    flat=True,
+                )
+            )
+
+            queryset = Attribute.objects.filter(
+                id__in=highlight_attribute_ids,
+            )
+
+        formset.form.base_fields["attribute"].queryset = queryset # type: ignore
+
+        return formset
+   
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
