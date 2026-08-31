@@ -138,8 +138,6 @@ class ProductAttributeValueSerializer(serializers.ModelSerializer):
     highlight_title = serializers.SerializerMethodField()
     highlight_description = serializers.SerializerMethodField()
 
-
-
     class Meta:
         model = ProductAttributeValue
         fields = (
@@ -159,6 +157,11 @@ class ProductAttributeValueSerializer(serializers.ModelSerializer):
             "highlight_description",
         )
 
+    def _get_highlight_image(self, obj):
+        return ProductHighlightImage.objects.filter(
+            product=obj.product,
+            attribute=obj.attribute,
+        ).first()
 
     def get_is_highlight(self, obj):
         category_attribute = CategoryAttribute.objects.filter(
@@ -172,10 +175,7 @@ class ProductAttributeValueSerializer(serializers.ModelSerializer):
         return category_attribute.is_highlight
 
     def get_highlight_image_url(self, obj):
-        highlight_image = ProductHighlightImage.objects.filter(
-            product=obj.product,
-            attribute=obj.attribute,
-        ).first()
+        highlight_image = self._get_highlight_image(obj)
 
         if highlight_image is None or not highlight_image.image:
             return None
@@ -188,7 +188,6 @@ class ProductAttributeValueSerializer(serializers.ModelSerializer):
             )
 
         return highlight_image.image.url
-
 
     def get_highlight_title(self, obj):
         highlight_image = self._get_highlight_image(obj)
