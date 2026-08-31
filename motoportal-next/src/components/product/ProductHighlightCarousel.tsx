@@ -44,11 +44,11 @@ export function ProductHighlightCarousel({
               className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
             >
               <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-neutral-900 shadow-sm transition-shadow duration-300 hover:shadow-xl">
-                <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-800">
+                <div className="relative h-48 w-full overflow-hidden bg-neutral-800">
                   {attribute.highlight_image_url ? (
                     <Image
                       src={attribute.highlight_image_url}
-                      alt={attribute.name}
+                      alt={attribute.highlight_title}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
@@ -58,15 +58,18 @@ export function ProductHighlightCarousel({
                       Görsel yok
                     </div>
                   )}
+
+                  <span className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                    {attribute.name}
+                  </span>
                 </div>
 
                 <div className="flex flex-1 flex-col gap-1.5 p-5">
                   <h3 className="text-base font-semibold text-white">
-                    {attribute.name}
+                    {attribute.highlight_title}
                   </h3>
                   <p className="text-sm leading-relaxed text-neutral-400">
-                    {attribute.value}
-                    {attribute.unit ? ` ${attribute.unit}` : ""}
+                    {attribute.highlight_description}
                   </p>
                 </div>
               </div>

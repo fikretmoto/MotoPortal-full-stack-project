@@ -93,6 +93,8 @@ export type ProductAttribute = {
 
   is_highlight: boolean;
   highlight_image_url: string | null;
+  highlight_title: string;
+  highlight_description: string;
 };
 
 export type ProductDetail = Product & {
