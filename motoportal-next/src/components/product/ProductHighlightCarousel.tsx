@@ -59,11 +59,12 @@ export function ProductHighlightCarousel({
                     </div>
                   )}
 
-                  <span className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
-                    {attribute.name}
+                    <span className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                    {attribute.value}
+                    {attribute.unit ? ` ${attribute.unit}` : ""}
                   </span>
                 </div>
-
+   
                 <div className="flex flex-1 flex-col gap-1.5 p-5">
                   <h3 className="text-base font-semibold text-white">
                     {attribute.highlight_title}
