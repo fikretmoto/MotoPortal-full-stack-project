@@ -90,6 +90,9 @@ export type ProductAttribute = {
   unit: string;
 
   attribute_order: number;
+
+  is_highlight: boolean;
+  highlight_image_url: string | null;
 };
 
 export type ProductDetail = Product & {

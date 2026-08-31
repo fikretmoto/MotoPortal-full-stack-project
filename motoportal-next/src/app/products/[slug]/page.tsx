@@ -92,7 +92,7 @@ export default async function ProductDetailPage({
   attributes={product.attributes}
 />
 
-<ProductHighlightCarousel />
+<ProductHighlightCarousel attributes={product.attributes} />
 
 <ProductReviews
   slug={product.slug}
