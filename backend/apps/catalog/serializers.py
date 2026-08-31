@@ -16,6 +16,7 @@ from .models import (
     ProductImage,
     ProductVariant,
     ProductReview,
+    ProductHighlightImage,
 )
 
 
@@ -132,6 +133,11 @@ class ProductAttributeValueSerializer(serializers.ModelSerializer):
         read_only=True,
     )
 
+    is_highlight = serializers.SerializerMethodField()
+    highlight_image_url = serializers.SerializerMethodField()
+
+
+
     class Meta:
         model = ProductAttributeValue
         fields = (
@@ -145,9 +151,39 @@ class ProductAttributeValueSerializer(serializers.ModelSerializer):
             "value",
             "unit",
             "attribute_order",
+            "is_highlight",
+            "highlight_image_url",
         )
 
 
+    def get_is_highlight(self, obj):
+        category_attribute = CategoryAttribute.objects.filter(
+            category=obj.product.category,
+            attribute=obj.attribute,
+        ).first()
+
+        if category_attribute is None:
+            return False
+
+        return category_attribute.is_highlight
+
+    def get_highlight_image_url(self, obj):
+        highlight_image = ProductHighlightImage.objects.filter(
+            product=obj.product,
+            attribute=obj.attribute,
+        ).first()
+
+        if highlight_image is None or not highlight_image.image:
+            return None
+
+        request = self.context.get("request")
+
+        if request:
+            return request.build_absolute_uri(
+                highlight_image.image.url
+            )
+
+        return highlight_image.image.url
 class ProductVariantSerializer(serializers.ModelSerializer):
     effective_price = serializers.ReadOnlyField()
     is_in_stock = serializers.ReadOnlyField()
@@ -167,6 +203,10 @@ class ProductVariantSerializer(serializers.ModelSerializer):
             "is_active",
             "is_in_stock",
         )
+
+    
+
+       
 class ProductListSerializer(serializers.ModelSerializer):
     brand = BrandSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
