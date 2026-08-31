@@ -135,6 +135,8 @@ class ProductAttributeValueSerializer(serializers.ModelSerializer):
 
     is_highlight = serializers.SerializerMethodField()
     highlight_image_url = serializers.SerializerMethodField()
+    highlight_title = serializers.SerializerMethodField()
+    highlight_description = serializers.SerializerMethodField()
 
 
 
@@ -153,6 +155,8 @@ class ProductAttributeValueSerializer(serializers.ModelSerializer):
             "attribute_order",
             "is_highlight",
             "highlight_image_url",
+            "highlight_title",
+            "highlight_description",
         )
 
 
@@ -184,6 +188,29 @@ class ProductAttributeValueSerializer(serializers.ModelSerializer):
             )
 
         return highlight_image.image.url
+
+
+    def get_highlight_title(self, obj):
+        highlight_image = self._get_highlight_image(obj)
+
+        if highlight_image and highlight_image.title:
+            return highlight_image.title
+
+        return obj.attribute.name
+
+    def get_highlight_description(self, obj):
+        highlight_image = self._get_highlight_image(obj)
+
+        if highlight_image and highlight_image.description:
+            return highlight_image.description
+
+        if obj.value:
+            return f"{obj.value} {obj.attribute.unit}".strip()
+
+        return ""
+
+
+    
 class ProductVariantSerializer(serializers.ModelSerializer):
     effective_price = serializers.ReadOnlyField()
     is_in_stock = serializers.ReadOnlyField()

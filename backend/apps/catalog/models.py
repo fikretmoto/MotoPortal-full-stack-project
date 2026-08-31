@@ -689,6 +689,22 @@ class ProductHighlightImage(models.Model):
         verbose_name="Görsel",
     )
 
+
+    title = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="Başlık",
+        help_text="Boş bırakılırsa özellik adı (örn: 'Motor Hacmi') kullanılır.",
+    )
+
+    description = models.TextField(
+        blank=True,
+        verbose_name="Kısa Açıklama",
+        help_text="1-3 cümlelik editoryal metin (örn: 'Şehir içi kullanım için dengeli güç sunar.')",
+    )
+
+
+    
     class Meta:
         verbose_name = "Öne Çıkan Özellik Görseli"
         verbose_name_plural = "Öne Çıkan Özellik Görselleri"

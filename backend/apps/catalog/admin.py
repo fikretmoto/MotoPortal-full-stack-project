@@ -237,7 +237,7 @@ class BrandAdmin(admin.ModelAdmin):
 class ProductHighlightImageInline(admin.TabularInline):
     model = ProductHighlightImage
     extra = 1
-    fields = ("attribute", "image")
+    fields = ("attribute", "image", "title", "description")
 
     def get_formset(self, request, obj=None, **kwargs):
         formset = super().get_formset(request, obj, **kwargs)
