@@ -9,33 +9,36 @@ export default function ProductHighlights({
   attributes,
   compact = false,
 }: ProductHighlightsProps) {
-  const highlightSlugs = new Set([
-    "model-yili",
-    "motor-hacmi",
-    "maksimum-guc",
-    "maksimum-tork",
-    "sanziman-tipi",
-  ]);
-
   const highlightAttributes = attributes.filter(
-    (attribute) =>
-      attribute.value?.trim() &&
-      highlightSlugs.has(attribute.slug)
+    (attribute) => attribute.is_highlight && attribute.value?.trim()
   );
 
   if (highlightAttributes.length === 0) {
     return null;
   }
 
+  if (compact) {
+    return (
+      <dl className="divide-y divide-gray-200">
+        {highlightAttributes.map((attribute) => (
+          <div
+            key={attribute.id}
+            className="flex items-center justify-between py-3"
+          >
+            <dt className="text-sm text-gray-500">{attribute.name}</dt>
+            <dd className="text-sm font-semibold text-gray-900">
+              {attribute.value}
+              {attribute.unit ? ` ${attribute.unit}` : ""}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    );
+  }
+
   return (
-    <section className={compact ? "" : "mt-10"}>
-      <div
-        className={
-          compact
-            ? "grid grid-cols-2 gap-3 sm:grid-cols-3"
-            : "grid gap-4 sm:grid-cols-2 lg:grid-cols-5"
-        }
-      >
+    <section className="mt-10">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {highlightAttributes.map((attribute) => (
           <div
             key={attribute.id}
