@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import type { ProductDetail } from "@/services/catalog";
 
 import ProductPrice from "./ProductPrice";
@@ -13,14 +16,32 @@ type ProductHeroAttributesProps = {
 export default function ProductHeroAttributes({
   product,
 }: ProductHeroAttributesProps) {
+  const defaultVariant =
+    product.variants.find((variant) => variant.is_default) ??
+    product.variants[0] ??
+    null;
+
+  const [selectedVariantId, setSelectedVariantId] = useState<number | null>(
+    defaultVariant?.id ?? null
+  );
+
+  const selectedVariant =
+    product.variants.find((variant) => variant.id === selectedVariantId) ??
+    null;
+
+  const displayPrice =
+    selectedVariant?.price != null
+      ? selectedVariant.effective_price
+      : product.price;
+
+  const displayDiscountPrice =
+    selectedVariant?.price != null ? null : product.discount_price;
+
   return (
     <div className="flex flex-col justify-center">
-      
-
       {/* SATIR 1: Ürün adı + fiyat aynı satırda, aynı eksende */}
-            {/* SATIR 1: Ürün adı + fiyat aynı satırda, aynı eksende */}
       <div className="mt-5 flex flex-wrap items-start justify-between gap-4">
-                <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1">
           <h1 className="truncate text-2xl font-bold tracking-tight text-gray-900 lg:text-3xl">
             {product.name}
           </h1>
@@ -28,8 +49,8 @@ export default function ProductHeroAttributes({
 
         <div className="shrink-0">
           <ProductPrice
-            price={product.price}
-            discountPrice={product.discount_price}
+            price={displayPrice}
+            discountPrice={displayDiscountPrice}
             currency={product.currency}
           />
         </div>
@@ -49,7 +70,7 @@ export default function ProductHeroAttributes({
       )}
 
       {/* SATIR 4: Instagram / WhatsApp butonları */}
-       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row">
         {product.whatsapp_number && (
           
            <a href={`https://wa.me/${product.whatsapp_number}?text=${encodeURIComponent(
@@ -76,7 +97,11 @@ export default function ProductHeroAttributes({
       </div>
 
       {/* SATIR 5: Varyant seçimi (renk, cc vb.) */}
-      <ProductVariantSelector variants={product.variants} />
+      <ProductVariantSelector
+        variants={product.variants}
+        selectedVariantId={selectedVariantId}
+        onSelect={setSelectedVariantId}
+      />
 
       {/* SATIR 6: Ürün Detayları başlığı + öne çıkan özellik kartları */}
       <div className="mt-10">

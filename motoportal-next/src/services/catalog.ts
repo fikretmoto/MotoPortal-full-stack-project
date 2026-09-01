@@ -57,10 +57,14 @@ export type ProductVariant = {
   sku: string;
   color: string;
   size: string;
+  trim: string;
+  capacity: string;
+  wheel_size: string;
+  material: string;
+  bundle: string;
   price: string | null;
   effective_price: string | null;
   stock_quantity: number;
-  barcode: string | null;
   is_default: boolean;
   is_active: boolean;
   is_in_stock: boolean;
