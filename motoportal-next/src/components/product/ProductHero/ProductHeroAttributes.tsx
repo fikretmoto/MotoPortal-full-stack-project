@@ -58,7 +58,7 @@ export default function ProductHeroAttributes({
 
       {/* SATIR 2: Puan + yorum sayısı + stok rozeti aynı satırda */}
       <div className="mt-3 flex flex-wrap items-center gap-4">
-        <ProductRatingSummary slug={product.slug} />
+        <ProductRatingSummary reviews={reviews} />
         <ProductStock stockStatus={product.stock_status} />
       </div>
 

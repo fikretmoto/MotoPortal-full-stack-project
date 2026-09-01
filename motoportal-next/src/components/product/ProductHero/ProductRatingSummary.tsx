@@ -1,18 +1,15 @@
 import { Star, StarHalf } from "lucide-react";
-
-import { getProductReviews } from "@/services/catalog";
+import type { ProductReview } from "@/services/catalog";
 
 type ProductRatingSummaryProps = {
-  slug: string;
+  reviews: ProductReview[];
 };
 
 const MAX_STARS = 5;
 
-export default async function ProductRatingSummary({
-  slug,
+export default function ProductRatingSummary({
+  reviews,
 }: ProductRatingSummaryProps) {
-  const reviews = await getProductReviews(slug);
-
   if (reviews.length === 0) {
     return (
       <p className="text-sm text-muted-foreground">

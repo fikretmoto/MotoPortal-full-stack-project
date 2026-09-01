@@ -1,12 +1,10 @@
-import { getProductReviews } from "@/services/catalog";
+import type { ProductReview } from "@/services/catalog";
 
 type ProductReviewsProps = {
-  slug: string;
+  reviews: ProductReview[];
 };
 
-export default async function ProductReviews({ slug }: ProductReviewsProps) {
-  const reviews = await getProductReviews(slug);
-
+export default function ProductReviews({ reviews }: ProductReviewsProps) {
   if (reviews.length === 0) {
     return (
       <div className="border-t py-6">

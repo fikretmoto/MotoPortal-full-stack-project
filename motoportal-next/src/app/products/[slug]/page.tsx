@@ -20,6 +20,7 @@ import {
 
 import {
   getProductBySlug,
+  getProductReviews,
   type ProductDetail,
 } from "@/services/catalog";
 
@@ -39,12 +40,12 @@ export default async function ProductDetailPage({
   let product: ProductDetail;
 
 
-  try {
+   try {
     product = await getProductBySlug(slug);
   } catch {
 
 
-    
+
 
     return (
       <main className="mx-auto max-w-6xl px-6 py-10">
@@ -54,6 +55,8 @@ export default async function ProductDetailPage({
       </main>
     );
   }
+
+  const reviews = await getProductReviews(slug);
 
 
   return (
@@ -78,7 +81,7 @@ export default async function ProductDetailPage({
         </BreadcrumbList>
       </Breadcrumb>
 
-      <ProductHero product={product} />
+     <ProductHero product={product} reviews={reviews} />
       
 
 
@@ -94,10 +97,7 @@ export default async function ProductDetailPage({
 
 <ProductHighlightCarousel attributes={product.attributes} />
 
-<ProductReviews
-  slug={product.slug}
-/>
-
+<ProductReviews reviews={reviews} />
 
     </main>
   );
