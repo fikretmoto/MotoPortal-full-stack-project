@@ -128,6 +128,82 @@ class ProductCurrency(models.TextChoices):
     EUR = "EUR", "Euro"
 
 
+
+class Tag(models.Model):
+    name = models.CharField(
+        max_length=100,
+        unique=True,
+        verbose_name="Etiket Adı",
+    )
+
+    slug = models.SlugField(
+        max_length=120,
+        unique=True,
+        verbose_name="Slug",
+    )
+
+    description = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name="Açıklama",
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Aktif mi?",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Oluşturulma Tarihi",
+    )
+
+    class Meta:
+        verbose_name = "Etiket"
+        verbose_name_plural = "Etiketler"
+        ordering = ("name",)
+
+    def __str__(self):
+        return self.name
+
+class HomepageBand(models.Model):
+    title = models.CharField(
+        max_length=150,
+        verbose_name="Bant Başlığı",
+        help_text="Anasayfada görünecek başlık, örn: 'Kampanyalı Ürünler'",
+    )
+
+    tag = models.ForeignKey(
+        Tag,
+        on_delete=models.CASCADE,
+        related_name="homepage_bands",
+        verbose_name="Etiket",
+        help_text="Bu bant, bu etikete sahip ürünleri gösterir.",
+    )
+
+    display_order = models.PositiveIntegerField(
+        default=0,
+        verbose_name="Gösterim Sırası",
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Aktif mi?",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Oluşturulma Tarihi",
+    )
+
+    class Meta:
+        verbose_name = "Anasayfa Bandı"
+        verbose_name_plural = "Anasayfa Bantları"
+        ordering = ("display_order", "title")
+
+    def __str__(self):
+        return self.title
+
 class Product(models.Model):
     name = models.CharField(
         max_length=150,
@@ -226,6 +302,13 @@ class Product(models.Model):
     is_featured = models.BooleanField(
         default=False,
         verbose_name="Öne Çıkan Ürün mü?",
+    )
+
+    tags = models.ManyToManyField(
+        Tag,
+        blank=True,
+        related_name="products",
+        verbose_name="Etiketler",
     )
 
     is_active = models.BooleanField(

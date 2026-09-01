@@ -9,12 +9,14 @@ from .models import (
     Brand,
     Category,
     CategoryAttribute,
+    HomepageBand,
     Product,
     ProductAttributeValue,
     ProductHighlightImage,
     ProductImage,
     ProductReview,
     ProductVariant,
+    Tag,
 )
 
 
@@ -342,6 +344,7 @@ class ProductAdmin(admin.ModelAdmin):
                 "fields": (
                     "is_featured",
                     "is_active",
+                    "tags",
                 ),
             },
         ),
@@ -642,3 +645,47 @@ class ProductReviewAdmin(admin.ModelAdmin):
             request,
             f"{updated_count} yorum onaylandı.",
         )
+        
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "is_active",
+        "created_at",
+    )
+
+    list_filter = (
+        "is_active",
+    )
+
+    search_fields = (
+        "name",
+    )
+
+    prepopulated_fields = {
+        "slug": ("name",),
+    }
+
+
+@admin.register(HomepageBand)
+class HomepageBandAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "tag",
+        "display_order",
+        "is_active",
+    )
+
+    list_filter = (
+        "is_active",
+    )
+
+    search_fields = (
+        "title",
+    )
+
+    autocomplete_fields = (
+        "tag",
+    )
