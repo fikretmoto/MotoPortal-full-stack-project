@@ -326,6 +326,42 @@ class ProductVariant(models.Model):
         verbose_name="Beden / Ölçü",
     )
 
+    trim = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="Donanım Paketi",
+        help_text="Örn: STD, DLX, ABS",
+    )
+
+    capacity = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="Kapasite / Hacim",
+        help_text="Örn: 40Ah, 60Ah, 125cc",
+    )
+
+    wheel_size = models.CharField(
+        max_length=50,
+        blank=True,
+        verbose_name="Jant / Teker Boyu",
+        help_text="Örn: 26, 27.5, 29",
+    )
+
+    material = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="Malzeme",
+        help_text="Örn: Deri, Kumaş/Mesh",
+    )
+
+    bundle = models.CharField(
+        max_length=150,
+        blank=True,
+        verbose_name="Paket İçeriği",
+        help_text="Örn: Kask Hediyeli Paket",
+    )
+
+
     price = models.DecimalField(
         max_digits=12,
         decimal_places=2,
@@ -377,6 +413,11 @@ class ProductVariant(models.Model):
             "product",
             "color",
             "size",
+            "trim",
+            "capacity",
+            "wheel_size",
+            "material",
+            "bundle",
         )
 
         constraints = [
@@ -385,8 +426,13 @@ class ProductVariant(models.Model):
                     "product",
                     "color",
                     "size",
+                    "trim",
+                    "capacity",
+                    "wheel_size",
+                    "material",
+                    "bundle",
                 ),
-                name="unique_product_color_size",
+               name="unique_product_variant_combination",
             ),
         ]
 
@@ -396,6 +442,11 @@ class ProductVariant(models.Model):
             for part in (
                 self.color,
                 self.size,
+                self.trim,
+                self.capacity,
+                self.wheel_size,
+                self.material,
+                self.bundle,
             )
             if part
         ]
@@ -704,7 +755,7 @@ class ProductHighlightImage(models.Model):
     )
 
 
-    
+
     class Meta:
         verbose_name = "Öne Çıkan Özellik Görseli"
         verbose_name_plural = "Öne Çıkan Özellik Görselleri"
