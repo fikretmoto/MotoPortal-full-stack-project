@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { ProductDetail } from "@/services/catalog";
+import type { ProductDetail, ProductReview } from "@/services/catalog";
 
 import ProductPrice from "./ProductPrice";
 import ProductStock from "./ProductStock";
@@ -11,10 +11,12 @@ import ProductHighlights from "../ProductHighlights";
 
 type ProductHeroAttributesProps = {
   product: ProductDetail;
+  reviews: ProductReview[];
 };
 
 export default function ProductHeroAttributes({
   product,
+  reviews,
 }: ProductHeroAttributesProps) {
   const defaultVariant =
     product.variants.find((variant) => variant.is_default) ??
@@ -73,7 +75,7 @@ export default function ProductHeroAttributes({
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
         {product.whatsapp_number && (
           
-           <a href={`https://wa.me/${product.whatsapp_number}?text=${encodeURIComponent(
+            <a href={`https://wa.me/${product.whatsapp_number}?text=${encodeURIComponent(
               `Merhaba, ${product.name} hakkında bilgi almak istiyorum.`
             )}`}
             target="_blank"
