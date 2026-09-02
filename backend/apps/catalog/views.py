@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny
 
 from .filters import ProductFilter
 
-from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductReview
+from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductReview, HomepageBand
 from .serializers import (
    BrandSerializer,
     CategoryAttributesResponseSerializer,
@@ -17,6 +17,7 @@ from .serializers import (
     ProductListSerializer,
     ProductWriteSerializer,
     ProductReviewSerializer,
+    HomepageBandSerializer,
 )
 
 class CategoryListAPIView(generics.ListAPIView):
@@ -31,6 +32,18 @@ class CategoryListAPIView(generics.ListAPIView):
             .order_by("name")
         )
 
+
+class HomepageBandListAPIView(generics.ListAPIView):
+    serializer_class = HomepageBandSerializer
+    pagination_class = None
+
+    def get_queryset(self):
+        return (
+            HomepageBand.objects
+            .filter(is_active=True)
+            .select_related("tag")
+            .order_by("display_order", "title")
+        )
 
 class CategoryDetailAPIView(generics.RetrieveAPIView):
     serializer_class = CategorySerializer

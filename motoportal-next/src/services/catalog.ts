@@ -52,6 +52,33 @@ export type Product = {
   is_active: boolean;
 };
 
+
+export type HomepageBand = {
+  id: number;
+  title: string;
+  display_order: number;
+  products: Product[];
+};
+
+export async function getHomepageBands(): Promise<HomepageBand[]> {
+  const response = await fetch(
+    `${API_URL}/homepage-bands/`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Anasayfa bantları alınamadı. HTTP ${response.status}`
+    );
+  }
+
+  return response.json();
+}
+
+
+
 export type ProductVariant = {
   id: number;
   sku: string;

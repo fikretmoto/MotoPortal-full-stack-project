@@ -17,6 +17,7 @@ from .models import (
     ProductVariant,
     ProductReview,
     ProductHighlightImage,
+    HomepageBand,
 )
 
 
@@ -272,6 +273,32 @@ class ProductListSerializer(serializers.ModelSerializer):
 
         return obj.cover_image.url
 
+
+class HomepageBandSerializer(serializers.ModelSerializer):
+    products = serializers.SerializerMethodField()
+
+    class Meta:
+        model = HomepageBand
+        fields = (
+            "id",
+            "title",
+            "display_order",
+            "products",
+        )
+
+    def get_products(self, obj):
+        products = (
+            obj.tag.products
+            .filter(is_active=True)
+            .select_related("brand", "category")
+            [:12]
+        )
+
+        return ProductListSerializer(
+            products,
+            many=True,
+            context=self.context,
+        ).data
 
 class ProductDetailSerializer(serializers.ModelSerializer):
     brand = BrandSerializer(read_only=True)

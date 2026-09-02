@@ -6,6 +6,7 @@ from .views import (
     CategoryAttributesAPIView,
     CategoryDetailAPIView,
     CategoryListAPIView,
+    HomepageBandListAPIView,
     ProductCreateAPIView,
     ProductDetailAPIView,
     ProductListAPIView,
@@ -18,6 +19,15 @@ app_name = "catalog"
 
 
 urlpatterns = [
+
+
+     path(
+        "homepage-bands/",
+        HomepageBandListAPIView.as_view(),
+        name="homepage-band-list",
+    ),
+
+
     path(
         "categories/",
         CategoryListAPIView.as_view(),
