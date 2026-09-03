@@ -1,4 +1,6 @@
 from decimal import Decimal, InvalidOperation
+from datetime import timedelta
+from django.utils import timezone
 
 from django.db import transaction
 from django.db.models import Prefetch
@@ -24,6 +26,68 @@ from .models import (
 )
 
 
+
+NEW_PRODUCT_DAYS = 14
+LOW_STOCK_THRESHOLD = 3
+
+TAG_BADGE_NAMES = {
+    "Öne Çıkan": "featured",
+    "Editörün Seçtikleri": "editors_pick",
+    "Fırsat": "deal",
+     "Takas Fırsatı": "trade_opportunity",
+     "Ücretsiz Kargo": "free_shipping",
+}
+
+
+
+class ProductBadgeMixin:
+    def get_badges(self, obj):
+        badges = []
+
+        if obj.created_at >= timezone.now() - timedelta(days=NEW_PRODUCT_DAYS):
+            badges.append({"type": "new", "label": "Yeni"})
+
+        if obj.discount_price and obj.price and obj.discount_price < obj.price:
+            percentage = round(
+                (1 - (obj.discount_price / obj.price)) * 100
+            )
+            badges.append({
+                "type": "discount",
+                "label": f"%{percentage} İndirim",
+            })
+
+        variant_stock = sum(
+            variant.stock_quantity
+            for variant in obj.variants.all()
+        ) if obj.variants.exists() else None
+
+        total_stock = variant_stock if variant_stock is not None else None
+
+        if obj.stock_status == "out_of_stock":
+            badges.append({"type": "out_of_stock", "label": "Tükendi"})
+        elif total_stock is not None and 0 < total_stock <= LOW_STOCK_THRESHOLD:
+            badges.append({
+                "type": "low_stock",
+                "label": f"Son {total_stock} Adet",
+            })
+
+        for tag in obj.tags.all():
+            badge_type = TAG_BADGE_NAMES.get(tag.name)
+            if badge_type:
+                badges.append({"type": badge_type, "label": tag.name})
+
+        has_zero_rate_installment = InstallmentOption.objects.filter(
+            rate=0,
+        ).exists()
+
+        if has_zero_rate_installment:
+            badges.append({
+                "type": "installment_deal",
+                "label": "Taksit Fırsatı",
+            })
+
+
+        return badges
 class CategorySerializer(serializers.ModelSerializer):
     parent_name = serializers.CharField(
         source="parent.name",
@@ -240,12 +304,17 @@ class ProductVariantSerializer(serializers.ModelSerializer):
 
     
 
-       
-class ProductListSerializer(serializers.ModelSerializer):
+
+
+
+
+
+
+class ProductListSerializer(ProductBadgeMixin, serializers.ModelSerializer):
     brand = BrandSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
     cover_image_url = serializers.SerializerMethodField()
-
+    badges = serializers.SerializerMethodField()
     class Meta:
         model = Product
         fields = (
@@ -261,6 +330,7 @@ class ProductListSerializer(serializers.ModelSerializer):
             "price",
             "currency",
             "stock_status",
+            "badges",
         )
 
     def get_cover_image_url(self, obj):
@@ -327,9 +397,11 @@ class ProductResourceSerializer(serializers.ModelSerializer):
 
         return obj.file.url
 
-class ProductDetailSerializer(serializers.ModelSerializer):
+class ProductDetailSerializer(ProductBadgeMixin, serializers.ModelSerializer):
     brand = BrandSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
+    badges = serializers.SerializerMethodField()
+   
 
     images = ProductImageSerializer(
         many=True,
@@ -378,11 +450,13 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             "variants",
             "attributes",
             "resources",
+            "badges"
 
             "is_featured",
             "is_active",
             "created_at",
             "updated_at",
+            
         )
 
     def get_cover_image_url(self, obj):
