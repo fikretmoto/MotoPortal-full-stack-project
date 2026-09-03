@@ -1,11 +1,13 @@
-import Brands from "./Brands/Brands";
-import Categories from "./Categories/Categories";
+import TagCategoryBlock from "./TagCategoryBlock/TagCategoryBlock";
+import { campaignTags, motorcycleCategories } from "@/constant/homepageBlocks";
+
 import Footer from "./Footer/Footer";
-import FeaturedProducts from "./FeaturedProducts/FeaturedProducts";
-import HomepageBands from "./HomepageBands/HomepageBands";
+
+import PopularBrandsBar from "./PopularBrandsBar/PopularBrandsBar";
+
 import Navbar from "./Navbar/Navbar";
 import Hero from "./Hero/Hero";
-import PopularBrandsBar from "./PopularBrandsBar/PopularBrandsBar";
+
 
 const Home = () => {
   return (
@@ -13,13 +15,10 @@ const Home = () => {
       <Navbar />
       <Hero />
       <PopularBrandsBar />
-      <Categories />
-      <FeaturedProducts />
-      <HomepageBands />
-      <Brands />
+      <TagCategoryBlock tags={campaignTags} categories={motorcycleCategories} />
       <Footer />
     </>
   );
 };
 
-export default Home;
+export default Home; 

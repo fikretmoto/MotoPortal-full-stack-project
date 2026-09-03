@@ -18,6 +18,9 @@ from .models import (
     ProductReview,
     ProductHighlightImage,
     HomepageBand,
+    SiteContent,
+    InstallmentOption,
+    ProductResource,
 )
 
 
@@ -300,6 +303,30 @@ class HomepageBandSerializer(serializers.ModelSerializer):
             context=self.context,
         ).data
 
+
+class ProductResourceSerializer(serializers.ModelSerializer):
+    file_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ProductResource
+        fields = (
+            "id",
+            "title",
+            "file_url",
+            "display_order",
+        )
+
+    def get_file_url(self, obj):
+        if not obj.file:
+            return None
+
+        request = self.context.get("request")
+
+        if request:
+            return request.build_absolute_uri(obj.file.url)
+
+        return obj.file.url
+
 class ProductDetailSerializer(serializers.ModelSerializer):
     brand = BrandSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
@@ -320,6 +347,11 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         read_only=True,
     )
 
+
+    resources = ProductResourceSerializer(
+        many=True,
+        read_only=True,
+    )
     cover_image_url = serializers.SerializerMethodField()
 
     class Meta:
@@ -345,6 +377,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             "images",
             "variants",
             "attributes",
+            "resources",
 
             "is_featured",
             "is_active",
@@ -829,6 +862,44 @@ class CategoryAttributeSerializer(serializers.ModelSerializer):
         active_options,
         many=True,
     ).data
+
+
+
+
+class SiteContentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SiteContent
+        fields = (
+            "kargo_teslimat",
+            "iade_degisim",
+            "garanti_bilgisi",
+        )
+
+
+class InstallmentOptionSerializer(serializers.ModelSerializer):
+    brand_slug = serializers.CharField(
+        source="brand.slug",
+        read_only=True,
+        allow_null=True,
+    )
+
+    category_slug = serializers.CharField(
+        source="category.slug",
+        read_only=True,
+        allow_null=True,
+    )
+
+    class Meta:
+        model = InstallmentOption
+        fields = (
+            "id",
+            "brand_slug",
+            "category_slug",
+            "bank_name",
+            "installment_count",
+            "rate",
+            "display_order",
+        )
 
 
 class AttributeGroupWithAttributesSerializer(serializers.Serializer):

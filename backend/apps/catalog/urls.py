@@ -7,11 +7,13 @@ from .views import (
     CategoryDetailAPIView,
     CategoryListAPIView,
     HomepageBandListAPIView,
+    InstallmentOptionListAPIView,
     ProductCreateAPIView,
     ProductDetailAPIView,
     ProductListAPIView,
     ProductReviewListCreateAPIView,
     ProductUpdateAPIView,
+    SiteContentAPIView,
 )
 
 
@@ -19,6 +21,19 @@ app_name = "catalog"
 
 
 urlpatterns = [
+
+    path(
+        "site-content/",
+        SiteContentAPIView.as_view(),
+        name="site-content",
+    ),
+
+    path(
+        "installment-options/",
+        InstallmentOptionListAPIView.as_view(),
+        name="installment-option-list",
+    ),
+
 
 
      path(

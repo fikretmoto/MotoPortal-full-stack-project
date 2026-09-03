@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib import admin
 from django.utils.html import format_html
+from django.urls import reverse
+from django.shortcuts import redirect
 
 from .models import (
     Attribute,
@@ -10,12 +12,15 @@ from .models import (
     Category,
     CategoryAttribute,
     HomepageBand,
+    InstallmentOption,
     Product,
     ProductAttributeValue,
     ProductHighlightImage,
     ProductImage,
+    ProductResource,
     ProductReview,
     ProductVariant,
+    SiteContent,
     Tag,
 )
 
@@ -271,6 +276,12 @@ class ProductHighlightImageInline(admin.TabularInline):
         formset.form.base_fields["attribute"].queryset = queryset # type: ignore
 
         return formset
+
+
+class ProductResourceInline(admin.TabularInline):
+    model = ProductResource
+    extra = 1
+    fields = ("title", "file", "display_order")
    
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -422,6 +433,14 @@ class ProductAdmin(admin.ModelAdmin):
                 self.admin_site,
             )
         )
+
+        inline_instances.append(
+            ProductResourceInline(
+                self.model,
+                self.admin_site,
+            )
+        )
+
 
         return inline_instances
 
@@ -688,4 +707,63 @@ class HomepageBandAdmin(admin.ModelAdmin):
 
     autocomplete_fields = (
         "tag",
+    )
+
+@admin.register(SiteContent)
+class SiteContentAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (
+            "Sabit Sayfa İçerikleri",
+            {
+                "fields": (
+                    "kargo_teslimat",
+                    "iade_degisim",
+                    "garanti_bilgisi",
+                ),
+            },
+        ),
+    )
+
+    def has_add_permission(self, request):
+        return not SiteContent.objects.exists()
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def changelist_view(self, request, extra_context=None):
+        obj = SiteContent.load()
+        return redirect(
+            reverse(
+                "admin:catalog_sitecontent_change",
+                args=(obj.pk,),
+            )
+        )
+
+
+@admin.register(InstallmentOption)
+class InstallmentOptionAdmin(admin.ModelAdmin):
+    list_display = (
+        "__str__",
+        "brand",
+        "category",
+        "bank_name",
+        "installment_count",
+        "rate",
+        "is_active",
+    )
+
+    list_filter = (
+        "brand",
+        "category",
+        "bank_name",
+        "is_active",
+    )
+
+    search_fields = (
+        "bank_name",
+    )
+
+    autocomplete_fields = (
+        "brand",
+        "category",
     )

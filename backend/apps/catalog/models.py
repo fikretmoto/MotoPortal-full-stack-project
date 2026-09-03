@@ -933,3 +933,150 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return f"{self.product} - Görsel {self.display_order}"
+
+
+class SiteContent(models.Model):
+    kargo_teslimat = models.TextField(
+        blank=True,
+        verbose_name="Kargo ve Teslimat",
+    )
+
+    iade_degisim = models.TextField(
+        blank=True,
+        verbose_name="İade ve Değişim",
+    )
+
+    garanti_bilgisi = models.TextField(
+        blank=True,
+        verbose_name="Garanti Bilgisi",
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        verbose_name="Güncellenme Tarihi",
+    )
+
+    class Meta:
+        verbose_name = "Site İçeriği"
+        verbose_name_plural = "Site İçeriği"
+
+    def __str__(self):
+        return "Site İçeriği"
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        obj, _ = cls.objects.get_or_create(pk=1)
+        return obj
+
+class InstallmentOption(models.Model):
+    brand = models.ForeignKey(
+        Brand,
+        on_delete=models.CASCADE,
+        related_name="installment_options",
+        null=True,
+        blank=True,
+        verbose_name="Marka",
+        help_text="Boş bırakılırsa markadan bağımsız kural olur.",
+    )
+
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name="installment_options",
+        null=True,
+        blank=True,
+        verbose_name="Kategori",
+        help_text="Boş bırakılırsa kategoriden bağımsız kural olur.",
+    )
+
+    bank_name = models.CharField(
+        max_length=100,
+        verbose_name="Banka Adı",
+        help_text="Örn: Garanti BBVA, Yapı Kredi, Akbank",
+    )
+
+    installment_count = models.PositiveIntegerField(
+        verbose_name="Taksit Sayısı",
+        help_text="Örn: 1 (tek çekim), 2, 3, 6, 9, 12",
+    )
+
+    rate = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        default=0,
+        verbose_name="Vade Farkı (%)",
+        help_text="Taksitsiz/tek çekim ise 0 girin.",
+    )
+
+    display_order = models.PositiveIntegerField(
+        default=0,
+        verbose_name="Gösterim Sırası",
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Aktif mi?",
+    )
+
+    class Meta:
+        verbose_name = "Taksit Seçeneği"
+        verbose_name_plural = "Taksit Seçenekleri"
+        ordering = ("brand__name", "category__name", "bank_name", "installment_count")
+        constraints = [
+            models.UniqueConstraint(
+                fields=("brand", "category", "bank_name", "installment_count"),
+                name="unique_installment_scope",
+            ),
+        ]
+
+    def __str__(self):
+        scope_parts = [
+            part
+            for part in (
+                self.brand.name if self.brand else None,
+                self.category.name if self.category else None,
+            )
+            if part
+        ]
+
+        scope = " / ".join(scope_parts) if scope_parts else "Genel"
+
+        return f"{scope} - {self.bank_name} - {self.installment_count} taksit"
+
+
+class ProductResource(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="resources",
+        verbose_name="Ürün",
+    )
+
+    title = models.CharField(
+        max_length=150,
+        verbose_name="Başlık",
+        help_text="Örn: Kullanım Kılavuzu, Temizlik Talimatı",
+    )
+
+    file = models.FileField(
+        upload_to="products/resources/",
+        verbose_name="Dosya",
+        help_text="PDF, kullanım kılavuzu, garanti belgesi vb.",
+    )
+
+    display_order = models.PositiveIntegerField(
+        default=0,
+        verbose_name="Gösterim Sırası",
+    )
+
+    class Meta:
+        verbose_name = "Ürün Kaynağı"
+        verbose_name_plural = "Ürün Kaynakları"
+        ordering = ("product", "display_order", "title")
+
+    def __str__(self):
+        return f"{self.product.name} - {self.title}"
