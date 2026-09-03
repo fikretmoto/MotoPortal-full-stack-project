@@ -88,6 +88,25 @@ class ProductBadgeMixin:
 
 
         return badges
+
+
+
+
+class ProductRatingMixin:
+    def get_average_rating(self, obj):
+        reviews = obj.reviews.filter(is_approved=True)
+
+        if not reviews.exists():
+            return None
+
+        total = sum(review.rating for review in reviews)
+        return round(total / reviews.count(), 1)
+
+    def get_review_count(self, obj):
+        return obj.reviews.filter(is_approved=True).count()
+    
+
+
 class CategorySerializer(serializers.ModelSerializer):
     parent_name = serializers.CharField(
         source="parent.name",
@@ -310,11 +329,14 @@ class ProductVariantSerializer(serializers.ModelSerializer):
 
 
 
-class ProductListSerializer(ProductBadgeMixin, serializers.ModelSerializer):
+class ProductListSerializer(ProductBadgeMixin, ProductRatingMixin, serializers.ModelSerializer):
     brand = BrandSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
     cover_image_url = serializers.SerializerMethodField()
     badges = serializers.SerializerMethodField()
+    average_rating = serializers.SerializerMethodField()
+    review_count = serializers.SerializerMethodField()
+
     class Meta:
         model = Product
         fields = (
@@ -331,6 +353,8 @@ class ProductListSerializer(ProductBadgeMixin, serializers.ModelSerializer):
             "currency",
             "stock_status",
             "badges",
+            "average_rating",
+            "review_count",
         )
 
     def get_cover_image_url(self, obj):
