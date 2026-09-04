@@ -28,29 +28,12 @@ export type Brand = {
   is_active: boolean;
 };
 
-export type Product = {
-  id: number;
 
-  name: string;
-
-  slug: string;
-
-  brand: Brand;
-
-  category: Category;
-
-  short_description: string;
-
-  cover_image_url: string | null;
-
-  instagram_url: string | null;
-
-  whatsapp_number: string | null;
-
-  is_featured: boolean;
-
-  is_active: boolean;
+export type ProductBadge = {
+  type: string;
+  label: string;
 };
+
 
 
 export type HomepageBand = {
@@ -76,6 +59,24 @@ export async function getHomepageBands(): Promise<HomepageBand[]> {
 
   return response.json();
 }
+
+export type Product = {
+  id: number;
+  name: string;
+  slug: string;
+  brand: Brand;
+  category: Category;
+  short_description: string;
+  cover_image_url: string | null;
+  is_featured: boolean;
+  is_active: boolean;
+  price: string | null;
+  currency: string;
+  stock_status: string;
+  badges: ProductBadge[];
+  average_rating: number | null;
+  review_count: number;
+};
 
 
 
@@ -106,6 +107,17 @@ export type ProductImage = {
   display_order: number;
 };
 
+
+
+export type ProductResource = {
+  id: number;
+  title: string;
+  file_url: string | null;
+  display_order: number;
+};
+
+
+
 export type ProductAttribute = {
   id: number;
 
@@ -135,19 +147,16 @@ export type ProductDetail = Product & {
   stock_status: string;
 
   description: string;
+  instagram_url: string | null;
+  whatsapp_number: string | null;
 
   images: ProductImage[];
   variants: ProductVariant[];
   attributes: ProductAttribute[];
+  resources: ProductResource[];
 
   created_at: string;
   updated_at: string;
-};
-type PaginatedResponse<T> = {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: T[];
 };
 
 export type ProductReview = {

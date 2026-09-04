@@ -11,6 +11,7 @@ from .models import (
     Brand,
     Category,
     CategoryAttribute,
+    Favorite,
     HomepageBand,
     InstallmentOption,
     Product,
@@ -766,4 +767,26 @@ class InstallmentOptionAdmin(admin.ModelAdmin):
     autocomplete_fields = (
         "brand",
         "category",
+    )
+
+@admin.register(Favorite)
+class FavoriteAdmin(admin.ModelAdmin):
+    list_display = (
+        "user",
+        "product",
+        "created_at",
+    )
+
+    list_filter = (
+        "created_at",
+    )
+
+    search_fields = (
+        "user__email",
+        "product__name",
+    )
+
+    autocomplete_fields = (
+        "user",
+        "product",
     )

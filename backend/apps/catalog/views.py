@@ -8,11 +8,12 @@ from rest_framework.permissions import AllowAny
 
 from .filters import ProductFilter
 
-from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductReview, HomepageBand, SiteContent, InstallmentOption
+from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductReview, HomepageBand, SiteContent, InstallmentOption, Favorite
 from .serializers import (
    BrandSerializer,
     CategoryAttributesResponseSerializer,
     CategorySerializer,
+    FavoriteSerializer,
     ProductDetailSerializer,
     ProductListSerializer,
     ProductWriteSerializer,
@@ -281,4 +282,54 @@ class ProductReviewListCreateAPIView(generics.ListCreateAPIView):
         serializer.save(
             user=self.request.user,
             product=product,
+        )
+
+class FavoriteToggleAPIView(generics.GenericAPIView):
+    """
+    POST: bir ürünü favoriye ekler (yoksa) ya da çıkarır (varsa).
+    Giriş şart.
+    """
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request, slug):
+        product = generics.get_object_or_404(
+            Product,
+            slug=slug,
+            is_active=True,
+        )
+
+        favorite = Favorite.objects.filter(
+            user=request.user,
+            product=product,
+        ).first()
+
+        if favorite:
+            favorite.delete()
+            return Response({"is_favorited": False})
+
+        Favorite.objects.create(
+            user=request.user,
+            product=product,
+        )
+        return Response({"is_favorited": True})
+
+
+class FavoriteListAPIView(generics.ListAPIView):
+    """
+    GET: giriş yapmış kullanıcının favori ürünlerini listeler.
+    """
+    serializer_class = FavoriteSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = None
+
+    def get_queryset(self):
+        return (
+            Favorite.objects
+            .filter(user=self.request.user)
+            .select_related(
+                "product",
+                "product__brand",
+                "product__category",
+            )
+            .order_by("-created_at")
         )

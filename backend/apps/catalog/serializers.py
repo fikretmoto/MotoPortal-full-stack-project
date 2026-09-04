@@ -13,6 +13,7 @@ from .models import (
     Brand,
     Category,
     CategoryAttribute,
+    Favorite,
     Product,
     ProductAttributeValue,
     ProductImage,
@@ -106,6 +107,19 @@ class ProductRatingMixin:
         return obj.reviews.filter(is_approved=True).count()
     
 
+
+
+class ProductFavoriteMixin:
+    def get_is_favorited(self, obj):
+        request = self.context.get("request")
+
+        if not request or not request.user.is_authenticated:
+            return False
+
+        return Favorite.objects.filter(
+            user=request.user,
+            product=obj,
+        ).exists()
 
 class CategorySerializer(serializers.ModelSerializer):
     parent_name = serializers.CharField(
@@ -329,13 +343,14 @@ class ProductVariantSerializer(serializers.ModelSerializer):
 
 
 
-class ProductListSerializer(ProductBadgeMixin, ProductRatingMixin, serializers.ModelSerializer):
+class ProductListSerializer(ProductBadgeMixin, ProductRatingMixin, ProductFavoriteMixin, serializers.ModelSerializer):
     brand = BrandSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
     cover_image_url = serializers.SerializerMethodField()
     badges = serializers.SerializerMethodField()
     average_rating = serializers.SerializerMethodField()
     review_count = serializers.SerializerMethodField()
+    is_favorited = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
@@ -355,6 +370,7 @@ class ProductListSerializer(ProductBadgeMixin, ProductRatingMixin, serializers.M
             "badges",
             "average_rating",
             "review_count",
+            "is_favorited",
         )
 
     def get_cover_image_url(self, obj):
@@ -421,10 +437,11 @@ class ProductResourceSerializer(serializers.ModelSerializer):
 
         return obj.file.url
 
-class ProductDetailSerializer(ProductBadgeMixin, serializers.ModelSerializer):
+class ProductDetailSerializer(ProductBadgeMixin, ProductFavoriteMixin, serializers.ModelSerializer):
     brand = BrandSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
     badges = serializers.SerializerMethodField()
+    is_favorited = serializers.SerializerMethodField()
    
 
     images = ProductImageSerializer(
@@ -474,7 +491,8 @@ class ProductDetailSerializer(ProductBadgeMixin, serializers.ModelSerializer):
             "variants",
             "attributes",
             "resources",
-            "badges"
+            "badges",
+            "is_favorited",
 
             "is_featured",
             "is_active",
@@ -1014,3 +1032,20 @@ class CategoryAttributesResponseSerializer(serializers.Serializer):
     attribute_groups = AttributeGroupWithAttributesSerializer(
         many=True,
     )
+
+
+class FavoriteSerializer(serializers.ModelSerializer):
+    product = ProductListSerializer(read_only=True)
+
+    class Meta:
+        model = Favorite
+        fields = (
+            "id",
+            "product",
+            "created_at",
+        )
+        read_only_fields = (
+            "id",
+            "product",
+            "created_at",
+        )

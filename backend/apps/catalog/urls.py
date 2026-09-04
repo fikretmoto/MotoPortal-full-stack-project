@@ -6,6 +6,8 @@ from .views import (
     CategoryAttributesAPIView,
     CategoryDetailAPIView,
     CategoryListAPIView,
+    FavoriteListAPIView,
+    FavoriteToggleAPIView,
     HomepageBandListAPIView,
     InstallmentOptionListAPIView,
     ProductCreateAPIView,
@@ -100,5 +102,17 @@ urlpatterns = [
         "products/<slug:slug>/reviews/",
         ProductReviewListCreateAPIView.as_view(),
         name="product-review-list-create",
+    ),
+
+     path(
+        "products/<slug:slug>/favorite/",
+        FavoriteToggleAPIView.as_view(),
+        name="product-favorite-toggle",
+    ),
+
+    path(
+        "favorites/",
+        FavoriteListAPIView.as_view(),
+        name="favorite-list",
     ),
 ]

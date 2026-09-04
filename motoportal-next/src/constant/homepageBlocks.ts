@@ -3,10 +3,20 @@ import type { CategoryCard, TagPill } from "@/components/Home/TagCategoryBlock/T
 /* ---- BLOK A: kampanya tag'leri + motosiklet kategorileri ---- */
 
 export const campaignTags: TagPill[] = [
-  { label: "%50'ye Varan İndirim", href: "/kampanya/50-indirim" },
+  { label: "İndirimli Ürünler", href: "/kampanya/indirimli-urunler" },
   { label: "Yeni Gelenler", href: "/kampanya/yeni-gelenler" },
-  { label: "Sezon Sonu", href: "/kampanya/sezon-sonu" },
-  { label: "Outlet", href: "/kampanya/outlet" },
+  { label: "Bitmek Üzere Olanlar", href: "/kampanya/bitmek-uzere" },
+  { label: "Outlet / Fırsat", href: "/kampanya/outlet-firsat" },
+  { label: "Takas Fırsatı", href: "/kampanya/takas-firsati" },
+  { label: "Öne Çıkanlar", href: "/kampanya/one-cikanlar" },
+  { label: "B Ehliyeti ile Sürülebilenler", href: "/kampanya/b-ehliyeti-surulebilir" },
+  { label: "A1 ile Sürülebilenler", href: "/kampanya/a1-surulebilir" },
+  { label: "Yakında Gelecek Olanlar", href: "/kampanya/yakinda-gelecek" },
+  { label: "2. El", href: "/kampanya/2-el" },
+  { label: "Sıfır Faizli Taksit", href: "/kampanya/sifir-faizli-taksit" },
+  { label: "Ücretsiz Kargo", href: "/kampanya/ucretsiz-kargo" },
+  { label: "Şehir Merkezi Ücretsiz Kargo", href: "/kampanya/sehir-merkezi-ucretsiz-kargo" },
+   { label: "Çok Satan", href: "/kampanya/cok-satan" },
 ];
 
 export const motorcycleCategories: CategoryCard[] = [
