@@ -49,6 +49,19 @@ class HomepageBandListAPIView(generics.ListAPIView):
         )
 
 
+
+class HomepageBandByTagAPIView(generics.RetrieveAPIView):
+    serializer_class = HomepageBandSerializer
+
+    def get_object(self):
+        return generics.get_object_or_404(
+            HomepageBand.objects
+            .filter(is_active=True)
+            .select_related("tag"),
+            tag__slug=self.kwargs["tag_slug"],
+        )
+
+    
 class SiteContentAPIView(generics.RetrieveAPIView):
     serializer_class = SiteContentSerializer
 

@@ -32,7 +32,10 @@ const montserrat = Montserrat({
 
 
 export const metadata: Metadata = {
-  title: "MotoPortal",
+  title: {
+    template: "%s | MotoPortal",
+    default: "MotoPortal",
+  },
   description: "Motor tutkunlarının dijital durağı",
 };
 

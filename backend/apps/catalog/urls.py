@@ -8,6 +8,7 @@ from .views import (
     CategoryListAPIView,
     FavoriteListAPIView,
     FavoriteToggleAPIView,
+    HomepageBandByTagAPIView,
     HomepageBandListAPIView,
     InstallmentOptionListAPIView,
     ProductCreateAPIView,
@@ -42,6 +43,12 @@ urlpatterns = [
         "homepage-bands/",
         HomepageBandListAPIView.as_view(),
         name="homepage-band-list",
+    ),
+
+    path(
+        "homepage-bands/<slug:tag_slug>/",
+        HomepageBandByTagAPIView.as_view(),
+        name="homepage-band-by-tag",
     ),
 
 

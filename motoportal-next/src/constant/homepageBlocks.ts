@@ -3,20 +3,20 @@ import type { CategoryCard, TagPill } from "@/components/Home/TagCategoryBlock/T
 /* ---- BLOK A: kampanya tag'leri + motosiklet kategorileri ---- */
 
 export const campaignTags: TagPill[] = [
-  { label: "İndirimli Ürünler", href: "/kampanya/indirimli-urunler" },
-  { label: "Yeni Gelenler", href: "/kampanya/yeni-gelenler" },
-  { label: "Bitmek Üzere Olanlar", href: "/kampanya/bitmek-uzere" },
-  { label: "Outlet / Fırsat", href: "/kampanya/outlet-firsat" },
-  { label: "Takas Fırsatı", href: "/kampanya/takas-firsati" },
-  { label: "Öne Çıkanlar", href: "/kampanya/one-cikanlar" },
-  { label: "B Ehliyeti ile Sürülebilenler", href: "/kampanya/b-ehliyeti-surulebilir" },
-  { label: "A1 ile Sürülebilenler", href: "/kampanya/a1-surulebilir" },
-  { label: "Yakında Gelecek Olanlar", href: "/kampanya/yakinda-gelecek" },
-  { label: "2. El", href: "/kampanya/2-el" },
-  { label: "Sıfır Faizli Taksit", href: "/kampanya/sifir-faizli-taksit" },
-  { label: "Ücretsiz Kargo", href: "/kampanya/ucretsiz-kargo" },
-  { label: "Şehir Merkezi Ücretsiz Kargo", href: "/kampanya/sehir-merkezi-ucretsiz-kargo" },
-   { label: "Çok Satan", href: "/kampanya/cok-satan" },
+  { label: "İndirimli Ürünler", href: "/indirimli-urunler" },
+  { label: "Yeni Gelenler", href: "/yeni-gelenler" },
+  { label: "Bitmek Üzere Olanlar", href: "/bitmek-uzere" },
+  { label: "Outlet / Fırsat", href: "/outlet-firsat" },
+  { label: "Takas Fırsatı", href: "/takas-firsati" },
+  { label: "Öne Çıkanlar", href: "/one-cikanlar" },
+  { label: "B Ehliyeti ile Sürülebilenler", href: "/b-ehliyeti-surulebilir" },
+  { label: "A1 ile Sürülebilenler", href: "/a1-surulebilir" },
+  { label: "Yakında Gelecek Olanlar", href: "/yakinda-gelecek" },
+  { label: "2. El", href: "/2-el" },
+  { label: "Sıfır Faizli Taksit", href: "/sifir-faizli-taksit" },
+  { label: "Ücretsiz Kargo", href: "/ucretsiz-kargo" },
+  { label: "Şehir Merkezi Ücretsiz Kargo", href: "/sehir-merkezi-ucretsiz-kargo" },
+  { label: "Çok Satan", href: "/cok-satan" },
 ];
 
 export const motorcycleCategories: CategoryCard[] = [

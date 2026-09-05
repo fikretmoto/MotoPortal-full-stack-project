@@ -76,6 +76,7 @@ export type Product = {
   badges: ProductBadge[];
   average_rating: number | null;
   review_count: number;
+  is_favorited: boolean;
 };
 
 
@@ -159,6 +160,13 @@ export type ProductDetail = Product & {
   updated_at: string;
 };
 
+
+type PaginatedResponse<T> = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T[];
+};
 export type ProductReview = {
   id: number;
   product: number;
@@ -226,6 +234,44 @@ HTTP ${response.status}`
 }
 
 
+
+export async function getProductsByTag(
+  tagSlug: string
+): Promise<Product[]> {
+  const response = await fetch(
+    `${API_URL}/products/?tag=${tagSlug}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    return [];
+  }
+
+  const data: PaginatedResponse<Product> = await response.json();
+
+  return data.results;
+}
+
+
+
+export async function getProductsOnDiscount(): Promise<Product[]> {
+  const response = await fetch(
+    `${API_URL}/products/?on_discount=true`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    return [];
+  }
+
+  const data: PaginatedResponse<Product> = await response.json();
+
+  return data.results;
+}
 export async function getProductBySlug(
   slug: string
 ): Promise<ProductDetail> {
