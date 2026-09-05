@@ -256,6 +256,26 @@ export async function getProductsByTag(
 
 
 
+
+export async function getProductsByCategory(
+  categorySlug: string
+): Promise<Product[]> {
+  const response = await fetch(
+    `${API_URL}/products/?category=${categorySlug}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    return [];
+  }
+
+  const data: PaginatedResponse<Product> = await response.json();
+
+  return data.results;
+}
+
 export async function getProductsOnDiscount(): Promise<Product[]> {
   const response = await fetch(
     `${API_URL}/products/?on_discount=true`,

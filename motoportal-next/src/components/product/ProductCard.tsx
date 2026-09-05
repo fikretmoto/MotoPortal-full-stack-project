@@ -84,16 +84,18 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
 
-                      <CardContent className="flex h-full min-h-[150px] flex-col p-3 pb-1 pt-2">
-          <h3 className="line-clamp-2 min-h-[2.25rem] text-sm font-semibold text-blue-700">
-            {product.name}
-          </h3>
+                      <CardContent className="flex h-full min-h-[150px] flex-col  pb-1 pt-2">
+                    <div className="min-h-[3.75rem]">
+            <h3 className="line-clamp-2 text-sm font-semibold text-blue-700">
+              {product.name}
+            </h3>
 
-          {product.short_description && (
-                   <p className="font-motoportal-tagline mt-1 line-clamp-2 text-[12px] font-normal tracking-tight text-black">
-              {product.short_description}
-            </p>
-          )}
+            {product.short_description && (
+              <p className="font-motoportal-tagline line-clamp-2 text-[12px] font-semibold leading-tight tracking-tight text-black/80">
+                {product.short_description}
+              </p>
+            )}
+          </div>
 
           <div className="mt-auto">
             <div className="flex h-4 items-center gap-1 text-xs text-gray-500">
@@ -107,7 +109,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             </div>
 
             {priceText && (
-              <p className="mt-0.5 inline-block rounded-md bg-gray-100 px-2 py-1 text-sm font-bold text-white bg-gray-900">
+              <p className="mt-0.5 text-xs font-light font-bold text-gray-900">
                 {priceText}
               </p>
             )}
