@@ -13,6 +13,7 @@ PARTS_CATEGORY_SLUGS = [
     "debriyaj-parcalari",
     "hava-filtresi",
     "kasa-koruma-dusme-demiri",
+    "buji",
 ]
 
 
@@ -21,7 +22,7 @@ PARTS_ATTRIBUTE_SLUGS = [
     *FITMENT_ATTRIBUTE_SLUGS,
     *SEARCH_ATTRIBUTE_SLUGS,
 
-    "parca-tipi",
+     "parca-tipi",
     "parca-rengi",
     "zincir-olcusu",
     "dis-sayisi",
@@ -29,4 +30,9 @@ PARTS_ATTRIBUTE_SLUGS = [
     "kasa-koruma-tipi",
     "parca-malzemesi",
     "parca-agirligi",
+    "elektrot-araligi",
+    "termal-deger",
+    "dis-capi",
+    "dis-uzunlugu",
+    "anahtar-agzi",
 ]

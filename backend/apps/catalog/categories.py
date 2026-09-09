@@ -10,16 +10,14 @@ CATEGORY_DATA = [
         "slug": "elektrikli",
         "parent_slug": None,
     },
+
+
     {
-        "name": "ATV",
-        "slug": "atv",
+        "name": "ATV / UTV",
+        "slug": "atv-utv",
         "parent_slug": None,
     },
-    {
-        "name": "UTV",
-        "slug": "utv",
-        "parent_slug": None,
-    },
+
     {
         "name": "Bisiklet",
         "slug": "bisiklet",
@@ -148,6 +146,13 @@ CATEGORY_DATA = [
         "slug": "motor-parcalari",
         "parent_slug": "yedek-parca",
     },
+
+     {
+        "name": "Buji",
+        "slug": "buji",
+        "parent_slug": "motor-parcalari",
+    },
+
     {
         "name": "Elektrik Sistemi",
         "slug": "elektrik-sistemi",
@@ -179,14 +184,13 @@ CATEGORY_DATA = [
     {
         "name": "Ön Lastik",
         "slug": "on-lastik",
-        "parent_slug": "yedek-parca",
+        "parent_slug": "lastik",
     },
     {
         "name": "Arka Lastik",
         "slug": "arka-lastik",
-        "parent_slug": "yedek-parca",
+        "parent_slug": "lastik",
     },
-
 
        
     {
@@ -236,45 +240,45 @@ CATEGORY_DATA = [
         "slug": "bakim-urunleri",
         "parent_slug": "bakim-ve-temizlik",
     },
+
     {
-            "name": "Motor Yağı",
-            "slug": "motor-yagi",
-            "parent_slug": "bakim-ve-temizlik",
-        },
-        {
-                "name": "Zincir Yağı",
-                "slug": "zincir-yagi",
-                "parent_slug": "bakim-ve-temizlik",
-            },
+        "name": "Motor Yağı",
+        "slug": "motor-yagi",
+        "parent_slug": "bakim-urunleri",
+    },
+    {
+            "name": "Zincir Yağı",
+            "slug": "zincir-yagi",
+            "parent_slug": "bakim-urunleri",
+    },
 
 
 
-            {
-                "name": "Şanzıman Yağı",
-                "slug": "sanziman-yagi",
-                "parent_slug": "bakim-ve-temizlik",
-            },
-        {
-                "name": "2T Yağı",
-                "slug": "2t-yagi",
-                "parent_slug": "bakim-ve-temizlik",
-            },
-        {
-                "name": "Fork Yağı",
-                "slug": "fork-yagi",
-                "parent_slug": "bakim-ve-temizlik",
-            },
-        {
-                "name": "Fren Hidroliği",
-                "slug": "fren-hidroligi",
-                "parent_slug": "bakim-ve-temizlik",
-            },
-        {
-                "name": "Soğutma Sıvısı",
-                "slug": "sogutma-sivisi",
-                "parent_slug": "bakim-ve-temizlik",
-            },
-
+    {
+            "name": "Şanzıman Yağı",
+            "slug": "sanziman-yagi",
+            "parent_slug": "bakim-urunleri",
+    },
+    {
+            "name": "2T Yağı",
+            "slug": "2t-yagi",
+            "parent_slug": "bakim-urunleri",
+    },
+    {
+            "name": "Fork Yağı",
+            "slug": "fork-yagi",
+            "parent_slug": "bakim-urunleri",
+    },
+    {
+            "name": "Fren Hidroliği",
+            "slug": "fren-hidroligi",
+            "parent_slug": "bakim-urunleri",
+    },
+    {
+            "name": "Soğutma Sıvısı",
+            "slug": "sogutma-sivisi",
+            "parent_slug": "bakim-urunleri",
+    },
 
             #ekipman alt kategorileri
             {
@@ -392,6 +396,68 @@ CATEGORY_DATA = [
     {
         "name": "Çocuk Bisikleti",
         "slug": "cocuk-bisikleti",
+        "parent_slug": "bisiklet",   
+    },
+
+     {
+        "name": "4 Çeker",
+        "slug": "4-ceker",
+        "parent_slug": "atv-utv",
+    },
+
+     {
+        "name": "2 Çeker",
+        "slug": "2-ceker",
+        "parent_slug": "atv-utv",
+    },
+
+
+    # Scooter alt kategorileri
+    {
+        "name": "50cc Scooter",
+        "slug": "50cc-scooter",
+        "parent_slug": "scooter",
+    },
+    {
+        "name": "125cc Scooter",
+        "slug": "125cc-scooter",
+        "parent_slug": "scooter",
+    },
+    {
+        "name": "150-250cc arası Scooter",
+        "slug": "150-250cc-arasi-scooter",
+        "parent_slug": "scooter",
+    },
+    {
+        "name": "Maxi Scooter (250cc)",
+        "slug": "maxi-scooter-250cc",
+        "parent_slug": "scooter",
+    },
+    {
+        "name": "Maxi Scooter (250cc Üzeri)",
+        "slug": "maxi-scooter-250cc-uzeri",
+        "parent_slug": "scooter",
+    },
+
+    # Bisiklet ek alt kategorileri
+    {
+        "name": "BMX",
+        "slug": "bmx",
+        "parent_slug": "bisiklet",
+    },
+    {
+        "name": "Katlanır Bisiklet",
+        "slug": "katlanir-bisiklet",
+        "parent_slug": "bisiklet",
+    },
+    {
+        "name": "Gravel Bisikleti",
+        "slug": "gravel-bisikleti",
+        "parent_slug": "bisiklet",
+    },
+    {
+        "name": "Tur / Trekking Bisikleti",
+        "slug": "tur-trekking-bisikleti",
         "parent_slug": "bisiklet",
     },
 ]

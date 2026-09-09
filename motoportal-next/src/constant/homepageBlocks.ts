@@ -20,15 +20,11 @@ export const campaignTags: TagPill[] = [
 ];
 
 export const motorcycleCategories: CategoryCard[] = [
-  { name: "Motosikletler", href: "/kategori/motosikletler" },
+  { name: "Motosiklet", href: "/kategori/motosiklet" },
   { name: "Scooter", href: "/kategori/scooter" },
-  { name: "Cross / Enduro", href: "/kategori/cross-enduro" },
+  { name: "ATV / UTV", href: "/kategori/atv-utv" },
+  { name: "Bisiklet", href: "/kategori/bisiklet" },
   { name: "Elektrikli", href: "/kategori/elektrikli" },
-  { name: "ATV", href: "/kategori/atv" },
-  { name: "Bisikletler", href: "/kategori/bisikletler" },
-  { name: "Cruiser", href: "/kategori/cruiser" },
-  { name: "Touring", href: "/kategori/touring" },
-  { name: "Naked", href: "/kategori/naked" },
 ];
 
 /* ---- BLOK B: rehber tag'leri + ekipman/parça kategorileri ---- */

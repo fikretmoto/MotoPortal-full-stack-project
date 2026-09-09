@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
+from apps.catalog.attribute_options.parts import PARTS_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attributes.ecommerce import ECOMMERCE_ATTRIBUTE_DATA
 from apps.catalog.attributes.scooter import SCOOTER_ATTRIBUTE_DATA
 
@@ -66,6 +67,7 @@ from apps.catalog.category_attributes.accessories import (
 from apps.catalog.models import (
     Attribute,
     AttributeGroup,
+    AttributeOption,
     Category,
     CategoryAttribute,
 )
@@ -91,6 +93,8 @@ class Command(BaseCommand):
             attributes=attributes,
         )
 
+        self.seed_attribute_options(attributes)
+ 
         self.stdout.write(
             self.style.SUCCESS(
                 "MotoPortal katalog çekirdeği başarıyla hazırlandı."
@@ -115,6 +119,8 @@ class Command(BaseCommand):
             )
 
             categories[item["slug"]] = category
+
+            
 
             self.print_result(
                 created=created,
@@ -340,6 +346,48 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS(
                 f"{connection_count} kategori-özellik bağlantısı hazır."
+            )
+        )
+
+    def seed_attribute_options(self, attributes):
+        all_option_data = [
+            *PARTS_ATTRIBUTE_OPTION_DATA,
+        ]
+
+        option_count = 0
+
+        for item in all_option_data:
+            attribute_slug = item["attribute_slug"]
+            attribute = attributes.get(attribute_slug)
+
+            if attribute is None:
+                raise ValueError(
+                    f"Özellik bulunamadı: {attribute_slug}"
+                )
+
+            _, created = AttributeOption.objects.update_or_create(
+                attribute=attribute,
+                value=item["value"],
+                defaults={
+                    "display_order": item["display_order"],
+                    "is_active": True,
+                },
+            )
+
+            option_count += 1
+
+            if created:
+                self.stdout.write(
+                    self.style.SUCCESS(
+                        "OLUŞTURULDU: "
+                        f"{attribute.name} -> "
+                        f"{item['value']}"
+                    )
+                )
+
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"{option_count} özellik seçeneği hazır."
             )
         )
 
