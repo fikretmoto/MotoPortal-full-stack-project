@@ -76,7 +76,6 @@ BRAND_DATA = [
     {"name": "Zealsun", "slug": "zealsun", "country": "Çin", "founded_year": None, "website": "", "description": ""},
     {"name": "Zelsun", "slug": "zelsun", "country": "Çin", "founded_year": None, "website": "", "description": ""},
      {"name": "Btwin", "slug": "btwin", "country": "Fransa", "founded_year": None, "website": "", "description": ""},
-    {"name": "Carraro", "slug": "carraro-bisiklet", "country": "Türkiye", "founded_year": None, "website": "", "description": ""},
     {"name": "Dahon", "slug": "dahon", "country": "ABD", "founded_year": None, "website": "", "description": ""},
     {"name": "Kron", "slug": "kron", "country": "Türkiye", "founded_year": None, "website": "", "description": ""},
     {"name": "Foldo", "slug": "foldo", "country": "", "founded_year": None, "website": "", "description": ""},
@@ -88,6 +87,4 @@ BRAND_DATA = [
     {"name": "Peugeot", "slug": "peugeot", "country": "Fransa", "founded_year": None, "website": "", "description": ""},
     {"name": "Umut", "slug": "umut", "country": "Türkiye", "founded_year": None, "website": "", "description": ""},
     {"name": "Gazelle", "slug": "gazelle", "country": "Hollanda", "founded_year": None, "website": "", "description": ""},
-
-
 ]

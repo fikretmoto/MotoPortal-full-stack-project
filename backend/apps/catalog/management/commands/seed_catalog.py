@@ -19,6 +19,7 @@ from apps.catalog.attributes.bicycle import BICYCLE_ATTRIBUTE_DATA
 from apps.catalog.attributes.electric import ELECTRIC_ATTRIBUTE_DATA
 from apps.catalog.attributes.parts import PARTS_ATTRIBUTE_DATA
 from apps.catalog.attributes.accessories import ACCESSORIES_ATTRIBUTE_DATA
+from apps.catalog.brands import BRAND_DATA
 from apps.catalog.categories import CATEGORY_DATA
 from apps.catalog.category_attributes.scooter import (
     SCOOTER_ATTRIBUTE_SLUGS,
@@ -71,6 +72,7 @@ from apps.catalog.models import (
     Attribute,
     AttributeGroup,
     AttributeOption,
+    Brand,
     Category,
     CategoryAttribute,
 )
@@ -87,6 +89,7 @@ class Command(BaseCommand):
             )
         )
 
+        self.seed_brands()
         categories = self.seed_categories()
         groups = self.seed_attribute_groups()
         attributes = self.seed_attributes(groups)
@@ -394,6 +397,38 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS(
                 f"{option_count} özellik seçeneği hazır."
+            )
+        )
+
+
+    def seed_brands(self):
+        brand_count = 0
+
+        for item in BRAND_DATA:
+            _, created = Brand.objects.update_or_create(
+                name=item["name"],
+                defaults={
+                    "slug": item["slug"],
+                    "country": item["country"],
+                    "founded_year": item["founded_year"],
+                    "website": item["website"],
+                    "description": item["description"],
+                    "is_active": True,
+                },
+            )
+            
+            brand_count += 1
+
+            if created:
+                self.stdout.write(
+                    self.style.SUCCESS(
+                        f"OLUŞTURULDU: Marka -> {item['name']}"
+                    )
+                )
+
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"{brand_count} marka hazır."
             )
         )
 

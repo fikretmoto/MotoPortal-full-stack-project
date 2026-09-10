@@ -206,10 +206,9 @@ export async function getBrands(): Promise<Brand[]> {
     );
   }
 
-  const data: PaginatedResponse<Brand> =
-    await response.json();
+  const data: Brand[] = await response.json();
 
-  return data.results;
+  return data;
 }
 
 export async function getProducts(): Promise<Product[]> {
@@ -235,6 +234,25 @@ HTTP ${response.status}`
 
 
 
+
+export async function getProductsByBrand(
+  brandSlug: string
+): Promise<Product[]> {
+  const response = await fetch(
+    `${API_URL}/products/?brand=${brandSlug}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    return [];
+  }
+
+  const data: PaginatedResponse<Product> = await response.json();
+
+  return data.results;
+}
 export async function getProductsByTag(
   tagSlug: string
 ): Promise<Product[]> {

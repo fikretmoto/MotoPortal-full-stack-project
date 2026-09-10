@@ -94,6 +94,7 @@ class CategoryDetailAPIView(generics.RetrieveAPIView):
 
 class BrandListAPIView(generics.ListAPIView):
     serializer_class = BrandSerializer
+    pagination_class = None
 
     def get_queryset(self):
         return (

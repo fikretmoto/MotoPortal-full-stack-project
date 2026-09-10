@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -5,8 +8,38 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { getProductsByBrand } from "@/services/catalog";
+import type { Category, Brand } from "@/services/catalog";
 
-export default function VehicleSearchBox() {
+const YEARS = Array.from({ length: 2027 - 2005 + 1 }, (_, i) => 2027 - i);
+
+type VehicleSearchBoxProps = {
+  childCategories: Category[];
+  brands: Brand[];
+};
+
+export default function VehicleSearchBox({
+  childCategories,
+  brands,
+}: VehicleSearchBoxProps) {
+  const [selectedBrand, setSelectedBrand] = useState<string>("");
+  const [modelOptions, setModelOptions] = useState<string[]>([]);
+  const [loadingModels, setLoadingModels] = useState(false);
+
+  async function handleBrandChange(brandSlug: string) {
+    setSelectedBrand(brandSlug);
+    setModelOptions([]);
+    setLoadingModels(true);
+
+    const products = await getProductsByBrand(brandSlug);
+    const uniqueNames = Array.from(
+      new Set(products.map((p) => p.name))
+    );
+
+    setModelOptions(uniqueNames);
+    setLoadingModels(false);
+  }
+
   return (
     <div className="mb-8 flex flex-wrap items-end gap-3 rounded-xl border border-gray-200 bg-white p-4">
       <div className="flex flex-col gap-1">
@@ -16,7 +49,11 @@ export default function VehicleSearchBox() {
             <SelectValue placeholder="Seçiniz" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="tip1">Yakında</SelectItem>
+            {childCategories.map((category) => (
+              <SelectItem key={category.id} value={category.slug}>
+                {category.name}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
@@ -28,31 +65,51 @@ export default function VehicleSearchBox() {
             <SelectValue placeholder="Seçiniz" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="yil1">Yakında</SelectItem>
+            {YEARS.map((year) => (
+              <SelectItem key={year} value={String(year)}>
+                {year}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
 
       <div className="flex flex-col gap-1">
         <label className="text-xs font-medium text-gray-600">Marka</label>
-        <Select>
+        <Select value={selectedBrand} onValueChange={handleBrandChange}>
           <SelectTrigger className="w-40">
             <SelectValue placeholder="Seçiniz" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="marka1">Yakında</SelectItem>
+          <SelectContent position="popper">   
+            {brands.map((brand) => (
+              <SelectItem key={brand.id} value={brand.slug}>
+                {brand.name}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
 
       <div className="flex flex-col gap-1">
         <label className="text-xs font-medium text-gray-600">Model</label>
-        <Select>
+        <Select disabled={!selectedBrand || modelOptions.length === 0}>
           <SelectTrigger className="w-40">
-            <SelectValue placeholder="Seçiniz" />
+            <SelectValue
+              placeholder={
+                !selectedBrand
+                  ? "Önce marka seçin"
+                  : loadingModels
+                  ? "Yükleniyor..."
+                  : "Seçiniz"
+              }
+            />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="model1">Yakında</SelectItem>
+            {modelOptions.map((name) => (
+              <SelectItem key={name} value={name}>
+                {name}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>

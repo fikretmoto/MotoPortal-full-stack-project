@@ -1,18 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCategories } from "@/services/catalog";
+import { getBrands, getCategories } from "@/services/catalog";
 import type { Category } from "@/services/catalog";
 import VehicleSearchBox from "@/components/product/VehicleSearchBox";
 
 
-const VEHICLE_ROOT_SLUGS = [
-  "motosiklet",
-  "scooter",
-  "atv",
-  "utv",
-  "bisiklet",
-  "elektrikli",
-];
+const VEHICLE_ROOT_SLUGS = ["tasitlar"];
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -42,6 +35,7 @@ export default async function CategorySlugLayout({
 }: Props) {
   const { slug } = await params;
   const categories = await getCategories();
+  const brands = await getBrands();
   const category = categories.find((c) => c.slug === slug);
 
   if (!category) {
@@ -71,7 +65,10 @@ export default async function CategorySlugLayout({
       </nav>
 
 
-  {VEHICLE_ROOT_SLUGS.includes(trail[0].slug) && <VehicleSearchBox />}
+   {VEHICLE_ROOT_SLUGS.includes(trail[0].slug) && (
+    <VehicleSearchBox childCategories={childCategories} brands={brands} />
+  )}
+
       <div className="flex gap-8">
         {childCategories.length > 0 && (
           <aside className="w-48 flex-none">
