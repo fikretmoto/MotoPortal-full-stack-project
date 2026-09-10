@@ -135,7 +135,7 @@ SCOOTER_ATTRIBUTE_DATA = [
         "name": "Yakıt Deposu Konumu",
         "slug": "yakit-deposu-konumu",
         "group_slug": "yakit-ve-enerji",
-        "data_type": "text",
+        "data_type":  "single_select",
         "unit": "",
         "display_order": 1320,
         "is_filterable": False,

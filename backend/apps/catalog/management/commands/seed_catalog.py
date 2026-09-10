@@ -1,6 +1,9 @@
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
+from apps.catalog.attribute_options.scooter import SCOOTER_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.motorcycle import MOTORCYCLE_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.ecommerce import ECOMMERCE_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.parts import PARTS_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attributes.ecommerce import ECOMMERCE_ATTRIBUTE_DATA
 from apps.catalog.attributes.scooter import SCOOTER_ATTRIBUTE_DATA
@@ -351,6 +354,9 @@ class Command(BaseCommand):
 
     def seed_attribute_options(self, attributes):
         all_option_data = [
+            *SCOOTER_ATTRIBUTE_OPTION_DATA,
+            *MOTORCYCLE_ATTRIBUTE_OPTION_DATA,
+            *ECOMMERCE_ATTRIBUTE_OPTION_DATA,
             *PARTS_ATTRIBUTE_OPTION_DATA,
         ]
 

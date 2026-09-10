@@ -1,53 +1,60 @@
 CATEGORY_DATA = [
     # Ana kategoriler
     {
-        "name": "Motosiklet",
-        "slug": "motosiklet",
+        "name": "Taşıtlar",
+        "slug": "tasitlar",
         "parent_slug": None,
     },
+    
+   {
+        "name": "Motosiklet",
+        "slug": "motosiklet",
+        "parent_slug": "tasitlar",
+    },
+
+    {
+            "name": "Scooter",
+            "slug": "scooter",
+            "parent_slug": "tasitlar",
+    },
+
     {
         "name": "Elektrikli",
         "slug": "elektrikli",
-        "parent_slug": None,
+        "parent_slug": "tasitlar",
     },
-
-
     {
         "name": "ATV / UTV",
         "slug": "atv-utv",
-        "parent_slug": None,
+        "parent_slug": "tasitlar",
     },
-
     {
         "name": "Bisiklet",
         "slug": "bisiklet",
-        "parent_slug": None,
+        "parent_slug": "tasitlar",
     },
-    
-    
+
+#taşıtlar dışındakiler
    
     {
         "name": "Yedek Parça",
         "slug": "yedek-parca",
         "parent_slug": None,
     },
+
     {
         "name": "Aksesuar",
         "slug": "aksesuar",
         "parent_slug": None,
     },
 
-{
+    {
         "name": "Bakim ve Temizlik",
         "slug": "bakim-ve-temizlik",
         "parent_slug": None,
     },
 
-  {
-        "name": "Scooter",
-        "slug": "scooter",
-        "parent_slug": None,
-    },
+  
 
 {
         "name": "Ekipman",

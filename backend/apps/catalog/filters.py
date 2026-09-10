@@ -1,13 +1,12 @@
 from django.db import models
 from django_filters import rest_framework as filters
 
-from .models import Product
+from .models import Category, Product
 
 
 class ProductFilter(filters.FilterSet):
     category = filters.CharFilter(
-        field_name="category__slug",
-        lookup_expr="iexact",
+        method="filter_category",
     )
 
     brand = filters.CharFilter(
@@ -18,9 +17,6 @@ class ProductFilter(filters.FilterSet):
     featured = filters.BooleanFilter(
         field_name="is_featured",
     )
-
-
-
 
     tag = filters.CharFilter(
         field_name="tags__slug",
@@ -38,9 +34,8 @@ class ProductFilter(filters.FilterSet):
             "brand",
             "featured",
             "tag",
-             "on_discount",
+            "on_discount",
         )
-
 
     def filter_on_discount(self, queryset, name, value):
         if not value:
@@ -50,4 +45,21 @@ class ProductFilter(filters.FilterSet):
             discount_price__isnull=False,
             discount_price__lt=models.F("price"),
         )
-       
+
+    def filter_category(self, queryset, name, value):
+        try:
+            category = Category.objects.get(slug=value)
+        except Category.DoesNotExist:
+            return queryset.none()
+
+        category_ids = self.get_descendant_category_ids(category)
+
+        return queryset.filter(category_id__in=category_ids)
+
+    def get_descendant_category_ids(self, category):
+        ids = [category.id]
+
+        for child in Category.objects.filter(parent=category):
+            ids.extend(self.get_descendant_category_ids(child))
+
+        return ids

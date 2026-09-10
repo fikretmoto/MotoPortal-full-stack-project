@@ -4,7 +4,7 @@ ECOMMERCE_ATTRIBUTE_DATA = [
         "name": "Model Yılı",
         "slug": "model-yili",
         "group_slug": "genel-bilgiler",
-        "data_type": "integer",
+        "data_type": "single_select",
         "unit": "",
         "display_order": 10,
         "is_filterable": True,
