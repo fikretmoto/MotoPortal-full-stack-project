@@ -85,31 +85,35 @@ export default async function CategorySlugLayout({
   )}
 
        <div className="flex gap-8">
-        {childCategories.length > 0 && (
-          <aside className={isVehicle ? "w-48 flex-none" : "w-72 flex-none"}>
-            <h2 className="mb-3 text-sm font-bold uppercase text-gray-900">
-              {category.name}
-            </h2>
-            <nav className="flex flex-col gap-2">
-              {childCategories.map((child) => (
-                <Link
-                  key={child.id}
-                  href={`/kategori/${child.slug}`}
-                  className="text-sm text-gray-700 hover:text-blue-700"
-                >
-                  {child.name}
-                </Link>
-              ))}
-            </nav>
+        {(childCategories.length > 0 || !isVehicle) && (
+  <aside className={isVehicle ? "w-48 flex-none" : "w-72 flex-none"}>
+    {childCategories.length > 0 && (
+      <>
+        <h2 className="mb-3 text-sm font-bold uppercase text-gray-900">
+          {category.name}
+        </h2>
+        <nav className="flex flex-col gap-2">
+          {childCategories.map((child) => (
+            <Link
+              key={child.id}
+              href={`/kategori/${child.slug}`}
+              className="text-sm text-gray-700 hover:text-blue-700"
+            >
+              {child.name}
+            </Link>
+          ))}
+        </nav>
+      </>
+    )}
 
-            {!isVehicle && (
-              <CategoryFilterSidebar
-                attributeGroups={attributeGroups}
-                brands={brands}
-              />
-            )}
-          </aside>
-        )}
+    {!isVehicle && (
+      <CategoryFilterSidebar
+        attributeGroups={attributeGroups}
+        brands={brands}
+      />
+    )}
+  </aside>
+)}
 
         <div className="flex-1">{children}</div>
       </div>
