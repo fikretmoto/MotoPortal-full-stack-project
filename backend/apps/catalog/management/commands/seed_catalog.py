@@ -21,6 +21,7 @@ from apps.catalog.attributes.parts import PARTS_ATTRIBUTE_DATA
 from apps.catalog.attributes.accessories import ACCESSORIES_ATTRIBUTE_DATA
 from apps.catalog.brands import BRAND_DATA
 from apps.catalog.categories import CATEGORY_DATA
+from apps.catalog.tags import TAG_DATA
 from apps.catalog.category_attributes.scooter import (
     SCOOTER_ATTRIBUTE_SLUGS,
     SCOOTER_CATEGORY_SLUGS,
@@ -75,6 +76,7 @@ from apps.catalog.models import (
     Brand,
     Category,
     CategoryAttribute,
+    Tag,
 )
 
 
@@ -90,6 +92,7 @@ class Command(BaseCommand):
         )
 
         self.seed_brands()
+        self.seed_tags()
         categories = self.seed_categories()
         groups = self.seed_attribute_groups()
         attributes = self.seed_attributes(groups)
@@ -432,6 +435,38 @@ class Command(BaseCommand):
             )
         )
 
+
+    def seed_tags(self):
+        tag_count = 0
+
+        for item in TAG_DATA:
+            _, created = Tag.objects.update_or_create(
+                slug=item["slug"],
+                defaults={
+                    "name": item["name"],
+                    "description": item["description"],
+                    "is_active": True,
+                },
+            )
+
+            tag_count += 1
+
+            if created:
+                self.stdout.write(
+                    self.style.SUCCESS(
+                        f"OLUŞTURULDU: Etiket -> {item['name']}"
+                    )
+                )
+
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"{tag_count} etiket hazır."
+            )
+        )
+
+  
+
+    
     def print_result(
         self,
         *,

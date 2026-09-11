@@ -288,6 +288,37 @@ CATEGORY_DATA = [
     },
 
             #ekipman alt kategorileri
+
+    {
+    "name": "Sırt Koruyucu",
+    "slug": "sirt-koruyucu",
+    "parent_slug": "koruma-ekipmani",
+},
+{
+    "name": "Göğüs Koruyucu",
+    "slug": "gogus-koruyucu",
+    "parent_slug": "koruma-ekipmani",
+},
+{
+    "name": "Dirseklik",
+    "slug": "dirseklik",
+    "parent_slug": "koruma-ekipmani",
+},
+{
+    "name": "Boyun Koruyucu",
+    "slug": "boyun-koruyucu",
+    "parent_slug": "koruma-ekipmani",
+},
+{
+    "name": "Zırhlı Gömlek / Yelek",
+    "slug": "zirhli-gomlek-yelek",
+    "parent_slug": "koruma-ekipmani",
+},
+{
+    "name": "Yedek Zırh",
+    "slug": "yedek-zirh",
+    "parent_slug": "koruma-ekipmani",
+},
             {
                 "name": "Motosiklet Montu",
                 "slug": "motosiklet-montu",
@@ -325,6 +356,12 @@ CATEGORY_DATA = [
                         {
                                 "name": "Kask",
                                 "slug": "kask",
+                                "parent_slug": "ekipman",
+                            },
+
+                             {
+                                "name": "Dizlik",
+                                "slug": "dizlik",
                                 "parent_slug": "ekipman",
                             },
                     

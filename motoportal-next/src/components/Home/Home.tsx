@@ -1,5 +1,5 @@
 import TagCategoryBlock from "./TagCategoryBlock/TagCategoryBlock";
-import { campaignTags, motorcycleCategories } from "@/constant/homepageBlocks";
+import { campaignTags, motorcycleCategories, gearTags, gearCategories,} from "@/constant/homepageBlocks";
 
 import Footer from "./Footer/Footer";
 
@@ -15,7 +15,12 @@ const Home = () => {
       <Navbar />
       <Hero />
       <PopularBrandsBar />
-      <TagCategoryBlock tags={campaignTags} categories={motorcycleCategories} />
+      <TagCategoryBlock title="Taşıt Fırsatları" tags={campaignTags} categories={motorcycleCategories} />
+       <TagCategoryBlock
+        title="Ekipman Fırsatları"
+        tags={gearTags}
+        categories={gearCategories}
+      />
       <Footer />
     </>
   );

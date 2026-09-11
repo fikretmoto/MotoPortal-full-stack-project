@@ -47,14 +47,24 @@ class ProductFilter(filters.FilterSet):
         )
 
     def filter_category(self, queryset, name, value):
-        try:
-            category = Category.objects.get(slug=value)
-        except Category.DoesNotExist:
+        slugs = [s.strip() for s in value.split(",") if s.strip()]
+
+        all_category_ids = []
+
+        for slug in slugs:
+            try:
+                category = Category.objects.get(slug=slug)
+            except Category.DoesNotExist:
+                continue
+
+            all_category_ids.extend(
+                self.get_descendant_category_ids(category)
+            )
+
+        if not all_category_ids:
             return queryset.none()
 
-        category_ids = self.get_descendant_category_ids(category)
-
-        return queryset.filter(category_id__in=category_ids)
+        return queryset.filter(category_id__in=all_category_ids)
 
     def get_descendant_category_ids(self, category):
         ids = [category.id]

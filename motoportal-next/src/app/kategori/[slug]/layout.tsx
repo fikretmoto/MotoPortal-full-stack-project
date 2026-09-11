@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBrands, getCategories } from "@/services/catalog";
-import type { Category } from "@/services/catalog";
+import { getBrands, getCategories, getCategoryAttributes } from "@/services/catalog";
+import type { AttributeGroupWithAttributes, Category } from "@/services/catalog";
 import VehicleSearchBox from "@/components/product/VehicleSearchBox";
+import CategoryFilterSidebar from "@/components/product/CategoryFilterSidebar";
 
 
 const VEHICLE_ROOT_SLUGS = ["tasitlar"];
@@ -47,6 +48,20 @@ export default async function CategorySlugLayout({
     (c) => c.parent === category.id
   );
 
+
+  const isVehicle = VEHICLE_ROOT_SLUGS.includes(trail[0].slug);
+
+  let attributeGroups: AttributeGroupWithAttributes[] = [];
+  if (!isVehicle) {
+    try {
+      const categoryAttributes = await getCategoryAttributes(slug);
+      attributeGroups = categoryAttributes.attribute_groups;
+    } catch {
+      attributeGroups = [];
+    }
+  }
+
+  
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
       <nav className="mb-4 text-sm text-gray-500">
@@ -69,9 +84,9 @@ export default async function CategorySlugLayout({
     <VehicleSearchBox childCategories={childCategories} brands={brands} />
   )}
 
-      <div className="flex gap-8">
+       <div className="flex gap-8">
         {childCategories.length > 0 && (
-          <aside className="w-48 flex-none">
+          <aside className={isVehicle ? "w-48 flex-none" : "w-72 flex-none"}>
             <h2 className="mb-3 text-sm font-bold uppercase text-gray-900">
               {category.name}
             </h2>
@@ -86,6 +101,13 @@ export default async function CategorySlugLayout({
                 </Link>
               ))}
             </nav>
+
+            {!isVehicle && (
+              <CategoryFilterSidebar
+                attributeGroups={attributeGroups}
+                brands={brands}
+              />
+            )}
           </aside>
         )}
 

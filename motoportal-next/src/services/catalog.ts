@@ -273,7 +273,27 @@ export async function getProductsByTag(
 }
 
 
+export async function getProductsByTagAndCategories(
+  tagSlug: string,
+  categorySlugs: string[]
+): Promise<Product[]> {
+  const categoryParam = categorySlugs.join(",");
 
+  const response = await fetch(
+    `${API_URL}/products/?tag=${tagSlug}&category=${categoryParam}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    return [];
+  }
+
+  const data: PaginatedResponse<Product> = await response.json();
+
+  return data.results;
+}
 
 export async function getProductsByCategory(
   categorySlug: string
