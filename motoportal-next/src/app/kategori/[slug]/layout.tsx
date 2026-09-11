@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBrands, getCategories, getCategoryAttributes } from "@/services/catalog";
-import type { AttributeGroupWithAttributes, Category } from "@/services/catalog";
+import { getBrands, getCategories, getBrandsByCategory, getCategoryAttributes } from "@/services/catalog";
+import type { AttributeGroupWithAttributes, Brand, Category } from "@/services/catalog";
 import VehicleSearchBox from "@/components/product/VehicleSearchBox";
 import CategoryFilterSidebar from "@/components/product/CategoryFilterSidebar";
 
@@ -52,6 +52,7 @@ export default async function CategorySlugLayout({
   const isVehicle = VEHICLE_ROOT_SLUGS.includes(trail[0].slug);
 
   let attributeGroups: AttributeGroupWithAttributes[] = [];
+  let categoryBrands: Brand[] = [];
   if (!isVehicle) {
     try {
       const categoryAttributes = await getCategoryAttributes(slug);
@@ -59,6 +60,8 @@ export default async function CategorySlugLayout({
     } catch {
       attributeGroups = [];
     }
+
+    categoryBrands = await getBrandsByCategory(slug);
   }
 
   
@@ -109,7 +112,7 @@ export default async function CategorySlugLayout({
     {!isVehicle && (
       <CategoryFilterSidebar
         attributeGroups={attributeGroups}
-        brands={brands}
+         brands={categoryBrands}
       />
     )}
   </aside>

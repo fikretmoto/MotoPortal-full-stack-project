@@ -211,6 +211,26 @@ export async function getBrands(): Promise<Brand[]> {
   return data;
 }
 
+
+
+export async function getBrandsByCategory(
+  categorySlug: string
+): Promise<Brand[]> {
+  const response = await fetch(
+    `${API_URL}/categories/${categorySlug}/brands/`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    return [];
+  }
+
+  const data: Brand[] = await response.json();
+
+  return data;
+}
 export async function getProducts(): Promise<Product[]> {
   const response = await fetch(
     `${API_URL}/products/`,

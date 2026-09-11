@@ -6,6 +6,7 @@ from .views import (
     CategoryAttributesAPIView,
     CategoryDetailAPIView,
     CategoryListAPIView,
+    CategoryBrandListAPIView,
     FavoriteListAPIView,
     FavoriteToggleAPIView,
     HomepageBandByTagAPIView,
@@ -67,6 +68,13 @@ urlpatterns = [
         "categories/<slug:slug>/attributes/",
         CategoryAttributesAPIView.as_view(),
         name="category-attributes",
+    ),
+
+
+ path(
+        "categories/<slug:slug>/brands/",
+        CategoryBrandListAPIView.as_view(),
+        name="category-brands",
     ),
 
     path(

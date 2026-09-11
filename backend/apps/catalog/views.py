@@ -23,6 +23,15 @@ from .serializers import (
     InstallmentOptionSerializer,
 )
 
+
+def get_descendant_category_ids(category):
+    ids = [category.id]
+
+    for child in Category.objects.filter(parent=category):
+        ids.extend(get_descendant_category_ids(child))
+
+    return ids
+
 class CategoryListAPIView(generics.ListAPIView):
     serializer_class = CategorySerializer
     pagination_class = None
@@ -111,6 +120,30 @@ class BrandDetailAPIView(generics.RetrieveAPIView):
     def get_queryset(self):
         return Brand.objects.filter(is_active=True)
 
+
+class CategoryBrandListAPIView(generics.ListAPIView):
+    serializer_class = BrandSerializer
+    pagination_class = None
+
+    def get_queryset(self):
+        category = generics.get_object_or_404(
+            Category.objects.filter(is_active=True),
+            slug=self.kwargs["slug"],
+        )
+        category_ids = get_descendant_category_ids(category)
+
+        brand_ids = (
+            Product.objects
+            .filter(category_id__in=category_ids, is_active=True)
+            .values_list("brand_id", flat=True)
+            .distinct()
+        )
+
+        return (
+            Brand.objects
+            .filter(id__in=brand_ids, is_active=True)
+            .order_by("name")
+        )
 
 class ProductListAPIView(generics.ListAPIView):
     serializer_class = ProductListSerializer
