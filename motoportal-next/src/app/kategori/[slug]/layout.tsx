@@ -44,9 +44,19 @@ export default async function CategorySlugLayout({
   }
 
   const trail = getAncestorTrail(category, categories);
-  const childCategories = categories.filter(
+
+  const ownChildren = categories.filter(
     (c) => c.parent === category.id
   );
+  const siblingCategories = categories.filter(
+    (c) => c.parent === category.parent
+  );
+
+  const sidebarItems = ownChildren.length > 0 ? ownChildren : siblingCategories;
+  const sidebarHeaderCategory =
+    ownChildren.length > 0
+      ? category
+      : categories.find((c) => c.id === category.parent) ?? category;
 
 
   const isVehicle = VEHICLE_ROOT_SLUGS.includes(trail[0].slug);
@@ -83,26 +93,33 @@ export default async function CategorySlugLayout({
       </nav>
 
 
-   {VEHICLE_ROOT_SLUGS.includes(trail[0].slug) && (
-    <VehicleSearchBox childCategories={childCategories} brands={brands} />
+   {isVehicle && (
+    <VehicleSearchBox childCategories={ownChildren} brands={brands} />
   )}
 
        <div className="flex gap-8">
-        {(childCategories.length > 0 || !isVehicle) && (
+        {(sidebarItems.length > 0 || !isVehicle) && (
   <aside className={isVehicle ? "w-48 flex-none" : "w-72 flex-none"}>
-    {childCategories.length > 0 && (
+    {sidebarItems.length > 0 && (
       <>
-        <h2 className="mb-3 text-sm font-bold uppercase text-gray-900">
-          {category.name}
-        </h2>
+        <Link
+          href={`/kategori/${sidebarHeaderCategory.slug}`}
+          className="mb-3 block text-sm font-bold uppercase text-gray-900 hover:text-blue-700"
+        >
+          {sidebarHeaderCategory.name}
+        </Link>
         <nav className="flex flex-col gap-2">
-          {childCategories.map((child) => (
+          {sidebarItems.map((item) => (
             <Link
-              key={child.id}
-              href={`/kategori/${child.slug}`}
-              className="text-sm text-gray-700 hover:text-blue-700"
+              key={item.id}
+              href={`/kategori/${item.slug}`}
+              className={
+                item.id === category.id
+                  ? "text-sm font-bold text-blue-700"
+                  : "text-sm text-gray-700 hover:text-blue-700"
+              }
             >
-              {child.name}
+              {item.name}
             </Link>
           ))}
         </nav>
@@ -112,7 +129,7 @@ export default async function CategorySlugLayout({
     {!isVehicle && (
       <CategoryFilterSidebar
         attributeGroups={attributeGroups}
-         brands={categoryBrands}
+        brands={categoryBrands}
       />
     )}
   </aside>
