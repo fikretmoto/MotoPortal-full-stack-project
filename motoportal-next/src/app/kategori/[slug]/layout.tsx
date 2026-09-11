@@ -53,10 +53,7 @@ export default async function CategorySlugLayout({
   );
 
   const sidebarItems = ownChildren.length > 0 ? ownChildren : siblingCategories;
-  const sidebarHeaderCategory =
-    ownChildren.length > 0
-      ? category
-      : categories.find((c) => c.id === category.parent) ?? category;
+  const sidebarHeaderCategory = trail[0];
 
 
   const isVehicle = VEHICLE_ROOT_SLUGS.includes(trail[0].slug);
