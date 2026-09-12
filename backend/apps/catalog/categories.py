@@ -456,14 +456,14 @@ CATEGORY_DATA = [
     },
 
      {
-        "name": "4 Çeker",
-        "slug": "4-ceker",
+        "name": "ATV",
+        "slug": "atv",
         "parent_slug": "atv-utv",
     },
 
-     {
-        "name": "2 Çeker",
-        "slug": "2-ceker",
+    {
+        "name": "UTV",
+        "slug": "utv",
         "parent_slug": "atv-utv",
     },
 

@@ -159,21 +159,7 @@ export const featuredPromo = {
   ctaHref: "#yeni-modeller",
 };
 
-export const popularBrandStripItems: NavItem[] = [
-  { label: "Honda", href: "#honda" },
-  { label: "Yamaha", href: "#yamaha" },
-  { label: "Kuba", href: "#kuba" },
-  { label: "Mondial", href: "#mondial" },
-  { label: "RKS", href: "#rks" },
-  { label: "Arora", href: "#arora" },
-  { label: "SYM", href: "#sym" },
-  { label: "Kymco", href: "#kymco" },
-  { label: "Regal Raptor", href: "#regal-raptor" },
-  { label: "Yuki", href: "#yuki" },
-  { label: "Suzuki", href: "#suzuki" },
-  { label: "Peugeot", href: "#peugeot" },
-  { label: "Tüm Markalar", href: "#markalar" },
-];
+
 
 export const homeCategoryItems: HomeCategoryItem[] = [
   { label: "Motosiklet", href: "#motosiklet" },
@@ -253,9 +239,3 @@ export const socialLinks: SocialLink[] = [
   { label: "TikTok", href: "#" },
 ];
 
-export const routeMismatchNotes = [
-  "Next.js tarafında şu anda yalnızca '/' ve '/products/[slug]' route'ları kesin mevcut. '/brands' ve '/blog' menüde kullanılıyor ama app router altında henüz sayfa dosyaları görünmüyor.",
-  "Backend kategori slug'larında 'cup', '50 cc scooter', '125 cc scooter', '150 cc scooter', '250 cc scooter', '250 cc üstü scooter', 'e-bike', 'e-pikap', '249 watt e-scooter', 'e-servis tipi', 'kask-ekipman', 'takas' ve '2. el' için birebir slug kaydı görünmüyor.",
-  "Backend'de 'e-kasali' slug'ı var, ancak tasarım brief'inde istenen isim 'E-Pikap'. Bu görevde backend slug üretilmediği için frontend tarafında güvenli placeholder anchor link kullanıldı.",
-  "Backend'de 'bakim-urunleri' mevcut, fakat tasarımdaki 'Kask & Ekipman' birleşik bir kategori değil; mevcut veride ayrı olarak 'kask' ve 'mont' alt kategorileri bulunuyor.",
-];

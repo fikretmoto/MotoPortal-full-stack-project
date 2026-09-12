@@ -549,6 +549,9 @@ class ProductWriteSerializer(serializers.ModelSerializer):
             "id",
         )
 
+    def create(self, validated_data):
+        validated_data["is_active"] = False
+        return super().create(validated_data)
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
