@@ -3,10 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useRef } from "react";
 
 const motorcycleBrands = [
-  { name: "Honda", logo: "/brands/honda.svg", href: "#brands", offer: "%15 indirim",   maxH: "max-h-10"},
+  { name: "Honda", logo: "/brands/honda.svg", href: "#brands", offer: "%15 indirim", maxH: "max-h-10" },
   { name: "Yamaha", logo: "/brands/yamaha.svg", href: "#brands", offer: "Seçili ürünlerde %20" },
   { name: "Suzuki", logo: "/brands/suzuki.svg", href: "#brands", offer: "%10 indirim" },
   { name: "TVS", logo: "/brands/tvs.svg", href: "#brands", offer: "%25'e varan" },
@@ -39,23 +39,18 @@ const bicycleBrands = [
   { name: "Mosso", href: "#brands", offer: "Seçili modellerde %20" },
 ];
 
-const PER_VIEW = 5;
-
 const ArrowButton = ({
   direction,
   onClick,
-  disabled,
 }: {
   direction: "prev" | "next";
   onClick: () => void;
-  disabled: boolean;
 }) => (
   <button
     type="button"
     onClick={onClick}
-    disabled={disabled}
     aria-label={direction === "prev" ? "Önceki markalar" : "Sonraki markalar"}
-    className={`absolute top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-black/15 text-black/60 transition hover:border-black/50 hover:text-black disabled:opacity-25 disabled:hover:border-black/15 disabled:hover:text-black/60 ${
+    className={`absolute top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-black/15 bg-white text-black/60 transition hover:border-black/50 hover:text-black ${
       direction === "prev" ? "left-0" : "right-0"
     }`}
   >
@@ -68,11 +63,12 @@ const ArrowButton = ({
 );
 
 const PopularBrandsBar = () => {
-  const [motoIndex, setMotoIndex] = useState(0);
-  const [bikeIndex, setBikeIndex] = useState(0);
+  const motoRef = useRef<HTMLDivElement>(null);
+  const bikeRef = useRef<HTMLDivElement>(null);
 
-  const motoMax = Math.max(0, motorcycleBrands.length - PER_VIEW);
-  const bikeMax = Math.max(0, bicycleBrands.length - PER_VIEW);
+  const scroll = (ref: React.RefObject<HTMLDivElement | null>, dir: 1 | -1) => {
+    ref.current?.scrollBy({ left: dir * ref.current.clientWidth, behavior: "smooth" });
+  };
 
   return (
     <div className="border-b border-black/10 bg-white">
@@ -84,49 +80,36 @@ const PopularBrandsBar = () => {
             Öne Çıkan Motosiklet Markaları
           </h2>
 
-          <div className="relative px-12 sm:px-16">
-            <ArrowButton
-              direction="prev"
-              onClick={() => setMotoIndex((i) => Math.max(0, i - 1))}
-              disabled={motoIndex === 0}
-            />
-            <ArrowButton
-              direction="next"
-              onClick={() => setMotoIndex((i) => Math.min(motoMax, i + 1))}
-              disabled={motoIndex === motoMax}
-            />
+          <div className="relative px-10 sm:px-12">
+            <ArrowButton direction="prev" onClick={() => scroll(motoRef, -1)} />
+            <ArrowButton direction="next" onClick={() => scroll(motoRef, 1)} />
 
-            <div className="overflow-hidden">
-              <div
-                className="flex transition-transform duration-500 ease-out"
-                style={{ transform: `translateX(-${motoIndex * (100 / PER_VIEW)}%)` }}
-              >
-                {motorcycleBrands.map((brand) => (
-                  <div
-                    key={brand.name}
-                    className="w-1/5 shrink-0 border-r border-black/10 px-4 last:border-r-0"
-                  >
-                    <Link
-                      href={brand.href}
-                      aria-label={brand.name}
-                      className="group flex flex-col items-center gap-2.5"
-                    >
-                      <span className="flex h-9 w-full items-center justify-center">
-                        <Image
-                          src={brand.logo}
-                          alt={brand.name}
-                          width={140}
-                          height={36}
-                         className={`h-auto ${brand.maxH ?? "max-h-7"} w-auto max-w-full object-contain opacity-85 transition group-hover:opacity-100`}
-                        />
-                      </span>
-                      <span className="text-center text-[13px] font-semibold text-black/55 transition group-hover:text-black/80">
-                        {brand.offer}
-                      </span>
-                    </Link>
-                  </div>
-                ))}
-              </div>
+            <div
+              ref={motoRef}
+              className="grid grid-flow-col auto-cols-[33.333%] gap-x-3 overflow-x-auto scroll-smooth [&::-webkit-scrollbar]:hidden sm:gap-x-4 lg:auto-cols-[12.5%] lg:gap-x-6"
+              style={{ scrollbarWidth: "none" }}
+            >
+              {motorcycleBrands.map((brand) => (
+                <Link
+                  key={brand.name}
+                  href={brand.href}
+                  aria-label={brand.name}
+                  className="group flex flex-col items-center gap-2 sm:gap-2.5"
+                >
+                  <span className="flex h-9 w-full items-center justify-center">
+                    <Image
+                      src={brand.logo}
+                      alt={brand.name}
+                      width={140}
+                      height={36}
+                      className={`h-auto ${brand.maxH ?? "max-h-7"} w-auto max-w-full object-contain opacity-85 transition group-hover:opacity-100`}
+                    />
+                  </span>
+                  <span className="text-center text-[11px] font-semibold text-black/55 transition group-hover:text-black/80 sm:text-[13px]">
+                    {brand.offer}
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -137,42 +120,29 @@ const PopularBrandsBar = () => {
             Öne Çıkan Bisiklet Markaları
           </h2>
 
-          <div className="relative px-12 sm:px-16">
-            <ArrowButton
-              direction="prev"
-              onClick={() => setBikeIndex((i) => Math.max(0, i - 1))}
-              disabled={bikeIndex === 0}
-            />
-            <ArrowButton
-              direction="next"
-              onClick={() => setBikeIndex((i) => Math.min(bikeMax, i + 1))}
-              disabled={bikeIndex === bikeMax}
-            />
+          <div className="relative px-10 sm:px-12">
+            <ArrowButton direction="prev" onClick={() => scroll(bikeRef, -1)} />
+            <ArrowButton direction="next" onClick={() => scroll(bikeRef, 1)} />
 
-            <div className="overflow-hidden">
-              <div
-                className="flex transition-transform duration-500 ease-out"
-                style={{ transform: `translateX(-${bikeIndex * (100 / PER_VIEW)}%)` }}
-              >
-                {bicycleBrands.map((brand) => (
-                  <div
-                    key={brand.name}
-                    className="w-1/5 shrink-0 border-r border-black/10 px-4 last:border-r-0"
-                  >
-                    <Link
-                      href={brand.href}
-                      className="group flex flex-col items-center gap-2.5"
-                    >
-                      <span className="flex h-9 items-center text-[21px] font-extrabold tracking-[-0.02em] text-black">
-                        {brand.name}
-                      </span>
-                      <span className="text-center text-[13px] font-semibold text-black/55 transition group-hover:text-black/80">
-                        {brand.offer}
-                      </span>
-                    </Link>
-                  </div>
-                ))}
-              </div>
+            <div
+              ref={bikeRef}
+              className="grid grid-flow-col auto-cols-[33.333%] gap-x-3 overflow-x-auto scroll-smooth [&::-webkit-scrollbar]:hidden sm:gap-x-4 lg:auto-cols-[12.5%] lg:gap-x-6"
+              style={{ scrollbarWidth: "none" }}
+            >
+              {bicycleBrands.map((brand) => (
+                <Link
+                  key={brand.name}
+                  href={brand.href}
+                  className="group flex flex-col items-center gap-2 sm:gap-2.5"
+                >
+                  <span className="flex h-9 items-center text-[15px] font-extrabold tracking-[-0.02em] text-black sm:text-[21px]">
+                    {brand.name}
+                  </span>
+                  <span className="text-center text-[11px] font-semibold text-black/55 transition group-hover:text-black/80 sm:text-[13px]">
+                    {brand.offer}
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
