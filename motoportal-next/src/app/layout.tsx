@@ -37,6 +37,9 @@ export const metadata: Metadata = {
     default: "MotoPortal",
   },
   description: "Motor tutkunlarının dijital durağı",
+  verification: {
+    google: "jbr5m5E_8ykbpAxddBx1IPdrR1d6nYojYJMiJ0lNAJY",
+  },
 };
 
 export default function RootLayout({
