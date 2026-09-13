@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ProductHero from "@/components/product/ProductHero";
 
-import ProductDescription from "@/components/product/ProductDescription";
+import ProductCommercialTabs from "@/components/product/ProductCommercialTabs";
 
 import ProductTechnicalTabs from "@/components/product/ProductTechnicalTabs";
 import ProductReviews from "@/components/product/ProductReviews";
@@ -86,9 +86,7 @@ export default async function ProductDetailPage({
 
 
 
-<ProductDescription
-  description={product.description}
-/>
+<ProductCommercialTabs product={product} />
 
 
 <ProductTechnicalTabs

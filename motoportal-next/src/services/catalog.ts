@@ -502,3 +502,44 @@ export async function getCategoryAttributes(
 
   return response.json();
 }
+
+export type SiteContent = {
+  kargo_teslimat: string;
+  iade_degisim: string;
+  garanti_bilgisi: string;
+};
+
+export async function getSiteContent(): Promise<SiteContent> {
+  const response = await fetch(`${API_URL}/site-content/`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    return { kargo_teslimat: "", iade_degisim: "", garanti_bilgisi: "" };
+  }
+
+  return response.json();
+}
+
+export type InstallmentOption = {
+  id: number;
+  brand_slug: string | null;
+  category_slug: string | null;
+  bank_name: string;
+  installment_count: number;
+  rate: string;
+  display_order: number;
+};
+
+export async function getInstallmentOptions(): Promise<InstallmentOption[]> {
+  const response = await fetch(`${API_URL}/installment-options/`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    return [];
+  }
+
+  const data = await response.json();
+  return Array.isArray(data) ? data : data.results ?? [];
+}

@@ -135,7 +135,7 @@ ECOMMERCE_ATTRIBUTE_DATA = [
         "name": "Paket İçeriği",
         "slug": "paket-icerigi",
         "group_slug": "paket-icerigi",
-        "data_type": "text",
+        "data_type": "multi_select",
         "unit": "",
         "display_order": 400,
         "is_filterable": False,

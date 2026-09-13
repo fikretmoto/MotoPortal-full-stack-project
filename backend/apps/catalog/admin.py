@@ -127,6 +127,11 @@ class ProductAttributeValueInline(admin.TabularInline):
         unit = f" ({obj.attribute.unit})" if obj.attribute.unit else ""
         return f"{obj.attribute.name}{unit}"
 
+    def get_max_num(self, request, obj=None, **kwargs):
+        if obj is None:
+            return 0
+        return self.get_queryset(request).filter(product=obj).count()
+
 
 def create_attribute_group_inline(group):
     return type(
@@ -284,8 +289,41 @@ class ProductResourceInline(admin.TabularInline):
     extra = 1
     fields = ("title", "file", "display_order")
    
+class ProductAdminForm(forms.ModelForm):
+    paket_icerigi = forms.MultipleChoiceField(
+        required=False,
+        label="Paket İçeriği",
+        widget=forms.CheckboxSelectMultiple,
+    )
+
+    class Meta:
+        model = Product
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["paket_icerigi"].choices = [
+            (option.value, option.value)
+            for option in AttributeOption.objects.filter(
+                attribute__slug="paket-icerigi",
+                is_active=True,
+            ).order_by("display_order", "value")
+        ]
+
+        if self.instance and self.instance.pk:
+            self.fields["paket_icerigi"].initial = list(
+                ProductAttributeValue.objects.filter(
+                    product=self.instance,
+                    attribute__slug="paket-icerigi",
+                ).values_list("value", flat=True)
+            )
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    form = ProductAdminForm
+
     list_display = (
         "name",
         "brand",
@@ -361,6 +399,14 @@ class ProductAdmin(admin.ModelAdmin):
             },
         ),
         (
+            "Paket İçeriği",
+            {
+                "fields": (
+                    "paket_icerigi",
+                ),
+            },
+        ),
+        (
             "Sistem Bilgileri",
             {
                 "fields": (
@@ -396,6 +442,9 @@ class ProductAdmin(admin.ModelAdmin):
                 AttributeGroup.objects
                 .filter(
                     id__in=group_ids,
+                )
+                .exclude(
+                    slug="paket-icerigi",
                 )
                 .distinct()
                 .order_by(
@@ -492,6 +541,27 @@ class ProductAdmin(admin.ModelAdmin):
             missing_values,
             ignore_conflicts=True,
         )
+
+        selected_paket_icerigi = form.cleaned_data.get("paket_icerigi", [])
+
+        ProductAttributeValue.objects.filter(
+            product=product,
+            attribute__slug="paket-icerigi",
+        ).delete()
+
+        if selected_paket_icerigi:
+            paket_icerigi_attribute = Attribute.objects.get(slug="paket-icerigi")
+
+            ProductAttributeValue.objects.bulk_create(
+                [
+                    ProductAttributeValue(
+                        product=product,
+                        attribute=paket_icerigi_attribute,
+                        value=value,
+                    )
+                    for value in selected_paket_icerigi
+                ]
+            )
 
 
 @admin.register(ProductVariant)

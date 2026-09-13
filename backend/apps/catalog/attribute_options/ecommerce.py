@@ -45,4 +45,16 @@ ECOMMERCE_ATTRIBUTE_OPTION_DATA = [
     {"attribute_slug": "model-yili", "value": "2025", "display_order": 210},
     {"attribute_slug": "model-yili", "value": "2026", "display_order": 220},
     {"attribute_slug": "model-yili", "value": "2027", "display_order": 230},
+
+    # Paket İçeriği (multi_select)
+    {"attribute_slug": "paket-icerigi", "value": "Üst Çanta", "display_order": 10},
+    {"attribute_slug": "paket-icerigi", "value": "Yan Çanta Seti", "display_order": 20},
+    {"attribute_slug": "paket-icerigi", "value": "Cam Rüzgarlık/Siperlik", "display_order": 30},
+    {"attribute_slug": "paket-icerigi", "value": "Motor Koruma Demiri", "display_order": 40},
+    {"attribute_slug": "paket-icerigi", "value": "Bagaj Filesi/Ağı", "display_order": 50},
+    {"attribute_slug": "paket-icerigi", "value": "Alarm/Immobilizer", "display_order": 60},
+    {"attribute_slug": "paket-icerigi", "value": "El Koruması", "display_order": 70},
+    {"attribute_slug": "paket-icerigi", "value": "Sele Kılıfı", "display_order": 80},
+    {"attribute_slug": "paket-icerigi", "value": "Kilit Seti", "display_order": 90},
+    {"attribute_slug": "paket-icerigi", "value": "Kask", "display_order": 100},
 ]

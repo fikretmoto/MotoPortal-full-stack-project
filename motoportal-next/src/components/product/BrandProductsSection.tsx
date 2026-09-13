@@ -25,7 +25,7 @@ export default function BrandProductsSection({
   const [priceMax, setPriceMax] = useState("");
   const [selectedFacets, setSelectedFacets] = useState<Record<string, string[]>>({});
 
-  const [categoryAttributes, setCategoryAttributes] = useState
+  const [categoryAttributes, setCategoryAttributes] = useState<
     AttributeGroupWithAttributes[]
   >([]);
 
