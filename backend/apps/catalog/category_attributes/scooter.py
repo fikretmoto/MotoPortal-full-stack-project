@@ -6,6 +6,11 @@ from .ecommerce import (
 
 SCOOTER_CATEGORY_SLUGS = [
     "scooter",
+    "50cc-scooter",
+    "125cc-scooter",
+    "150-250cc-arasi-scooter",
+    "maxi-scooter-250cc",
+    "maxi-scooter-250cc-uzeri",
 ]
 
 

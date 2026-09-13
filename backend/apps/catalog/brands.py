@@ -85,8 +85,10 @@ BRAND_DATA = [
     {"name": "Tern", "slug": "tern", "country": "Tayvan", "founded_year": None, "website": "", "description": ""},
     {"name": "OLA", "slug": "ola", "country": "Hindistan", "founded_year": None, "website": "", "description": ""},
     {"name": "Peugeot", "slug": "peugeot", "country": "Fransa", "founded_year": None, "website": "", "description": ""},
-    {"name": "Umut", "slug": "umut", "country": "Türkiye", "founded_year": None, "website": "", "description": ""},
+    {"name": "Ümit", "slug": "umit", "country": "Türkiye", "founded_year": None, "website": "", "description": ""},
     {"name": "Gazelle", "slug": "gazelle", "country": "Hollanda", "founded_year": None, "website": "", "description": ""},
+    {"name": "Zontes", "slug": "zontes", "country": "Çin", "founded_year": 2003, "website": "", "description": ""},
+    {"name": "Benda", "slug": "benda", "country": "Çin", "founded_year": 2016, "website": "", "description": ""},
 
 
         # Ekipman Markaları (Kask/Giyim)

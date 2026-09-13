@@ -6,37 +6,37 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
 
 const motorcycleBrands = [
-  { name: "Honda", logo: "/brands/honda.svg", href: "#brands", offer: "%15 indirim", maxH: "max-h-10" },
-  { name: "Yamaha", logo: "/brands/yamaha.svg", href: "#brands", offer: "Seçili ürünlerde %20" },
-  { name: "Suzuki", logo: "/brands/suzuki.svg", href: "#brands", offer: "%10 indirim" },
-  { name: "TVS", logo: "/brands/tvs.svg", href: "#brands", offer: "%25'e varan" },
-  { name: "CFMOTO", logo: "/brands/cfmoto.png", href: "#brands", offer: "Seçili modellerde %12" },
-  { name: "SYM", logo: "/brands/sym.png", href: "#brands", offer: "%18'e varan", maxH: "max-h-12" },
-  { name: "Kymco", logo: "/brands/kymco.svg", href: "#brands", offer: "%15 indirim" },
-  { name: "Hero", logo: "/brands/hero.svg", href: "#brands", offer: "Seçili ürünlerde %20" },
-  { name: "QJ Motor", logo: "/brands/qj.svg", href: "#brands", offer: "%30'a varan" },
-  { name: "Zontes", logo: "/brands/zontes.svg", href: "#brands", offer: "%22'ye varan" },
-  { name: "Kuba", logo: "/brands/kuba.svg", href: "#brands", offer: "%10 indirim" },
-  { name: "RKS", logo: "/brands/rks.svg", href: "#brands", offer: "Seçili modellerde %15" },
-  { name: "Mondial", logo: "/brands/mondial.svg", href: "#brands", offer: "%20'ye varan" },
-  { name: "Yuki", logo: "/brands/yuki.svg", href: "#brands", offer: "%12 indirim" },
-  { name: "Arora", logo: "/brands/arora.svg", href: "#brands", offer: "%18'e varan" },
-  { name: "Benda", logo: "/brands/benda.svg", href: "#brands", offer: "Seçili modellerde %25" },
-  { name: "Peugeot", logo: "/brands/peugeot.svg", href: "#brands", offer: "%15 indirim" },
-  { name: "Regal Raptor", logo: "/brands/regal-raptor.svg", href: "#brands", offer: "%20'ye varan" },
-  { name: "Voge", logo: "/brands/voge.svg", href: "#brands", offer: "Seçili modellerde %18" },
-  { name: "Taro", logo: "/brands/taro.svg", href: "#brands", offer: "%14 indirim" },
-  { name: "Volta", logo: "/brands/volta.svg", href: "#brands", offer: "Elektriklide %25" },
+  { name: "Honda", slug: "honda", logo: "/brands/honda.svg", offer: "%15 indirim", maxH: "max-h-10" },
+  { name: "Yamaha", slug: "yamaha", logo: "/brands/yamaha.svg", offer: "Seçili ürünlerde %20" },
+  { name: "Suzuki", slug: "suzuki", logo: "/brands/suzuki.svg", offer: "%10 indirim" },
+  { name: "TVS", slug: "tvs", logo: "/brands/tvs.svg", offer: "%25'e varan" },
+  { name: "CFMOTO", slug: "cfmoto", logo: "/brands/cfmoto.png", offer: "Seçili modellerde %12" },
+  { name: "SYM", slug: "sym", logo: "/brands/sym.png", offer: "%18'e varan", maxH: "max-h-12" },
+  { name: "Kymco", slug: "kymco", logo: "/brands/kymco.svg", offer: "%15 indirim" },
+  { name: "Hero", slug: "hero", logo: "/brands/hero.svg", offer: "Seçili ürünlerde %20" },
+  { name: "QJ Motor", slug: "qj-motor", logo: "/brands/qj.svg", offer: "%30'a varan" },
+  { name: "Zontes", slug: "zontes", logo: "/brands/zontes.svg", offer: "%22'ye varan" },
+  { name: "Kuba", slug: "kuba", logo: "/brands/kuba.svg", offer: "%10 indirim" },
+  { name: "RKS", slug: "rks", logo: "/brands/rks.svg", offer: "Seçili modellerde %15" },
+  { name: "Mondial", slug: "mondial", logo: "/brands/mondial.svg", offer: "%20'ye varan" },
+  { name: "Yuki", slug: "yuki", logo: "/brands/yuki.svg", offer: "%12 indirim" },
+  { name: "Arora", slug: "arora", logo: "/brands/arora.svg", offer: "%18'e varan" },
+  { name: "Benda", slug: "benda", logo: "/brands/benda.svg", offer: "Seçili modellerde %25" },
+  { name: "Peugeot", slug: "peugeot", logo: "/brands/peugeot.svg", offer: "%15 indirim" },
+  { name: "Regal Raptor", slug: "regal-raptor", logo: "/brands/regal-raptor.svg", offer: "%20'ye varan" },
+  { name: "Voge", slug: "voge", logo: "/brands/voge.svg", offer: "Seçili modellerde %18" },
+  { name: "Taro", slug: "taro", logo: "/brands/taro.svg", offer: "%14 indirim" },
+  { name: "Volta", slug: "volta", logo: "/brands/volta.svg", offer: "Elektriklide %25" },
 ];
 
 const bicycleBrands = [
-  { name: "Bisan", href: "#brands", offer: "%20'ye varan" },
-  { name: "Carraro", href: "#brands", offer: "Seçili modellerde %15" },
-  { name: "Salcano", href: "#brands", offer: "%18 indirim" },
-  { name: "Kron", href: "#brands", offer: "%12 indirim" },
-  { name: "Corelli", href: "#brands", offer: "%25'e varan" },
-  { name: "Ümit", href: "#brands", offer: "%10 indirim" },
-  { name: "Mosso", href: "#brands", offer: "Seçili modellerde %20" },
+  { name: "Bisan", slug: "bisan", offer: "%20'ye varan" },
+  { name: "Carraro", slug: "carraro", offer: "Seçili modellerde %15" },
+  { name: "Salcano", slug: "salcano", offer: "%18 indirim" },
+  { name: "Kron", slug: "kron", offer: "%12 indirim" },
+  { name: "Corelli", slug: "corelli", offer: "%25'e varan" },
+  { name: "Ümit", slug: "umit", offer: "%10 indirim" },
+  { name: "Mosso", slug: "mosso", offer: "Seçili modellerde %20" },
 ];
 
 const ArrowButton = ({
@@ -92,7 +92,7 @@ const PopularBrandsBar = () => {
               {motorcycleBrands.map((brand) => (
                 <Link
                   key={brand.name}
-                  href={brand.href}
+                  href={`/marka/${brand.slug}`}
                   aria-label={brand.name}
                   className="group flex flex-col items-center gap-2 sm:gap-2.5"
                 >
@@ -132,7 +132,7 @@ const PopularBrandsBar = () => {
               {bicycleBrands.map((brand) => (
                 <Link
                   key={brand.name}
-                  href={brand.href}
+                  href={`/marka/${brand.slug}`}
                   className="group flex flex-col items-center gap-2 sm:gap-2.5"
                 >
                   <span className="flex h-9 items-center text-[15px] font-extrabold tracking-[-0.02em] text-black sm:text-[21px]">

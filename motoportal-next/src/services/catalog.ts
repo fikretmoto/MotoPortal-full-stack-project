@@ -273,6 +273,45 @@ export async function getProductsByBrand(
 
   return data.results;
 }
+
+
+export async function getProductsByBrandFiltered(
+  brandSlug: string,
+  params: {
+    category?: string;
+    priceMin?: string;
+    priceMax?: string;
+    facets?: string;
+  }
+): Promise<Product[]> {
+  const query = new URLSearchParams({ brand: brandSlug });
+  if (params.category) query.set("category", params.category);
+  if (params.facets) query.set("facets", params.facets);
+
+  const response = await fetch(`${API_URL}/products/?${query.toString()}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    return [];
+  }
+
+  const data: PaginatedResponse<Product> = await response.json();
+  let results = data.results;
+
+  if (params.priceMin) {
+    results = results.filter(
+      (p) => p.price && Number(p.price) >= Number(params.priceMin)
+    );
+  }
+  if (params.priceMax) {
+    results = results.filter(
+      (p) => p.price && Number(p.price) <= Number(params.priceMax)
+    );
+  }
+
+  return results;
+}
 export async function getProductsByTag(
   tagSlug: string
 ): Promise<Product[]> {
@@ -363,6 +402,24 @@ export async function getProductBySlug(
   if (!response.ok) {
     throw new Error(
       `Ürün detayı alınamadı. HTTP ${response.status}`
+    );
+  }
+
+  return response.json();
+}
+
+
+export async function getBrandBySlug(slug: string): Promise<Brand> {
+  const response = await fetch(
+    `${API_URL}/brands/${slug}/`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Marka detayı alınamadı. HTTP ${response.status}`
     );
   }
 
