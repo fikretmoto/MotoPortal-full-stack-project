@@ -13,6 +13,7 @@ const sampleProducts: Product[] = [
     is_featured: true,
     is_active: true,
     price: "285000",
+    discount_price: null,
     currency: "TRY",
     stock_status: "in_stock",
     badges: [
@@ -34,6 +35,7 @@ const sampleProducts: Product[] = [
     is_featured: false,
     is_active: true,
     price: "310000",
+    discount_price: null,
     currency: "TRY",
     stock_status: "out_of_stock",
     badges: [{ type: "out_of_stock", label: "Tükendi" }],
@@ -52,6 +54,7 @@ const sampleProducts: Product[] = [
     is_featured: false,
     is_active: true,
     price: "89000",
+    discount_price: "82000",
     currency: "TRY",
     stock_status: "low_stock",
     badges: [

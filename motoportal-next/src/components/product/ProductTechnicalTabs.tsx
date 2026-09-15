@@ -60,22 +60,22 @@ export default function ProductTechnicalTabs({
     <Accordion type="multiple" className="w-full">
       {groupList.map((group) => (
         <AccordionItem key={group.slug} value={group.slug}>
-          <AccordionTrigger className="text-base font-semibold text-gray-900">
+          <AccordionTrigger className="text-base font-semibold text-foreground">
             {group.name}
           </AccordionTrigger>
 
           <AccordionContent>
-            <div className="overflow-hidden rounded-xl border border-gray-200">
+            <div className="overflow-hidden rounded-xl border border-line">
               {group.attributes.map((attribute) => (
                 <div
                   key={attribute.id}
-                  className="grid grid-cols-[160px_1fr] items-center gap-4 border-b border-gray-100 bg-white px-4 py-3 last:border-b-0"
+                  className="grid grid-cols-[160px_1fr] items-center gap-4 border-b border-line bg-card px-4 py-3 last:border-b-0"
                 >
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-fg-muted">
                     {attribute.name}
                   </span>
 
-                  <span className="text-sm font-medium text-gray-900">
+                  <span className="text-sm font-medium text-foreground">
                     {attribute.value}
                     {attribute.unit ? ` ${attribute.unit}` : ""}
                   </span>
@@ -91,11 +91,11 @@ export default function ProductTechnicalTabs({
   return (
     <section className="mt-12">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-wide text-gray-500">
+        <p className="text-sm font-semibold uppercase tracking-wide text-fg-muted">
           Teknik Detaylar
         </p>
 
-        <h2 className="mt-2 text-2xl font-bold text-gray-900">
+        <h2 className="mt-2 text-2xl font-bold text-foreground">
           Teknik Özellikler
         </h2>
       </div>

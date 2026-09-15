@@ -101,7 +101,7 @@ export default function ProductCommercialTabs({ product }: Props) {
         </TabsList>
 
         <TabsContent value="aciklama">
-          <p className="whitespace-pre-line leading-8 text-gray-600">
+          <p className="whitespace-pre-line leading-8 text-fg-muted">
             {product.description?.trim()
               ? product.description
               : "Henüz açıklama eklenmemiş."}
@@ -110,14 +110,14 @@ export default function ProductCommercialTabs({ product }: Props) {
 
         <TabsContent value="taksit">
           {relevantInstallments.length === 0 || price === null ? (
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-fg-muted">
               Bu ürün için taksit seçeneği tanımlanmamış.
             </p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
                 <thead>
-                  <tr className="border-b border-gray-200 text-gray-500">
+                  <tr className="border-b border-line text-fg-muted">
                     <th className="py-2 pr-4 font-medium">Banka</th>
                     <th className="py-2 pr-4 font-medium">Taksit Sayısı</th>
                     <th className="py-2 pr-4 font-medium">Vade Farkı</th>
@@ -132,7 +132,7 @@ export default function ProductCommercialTabs({ product }: Props) {
                     const monthly = total / option.installment_count;
 
                     return (
-                      <tr key={option.id} className="border-b border-gray-100">
+                      <tr key={option.id} className="border-b border-line">
                         <td className="py-2 pr-4">{option.bank_name}</td>
                         <td className="py-2 pr-4">
                           {option.installment_count}
@@ -154,25 +154,25 @@ export default function ProductCommercialTabs({ product }: Props) {
         </TabsContent>
 
         <TabsContent value="kargo">
-          <p className="whitespace-pre-line leading-8 text-gray-600">
+          <p className="whitespace-pre-line leading-8 text-fg-muted">
             {siteContent?.kargo_teslimat || "-"}
           </p>
         </TabsContent>
 
         <TabsContent value="iade">
-          <p className="whitespace-pre-line leading-8 text-gray-600">
+          <p className="whitespace-pre-line leading-8 text-fg-muted">
             {siteContent?.iade_degisim || "-"}
           </p>
         </TabsContent>
 
         <TabsContent value="garanti">
-          <p className="whitespace-pre-line leading-8 text-gray-600">
+          <p className="whitespace-pre-line leading-8 text-fg-muted">
             {siteContent?.garanti_bilgisi || "-"}
           </p>
         </TabsContent>
 
         <TabsContent value="takas">
-          <p className="whitespace-pre-line leading-8 text-gray-600">
+          <p className="whitespace-pre-line leading-8 text-fg-muted">
             Takas teklifleri için ürün sahibiyle iletişime geçebilirsiniz.
             Detaylı takas bilgilendirme formu yakında eklenecektir.
           </p>
@@ -187,7 +187,7 @@ export default function ProductCommercialTabs({ product }: Props) {
                     href={resource.file_url ?? undefined}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                    className="text-primary underline underline-offset-2 hover:text-primary-hover"
                   >
                     {resource.title}
                   </a>

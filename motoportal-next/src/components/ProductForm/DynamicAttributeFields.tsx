@@ -14,7 +14,7 @@ export function DynamicAttributeFields({ attributeGroups, values, onChange }: Dy
     <div className="space-y-8">
       {attributeGroups.map((group) => (
         <div key={group.slug} className="space-y-4">
-          <h3 className="text-sm font-semibold text-gray-700 border-b pb-1">
+          <h3 className="text-sm font-semibold text-fg-muted border-b pb-1">
             {group.name}
           </h3>
 

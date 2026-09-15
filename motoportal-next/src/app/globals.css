@@ -49,6 +49,7 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -60,6 +61,26 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* =========================
+     MP TEMASI — motoportal.com.tr'den örneklenen
+     koyu, garaj/endüstriyel tema, pas-turuncu vurgu rengi.
+     (bkz. https://github.com/coderentr/MP src/index.css)
+     ========================= */
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-elevated: var(--elevated);
+  --color-background-soft: var(--background-soft);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --color-accent-blue: var(--accent-blue);
+  --color-inverted: var(--inverted);
+  --color-inverted-fg: var(--inverted-fg);
 }
 
 /* =========================
@@ -72,6 +93,7 @@
 
 html {
   background: var(--background);
+  color-scheme: dark;
 }
 
 body {
@@ -94,38 +116,55 @@ body {
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --background: #0a0a0a;
+  --foreground: #fffefc;
+  --card: #171717;
+  --card-foreground: #fffefc;
+  --popover: #171717;
+  --popover-foreground: #fffefc;
+  --primary: #c8452c;
+  --primary-hover: #a83722;
+  --primary-foreground: #ffffff;
+  --secondary: #1a1917;
+  --secondary-foreground: #fffefc;
+  --muted: #111111;
+  --muted-foreground: #b3aca3;
+  --accent: #1e1e1e;
+  --accent-foreground: #fffefc;
+  --destructive: #e40014;
+  --border: #262626;
+  --input: #262626;
+  --ring: #c8452c;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: #171717;
+  --sidebar-foreground: #fffefc;
+  --sidebar-primary: #c8452c;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1e1e1e;
+  --sidebar-accent-foreground: #fffefc;
+  --sidebar-border: #262626;
+  --sidebar-ring: #c8452c;
+
+  /* MP temasına özel ham token'lar */
+  --surface: #171717;
+  --surface-hover: #1e1e1e;
+  --elevated: #1a1917;
+  --background-soft: #111111;
+  --line: #262626;
+  --line-soft: #2e2e2e;
+  --fg: #fffefc;
+  --fg-muted: #b3aca3;
+  --fg-subtle: #737373;
+  --danger: #e40014;
+  --success: #16a34a;
+  --accent-blue: #1447e6;
+  --inverted: #ffffff;
+  --inverted-fg: #0a0a0a;
 }
 
 .dark {
@@ -171,5 +210,17 @@ body {
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer utilities {
+  .bg-diagonal-stripes {
+    background-image: repeating-linear-gradient(135deg, #211f1d 0 14px, #1a1917 14px 28px);
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 }

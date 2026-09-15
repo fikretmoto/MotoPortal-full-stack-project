@@ -34,7 +34,7 @@ const MainNav = () => {
           <button
             type="button"
             aria-label={topBarContent.searchButtonLabel}
-            className="inline-flex h-11 w-12 items-center justify-center bg-[#e10600] text-white transition hover:bg-[#c90500]"
+            className="inline-flex h-11 w-12 items-center justify-center bg-primary text-primary-foreground transition hover:bg-primary-hover"
           >
             <Search className="h-4 w-4" />
           </button>
@@ -58,7 +58,7 @@ const MainNav = () => {
             <button
               type="button"
               aria-label={topBarContent.searchButtonLabel}
-              className="inline-flex h-13 w-14 items-center justify-center bg-[#e10600] text-white transition hover:bg-[#c90500]"
+              className="inline-flex h-13 w-14 items-center justify-center bg-primary text-primary-foreground transition hover:bg-primary-hover"
             >
               <Search className="h-5 w-5" />
             </button>
@@ -77,7 +77,7 @@ const MainNav = () => {
                   <span className="relative inline-flex h-8 w-8 items-center justify-center">
                     <Icon className="h-5 w-5" />
                     {action.badge ? (
-                      <span className="absolute -right-1 -top-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-[#e10600] px-1 text-[10px] font-bold text-white">
+                      <span className="absolute -right-1 -top-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
                         {action.badge}
                       </span>
                     ) : null}

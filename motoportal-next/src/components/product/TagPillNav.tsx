@@ -18,8 +18,8 @@ export default function TagPillNav() {
             href={tag.href}
             className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
               isActive
-                ? "bg-blue-700 text-white"
-                : "bg-gray-900 text-white hover:opacity-80"
+                ? "bg-primary text-primary-foreground"
+                : "bg-surface text-foreground hover:opacity-80"
             }`}
           >
             {tag.label}

@@ -71,6 +71,7 @@ export type Product = {
   is_featured: boolean;
   is_active: boolean;
   price: string | null;
+  discount_price: string | null;
   currency: string;
   stock_status: string;
   badges: ProductBadge[];

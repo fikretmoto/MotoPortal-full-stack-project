@@ -366,6 +366,7 @@ class ProductListSerializer(ProductBadgeMixin, ProductRatingMixin, ProductFavori
             "is_featured",
             "is_active",
             "price",
+            "discount_price",
             "currency",
             "stock_status",
             "badges",

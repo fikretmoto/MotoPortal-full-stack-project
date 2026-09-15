@@ -152,7 +152,7 @@ const MobileNav = ({
                               >
                                 <span>{item.label}</span>
                                 {item.badge ? (
-                                  <span className="rounded-md bg-[#e10600] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">
+                                  <span className="rounded-md bg-primary px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-primary-foreground">
                                     {item.badge}
                                   </span>
                                 ) : null}

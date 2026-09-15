@@ -23,7 +23,7 @@ const Footer = () => {
               <div>
                 <div className="flex items-end gap-1 text-[1.9rem] font-black uppercase tracking-tight">
                   <span className="text-white">Moto</span>
-                  <span className="text-[#e10600]">Portal</span>
+                  <span className="text-primary">Portal</span>
                 </div>
                 <p className="text-xs font-semibold uppercase tracking-[0.36em] text-white/60">
                   .COM.TR
@@ -70,7 +70,7 @@ const Footer = () => {
               />
               <button
                 type="button"
-                className="inline-flex h-12 w-12 items-center justify-center bg-[#e10600] text-white transition hover:bg-[#c90500]"
+                className="inline-flex h-12 w-12 items-center justify-center bg-primary text-primary-foreground transition hover:bg-primary-hover"
                 aria-label="Bultene kaydol"
               >
                 <Send className="h-4 w-4" />

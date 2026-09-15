@@ -28,10 +28,10 @@ export function ProductHighlightCarousel({
   return (
     <section className="mt-10">
       <div className="max-w-xl">
-        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-gray-900">
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
           Öne Çıkan Özellikler
         </h2>
-        <p className="mt-2 text-sm text-gray-500">
+        <p className="mt-2 text-sm text-fg-muted">
           Bu modeli farklı kılan detaylara yakından bakın.
         </p>
       </div>
@@ -43,8 +43,8 @@ export function ProductHighlightCarousel({
               key={attribute.id}
               className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
             >
-              <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-neutral-900 shadow-sm transition-shadow duration-300 hover:shadow-xl">
-                <div className="relative h-48 w-full overflow-hidden bg-neutral-800">
+              <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-surface shadow-sm transition-shadow duration-300 hover:shadow-xl">
+                <div className="relative h-48 w-full overflow-hidden bg-surface-hover">
                   {attribute.highlight_image_url ? (
                     <Image
                       src={attribute.highlight_image_url}
@@ -54,22 +54,22 @@ export function ProductHighlightCarousel({
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-sm text-neutral-500">
+                    <div className="flex h-full w-full items-center justify-center text-sm text-fg-subtle">
                       Görsel yok
                     </div>
                   )}
 
-                    <span className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                    <span className="absolute left-3 top-3 rounded-full bg-background/70 px-3 py-1 text-xs font-medium text-foreground backdrop-blur-sm">
                     {attribute.value}
                     {attribute.unit ? ` ${attribute.unit}` : ""}
                   </span>
                 </div>
-   
+
                 <div className="flex flex-1 flex-col gap-1.5 p-5">
-                  <h3 className="text-base font-semibold text-white">
+                  <h3 className="text-base font-semibold text-foreground">
                     {attribute.highlight_title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-neutral-400">
+                  <p className="text-sm leading-relaxed text-fg-muted">
                     {attribute.highlight_description}
                   </p>
                 </div>
@@ -79,8 +79,8 @@ export function ProductHighlightCarousel({
         </CarouselContent>
 
         <div className="mt-6 flex items-center gap-3">
-          <CarouselPrevious className="static translate-y-0 border-gray-300 bg-white text-gray-900 hover:bg-gray-100" />
-          <CarouselNext className="static translate-y-0 border-gray-300 bg-white text-gray-900 hover:bg-gray-100" />
+          <CarouselPrevious className="static translate-y-0 border-line bg-card text-foreground hover:bg-surface-hover" />
+          <CarouselNext className="static translate-y-0 border-line bg-card text-foreground hover:bg-surface-hover" />
         </div>
       </Carousel>
     </section>

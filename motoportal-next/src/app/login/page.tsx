@@ -44,7 +44,7 @@ function LoginForm() {
     <div className="flex min-h-screen items-center justify-center px-4">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm space-y-4 rounded-lg border border-gray-300 bg-white p-6 shadow-sm"
+        className="w-full max-w-sm space-y-4 rounded-lg border border-line bg-card p-6 shadow-sm"
       >
         <div>
           <label htmlFor="email" className="block text-sm font-medium">
@@ -56,7 +56,7 @@ function LoginForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-black"
+            className="mt-1 w-full rounded border border-line bg-card px-3 py-2 text-foreground"
           />
         </div>
 
@@ -70,12 +70,12 @@ function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-black"
+            className="mt-1 w-full rounded border border-line bg-card px-3 py-2 text-foreground"
           />
         </div>
 
         {error && (
-          <p role="alert" className="text-sm text-red-600">
+          <p role="alert" className="text-sm text-danger">
             {error}
           </p>
         )}
@@ -83,7 +83,7 @@ function LoginForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded bg-black px-4 py-2 text-white disabled:opacity-50"
+          className="w-full rounded bg-primary px-4 py-2 text-primary-foreground transition hover:bg-primary-hover disabled:opacity-50"
         >
           {isSubmitting ? "Giriş yapılıyor..." : "Giriş Yap"}
         </button>

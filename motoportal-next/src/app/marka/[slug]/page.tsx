@@ -45,10 +45,10 @@ export default async function BrandPage({ params }: Props) {
 
   return (
     <>
-      <div className="relative h-40 w-full bg-[#050505] sm:h-48">
+      <div className="relative h-40 w-full bg-elevated sm:h-48">
         {BRAND_LOGOS[slug] && (
           <div className="absolute left-1/2 top-full -mt-12 -translate-x-1/2">
-            <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-white bg-white shadow-lg">
+            <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-inverted bg-inverted shadow-lg">
               <Image
                 src={BRAND_LOGOS[slug]}
                 alt={brand.name}
@@ -65,12 +65,12 @@ export default async function BrandPage({ params }: Props) {
         <h1 className="text-2xl font-bold">{brand.name}</h1>
 
         {subtitleParts.length > 0 && (
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-fg-muted">
             {subtitleParts.join(" · ")}
           </p>
         )}
 
-        <p className="text-sm text-gray-500">{products.length} ürün</p>
+        <p className="text-sm text-fg-muted">{products.length} ürün</p>
       </div>
 
       <div className="mt-8">

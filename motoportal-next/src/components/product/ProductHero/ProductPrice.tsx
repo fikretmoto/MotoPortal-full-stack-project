@@ -11,7 +11,7 @@ export default function ProductPrice({
 }: ProductPriceProps) {
   if (!price) {
     return (
-      <p className="whitespace-nowrap text-lg font-semibold text-gray-700">
+      <p className="whitespace-nowrap text-lg font-semibold text-fg-muted">
         Fiyat için iletişime geçin
       </p>
     );
@@ -20,13 +20,13 @@ export default function ProductPrice({
   return (
     <div className="flex flex-wrap items-baseline gap-2">
       {discountPrice && (
-        <span className="whitespace-nowrap text-lg text-gray-400 line-through">
+        <span className="whitespace-nowrap text-lg text-fg-subtle line-through">
           {Number(price).toLocaleString("tr-TR")}{" "}
           {currency === "TRY" ? "₺" : currency}
         </span>
       )}
 
-      <span className="whitespace-nowrap text-3xl font-bold text-gray-900">
+      <span className="whitespace-nowrap text-3xl font-bold text-foreground">
         {Number(discountPrice ?? price).toLocaleString("tr-TR")}{" "}
         {currency === "TRY" ? "₺" : currency}
       </span>

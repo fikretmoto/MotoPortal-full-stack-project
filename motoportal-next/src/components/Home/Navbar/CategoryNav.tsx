@@ -39,26 +39,26 @@ const PromoMotorcycleArt = () => {
     >
       <defs>
         <linearGradient id="bikeBody" x1="72" y1="54" x2="355" y2="218">
-          <stop offset="0" stopColor="#ff554f" />
-          <stop offset="0.45" stopColor="#ff1d14" />
-          <stop offset="1" stopColor="#8f0909" />
+          <stop offset="0" stopColor="#e2652f" />
+          <stop offset="0.45" stopColor="#c8452c" />
+          <stop offset="1" stopColor="#6b2415" />
         </linearGradient>
         <linearGradient id="bikeDark" x1="116" y1="42" x2="332" y2="244">
           <stop offset="0" stopColor="#2a2d35" />
           <stop offset="1" stopColor="#0c0d10" />
         </linearGradient>
         <radialGradient id="bikeGlow" cx="0" cy="0" r="1" gradientTransform="translate(279 135) rotate(124.538) scale(148.541 189.377)">
-          <stop stopColor="#ff2a20" stopOpacity="0.45" />
-          <stop offset="1" stopColor="#ff2a20" stopOpacity="0" />
+          <stop stopColor="#c8452c" stopOpacity="0.45" />
+          <stop offset="1" stopColor="#c8452c" stopOpacity="0" />
         </radialGradient>
       </defs>
 
       <ellipse cx="286" cy="156" rx="136" ry="94" fill="url(#bikeGlow)" />
 
-      <circle cx="134" cy="214" r="48" fill="#090a0c" stroke="#8a0b0b" strokeWidth="10" />
+      <circle cx="134" cy="214" r="48" fill="#090a0c" stroke="#6b2415" strokeWidth="10" />
       <circle cx="134" cy="214" r="25" fill="#1d1f24" stroke="#d7d7d8" strokeWidth="4" />
 
-      <circle cx="324" cy="214" r="56" fill="#090a0c" stroke="#8a0b0b" strokeWidth="12" />
+      <circle cx="324" cy="214" r="56" fill="#090a0c" stroke="#6b2415" strokeWidth="12" />
       <circle cx="324" cy="214" r="28" fill="#1d1f24" stroke="#d7d7d8" strokeWidth="4" />
 
       <path
@@ -99,7 +99,7 @@ const PromoMotorcycleArt = () => {
       />
       <path
         d="M336 117H354L366 132H345L336 117Z"
-        fill="#ff3a30"
+        fill="#e2652f"
       />
       <path
         d="M154 111L116 87"
@@ -182,7 +182,7 @@ const CategoryNav = () => {
                   }}
                   className={`inline-flex h-[58px] min-w-0 items-center justify-center gap-1 whitespace-nowrap px-1 text-[10px] font-semibold tracking-tight transition xl:px-3 xl:text-[13px] 2xl:px-4 2xl:text-[15px] ${
                     isActive
-                      ? "bg-[#e10600] text-white"
+                      ? "bg-primary text-primary-foreground"
                       : "text-white/88 hover:bg-white/6 hover:text-white"
                   }`}
                   aria-expanded={isMegaTrigger ? isMegaMenuOpen : undefined}
@@ -216,7 +216,7 @@ const CategoryNav = () => {
                 return (
                   <section key={section.title} className={sectionClassName}>
                     <div className="flex items-center gap-2.5">
-                      <Icon className="h-4 w-4 text-[#ff2a20]" />
+                      <Icon className="h-4 w-4 text-primary" />
                       <h3 className="text-sm font-semibold uppercase tracking-[0.08em] text-white">
                         {section.title}
                       </h3>
@@ -231,7 +231,7 @@ const CategoryNav = () => {
                         >
                           <span>{item.label}</span>
                           {item.badge ? (
-                            <span className="rounded-md bg-[#e10600] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-white">
+                            <span className="rounded-md bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-primary-foreground">
                               {item.badge}
                             </span>
                           ) : null}
@@ -250,7 +250,7 @@ const CategoryNav = () => {
                             >
                               <span>{item.label}</span>
                               {item.badge ? (
-                                <span className="rounded-md bg-[#e10600] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-white">
+                                <span className="rounded-md bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-primary-foreground">
                                   {item.badge}
                                 </span>
                               ) : null}
@@ -263,13 +263,13 @@ const CategoryNav = () => {
                 );
               })}
 
-              <aside className="border-l border-white/10 bg-[radial-gradient(circle_at_top_left,rgba(225,6,0,0.35),transparent_38%),linear-gradient(160deg,#2a090d_0%,#15080b_45%,#09090b_100%)] p-4 xl:p-5">
-                <div className="relative h-full min-h-[278px] overflow-hidden rounded-[1.75rem] border border-[#5a1919] bg-[radial-gradient(circle_at_top_left,rgba(255,70,60,0.25),transparent_34%),linear-gradient(160deg,#321014_0%,#16090b_52%,#0a0a0c_100%)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+              <aside className="border-l border-white/10 bg-[radial-gradient(circle_at_top_left,rgba(200,69,44,0.35),transparent_38%),linear-gradient(160deg,#291208_0%,#170c08_45%,#09090b_100%)] p-4 xl:p-5">
+                <div className="relative h-full min-h-[278px] overflow-hidden rounded-[1.75rem] border border-[#4a2016] bg-[radial-gradient(circle_at_top_left,rgba(226,101,47,0.25),transparent_34%),linear-gradient(160deg,#32180f_0%,#160b08_52%,#0a0a0c_100%)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
                   <div className="relative z-10 max-w-[9.8rem]">
                     <p className="text-[1.7rem] font-black leading-none tracking-tight text-white">
                       {featuredPromo.eyebrow}
                     </p>
-                    <p className="mt-1 text-[2rem] font-black leading-none tracking-tight text-[#ff2a20]">
+                    <p className="mt-1 text-[2rem] font-black leading-none tracking-tight text-primary">
                       {featuredPromo.title}
                     </p>
                     <p className="mt-4 text-sm leading-6 text-white/78">
@@ -278,14 +278,14 @@ const CategoryNav = () => {
                   </div>
 
                   <div className="pointer-events-none absolute inset-y-2 right-[-10px] w-[74%]">
-                    <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,54,42,0.28),transparent_64%)] blur-2xl" />
+                    <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(200,69,44,0.28),transparent_64%)] blur-2xl" />
                     <PromoMotorcycleArt />
                   </div>
 
                   <div className="absolute bottom-5 left-5 z-10">
                     <Link
                       href={featuredPromo.ctaHref}
-                      className="inline-flex items-center justify-center rounded-xl bg-[#e10600] px-4 py-3 text-sm font-black tracking-tight text-white transition hover:bg-[#c90500]"
+                      className="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-3 text-sm font-black tracking-tight text-primary-foreground transition hover:bg-primary-hover"
                     >
                       {featuredPromo.ctaLabel}
                     </Link>

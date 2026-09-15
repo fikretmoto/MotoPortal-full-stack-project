@@ -18,7 +18,7 @@ const BADGE_STYLES: Record<string, string> = {
   discount: "bg-red-600 text-white",
   out_of_stock: "bg-gray-500 text-white",
   low_stock: "bg-amber-500 text-white",
-  featured: "bg-gray-900 text-white",
+  featured: "bg-elevated text-white",
   editors_pick: "bg-purple-600 text-white",
   deal: "bg-orange-600 text-white",
   trade_opportunity: "bg-blue-600 text-white",
@@ -37,7 +37,7 @@ function ProductBadges({ badges }: { badges: ProductBadge[] }) {
         <span
           key={badge.type}
           className={`rounded px-2 py-0.5 text-[10px] font-semibold ${
-            BADGE_STYLES[badge.type] ?? "bg-gray-800 text-white"
+            BADGE_STYLES[badge.type] ?? "bg-surface-hover text-white"
           }`}
         >
           {badge.label}
@@ -54,7 +54,7 @@ export default function HomepageBand({ band }: HomepageBandProps) {
 
   return (
     <section className="mt-14">
-      <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+      <h2 className="text-2xl font-bold tracking-tight text-foreground">
         {band.title}
       </h2>
 
@@ -67,9 +67,9 @@ export default function HomepageBand({ band }: HomepageBandProps) {
             >
               <Link
                 href={`/products/${product.slug}`}
-                className="group block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md"
+                className="group block overflow-hidden rounded-2xl border border-line bg-card shadow-sm transition hover:shadow-md"
               >
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface">
                   <ProductBadges badges={product.badges} />
 
                   {product.cover_image_url ? (
@@ -81,21 +81,21 @@ export default function HomepageBand({ band }: HomepageBandProps) {
                       sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 70vw"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-sm text-gray-400">
+                    <div className="flex h-full w-full items-center justify-center text-sm text-fg-subtle">
                       Görsel yakında
                     </div>
                   )}
                 </div>
 
                 <div className="p-4">
-                  <div className="flex items-center gap-2 text-xs text-gray-500">
-                    <span className="font-semibold text-gray-900">
+                  <div className="flex items-center gap-2 text-xs text-fg-muted">
+                    <span className="font-semibold text-foreground">
                       {product.brand.name}
                     </span>
                     <span>{product.category.name}</span>
                   </div>
 
-                  <h3 className="mt-1 font-semibold text-gray-900">
+                  <h3 className="mt-1 font-semibold text-foreground">
                     {product.name}
                   </h3>
                 </div>
@@ -105,8 +105,8 @@ export default function HomepageBand({ band }: HomepageBandProps) {
         </CarouselContent>
 
         <div className="mt-4 flex items-center gap-3">
-          <CarouselPrevious className="static translate-y-0 border-gray-300 bg-white text-gray-900 hover:bg-gray-100" />
-          <CarouselNext className="static translate-y-0 border-gray-300 bg-white text-gray-900 hover:bg-gray-100" />
+          <CarouselPrevious className="static translate-y-0 border-line bg-card text-foreground hover:bg-surface-hover" />
+          <CarouselNext className="static translate-y-0 border-line bg-card text-foreground hover:bg-surface-hover" />
         </div>
       </Carousel>
     </section>

@@ -44,7 +44,7 @@ export default function ProductHeroAttributes({
       {/* SATIR 1: Ürün adı + fiyat aynı satırda, aynı eksende */}
       <div className="mt-5 flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <h1 className="truncate text-2xl font-bold tracking-tight text-gray-900 lg:text-3xl">
+          <h1 className="truncate text-2xl font-bold tracking-tight text-foreground lg:text-3xl">
             {product.name}
           </h1>
         </div>
@@ -66,7 +66,7 @@ export default function ProductHeroAttributes({
 
       {/* SATIR 3: Kısa açıklama */}
       {product.short_description && (
-        <p className="mt-5 text-lg leading-8 text-gray-600">
+        <p className="mt-5 text-lg leading-8 text-fg-muted">
           {product.short_description}
         </p>
       )}
@@ -91,7 +91,7 @@ export default function ProductHeroAttributes({
            <a href={product.instagram_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-300 px-6 py-3 text-base font-semibold text-gray-900 transition hover:bg-gray-50"
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-line px-6 py-3 text-base font-semibold text-foreground transition hover:bg-surface-hover"
           >
             Instagram&apos;da İncele
           </a>
@@ -107,7 +107,7 @@ export default function ProductHeroAttributes({
 
       {/* SATIR 6: Ürün Detayları başlığı + öne çıkan özellik kartları */}
       <div className="mt-10">
-        <h2 className="text-lg font-semibold text-gray-900">
+        <h2 className="text-lg font-semibold text-foreground">
           Ürün Detayları
         </h2>
 

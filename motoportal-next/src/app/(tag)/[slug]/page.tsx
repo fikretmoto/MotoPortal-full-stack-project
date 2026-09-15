@@ -49,8 +49,8 @@ export default async function TagPage({ params, searchParams }: Props) {
       : await getProductsByTag(slug);
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
-      <nav className="mb-4 text-sm text-gray-500">
-        <span>Anasayfa</span> / <span className="text-gray-900">{tag.label}</span>
+      <nav className="mb-4 text-sm text-fg-muted">
+        <span>Anasayfa</span> / <span className="text-foreground">{tag.label}</span>
       </nav>
 
       <h1 className="mb-6 text-2xl font-bold">{tag.label}</h1>

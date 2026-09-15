@@ -121,16 +121,16 @@ export default function BrandProductsSection({
     <div className="flex gap-8">
       <aside className="w-64 flex-none">
         <div className="mb-6">
-          <h3 className="mb-3 text-sm font-bold text-gray-900">Kategori</h3>
+          <h3 className="mb-3 text-sm font-bold text-foreground">Kategori</h3>
           <div className="flex flex-col gap-2">
             {categories.map((category) => (
               <label
                 key={category.slug}
-                className="flex items-center gap-2 text-sm text-gray-700"
+                className="flex items-center gap-2 text-sm text-fg-muted"
               >
                 <input
                   type="checkbox"
-                  className="rounded border-gray-300"
+                  className="rounded border-line"
                   checked={selectedCategories.includes(category.slug)}
                   onChange={() => toggleCategory(category.slug)}
                 />
@@ -141,22 +141,22 @@ export default function BrandProductsSection({
         </div>
 
         <div className="mb-6">
-          <h3 className="mb-3 text-sm font-bold text-gray-900">Fiyat Aralığı</h3>
+          <h3 className="mb-3 text-sm font-bold text-foreground">Fiyat Aralığı</h3>
           <div className="flex items-center gap-2">
             <input
               type="number"
               placeholder="Min"
               value={priceMin}
               onChange={(e) => setPriceMin(e.target.value)}
-              className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
+              className="w-full rounded-md border border-line px-2 py-1.5 text-sm"
             />
-            <span className="text-gray-400">-</span>
+            <span className="text-fg-subtle">-</span>
             <input
               type="number"
               placeholder="Max"
               value={priceMax}
               onChange={(e) => setPriceMax(e.target.value)}
-              className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
+              className="w-full rounded-md border border-line px-2 py-1.5 text-sm"
             />
           </div>
         </div>
@@ -164,18 +164,18 @@ export default function BrandProductsSection({
         {selectedCategories.length === 1 &&
           filterableAttributes.map((attribute) => (
             <div key={attribute.slug} className="mb-6">
-              <h3 className="mb-3 text-sm font-bold text-gray-900">
+              <h3 className="mb-3 text-sm font-bold text-foreground">
                 {attribute.name}
               </h3>
               <div className="flex max-h-48 flex-col gap-2 overflow-y-auto pr-1">
                 {attribute.options.map((option) => (
                   <label
                     key={option.id}
-                    className="flex items-center gap-2 text-sm text-gray-700"
+                    className="flex items-center gap-2 text-sm text-fg-muted"
                   >
                     <input
                       type="checkbox"
-                      className="rounded border-gray-300"
+                      className="rounded border-line"
                       checked={(selectedFacets[attribute.slug] ?? []).includes(
                         option.value
                       )}
@@ -190,10 +190,10 @@ export default function BrandProductsSection({
       </aside>
 
       <div className="flex-1">
-        {loading && <p className="text-sm text-gray-500">Yükleniyor...</p>}
+        {loading && <p className="text-sm text-fg-muted">Yükleniyor...</p>}
 
         {!loading && products.length === 0 && (
-          <p className="text-sm text-gray-500">Hiçbir ürün eşleşmedi.</p>
+          <p className="text-sm text-fg-muted">Hiçbir ürün eşleşmedi.</p>
         )}
 
         <div className="flex flex-wrap gap-6">

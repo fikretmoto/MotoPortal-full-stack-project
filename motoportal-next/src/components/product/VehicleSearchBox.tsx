@@ -41,9 +41,9 @@ export default function VehicleSearchBox({
   }
 
   return (
-    <div className="mb-8 flex flex-wrap items-end gap-3 rounded-xl border border-gray-200 bg-white p-4">
+    <div className="mb-8 flex flex-wrap items-end gap-3 rounded-xl border border-line bg-card p-4">
       <div className="flex flex-col gap-1">
-        <label className="text-xs font-medium text-gray-600">Tip</label>
+        <label className="text-xs font-medium text-fg-muted">Tip</label>
         <Select>
           <SelectTrigger className="w-40">
             <SelectValue placeholder="Seçiniz" />
@@ -59,7 +59,7 @@ export default function VehicleSearchBox({
       </div>
 
       <div className="flex flex-col gap-1">
-        <label className="text-xs font-medium text-gray-600">Yıl</label>
+        <label className="text-xs font-medium text-fg-muted">Yıl</label>
         <Select>
           <SelectTrigger className="w-32">
             <SelectValue placeholder="Seçiniz" />
@@ -75,7 +75,7 @@ export default function VehicleSearchBox({
       </div>
 
       <div className="flex flex-col gap-1">
-        <label className="text-xs font-medium text-gray-600">Marka</label>
+        <label className="text-xs font-medium text-fg-muted">Marka</label>
         <Select value={selectedBrand} onValueChange={handleBrandChange}>
           <SelectTrigger className="w-40">
             <SelectValue placeholder="Seçiniz" />
@@ -91,7 +91,7 @@ export default function VehicleSearchBox({
       </div>
 
       <div className="flex flex-col gap-1">
-        <label className="text-xs font-medium text-gray-600">Model</label>
+        <label className="text-xs font-medium text-fg-muted">Model</label>
         <Select disabled={!selectedBrand || modelOptions.length === 0}>
           <SelectTrigger className="w-40">
             <SelectValue
@@ -116,7 +116,7 @@ export default function VehicleSearchBox({
 
       <button
         type="button"
-        className="rounded-lg bg-gray-900 px-6 py-2 text-sm font-semibold text-white"
+        className="rounded-lg bg-primary px-6 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary-hover"
       >
         Ara
       </button>

@@ -102,7 +102,7 @@ export default function ProductHeroGallery({
 
   if (!selectedImage) {
     return (
-      <div className="flex h-[500px] items-center justify-center rounded-2xl border border-gray-200 bg-gray-100 text-gray-500">
+      <div className="flex h-[500px] items-center justify-center rounded-2xl border border-line bg-surface text-fg-muted">
         Görsel Yok
       </div>
     );
@@ -112,7 +112,7 @@ export default function ProductHeroGallery({
 
   return (
     <div>
-      <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white">
+      <div className="group relative overflow-hidden rounded-2xl border border-line bg-card">
         <button
           type="button"
           onClick={() => setIsLightboxOpen(true)}
@@ -131,18 +131,18 @@ export default function ProductHeroGallery({
               type="button"
               onClick={goPrev}
               aria-label="Önceki görsel"
-              className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-gray-200 bg-white/90 p-2 opacity-0 shadow-sm transition hover:bg-white group-hover:opacity-100"
+              className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-line bg-card/90 p-2 opacity-0 shadow-sm transition hover:bg-card group-hover:opacity-100"
             >
-              <ChevronLeft className="h-5 w-5 text-gray-900" />
+              <ChevronLeft className="h-5 w-5 text-foreground" />
             </button>
 
             <button
               type="button"
               onClick={goNext}
               aria-label="Sonraki görsel"
-              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-gray-200 bg-white/90 p-2 opacity-0 shadow-sm transition hover:bg-white group-hover:opacity-100"
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-line bg-card/90 p-2 opacity-0 shadow-sm transition hover:bg-card group-hover:opacity-100"
             >
-              <ChevronRight className="h-5 w-5 text-gray-900" />
+              <ChevronRight className="h-5 w-5 text-foreground" />
             </button>
           </>
         )}
@@ -158,10 +158,10 @@ export default function ProductHeroGallery({
                 key={image.id}
                 type="button"
                 onClick={() => setSelectedImageId(image.id)}
-                className={`shrink-0 overflow-hidden rounded-xl border-2 bg-white transition ${
+                className={`shrink-0 overflow-hidden rounded-xl border-2 bg-card transition ${
                   isActive
-                    ? "border-gray-900"
-                    : "border-gray-200 hover:border-gray-400"
+                    ? "border-primary"
+                    : "border-line hover:border-fg-subtle"
                 }`}
               >
                 <img

@@ -17,7 +17,7 @@ export default function ProductVariantSelector({
 
   return (
     <div className="mt-10">
-      <h3 className="text-lg font-semibold text-gray-900">
+      <h3 className="text-lg font-semibold text-foreground">
         Seçenekler
       </h3>
 
@@ -42,8 +42,8 @@ export default function ProductVariantSelector({
               disabled={!variant.is_in_stock}
               className={`min-w-[140px] rounded-xl border px-4 py-3 text-left shadow-sm transition ${
                 isSelected
-                  ? "border-gray-900 bg-gray-900 text-white"
-                  : "border-gray-200 bg-white hover:border-gray-400 hover:shadow-md"
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-line bg-card hover:border-fg-subtle hover:shadow-md"
               } ${!variant.is_in_stock ? "cursor-not-allowed opacity-50" : ""}`}
             >
               {variant.color && (
@@ -54,7 +54,7 @@ export default function ProductVariantSelector({
                 <p
                   key={detail}
                   className={`mt-1 text-sm ${
-                    isSelected ? "text-gray-300" : "text-gray-600"
+                    isSelected ? "text-primary-foreground/80" : "text-fg-muted"
                   }`}
                 >
                   {detail}
@@ -63,7 +63,7 @@ export default function ProductVariantSelector({
 
               <p
                 className={`mt-2 text-xs ${
-                  isSelected ? "text-gray-400" : "text-gray-500"
+                  isSelected ? "text-primary-foreground/70" : "text-fg-subtle"
                 }`}
               >
                 {variant.is_in_stock

@@ -50,7 +50,7 @@ const ArrowButton = ({
     type="button"
     onClick={onClick}
     aria-label={direction === "prev" ? "Önceki markalar" : "Sonraki markalar"}
-    className={`absolute top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-black/15 bg-white text-black/60 transition hover:border-black/50 hover:text-black ${
+    className={`absolute top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-card text-fg-muted transition hover:border-fg-subtle hover:text-foreground ${
       direction === "prev" ? "left-0" : "right-0"
     }`}
   >
@@ -71,12 +71,12 @@ const PopularBrandsBar = () => {
   };
 
   return (
-    <div className="border-b border-black/10 bg-white">
+    <div className="border-b border-line bg-background">
       <div className="mx-auto max-w-[1560px] px-4 sm:px-6 lg:px-8">
 
         {/* MOTOSİKLET MARKALARI — logolu */}
-        <section className="border-b border-black/10 py-8">
-          <h2 className="mb-6 text-center text-[13px] font-extrabold uppercase tracking-[0.06em] text-black">
+        <section className="border-b border-line py-8">
+          <h2 className="mb-6 text-center text-[13px] font-extrabold uppercase tracking-[0.06em] text-foreground">
             Öne Çıkan Motosiklet Markaları
           </h2>
 
@@ -96,7 +96,7 @@ const PopularBrandsBar = () => {
                   aria-label={brand.name}
                   className="group flex flex-col items-center gap-2 sm:gap-2.5"
                 >
-                  <span className="flex h-9 w-full items-center justify-center">
+                  <span className="flex h-9 w-full items-center justify-center rounded-md bg-inverted px-2">
                     <Image
                       src={brand.logo}
                       alt={brand.name}
@@ -105,7 +105,7 @@ const PopularBrandsBar = () => {
                       className={`h-auto ${brand.maxH ?? "max-h-7"} w-auto max-w-full object-contain opacity-85 transition group-hover:opacity-100`}
                     />
                   </span>
-                  <span className="text-center text-[11px] font-semibold text-black/55 transition group-hover:text-black/80 sm:text-[13px]">
+                  <span className="text-center text-[11px] font-semibold text-fg-muted transition group-hover:text-foreground sm:text-[13px]">
                     {brand.offer}
                   </span>
                 </Link>
@@ -116,7 +116,7 @@ const PopularBrandsBar = () => {
 
         {/* BİSİKLET MARKALARI — yazılı (logolar sonra) */}
         <section className="py-8">
-          <h2 className="mb-6 text-center text-[13px] font-extrabold uppercase tracking-[0.06em] text-black">
+          <h2 className="mb-6 text-center text-[13px] font-extrabold uppercase tracking-[0.06em] text-foreground">
             Öne Çıkan Bisiklet Markaları
           </h2>
 
@@ -135,10 +135,10 @@ const PopularBrandsBar = () => {
                   href={`/marka/${brand.slug}`}
                   className="group flex flex-col items-center gap-2 sm:gap-2.5"
                 >
-                  <span className="flex h-9 items-center text-[15px] font-extrabold tracking-[-0.02em] text-black sm:text-[21px]">
+                  <span className="flex h-9 items-center text-[15px] font-extrabold tracking-[-0.02em] text-foreground sm:text-[21px]">
                     {brand.name}
                   </span>
-                  <span className="text-center text-[11px] font-semibold text-black/55 transition group-hover:text-black/80 sm:text-[13px]">
+                  <span className="text-center text-[11px] font-semibold text-fg-muted transition group-hover:text-foreground sm:text-[13px]">
                     {brand.offer}
                   </span>
                 </Link>

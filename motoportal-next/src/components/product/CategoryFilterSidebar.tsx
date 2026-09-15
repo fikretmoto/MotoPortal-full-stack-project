@@ -22,11 +22,11 @@ function FilterSection({
   return (
     <details
       open
-      className="border-b border-gray-200 py-4 first:pt-0 last:border-b-0"
+      className="border-b border-line py-4 first:pt-0 last:border-b-0"
     >
-      <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-bold text-gray-900">
+      <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-bold text-foreground">
         {title}
-        <span className="text-gray-400 transition-transform group-open:rotate-180">
+        <span className="text-fg-subtle transition-transform group-open:rotate-180">
           ▾
         </span>
       </summary>
@@ -48,19 +48,19 @@ export default function CategoryFilterSidebar({
     );
 
   return (
-    <div className="sticky top-6 mt-6 max-h-[calc(100vh-8rem)] overflow-y-auto border-t border-gray-200 pr-1">
+    <div className="sticky top-6 mt-6 max-h-[calc(100vh-8rem)] overflow-y-auto border-t border-line pr-1">
       <FilterSection title="Fiyat Aralığı">
         <div className="flex items-center gap-2">
           <input
             type="number"
             placeholder="Min"
-            className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
+            className="w-full rounded-md border border-line px-2 py-1.5 text-sm"
           />
-          <span className="text-gray-400">-</span>
+          <span className="text-fg-subtle">-</span>
           <input
             type="number"
             placeholder="Max"
-            className="w-full rounded-md border border-gray-300 px-2 py-1.5 text-sm"
+            className="w-full rounded-md border border-line px-2 py-1.5 text-sm"
           />
         </div>
       </FilterSection>
@@ -70,9 +70,9 @@ export default function CategoryFilterSidebar({
           {brands.map((brand) => (
             <label
               key={brand.id}
-              className="flex items-center gap-2 text-sm text-gray-700"
+              className="flex items-center gap-2 text-sm text-fg-muted"
             >
-              <input type="checkbox" className="rounded border-gray-300" />
+              <input type="checkbox" className="rounded border-line" />
               {brand.name}
             </label>
           ))}
@@ -84,9 +84,9 @@ export default function CategoryFilterSidebar({
           {attribute.options.map((option) => (
             <label
               key={option.id}
-              className="flex items-center gap-2 text-sm text-gray-700"
+              className="flex items-center gap-2 text-sm text-fg-muted"
             >
-              <input type="checkbox" className="rounded border-gray-300" />
+              <input type="checkbox" className="rounded border-line" />
               {option.value}
             </label>
           ))}
@@ -97,9 +97,9 @@ export default function CategoryFilterSidebar({
         {FEATURE_TAGS.map((tag) => (
           <label
             key={tag.slug}
-            className="flex items-center gap-2 text-sm text-gray-700"
+            className="flex items-center gap-2 text-sm text-fg-muted"
           >
-            <input type="checkbox" className="rounded border-gray-300" />
+            <input type="checkbox" className="rounded border-line" />
             {tag.name}
           </label>
         ))}

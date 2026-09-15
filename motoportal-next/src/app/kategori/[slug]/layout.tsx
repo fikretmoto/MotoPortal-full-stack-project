@@ -74,14 +74,14 @@ export default async function CategorySlugLayout({
   
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
-      <nav className="mb-4 text-sm text-gray-500">
+      <nav className="mb-4 text-sm text-fg-muted">
         <span>Anasayfa</span>
         {trail.map((ancestor) => (
           <span key={ancestor.id}>
             {" / "}
             <Link
               href={`/kategori/${ancestor.slug}`}
-              className="hover:text-blue-700"
+              className="hover:text-primary"
             >
               {ancestor.name}
             </Link>
@@ -101,7 +101,7 @@ export default async function CategorySlugLayout({
       <>
         <Link
           href={`/kategori/${sidebarHeaderCategory.slug}`}
-          className="mb-3 block text-sm font-bold uppercase text-gray-900 hover:text-blue-700"
+          className="mb-3 block text-sm font-bold uppercase text-foreground hover:text-primary"
         >
           {sidebarHeaderCategory.name}
         </Link>
@@ -112,8 +112,8 @@ export default async function CategorySlugLayout({
               href={`/kategori/${item.slug}`}
               className={
                 item.id === category.id
-                  ? "text-sm font-bold text-blue-700"
-                  : "text-sm text-gray-700 hover:text-blue-700"
+                  ? "text-sm font-bold text-primary"
+                  : "text-sm text-fg-muted hover:text-primary"
               }
             >
               {item.name}

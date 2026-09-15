@@ -95,7 +95,7 @@ export function AttributeField({ attribute, value, onChange }: AttributeFieldPro
             value={typeof value === "number" || typeof value === "string" ? value : ""}
             onChange={(e) => onChange(attribute.slug, e.target.value)}
           />
-          {attribute.unit && <span className="text-sm text-gray-500">{attribute.unit}</span>}
+          {attribute.unit && <span className="text-sm text-fg-muted">{attribute.unit}</span>}
         </div>
       </div>
     );

@@ -19,14 +19,14 @@ export default function ProductHighlights({
 
   if (compact) {
     return (
-      <dl className="divide-y divide-gray-200">
+      <dl className="divide-y divide-line">
         {highlightAttributes.map((attribute) => (
           <div
             key={attribute.id}
             className="flex items-center justify-between py-3"
           >
-            <dt className="text-sm text-gray-500">{attribute.name}</dt>
-            <dd className="text-sm font-semibold text-gray-900">
+            <dt className="text-sm text-fg-muted">{attribute.name}</dt>
+            <dd className="text-sm font-semibold text-foreground">
               {attribute.value}
               {attribute.unit ? ` ${attribute.unit}` : ""}
             </dd>
@@ -42,13 +42,13 @@ export default function ProductHighlights({
         {highlightAttributes.map((attribute) => (
           <div
             key={attribute.id}
-            className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
+            className="rounded-2xl border border-line bg-card p-5 shadow-sm"
           >
-            <p className="text-sm font-medium text-gray-500">
+            <p className="text-sm font-medium text-fg-muted">
               {attribute.name}
             </p>
 
-            <p className="mt-2 text-xl font-semibold text-gray-900">
+            <p className="mt-2 text-xl font-semibold text-foreground">
               {attribute.value}
               {attribute.unit ? ` ${attribute.unit}` : ""}
             </p>
