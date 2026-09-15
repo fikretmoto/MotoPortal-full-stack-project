@@ -79,7 +79,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/products/${product.slug}`} className="group block">
       <Card
-        className={`w-[190px] gap-0 overflow-hidden rounded-2xl p-0 border-transparent transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${
+        className={`w-[320px] gap-0 overflow-hidden rounded-2xl p-0 border-transparent transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${
           isPromoted ? "hover:border-orange-500/40" : "hover:border-border"
         } ${soldOut ? "opacity-70 grayscale" : ""}`}
       >
@@ -108,7 +108,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
 
-        <CardContent className="flex h-full min-h-[150px] flex-col pb-1 pt-2">
+        <CardContent className="flex h-full min-h-[180px] flex-col pb-1 pt-2">
           <div className="min-h-[3.75rem]">
             <h3 className="line-clamp-2 text-sm font-semibold tracking-tight text-primary">
               {product.name}
