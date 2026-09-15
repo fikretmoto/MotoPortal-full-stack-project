@@ -4,6 +4,7 @@ import {
   Geist,
   Geist_Mono,
   Montserrat,
+  Archivo,
 } from "next/font/google";
 
 import "./globals.css";
@@ -27,6 +28,12 @@ const audiowide = Audiowide({
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
+});
+
+const archivo = Archivo({
+  weight: ["400", "600", "700", "900"],
+  subsets: ["latin"],
+  variable: "--font-archivo",
 });
 
 
@@ -55,6 +62,7 @@ export default function RootLayout({
           ${geistMono.variable}
           ${audiowide.variable}
           ${montserrat.variable}
+          ${archivo.variable}
         `}
       >
         {children}

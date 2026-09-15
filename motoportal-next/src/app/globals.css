@@ -98,7 +98,7 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font-geist-sans), "Segoe UI", sans-serif;
+  font-family: var(--font-archivo), "Segoe UI", sans-serif;
 }
 
 /* =========================
@@ -116,55 +116,54 @@ body {
 }
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #fffefc;
-  --card: #171717;
-  --card-foreground: #fffefc;
-  --popover: #171717;
-  --popover-foreground: #fffefc;
-  --primary: #c8452c;
-  --primary-hover: #a83722;
+  --background: oklch(98% 0.006 70);
+  --foreground: oklch(20% 0.01 60);
+  --card: #ffffff;
+  --card-foreground: oklch(20% 0.01 60);
+  --popover: #ffffff;
+  --popover-foreground: oklch(20% 0.01 60);
+  --primary: oklch(62% 0.19 35);
+  --primary-hover: oklch(52% 0.19 35);
   --primary-foreground: #ffffff;
-  --secondary: #1a1917;
-  --secondary-foreground: #fffefc;
-  --muted: #111111;
-  --muted-foreground: #b3aca3;
-  --accent: #1e1e1e;
-  --accent-foreground: #fffefc;
+  --secondary: oklch(22% 0.02 50);
+  --secondary-foreground: #ffffff;
+  --muted: oklch(92% 0.006 70);
+  --muted-foreground: oklch(50% 0.02 60);
+  --accent: oklch(95% 0.02 35);
+  --accent-foreground: oklch(20% 0.01 60);
   --destructive: #e40014;
-  --border: #262626;
-  --input: #262626;
-  --ring: #c8452c;
+  --border: oklch(90% 0.006 70);
+  --input: oklch(90% 0.006 70);
+  --ring: oklch(62% 0.19 35);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --sidebar: #171717;
-  --sidebar-foreground: #fffefc;
-  --sidebar-primary: #c8452c;
+  --sidebar: #ffffff;
+  --sidebar-foreground: oklch(20% 0.01 60);
+  --sidebar-primary: oklch(62% 0.19 35);
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1e1e1e;
-  --sidebar-accent-foreground: #fffefc;
-  --sidebar-border: #262626;
-  --sidebar-ring: #c8452c;
+  --sidebar-accent: oklch(95% 0.02 35);
+  --sidebar-accent-foreground: oklch(20% 0.01 60);
+  --sidebar-border: oklch(90% 0.006 70);
+  --sidebar-ring: oklch(62% 0.19 35);
 
-  /* MP temasına özel ham token'lar */
-  --surface: #171717;
-  --surface-hover: #1e1e1e;
-  --elevated: #1a1917;
-  --background-soft: #111111;
-  --line: #262626;
-  --line-soft: #2e2e2e;
-  --fg: #fffefc;
-  --fg-muted: #b3aca3;
-  --fg-subtle: #737373;
+  --surface: #ffffff;
+  --surface-hover: oklch(96% 0.006 70);
+  --elevated: oklch(97% 0.006 70);
+  --background-soft: oklch(96% 0.006 70);
+  --line: oklch(90% 0.006 70);
+  --line-soft: oklch(93% 0.006 70);
+  --fg: oklch(20% 0.01 60);
+  --fg-muted: oklch(50% 0.02 60);
+  --fg-subtle: oklch(65% 0.01 60);
   --danger: #e40014;
   --success: #16a34a;
   --accent-blue: #1447e6;
-  --inverted: #ffffff;
-  --inverted-fg: #0a0a0a;
+  --inverted: oklch(20% 0.01 60);
+  --inverted-fg: #ffffff;
 }
 
 .dark {
