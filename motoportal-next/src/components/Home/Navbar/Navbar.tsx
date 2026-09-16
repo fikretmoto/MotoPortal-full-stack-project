@@ -1,17 +1,18 @@
+import { getCategoryTree } from "@/services/catalog";
 import UtilityBar from "./UtilityBar";
 import CategoryNav from "./CategoryNav";
 import ResponsiveNav from "./ResponsiveNav";
 import TopBar from "./TopBar";
 
+const Navbar = async () => {
+  const categoryTree = await getCategoryTree();
 
-const Navbar = () => {
   return (
     <header className="relative z-50 bg-[#050505] text-white">
       <UtilityBar />
       <TopBar />
       <ResponsiveNav />
-      <CategoryNav />
-      
+      <CategoryNav categoryTree={categoryTree} />
     </header>
   );
 };

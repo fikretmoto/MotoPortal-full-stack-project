@@ -16,6 +16,27 @@ export type Category = {
 };
 
 
+export type CategoryNode = {
+  id: number;
+  name: string;
+  slug: string;
+  children: CategoryNode[];
+};
+
+export async function getCategoryTree(): Promise<CategoryNode[]> {
+  const response = await fetch(`${API_URL}/categories/tree/`, {
+    next: { revalidate: 3600 }, // kategori ağacı sık değişmiyor, 1 saat cache
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `Kategori ağacı alınamadı. HTTP durum kodu: ${response.status}`
+    );
+  }
+
+  return response.json();
+}
+
 export type Brand = {
   id: number;
   name: string;

@@ -3,24 +3,24 @@ import { Mail, Phone } from "lucide-react";
 
 const UtilityBar = () => {
   return (
-    <div className="hidden border-b border-white/10 bg-[#09090b] text-white/65 lg:block">
+    <div className="hidden bg-[oklch(16%_0.02_50)] text-[oklch(75%_0.01_60)] lg:block">
       <div className="mx-auto flex h-9 max-w-[1560px] items-center justify-between px-4 sm:px-6 lg:px-8">
         
         {/* SOL: İLETİŞİM */}
         <div className="flex items-center gap-6 text-[12px]">
-          <a
-            href="tel:+905534512259"
+          
+           <a href="tel:+905534512259"
             className="flex items-center gap-2 transition hover:text-white"
           >
-            <Phone className="h-3.5 w-3.5 text-[#0062C8]" />
+            <Phone className="h-3.5 w-3.5 text-[oklch(62%_0.19_35)]" />
             <span>0 553 451 22 59</span>
           </a>
 
-          <a
-            href="mailto:info@motoportal.com.tr"
+          
+         <a href="mailto:info@motoportal.com.tr"
             className="flex items-center gap-2 transition hover:text-white"
           >
-            <Mail className="h-3.5 w-3.5 text-[#0062C8]" />
+            <Mail className="h-3.5 w-3.5 text-[oklch(62%_0.19_35)]" />
             <span>info@motoportal.com.tr</span>
           </a>
         </div>

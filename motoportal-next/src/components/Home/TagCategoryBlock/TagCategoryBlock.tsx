@@ -21,11 +21,11 @@ type Props = {
 
 const TagCategoryBlock = ({ title, tags, categories }: Props) => {
   return (
-    <section className="border-b border-white/10 bg-[#09090b] py-8">
+    <section className="border-b border-[oklch(90%_0.006_70)] bg-white py-8">
       <div className="mx-auto max-w-[1560px] px-4 sm:px-6 lg:px-8">
 
         {title ? (
-          <h2 className="mb-5 text-center text-[11px] font-bold uppercase tracking-[0.1em] text-white xl:text-[12px]">
+          <h2 className="mb-5 text-center text-[11px] font-black uppercase tracking-[0.1em] text-[oklch(20%_0.01_60)] xl:text-[12px]">
             {title}
           </h2>
         ) : null}
@@ -36,14 +36,14 @@ const TagCategoryBlock = ({ title, tags, categories }: Props) => {
             <Link
               key={tag.href}
               href={tag.href}
-              className="shrink-0 whitespace-nowrap rounded-full border border-white/15 bg-white/[0.06] px-5 py-2 text-[13px] font-bold text-white transition hover:border-white/40 hover:bg-white/[0.12]"
+              className="shrink-0 whitespace-nowrap rounded-full border-2 border-[oklch(20%_0.01_60)] bg-white px-5 py-2 text-[13px] font-bold text-[oklch(20%_0.01_60)] transition hover:border-[oklch(62%_0.19_35)] hover:text-[oklch(62%_0.19_35)]"
             >
               {tag.label}
             </Link>
           ))}
         </div>
 
-        <div className="my-6 h-px bg-white/10" />
+        <div className="my-6 h-px bg-[oklch(90%_0.006_70)]" />
 
         {/* KATEGORİ KARTLARI — her biri listeleme sayfasına gider */}
         <div className="grid grid-cols-3 gap-3 sm:grid-cols-5 lg:grid-cols-9 lg:gap-4">
@@ -53,7 +53,7 @@ const TagCategoryBlock = ({ title, tags, categories }: Props) => {
               href={category.href}
               className="group flex flex-col items-center gap-2.5"
             >
-              <div className="flex aspect-square w-full items-center justify-center rounded border border-transparent bg-white/[0.05] p-3 transition group-hover:border-white/25 group-hover:bg-white/[0.09]">
+              <div className="flex aspect-square w-full items-center justify-center rounded border border-[oklch(90%_0.006_70)] bg-[oklch(97%_0.006_70)] p-3 transition group-hover:border-[oklch(62%_0.19_35)] group-hover:bg-white">
                 {category.image ? (
                   <Image
                     src={category.image}
@@ -63,12 +63,12 @@ const TagCategoryBlock = ({ title, tags, categories }: Props) => {
                     className="h-full w-full object-contain"
                   />
                 ) : (
-                  <span className="text-[9px] uppercase tracking-[0.08em] text-white/30">
+                  <span className="text-[9px] uppercase tracking-[0.08em] text-[oklch(70%_0.01_60)]">
                     görsel
                   </span>
                 )}
               </div>
-              <span className="text-center text-[13px] font-bold leading-tight text-white/85 transition group-hover:text-white">
+              <span className="text-center text-[13px] font-bold leading-tight text-[oklch(35%_0.01_60)] transition group-hover:text-[oklch(62%_0.19_35)]">
                 {category.name}
               </span>
             </Link>

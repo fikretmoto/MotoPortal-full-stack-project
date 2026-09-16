@@ -230,11 +230,7 @@ CATEGORY_DATA = [
         "slug": "hava-filtresi",
         "parent_slug": "yedek-parca",
     },
-    {
-        "name": "Kasa Koruma / Düşme Demiri",
-        "slug": "kasa-koruma-dusme-demiri",
-        "parent_slug": "yedek-parca",
-    },
+    
 
     #bakim ve temizlik alt kategorileri
     {
@@ -429,6 +425,12 @@ CATEGORY_DATA = [
                 "parent_slug": "aksesuar",
             },
 
+            {
+                    "name": "Kasa Koruma / Düşme Demiri",
+                    "slug": "kasa-koruma-dusme-demiri",
+                    "parent_slug": "aksesuar",
+                },
+
 
 
                               # Bisiklet alt kategorileri
@@ -465,6 +467,30 @@ CATEGORY_DATA = [
         "name": "UTV",
         "slug": "utv",
         "parent_slug": "atv-utv",
+    },
+
+      {
+        "name": "4 Çeker",
+        "slug": "atv-4-ceker",
+        "parent_slug": "atv",
+    },
+
+    {
+        "name": "2 Çeker",
+        "slug": "atv-2-ceker",
+        "parent_slug": "atv",
+    },
+
+    {
+        "name": "4 Çeker",
+        "slug": "utv-4-ceker",
+        "parent_slug": "utv",
+    },
+
+    {
+        "name": "2 Çeker",
+        "slug": "utv-2-ceker",
+        "parent_slug": "utv",
     },
 
 

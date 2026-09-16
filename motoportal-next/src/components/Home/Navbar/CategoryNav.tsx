@@ -1,33 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Bike,
-  BikeIcon,
-  ChevronDown,
-  Settings,
-  ShieldAlert,
-  SquareM,
-  Zap,
-} from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
-import {
-  featuredPromo,
-  mainMenuItems,
-  megaMenuSections,
-  megaMenuSupplementaryLinks,
- 
-} from "@/constant/constant";
+import { featuredPromo } from "@/constant/constant";
+import type { CategoryNode } from "@/services/catalog";
 
-const iconMap = {
-  bike: Bike,
-  scooter: SquareM,
-  zap: Zap,
-  buggy: ShieldAlert,
-  bicycle: BikeIcon,
-  settings: Settings,
-} as const;
+type CategoryNavProps = {
+  categoryTree: CategoryNode[];
+};
 
 const PromoMotorcycleArt = () => {
   return (
@@ -39,265 +21,156 @@ const PromoMotorcycleArt = () => {
     >
       <defs>
         <linearGradient id="bikeBody" x1="72" y1="54" x2="355" y2="218">
-          <stop offset="0" stopColor="#e2652f" />
-          <stop offset="0.45" stopColor="#c8452c" />
-          <stop offset="1" stopColor="#6b2415" />
+          <stop offset="0" stopColor="#fff" stopOpacity="0.9" />
+          <stop offset="1" stopColor="#fff" stopOpacity="0.5" />
         </linearGradient>
-        <linearGradient id="bikeDark" x1="116" y1="42" x2="332" y2="244">
-          <stop offset="0" stopColor="#2a2d35" />
-          <stop offset="1" stopColor="#0c0d10" />
-        </linearGradient>
-        <radialGradient id="bikeGlow" cx="0" cy="0" r="1" gradientTransform="translate(279 135) rotate(124.538) scale(148.541 189.377)">
-          <stop stopColor="#c8452c" stopOpacity="0.45" />
-          <stop offset="1" stopColor="#c8452c" stopOpacity="0" />
-        </radialGradient>
       </defs>
-
-      <ellipse cx="286" cy="156" rx="136" ry="94" fill="url(#bikeGlow)" />
-
-      <circle cx="134" cy="214" r="48" fill="#090a0c" stroke="#6b2415" strokeWidth="10" />
-      <circle cx="134" cy="214" r="25" fill="#1d1f24" stroke="#d7d7d8" strokeWidth="4" />
-
-      <circle cx="324" cy="214" r="56" fill="#090a0c" stroke="#6b2415" strokeWidth="12" />
-      <circle cx="324" cy="214" r="28" fill="#1d1f24" stroke="#d7d7d8" strokeWidth="4" />
-
       <path
         d="M145 205L191 145H257L289 113H333L309 152L328 205H299L278 171H208L174 205H145Z"
         fill="url(#bikeBody)"
       />
-      <path
-        d="M191 145L240 104H324L289 145H191Z"
-        fill="url(#bikeDark)"
-      />
-      <path
-        d="M210 103H296L319 81H246L210 103Z"
-        fill="url(#bikeBody)"
-      />
-      <path
-        d="M240 84L274 52H335L307 84H240Z"
-        fill="#13151a"
-      />
-      <path
-        d="M303 89H333L353 122H323L303 89Z"
-        fill="#20232b"
-      />
-      <path
-        d="M200 146L173 116H140L165 155L200 146Z"
-        fill="#20232b"
-      />
-      <path
-        d="M172 116L192 95L210 103L191 145L172 116Z"
-        fill="#111319"
-      />
-      <path
-        d="M287 114L307 83L353 83L334 114H287Z"
-        fill="#2c313b"
-      />
-      <path
-        d="M213 166H277L292 196H199L213 166Z"
-        fill="#101216"
-      />
-      <path
-        d="M336 117H354L366 132H345L336 117Z"
-        fill="#e2652f"
-      />
-      <path
-        d="M154 111L116 87"
-        stroke="#8f939b"
-        strokeWidth="7"
-        strokeLinecap="round"
-      />
-      <path
-        d="M333 86L359 56"
-        stroke="#8f939b"
-        strokeWidth="7"
-        strokeLinecap="round"
-      />
-      <path
-        d="M203 145L179 205"
-        stroke="#8f939b"
-        strokeWidth="6"
-        strokeLinecap="round"
-      />
-      <path
-        d="M292 145L316 205"
-        stroke="#8f939b"
-        strokeWidth="6"
-        strokeLinecap="round"
-      />
-      <path
-        d="M324 158L353 121"
-        stroke="#aeb3bb"
-        strokeWidth="6"
-        strokeLinecap="round"
-      />
-      <path
-        d="M95 214H67"
-        stroke="#aeb3bb"
-        strokeWidth="6"
-        strokeLinecap="round"
-      />
+      <circle cx="134" cy="214" r="40" stroke="#fff" strokeOpacity="0.6" strokeWidth="8" fill="none" />
+      <circle cx="324" cy="214" r="48" stroke="#fff" strokeOpacity="0.6" strokeWidth="8" fill="none" />
     </svg>
   );
 };
 
-const CategoryNav = () => {
-  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+const ROOT_ORDER = ["tasitlar", "ekipman", "aksesuar", "bakim-ve-temizlik", "yedek-parca"];
+
+const CategoryNav = ({ categoryTree }: CategoryNavProps) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeRootSlug, setActiveRootSlug] = useState(ROOT_ORDER[0]);
+
+  const sortedRoots = [...categoryTree].sort(
+    (a, b) => ROOT_ORDER.indexOf(a.slug) - ROOT_ORDER.indexOf(b.slug)
+  );
+
+  const activeRoot =
+    sortedRoots.find((root) => root.slug === activeRootSlug) ?? sortedRoots[0] ?? null;
 
   return (
     <div
-      className="relative z-40 hidden border-b border-white/10 bg-[#0c0c0f] lg:block"
-      onMouseLeave={() => setIsMegaMenuOpen(false)}
+      className="relative z-40 hidden bg-[oklch(22%_0.02_50)] lg:block"
+      onMouseLeave={() => setIsMenuOpen(false)}
     >
-      <div className="mx-auto max-w-[1560px] px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1152px] px-8">
         <nav
           aria-label="Category navigation"
-         className="flex min-h-[58px] items-center justify-center gap-8"
+          className="flex min-h-[52px] items-center gap-7 text-[13px] font-bold uppercase tracking-[0.04em]"
         >
-          {mainMenuItems.map((item) => {
-            const isMegaTrigger = Boolean(item.isMegaTrigger);
-            const isActive = item.isCurrent && isMegaMenuOpen;
+          <Link
+            href="/"
+            className="border-b-[3px] border-transparent py-4 text-[oklch(88%_0.01_60)] transition hover:text-white"
+          >
+            Ana Sayfa
+          </Link>
 
-            return (
-              <div key={item.label} className="relative">
-                <Link
-                  href={item.href}
-                  onMouseEnter={() => {
-                    if (isMegaTrigger) {
-                      setIsMegaMenuOpen(true);
-                    } else {
-                      setIsMegaMenuOpen(false);
-                    }
-                  }}
-                  onFocus={() => {
-                    if (isMegaTrigger) {
-                      setIsMegaMenuOpen(true);
-                    }
-                  }}
-                  onClick={(event) => {
-                    if (isMegaTrigger) {
-                      event.preventDefault();
-                      setIsMegaMenuOpen((previousState) => !previousState);
-                    }
-                  }}
-                  className={`inline-flex h-[58px] min-w-0 items-center justify-center gap-1 whitespace-nowrap px-1 text-[10px] font-semibold tracking-tight transition xl:px-3 xl:text-[13px] 2xl:px-4 2xl:text-[15px] ${
-                    isActive
-                      ? "bg-primary text-primary-foreground"
-                      : "text-white/88 hover:bg-white/6 hover:text-white"
-                  }`}
-                  aria-expanded={isMegaTrigger ? isMegaMenuOpen : undefined}
-                >
-                  <span>{item.label}</span>
-                  {item.hasCaret ? (
-                    <ChevronDown
-                      className={`h-4 w-4 transition ${
-                        isActive ? "rotate-180" : ""
-                      }`}
-                    />
-                  ) : null}
-                </Link>
-              </div>
-            );
-          })}
+          <div
+            onMouseEnter={() => setIsMenuOpen(true)}
+            onFocus={() => setIsMenuOpen(true)}
+          >
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+              className={`flex items-center gap-1 border-b-[3px] py-4 transition ${
+                isMenuOpen
+                  ? "border-[oklch(62%_0.19_35)] text-white"
+                  : "border-transparent text-[oklch(88%_0.01_60)] hover:text-white"
+              }`}
+              aria-expanded={isMenuOpen}
+            >
+              <span>Kategoriler</span>
+              <ChevronDown
+                className={`h-4 w-4 transition ${isMenuOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+          </div>
+
+          <Link
+            href="#blog"
+            className="border-b-[3px] border-transparent py-4 text-[oklch(88%_0.01_60)] transition hover:text-white"
+          >
+            Blog
+          </Link>
         </nav>
       </div>
 
-      {isMegaMenuOpen ? (
-        <div className="border-t border-white/10 bg-[linear-gradient(180deg,#121215_0%,#0a0a0c_100%)]">
-          <div className="mx-auto max-w-[1560px] px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-[repeat(6,minmax(0,1fr))_320px] overflow-hidden border-x border-b border-white/10 shadow-[0_24px_60px_rgba(0,0,0,0.34)]">
-              {megaMenuSections.map((section, index) => {
-                const Icon = iconMap[section.icon];
-                const sectionClassName =
-                  index < megaMenuSections.length - 1
-                    ? "border-r border-white/10 px-4 py-4 xl:px-5"
-                    : "px-4 py-4 xl:px-5";
+      {isMenuOpen ? (
+        <div className="absolute left-0 right-0 border-b border-[oklch(90%_0.006_70)] bg-white shadow-[0_8px_16px_-8px_rgba(0,0,0,0.15)]">
+          <div className="mx-auto flex max-w-[1152px] overflow-hidden">
+            {/* SOL: dikey kök kategori listesi */}
+            <div className="w-[220px] shrink-0 border-r border-[oklch(90%_0.006_70)] bg-[oklch(97%_0.006_70)] py-2">
+              {sortedRoots.map((root) => {
+                const isActive = root.slug === activeRootSlug;
 
                 return (
-                  <section key={section.title} className={sectionClassName}>
-                    <div className="flex items-center gap-2.5">
-                      <Icon className="h-4 w-4 text-primary" />
-                      <h3 className="text-sm font-semibold uppercase tracking-[0.08em] text-white">
-                        {section.title}
-                      </h3>
-                    </div>
+                  <button
+                    key={root.slug}
+                    type="button"
+                    onMouseEnter={() => setActiveRootSlug(root.slug)}
+                    className={`flex w-full items-center justify-between px-4 py-3 text-left text-[14px] font-bold transition ${
+                      isActive
+                        ? "bg-[oklch(62%_0.19_35)] text-white"
+                        : "text-[oklch(35%_0.01_60)] hover:bg-white"
+                    }`}
+                  >
+                    <span>{root.name}</span>
+                    <ChevronDown className="h-4 w-4 -rotate-90" />
+                  </button>
+                );
+              })}
+            </div>
 
-                    <div className="mt-4 space-y-2.5">
-                      {section.items.map((item) => (
+            {/* SAĞ: aktif kökün alt kategorileri */}
+            <div className="grid flex-1 grid-cols-4 gap-8 p-7">
+              {activeRoot?.children.map((section) => (
+                <section key={section.slug}>
+                  <Link
+                    href={`/kategori/${section.slug}`}
+                    className="inline-block border-b-[3px] border-[oklch(62%_0.19_35)] pb-2 text-[13px] font-black uppercase tracking-[0.02em] text-[oklch(20%_0.01_60)] hover:text-[oklch(62%_0.19_35)]"
+                  >
+                    {section.name}
+                  </Link>
+
+                  {section.children.length > 0 ? (
+                    <div className="mt-3 flex flex-col gap-2">
+                      {section.children.map((leaf) => (
                         <Link
-                          key={item.label}
-                          href={item.href}
-                          className="flex items-center gap-2 text-[14px] leading-6 text-white/84 transition hover:text-white"
+                          key={leaf.slug}
+                          href={`/kategori/${leaf.slug}`}
+                          className="text-[13px] font-semibold text-[oklch(45%_0.02_60)] transition hover:text-[oklch(20%_0.01_60)]"
                         >
-                          <span>{item.label}</span>
-                          {item.badge ? (
-                            <span className="rounded-md bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-primary-foreground">
-                              {item.badge}
-                            </span>
-                          ) : null}
+                          {leaf.name}
                         </Link>
                       ))}
                     </div>
+                  ) : null}
+                </section>
+              ))}
 
-                    {section.icon === "settings" ? (
-                      <div className="mt-5 border-t border-white/10 pt-4">
-                        <div className="space-y-2.5">
-                          {megaMenuSupplementaryLinks.map((item) => (
-                            <Link
-                              key={item.label}
-                              href={item.href}
-                              className="flex items-center gap-2 text-[14px] leading-6 text-white/84 transition hover:text-white"
-                            >
-                              <span>{item.label}</span>
-                              {item.badge ? (
-                                <span className="rounded-md bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-primary-foreground">
-                                  {item.badge}
-                                </span>
-                              ) : null}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    ) : null}
-                  </section>
-                );
-              })}
-
-              <aside className="border-l border-white/10 bg-[radial-gradient(circle_at_top_left,rgba(200,69,44,0.35),transparent_38%),linear-gradient(160deg,#291208_0%,#170c08_45%,#09090b_100%)] p-4 xl:p-5">
-                <div className="relative h-full min-h-[278px] overflow-hidden rounded-[1.75rem] border border-[#4a2016] bg-[radial-gradient(circle_at_top_left,rgba(226,101,47,0.25),transparent_34%),linear-gradient(160deg,#32180f_0%,#160b08_52%,#0a0a0c_100%)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
-                  <div className="relative z-10 max-w-[9.8rem]">
-                    <p className="text-[1.7rem] font-black leading-none tracking-tight text-white">
-                      {featuredPromo.eyebrow}
-                    </p>
-                    <p className="mt-1 text-[2rem] font-black leading-none tracking-tight text-primary">
-                      {featuredPromo.title}
-                    </p>
-                    <p className="mt-4 text-sm leading-6 text-white/78">
-                      {featuredPromo.description}
-                    </p>
-                  </div>
-
-                  <div className="pointer-events-none absolute inset-y-2 right-[-10px] w-[74%]">
-                    <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(200,69,44,0.28),transparent_64%)] blur-2xl" />
-                    <PromoMotorcycleArt />
-                  </div>
-
-                  <div className="absolute bottom-5 left-5 z-10">
-                    <Link
-                      href={featuredPromo.ctaHref}
-                      className="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-3 text-sm font-black tracking-tight text-primary-foreground transition hover:bg-primary-hover"
-                    >
-                      {featuredPromo.ctaLabel}
-                    </Link>
-                  </div>
+              <aside className="col-span-1 flex flex-col justify-between rounded-md bg-[oklch(62%_0.19_35)] p-5">
+                <div>
+                  <p className="text-base font-black text-white">
+                    {featuredPromo.eyebrow}
+                  </p>
+                  <p className="mt-1.5 text-[13px] font-semibold text-[oklch(95%_0.02_35)]">
+                    {featuredPromo.description}
+                  </p>
                 </div>
+                <div className="relative mt-4 h-16 opacity-70">
+                  <PromoMotorcycleArt />
+                </div>
+                <Link
+                  href={featuredPromo.ctaHref}
+                  className="mt-3 text-[13px] font-extrabold uppercase text-white"
+                >
+                  {featuredPromo.ctaLabel} →
+                </Link>
               </aside>
             </div>
           </div>
         </div>
       ) : null}
-
-      
     </div>
   );
 };

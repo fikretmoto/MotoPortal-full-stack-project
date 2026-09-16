@@ -6,6 +6,7 @@ from .views import (
     CategoryAttributesAPIView,
     CategoryDetailAPIView,
     CategoryListAPIView,
+    CategoryTreeAPIView,
     CategoryBrandListAPIView,
     FavoriteListAPIView,
     FavoriteToggleAPIView,
@@ -58,6 +59,13 @@ urlpatterns = [
         CategoryListAPIView.as_view(),
         name="category-list",
     ),
+
+     path(
+        "categories/tree/",
+        CategoryTreeAPIView.as_view(),
+        name="category-tree",
+    ),
+
     path(
         "categories/<slug:slug>/",
         CategoryDetailAPIView.as_view(),

@@ -140,6 +140,23 @@ class CategorySerializer(serializers.ModelSerializer):
         )
 
 
+class CategoryTreeSerializer(serializers.ModelSerializer):
+    children = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Category
+        fields = (
+            "id",
+            "name",
+            "slug",
+            "children",
+        )
+
+    def get_children(self, obj):
+        active_children = obj.children.filter(is_active=True).order_by("id")
+        return CategoryTreeSerializer(active_children, many=True).data
+    
+
 class BrandSerializer(serializers.ModelSerializer):
     logo_url = serializers.SerializerMethodField()
 

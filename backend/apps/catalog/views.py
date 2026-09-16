@@ -13,6 +13,7 @@ from .serializers import (
    BrandSerializer,
     CategoryAttributesResponseSerializer,
     CategorySerializer,
+    CategoryTreeSerializer,
     FavoriteSerializer,
     ProductDetailSerializer,
     ProductListSerializer,
@@ -21,6 +22,7 @@ from .serializers import (
     HomepageBandSerializer,
     SiteContentSerializer,
     InstallmentOptionSerializer,
+    
 )
 
 
@@ -44,7 +46,17 @@ class CategoryListAPIView(generics.ListAPIView):
             .order_by("name")
         )
 
+class CategoryTreeAPIView(generics.ListAPIView):
+    serializer_class = CategoryTreeSerializer
+    pagination_class = None
 
+    def get_queryset(self):
+        return (
+            Category.objects
+            .filter(is_active=True, parent=None)
+            .prefetch_related("children__children")
+            .order_by("id")
+        )
 class HomepageBandListAPIView(generics.ListAPIView):
     serializer_class = HomepageBandSerializer
     pagination_class = None
