@@ -456,6 +456,75 @@ class ProductResourceSerializer(serializers.ModelSerializer):
 
         return obj.file.url
 
+def _merge_display_attributes(attributes_data):
+    """
+    Müşteriye gösterilen özellik listesini sadeleştirir:
+    - maksimum-hiz-min/max -> tek "Maksimum Hız" (ortalama)
+    - yakit-tuketimi-min/max -> tek "Yakıt Tüketimi" (ortalama)
+    - uzunluk/genislik/yukseklik -> tek "Boyutlar (U x G x Y)"
+    Ham min/max/ayrı boyut satırları çıktıdan kaldırılır; admin panelinde
+    bu değerler hâlâ ayrı ayrı görünür, çünkü admin bu fonksiyonu kullanmaz.
+    """
+    by_slug = {item["slug"]: item for item in attributes_data}
+    used_slugs = set()
+    merged = []
+
+    def _average(slug_min, slug_max):
+        if slug_min not in by_slug or slug_max not in by_slug:
+            return None
+        try:
+            min_val = Decimal(str(by_slug[slug_min]["value"]))
+            max_val = Decimal(str(by_slug[slug_max]["value"]))
+        except (InvalidOperation, TypeError):
+            return None
+
+        avg = (min_val + max_val) / 2
+        formatted = format(avg, "f")
+        if "." in formatted:
+            formatted = formatted.rstrip("0").rstrip(".")
+        return formatted
+
+    hiz_ortalama = _average("maksimum-hiz-min", "maksimum-hiz-max")
+    if hiz_ortalama is not None:
+        merged.append({
+            **by_slug["maksimum-hiz-min"],
+            "slug": "maksimum-hiz",
+            "name": "Maksimum Hız",
+            "value": hiz_ortalama,
+        })
+        used_slugs.update(["maksimum-hiz-min", "maksimum-hiz-max"])
+
+    yakit_ortalama = _average("yakit-tuketimi-min", "yakit-tuketimi-max")
+    if yakit_ortalama is not None:
+        merged.append({
+            **by_slug["yakit-tuketimi-min"],
+            "slug": "yakit-tuketimi",
+            "name": "Yakıt Tüketimi",
+            "value": yakit_ortalama,
+        })
+        used_slugs.update(["yakit-tuketimi-min", "yakit-tuketimi-max"])
+
+    boyut_slugs = ["uzunluk", "genislik", "yukseklik"]
+    if all(slug in by_slug for slug in boyut_slugs):
+        merged.append({
+            **by_slug["uzunluk"],
+            "slug": "boyutlar",
+            "name": "Boyutlar (U x G x Y)",
+            "unit": "mm",
+            "value": (
+                f"{by_slug['uzunluk']['value']} x "
+                f"{by_slug['genislik']['value']} x "
+                f"{by_slug['yukseklik']['value']}"
+            ),
+        })
+        used_slugs.update(boyut_slugs)
+
+    result = [
+        item for item in attributes_data
+        if item["slug"] not in used_slugs
+    ]
+    result.extend(merged)
+    return result
 class ProductDetailSerializer(ProductBadgeMixin, ProductFavoriteMixin, serializers.ModelSerializer):
     brand = BrandSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
@@ -532,6 +601,11 @@ class ProductDetailSerializer(ProductBadgeMixin, ProductFavoriteMixin, serialize
             )
 
         return obj.cover_image.url
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["attributes"] = _merge_display_attributes(data["attributes"])
+        return data
 
 
 class ProductWriteSerializer(serializers.ModelSerializer):

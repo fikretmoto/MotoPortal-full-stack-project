@@ -31,17 +31,20 @@ SCOOTER_ATTRIBUTE_SLUGS = [
     "maksimum-guc-devri",
     "maksimum-tork",
     "maksimum-tork-devri",
-    "maksimum-hiz",
+    "maksimum-hiz-min",
+    "maksimum-hiz-max",
 
     # Şanzıman ve aktarma
     "sanziman-tipi",
+    "debriyaj-tipi",
     "son-aktarma-tipi",
 
     # Yakıt ve enerji
     "yakit-turu",
     "yakit-sistemi",
     "yakit-deposu",
-    "yakit-tuketimi",
+    "yakit-tuketimi-min",
+    "yakit-tuketimi-max",
     "yakit-deposu-konumu",
 
     # Boyutlar ve ağırlık
@@ -87,6 +90,8 @@ SCOOTER_ATTRIBUTE_SLUGS = [
     "start-stop-sistemi",
     "idling-stop",
     "akilli-anahtar",
+    "anahtarsiz-calistirma",
+    "usb-sarj-girisi",
     "arka-portbagaj",
     "ayak-marsi",
     "on-saklama-gozu",

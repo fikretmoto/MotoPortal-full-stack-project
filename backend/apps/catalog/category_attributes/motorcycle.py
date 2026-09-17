@@ -33,7 +33,8 @@ MOTORCYCLE_ATTRIBUTE_SLUGS = [
     "maksimum-guc-devri",
     "maksimum-tork",
     "maksimum-tork-devri",
-    "maksimum-hiz",
+    "maksimum-hiz-min",
+    "maksimum-hiz-max",
 
     # Şanzıman ve aktarma
     "sanziman-tipi",
@@ -45,7 +46,8 @@ MOTORCYCLE_ATTRIBUTE_SLUGS = [
     "yakit-turu",
     "yakit-sistemi",
     "yakit-deposu",
-    "yakit-tuketimi",
+    "yakit-tuketimi-min",
+    "yakit-tuketimi-max",
 
     # Boyutlar ve ağırlık
     "uzunluk",
