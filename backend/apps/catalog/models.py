@@ -1,5 +1,9 @@
 from django.db import models
 from django.conf import settings
+from django.core.exceptions import ValidationError
+
+
+VEHICLE_ROOT_CATEGORY_SLUG = "tasitlar"
 
 
 class Category(models.Model):
@@ -47,6 +51,17 @@ class Category(models.Model):
         if self.parent:
             return f"{self.parent.name} → {self.name}"
         return self.name
+
+    def is_vehicle_category(self):
+        """
+        Bu kategori (ya da atalarından biri) Taşıtlar kökü altında mı?
+        VehicleModel/vehicle_model sisteminin sadece Taşıtlar'da
+        kullanılabilmesini sağlamak için kullanılıyor.
+        """
+        node = self
+        while node.parent_id is not None:
+            node = node.parent
+        return node.slug == VEHICLE_ROOT_CATEGORY_SLUG
 
 
 class Brand(models.Model):
@@ -113,6 +128,55 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class VehicleModel(models.Model):
+    brand = models.ForeignKey(
+        Brand,
+        on_delete=models.PROTECT,
+        related_name="vehicle_models",
+        verbose_name="Marka",
+    )
+
+    name = models.CharField(
+        max_length=100,
+        verbose_name="Model Adı",
+        help_text="Örn: Freccia 150, Blade-250",
+    )
+
+    slug = models.SlugField(
+        max_length=140,
+        verbose_name="Slug",
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Aktif mi?",
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Oluşturulma Tarihi",
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        verbose_name="Güncellenme Tarihi",
+    )
+
+    class Meta:
+        verbose_name = "Araç Modeli"
+        verbose_name_plural = "Araç Modelleri"
+        ordering = ("brand__name", "name")
+        constraints = [
+            models.UniqueConstraint(
+                fields=("brand", "slug"),
+                name="unique_vehicle_model_per_brand",
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.brand.name} {self.name}"
 
 
 class ProductStockStatus(models.TextChoices):
@@ -238,6 +302,16 @@ class Product(models.Model):
         verbose_name="Kategori",
     )
 
+    vehicle_model = models.ForeignKey(
+        VehicleModel,
+        on_delete=models.PROTECT,
+        related_name="products",
+        null=True,
+        blank=True,
+        verbose_name="Araç Modeli",
+        help_text="Sadece Taşıtlar kategorisindeki ürünlerde doldurulur.",
+    )
+
     price = models.DecimalField(
         max_digits=12,
         decimal_places=2,
@@ -334,7 +408,21 @@ class Product(models.Model):
             "name",
         )
 
+    def clean(self):
+        super().clean()
+
+        if self.vehicle_model_id and self.category_id:
+            if not self.category.is_vehicle_category():
+                raise ValidationError({
+                    "vehicle_model": (
+                        "Araç modeli sadece Taşıtlar kategorisindeki "
+                        "ürünlerde kullanılabilir."
+                    ),
+                })
+
     def __str__(self):
+        if self.vehicle_model_id:
+            return f"{self.brand.name} {self.vehicle_model.name}"
         return f"{self.brand.name} {self.name}"
 
 

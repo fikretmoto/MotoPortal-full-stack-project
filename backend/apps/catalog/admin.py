@@ -23,6 +23,7 @@ from .models import (
     ProductVariant,
     SiteContent,
     Tag,
+    VehicleModel,
 )
 
 
@@ -252,6 +253,39 @@ class BrandAdmin(admin.ModelAdmin):
     )
 
 
+@admin.register(VehicleModel)
+class VehicleModelAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "brand",
+        "is_active",
+        "created_at",
+    )
+
+    list_filter = (
+        "brand",
+        "is_active",
+    )
+
+    search_fields = (
+        "name",
+        "brand__name",
+    )
+
+    autocomplete_fields = (
+        "brand",
+    )
+
+    prepopulated_fields = {
+        "slug": ("name",),
+    }
+
+    readonly_fields = (
+        "created_at",
+        "updated_at",
+    )
+
+
 class ProductHighlightImageInline(admin.TabularInline):
     model = ProductHighlightImage
     extra = 1
@@ -355,6 +389,7 @@ class ProductAdmin(admin.ModelAdmin):
     autocomplete_fields = (
         "brand",
         "category",
+        "vehicle_model",
     )
 
     readonly_fields = (
@@ -371,6 +406,7 @@ class ProductAdmin(admin.ModelAdmin):
                     "slug",
                     "brand",
                     "category",
+                    "vehicle_model",
                     "price",
                     "discount_price",
                 ),

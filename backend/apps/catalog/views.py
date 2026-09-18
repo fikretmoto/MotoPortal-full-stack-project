@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny
 
 from .filters import ProductFilter
 
-from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductReview, HomepageBand, SiteContent, InstallmentOption, Favorite
+from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductAttributeValue, ProductReview, HomepageBand, SiteContent, InstallmentOption, Favorite
 from .serializers import (
    BrandSerializer,
     CategoryAttributesResponseSerializer,
@@ -195,6 +195,16 @@ class ProductListAPIView(generics.ListAPIView):
                 "brand",
                 "category",
                 "category__parent",
+                "vehicle_model",
+            )
+            .prefetch_related(
+                Prefetch(
+                    "attribute_values",
+                    queryset=ProductAttributeValue.objects.filter(
+                        attribute__slug="model-yili",
+                    ),
+                    to_attr="model_yili_prefetch",
+                ),
             )
         )
 
@@ -210,6 +220,7 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
                 "brand",
                 "category",
                 "category__parent",
+                "vehicle_model",
             )
             .prefetch_related(
                 "images",

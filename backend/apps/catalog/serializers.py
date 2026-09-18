@@ -358,9 +358,46 @@ class ProductVariantSerializer(serializers.ModelSerializer):
 
 
 
+def _resolve_model_yili_value(obj):
+    """
+    Bir ürünün "model-yili" attribute değerini, hangi queryset'ten
+    geldiğine bakmadan (liste görünümünün hafif Prefetch'i ya da detay
+    görünümünün tam attribute_values prefetch'i) bulur.
+    """
+    prefetched = getattr(obj, "model_yili_prefetch", None)
+    if prefetched is not None:
+        return prefetched[0].value if prefetched else None
+
+    for attribute_value in obj.attribute_values.all():
+        if attribute_value.attribute.slug == "model-yili":
+            return attribute_value.value
+
+    return None
+
+
+def get_display_name(obj):
+    """
+    Taşıtlar kategorisindeki ürünler için "{Marka} {Model} ({Yıl})"
+    şeklinde otomatik başlık üretir; vehicle_model boşsa (henüz
+    atanmamış Taşıt ürünleri ya da Taşıtlar-dışı kategoriler) ham
+    Product.name'e düşer.
+    """
+    if not obj.vehicle_model_id:
+        return obj.name
+
+    title = f"{obj.brand.name} {obj.vehicle_model.name}"
+
+    year_value = _resolve_model_yili_value(obj)
+    if year_value:
+        title += f" ({year_value})"
+
+    return title
+
+
 class ProductListSerializer(ProductBadgeMixin, ProductRatingMixin, ProductFavoriteMixin, serializers.ModelSerializer):
     brand = BrandSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
+    display_name = serializers.SerializerMethodField()
     cover_image_url = serializers.SerializerMethodField()
     badges = serializers.SerializerMethodField()
     average_rating = serializers.SerializerMethodField()
@@ -372,6 +409,7 @@ class ProductListSerializer(ProductBadgeMixin, ProductRatingMixin, ProductFavori
         fields = (
             "id",
             "name",
+            "display_name",
             "slug",
             "brand",
             "category",
@@ -388,6 +426,9 @@ class ProductListSerializer(ProductBadgeMixin, ProductRatingMixin, ProductFavori
             "review_count",
             "is_favorited",
         )
+
+    def get_display_name(self, obj):
+        return get_display_name(obj)
 
     def get_cover_image_url(self, obj):
         if not obj.cover_image:
@@ -602,9 +643,10 @@ def _merge_display_attributes(attributes_data):
 class ProductDetailSerializer(ProductBadgeMixin, ProductFavoriteMixin, serializers.ModelSerializer):
     brand = BrandSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
+    display_name = serializers.SerializerMethodField()
     badges = serializers.SerializerMethodField()
     is_favorited = serializers.SerializerMethodField()
-   
+
 
     images = ProductImageSerializer(
         many=True,
@@ -634,6 +676,7 @@ class ProductDetailSerializer(ProductBadgeMixin, ProductFavoriteMixin, serialize
         fields = (
             "id",
             "name",
+            "display_name",
             "slug",
             "brand",
             "category",
@@ -660,8 +703,11 @@ class ProductDetailSerializer(ProductBadgeMixin, ProductFavoriteMixin, serialize
             "is_active",
             "created_at",
             "updated_at",
-            
+
         )
+
+    def get_display_name(self, obj):
+        return get_display_name(obj)
 
     def get_cover_image_url(self, obj):
         if not obj.cover_image:
