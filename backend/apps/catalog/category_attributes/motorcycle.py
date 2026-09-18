@@ -92,7 +92,10 @@ MOTORCYCLE_ATTRIBUTE_SLUGS = [
 MOTORCYCLE_HIGHLIGHT_SLUGS = [
     "model-yili",
     "motor-hacmi",
+    "yakit-deposu",
+    "yakit-tuketimi-min",
+    "bos-agirlik",
     "maksimum-guc",
     "maksimum-tork",
-    "sanziman-tipi",
+    "on-fren",
 ]

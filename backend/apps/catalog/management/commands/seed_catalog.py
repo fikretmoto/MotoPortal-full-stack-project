@@ -25,6 +25,7 @@ from apps.catalog.tags import TAG_DATA
 from apps.catalog.category_attributes.scooter import (
     SCOOTER_ATTRIBUTE_SLUGS,
     SCOOTER_CATEGORY_SLUGS,
+    SCOOTER_HIGHLIGHT_SLUGS,
 )
 from apps.catalog.category_attributes.helmet import (
     HELMET_ATTRIBUTE_SLUGS,
@@ -280,6 +281,7 @@ class Command(BaseCommand):
 
         for category_slug in SCOOTER_CATEGORY_SLUGS:
                 mappings[category_slug] = SCOOTER_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = SCOOTER_HIGHLIGHT_SLUGS
 
         for category_slug in APPAREL_CATEGORY_SLUGS:
                 mappings[category_slug] = APPAREL_ATTRIBUTE_SLUGS

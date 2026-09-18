@@ -96,3 +96,17 @@ SCOOTER_ATTRIBUTE_SLUGS = [
     "ayak-marsi",
     "on-saklama-gozu",
 ]
+
+SCOOTER_HIGHLIGHT_SLUGS = [
+    "model-yili",
+    "motor-hacmi",
+    "yakit-deposu",
+    "yakit-tuketimi-min",
+    "bos-agirlik",
+    "maksimum-guc",
+    "maksimum-tork",
+    "on-fren",
+    "sele-alti-bagaj-hacmi",
+    "maksimum-hiz-min",
+    "yakit-deposu-konumu",
+]

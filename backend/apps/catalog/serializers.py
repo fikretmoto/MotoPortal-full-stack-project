@@ -489,7 +489,7 @@ def _merge_display_attributes(attributes_data):
         merged.append({
             **by_slug["maksimum-hiz-min"],
             "slug": "maksimum-hiz",
-            "name": "Maksimum Hız",
+            "name": "Ortalama Hız",
             "value": hiz_ortalama,
         })
         used_slugs.update(["maksimum-hiz-min", "maksimum-hiz-max"])
@@ -499,7 +499,7 @@ def _merge_display_attributes(attributes_data):
         merged.append({
             **by_slug["yakit-tuketimi-min"],
             "slug": "yakit-tuketimi",
-            "name": "Yakıt Tüketimi",
+            "name": "Ortalama Yakıt Tüketimi",
             "value": yakit_ortalama,
         })
         used_slugs.update(["yakit-tuketimi-min", "yakit-tuketimi-max"])
@@ -518,6 +518,72 @@ def _merge_display_attributes(attributes_data):
             ),
         })
         used_slugs.update(boyut_slugs)
+
+    def _combine_value_with_rpm(value_slug, rpm_slug):
+        if value_slug not in by_slug or rpm_slug not in by_slug:
+            return None
+
+        val = by_slug[value_slug].get("value")
+        rpm = by_slug[rpm_slug].get("value")
+        if not val or not rpm:
+            return None
+
+        val_unit = by_slug[value_slug].get("unit") or ""
+        rpm_unit = by_slug[rpm_slug].get("unit") or ""
+
+        return f"{val} {val_unit} / {rpm} {rpm_unit}".strip()
+
+    guc_birlesik = _combine_value_with_rpm("maksimum-guc", "maksimum-guc-devri")
+    if guc_birlesik is not None:
+        merged.append({
+            **by_slug["maksimum-guc"],
+            "slug": "maksimum-guc",
+            "name": "Maksimum Güç",
+            "value": guc_birlesik,
+            "unit": "",
+        })
+        used_slugs.update(["maksimum-guc", "maksimum-guc-devri"])
+
+    tork_birlesik = _combine_value_with_rpm("maksimum-tork", "maksimum-tork-devri")
+    if tork_birlesik is not None:
+        merged.append({
+            **by_slug["maksimum-tork"],
+            "slug": "maksimum-tork",
+            "name": "Maksimum Tork",
+            "value": tork_birlesik,
+            "unit": "",
+        })
+        used_slugs.update(["maksimum-tork", "maksimum-tork-devri"])
+
+    def _fren_taraf(fren_slug, abs_slug, cbs_slug):
+        if fren_slug not in by_slug:
+            return None
+
+        tip = by_slug[fren_slug].get("value")
+        if not tip:
+            return None
+
+        abs_var = by_slug.get(abs_slug, {}).get("value") == "true"
+        cbs_var = by_slug.get(cbs_slug, {}).get("value") == "true"
+
+        if abs_var:
+            return f"{tip} (ABS)"
+        if cbs_var:
+            return f"{tip} (CBS)"
+        return tip
+
+    on_taraf = _fren_taraf("on-fren", "abs", "cbs")
+    arka_taraf = _fren_taraf("arka-fren", "abs", "cbs")
+
+    if on_taraf is not None and arka_taraf is not None:
+        merged.append({
+            **by_slug["on-fren"],
+            "slug": "fren-tipi",
+            "name": "Fren Tipi (Ön/Arka)",
+            "value": f"{on_taraf} / {arka_taraf}",
+            "unit": "",
+        })
+        used_slugs.update(["on-fren", "arka-fren", "abs", "cbs"])
 
     result = [
         item for item in attributes_data
