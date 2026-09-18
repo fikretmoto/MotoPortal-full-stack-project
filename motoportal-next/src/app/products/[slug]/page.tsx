@@ -6,6 +6,7 @@ import ProductCommercialTabs from "@/components/product/ProductCommercialTabs";
 
 import ProductTechnicalTabs from "@/components/product/ProductTechnicalTabs";
 import { ProductHighlightCarousel } from "@/components/product/ProductHighlightCarousel";
+import ProductReviewsSection from "@/components/product/ProductReviewsSection";
 
 import {
   Breadcrumb,
@@ -89,11 +90,7 @@ export default async function ProductDetailPage({
 
 
 
-<ProductCommercialTabs
-  product={product}
-  reviews={reviews}
-  isAuthenticated={isAuthenticated}
-/>
+<ProductCommercialTabs product={product} />
 
 
 <ProductTechnicalTabs
@@ -101,6 +98,13 @@ export default async function ProductDetailPage({
 />
 
 <ProductHighlightCarousel attributes={product.attributes} />
+
+<ProductReviewsSection
+  slug={product.slug}
+  productId={product.id}
+  reviews={reviews}
+  isAuthenticated={isAuthenticated}
+/>
 
     </main>
   );

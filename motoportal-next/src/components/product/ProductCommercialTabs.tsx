@@ -4,26 +4,18 @@ import { useEffect, useState } from "react";
 import type {
   InstallmentOption,
   ProductDetail,
-  ProductReview,
   SiteContent,
 } from "@/services/catalog";
-import {
-  getInstallmentOptions,
-  getProductReviews,
-  getSiteContent,
-} from "@/services/catalog";
+import { getInstallmentOptions, getSiteContent } from "@/services/catalog";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
-import ReviewForm from "./ReviewForm";
 
 type Props = {
   product: ProductDetail;
-  reviews: ProductReview[];
-  isAuthenticated: boolean;
 };
 
 function getRelevantInstallments(
@@ -58,21 +50,11 @@ function formatCurrency(amount: number, currency: string) {
   return currency === "TRY" ? `${formatted} ₺` : `${formatted} ${currency}`;
 }
 
-export default function ProductCommercialTabs({
-  product,
-  reviews,
-  isAuthenticated,
-}: Props) {
+export default function ProductCommercialTabs({ product }: Props) {
   const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
   const [installmentOptions, setInstallmentOptions] = useState<
     InstallmentOption[]
   >([]);
-  const [reviewList, setReviewList] = useState<ProductReview[]>(reviews);
-
-  async function refreshReviews() {
-    const updated = await getProductReviews(product.slug);
-    setReviewList(updated);
-  }
 
   useEffect(() => {
     let cancelled = false;
@@ -113,9 +95,6 @@ export default function ProductCommercialTabs({
           <TabsTrigger value="iade">İade ve Değişim</TabsTrigger>
           <TabsTrigger value="garanti">Garanti Bilgisi</TabsTrigger>
           <TabsTrigger value="takas">Takas Bilgilendirme</TabsTrigger>
-          <TabsTrigger value="yorumlar">
-            Yorumlar ({reviewList.length})
-          </TabsTrigger>
           {hasResources && (
             <TabsTrigger value="kaynaklar">Kaynaklar/Dökümanlar</TabsTrigger>
           )}
@@ -197,50 +176,6 @@ export default function ProductCommercialTabs({
             Takas teklifleri için ürün sahibiyle iletişime geçebilirsiniz.
             Detaylı takas bilgilendirme formu yakında eklenecektir.
           </p>
-        </TabsContent>
-
-        <TabsContent value="yorumlar">
-          <div className="flex flex-col gap-6">
-            <ReviewForm
-              slug={product.slug}
-              productId={product.id}
-              isAuthenticated={isAuthenticated}
-              onSubmitted={refreshReviews}
-            />
-
-            <div className="flex flex-col gap-4 border-t border-line pt-4">
-              {reviewList.length === 0 ? (
-                <p className="text-sm text-fg-muted">
-                  Bu ürün için henüz onaylanmış yorum yok.
-                </p>
-              ) : (
-                reviewList.map((review) => (
-                  <div
-                    key={review.id}
-                    className="border-b border-line pb-4 last:border-b-0"
-                  >
-                    <div className="mb-1 flex items-center gap-1">
-                      {Array.from({ length: 5 }).map((_, index) => (
-                        <span
-                          key={index}
-                          className={
-                            index < review.rating
-                              ? "text-amber-500"
-                              : "text-fg-subtle"
-                          }
-                        >
-                          ★
-                        </span>
-                      ))}
-                    </div>
-                    <p className="text-sm text-foreground">
-                      {review.comment}
-                    </p>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
         </TabsContent>
 
         {hasResources && (
