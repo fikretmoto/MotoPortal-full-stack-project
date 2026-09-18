@@ -1,10 +1,10 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
 import ProductHero from "@/components/product/ProductHero";
 
 import ProductCommercialTabs from "@/components/product/ProductCommercialTabs";
 
 import ProductTechnicalTabs from "@/components/product/ProductTechnicalTabs";
-import ProductReviews from "@/components/product/ProductReviews";
 import { ProductHighlightCarousel } from "@/components/product/ProductHighlightCarousel";
 
 import {
@@ -58,6 +58,9 @@ export default async function ProductDetailPage({
 
   const reviews = await getProductReviews(slug);
 
+  const cookieStore = await cookies();
+  const isAuthenticated = Boolean(cookieStore.get("access_token")?.value);
+
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-10">
@@ -86,7 +89,11 @@ export default async function ProductDetailPage({
 
 
 
-<ProductCommercialTabs product={product} />
+<ProductCommercialTabs
+  product={product}
+  reviews={reviews}
+  isAuthenticated={isAuthenticated}
+/>
 
 
 <ProductTechnicalTabs
@@ -94,8 +101,6 @@ export default async function ProductDetailPage({
 />
 
 <ProductHighlightCarousel attributes={product.attributes} />
-
-<ProductReviews reviews={reviews} />
 
     </main>
   );
