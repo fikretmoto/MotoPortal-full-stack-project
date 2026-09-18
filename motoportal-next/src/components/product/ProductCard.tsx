@@ -111,7 +111,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <CardContent className="flex h-full min-h-[180px] flex-col pb-1 pt-2">
           <div className="min-h-[3.75rem]">
             <h3 className="line-clamp-2 text-sm font-semibold tracking-tight text-primary">
-              {product.name}
+              {product.display_name || product.name}
             </h3>
 
             {product.short_description && (

@@ -96,7 +96,7 @@ export default function HomepageBand({ band }: HomepageBandProps) {
                   </div>
 
                   <h3 className="mt-1 font-semibold text-foreground">
-                    {product.name}
+                    {product.display_name || product.name}
                   </h3>
                 </div>
               </Link>

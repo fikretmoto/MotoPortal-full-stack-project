@@ -80,7 +80,7 @@ export default async function ProductDetailPage({
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{product.name}</BreadcrumbPage>
+            <BreadcrumbPage>{product.display_name || product.name}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

@@ -84,6 +84,7 @@ export async function getHomepageBands(): Promise<HomepageBand[]> {
 export type Product = {
   id: number;
   name: string;
+  display_name: string;
   slug: string;
   brand: Brand;
   category: Category;

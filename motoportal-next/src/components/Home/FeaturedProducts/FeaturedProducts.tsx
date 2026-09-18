@@ -44,7 +44,7 @@ function FeaturedProductCard({
           </div>
 
           <h3 className="mt-5 text-2xl font-semibold tracking-tight text-foreground">
-            {product.name}
+            {product.display_name || product.name}
           </h3>
 
           <p className="mt-3 line-clamp-3 text-sm leading-6 text-fg-muted">

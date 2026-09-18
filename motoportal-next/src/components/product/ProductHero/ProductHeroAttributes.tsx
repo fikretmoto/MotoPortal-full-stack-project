@@ -45,7 +45,7 @@ export default function ProductHeroAttributes({
       <div className="mt-5 flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
           <h1 className="truncate text-2xl font-bold tracking-tight text-foreground lg:text-3xl">
-            {product.name}
+            {product.display_name || product.name}
           </h1>
         </div>
 
@@ -76,7 +76,7 @@ export default function ProductHeroAttributes({
         {product.whatsapp_number && (
           
             <a href={`https://wa.me/${product.whatsapp_number}?text=${encodeURIComponent(
-              `Merhaba, ${product.name} hakkında bilgi almak istiyorum.`
+              `Merhaba, ${product.display_name || product.name} hakkında bilgi almak istiyorum.`
             )}`}
             target="_blank"
             rel="noopener noreferrer"

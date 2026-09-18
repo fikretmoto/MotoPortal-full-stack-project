@@ -5,6 +5,7 @@ const sampleProducts: Product[] = [
   {
     id: 1,
     name: "Honda PCX 125",
+    display_name: "Honda PCX 125",
     slug: "honda-pcx-125",
     brand: { id: 1, name: "Honda", slug: "honda", logo_url: null, country: "Japonya", founded_year: 1948, website: "", description: "", is_active: true },
     category: { id: 1, name: "Scooter", slug: "scooter", parent: null, parent_name: null, is_active: true },
@@ -27,6 +28,7 @@ const sampleProducts: Product[] = [
   {
     id: 2,
     name: "Yamaha NMAX 155",
+    display_name: "Yamaha NMAX 155",
     slug: "yamaha-nmax-155",
     brand: { id: 2, name: "Yamaha", slug: "yamaha", logo_url: null, country: "Japonya", founded_year: 1955, website: "", description: "", is_active: true },
     category: { id: 1, name: "Scooter", slug: "scooter", parent: null, parent_name: null, is_active: true },
@@ -46,6 +48,7 @@ const sampleProducts: Product[] = [
   {
     id: 3,
     name: "Arora Beatrix 150 — çok uzun bir ürün adı burada nasıl kırpılıyor test",
+    display_name: "Arora Beatrix 150 — çok uzun bir ürün adı burada nasıl kırpılıyor test",
     slug: "arora-beatrix-150",
     brand: { id: 3, name: "Arora", slug: "arora", logo_url: null, country: "Türkiye", founded_year: 2010, website: "", description: "", is_active: true },
     category: { id: 2, name: "Motosiklet", slug: "motosiklet", parent: null, parent_name: null, is_active: true },
