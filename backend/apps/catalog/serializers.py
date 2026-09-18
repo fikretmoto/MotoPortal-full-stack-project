@@ -314,7 +314,7 @@ class ProductAttributeValueSerializer(serializers.ModelSerializer):
         if highlight_image and highlight_image.title:
             return highlight_image.title
 
-        return obj.attribute.name
+        return None
 
     def get_highlight_description(self, obj):
         highlight_image = self._get_highlight_image(obj)
@@ -322,10 +322,7 @@ class ProductAttributeValueSerializer(serializers.ModelSerializer):
         if highlight_image and highlight_image.description:
             return highlight_image.description
 
-        if obj.value:
-            return f"{obj.value} {obj.attribute.unit}".strip()
-
-        return ""
+        return None
 
 
     
@@ -590,6 +587,17 @@ def _merge_display_attributes(attributes_data):
         if item["slug"] not in used_slugs
     ]
     result.extend(merged)
+
+    for item in result:
+        if not item.get("highlight_title"):
+            item["highlight_title"] = item["name"]
+        if not item.get("highlight_description"):
+            value = item.get("value")
+            unit = item.get("unit") or ""
+            item["highlight_description"] = (
+                f"{value} {unit}".strip() if value else ""
+            )
+
     return result
 class ProductDetailSerializer(ProductBadgeMixin, ProductFavoriteMixin, serializers.ModelSerializer):
     brand = BrandSerializer(read_only=True)
