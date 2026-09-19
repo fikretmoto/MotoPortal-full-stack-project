@@ -67,14 +67,12 @@ class ProductAttributeValueForm(forms.ModelForm):
             )
 
         elif attribute.data_type == "boolean":
-            self.fields["value"] = forms.ChoiceField(
-                choices=[
-                    ("", "---------"),
-                    ("true", "Evet"),
-                    ("false", "Hayır"),
-                ],
+            self.fields["value"] = forms.BooleanField(
                 required=False,
                 label="Değer",
+            )
+            self.initial["value"] = (
+                (instance.value or "").strip().casefold() == "true"
             )
 
         else:
@@ -88,6 +86,18 @@ class ProductAttributeValueForm(forms.ModelForm):
                     }
                 ),
             )
+
+    def clean_value(self):
+        value = self.cleaned_data.get("value")
+
+        if (
+            self.instance
+            and self.instance.attribute_id
+            and self.instance.attribute.data_type == "boolean"
+        ):
+            return "true" if value else "false"
+
+        return value
 
 class ProductAttributeValueInline(admin.TabularInline):
     model = ProductAttributeValue
