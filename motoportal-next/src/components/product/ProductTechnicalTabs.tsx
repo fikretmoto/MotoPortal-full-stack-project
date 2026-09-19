@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { CircleCheck, CircleX } from "lucide-react";
 
 import type { ProductAttribute } from "@/services/catalog";
 import {
@@ -76,8 +77,18 @@ export default function ProductTechnicalTabs({
                   </span>
 
                   <span className="text-sm font-medium text-foreground">
-                    {attribute.value}
-                    {attribute.unit ? ` ${attribute.unit}` : ""}
+                    {attribute.data_type === "boolean" &&
+                    attribute.value.trim().toLowerCase() === "true" ? (
+                      <CircleCheck className="h-5 w-5 text-green-600" />
+                    ) : attribute.data_type === "boolean" &&
+                      attribute.value.trim().toLowerCase() === "false" ? (
+                      <CircleX className="h-5 w-5 text-red-600" />
+                    ) : (
+                      <>
+                        {attribute.value}
+                        {attribute.unit ? ` ${attribute.unit}` : ""}
+                      </>
+                    )}
                   </span>
                 </div>
               ))}
