@@ -41,22 +41,10 @@ export default function ProductHeroAttributes({
 
   return (
     <div className="flex flex-col justify-center">
-      {/* SATIR 1: Ürün adı + fiyat aynı satırda, aynı eksende */}
-      <div className="mt-5 flex flex-wrap items-start justify-between gap-4">
-        <div className="min-w-0 flex-1">
-          <h1 className="truncate text-2xl font-bold tracking-tight text-foreground lg:text-3xl">
-            {product.display_name || product.name}
-          </h1>
-        </div>
-
-        <div className="shrink-0">
-          <ProductPrice
-            price={displayPrice}
-            discountPrice={displayDiscountPrice}
-            currency={product.currency}
-          />
-        </div>
-      </div>
+      {/* SATIR 1: Ürün adı — tek başına */}
+      <h1 className="mt-5 text-2xl font-bold tracking-tight text-foreground lg:text-3xl">
+        {product.display_name || product.name}
+      </h1>
 
       {/* SATIR 2: Puan + yorum sayısı + stok rozeti aynı satırda */}
       <div className="mt-3 flex flex-wrap items-center gap-4">
@@ -71,7 +59,16 @@ export default function ProductHeroAttributes({
         </p>
       )}
 
-      {/* SATIR 4: Instagram / WhatsApp butonları */}
+      {/* SATIR 4: Fiyat — kendi satırında */}
+      <div className="mt-5">
+        <ProductPrice
+          price={displayPrice}
+          discountPrice={displayDiscountPrice}
+          currency={product.currency}
+        />
+      </div>
+
+      {/* SATIR 5: Instagram / WhatsApp butonları */}
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
         {product.whatsapp_number && (
           
@@ -98,14 +95,14 @@ export default function ProductHeroAttributes({
         )}
       </div>
 
-      {/* SATIR 5: Varyant seçimi (renk, cc vb.) */}
+      {/* SATIR 6: Varyant seçimi (renk, cc vb.) */}
       <ProductVariantSelector
         variants={product.variants}
         selectedVariantId={selectedVariantId}
         onSelect={setSelectedVariantId}
       />
 
-      {/* SATIR 6: Ürün Detayları başlığı + öne çıkan özellik kartları */}
+      {/* SATIR 7: Ürün Detayları başlığı + öne çıkan özellik kartları */}
       <div className="mt-10">
         <h2 className="text-lg font-semibold text-foreground">
           Ürün Detayları
