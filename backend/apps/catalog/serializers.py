@@ -557,6 +557,24 @@ def _merge_display_attributes(attributes_data):
         })
         used_slugs.update(boyut_slugs)
 
+    raf_kapasitesi_slugs = ["on-raf-kapasitesi", "arka-raf-kapasitesi"]
+    if all(slug in by_slug for slug in raf_kapasitesi_slugs):
+        on_deger = by_slug["on-raf-kapasitesi"]["value"]
+        arka_deger = by_slug["arka-raf-kapasitesi"]["value"]
+        on_birim = by_slug["on-raf-kapasitesi"].get("unit") or ""
+        arka_birim = by_slug["arka-raf-kapasitesi"].get("unit") or ""
+        merged.append({
+            **by_slug["on-raf-kapasitesi"],
+            "slug": "raf-kapasitesi",
+            "name": "Raf Kapasitesi (Ön/Arka)",
+            "value": (
+                f"Ön: {on_deger} {on_birim} / "
+                f"Arka: {arka_deger} {arka_birim}"
+            ).strip(),
+            "unit": "",
+        })
+        used_slugs.update(raf_kapasitesi_slugs)
+
     def _combine_value_with_rpm(value_slug, rpm_slug):
         if value_slug not in by_slug or rpm_slug not in by_slug:
             return None

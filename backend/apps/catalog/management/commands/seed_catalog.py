@@ -5,12 +5,14 @@ from apps.catalog.attribute_options.scooter import SCOOTER_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.motorcycle import MOTORCYCLE_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.ecommerce import ECOMMERCE_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.parts import PARTS_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.atv import ATV_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attributes.ecommerce import ECOMMERCE_ATTRIBUTE_DATA
 from apps.catalog.attributes.scooter import SCOOTER_ATTRIBUTE_DATA
 
 from apps.catalog.attribute_groups import ATTRIBUTE_GROUP_DATA
 from apps.catalog.attributes.helmet import HELMET_ATTRIBUTE_DATA
 from apps.catalog.attributes.motorcycle import MOTORCYCLE_ATTRIBUTE_DATA
+from apps.catalog.attributes.atv import ATV_ATTRIBUTE_DATA
 from apps.catalog.attributes.apparel import APPAREL_ATTRIBUTE_DATA
 from apps.catalog.attributes.battery import BATTERY_ATTRIBUTE_DATA
 from apps.catalog.attributes.oil import OIL_ATTRIBUTE_DATA
@@ -32,6 +34,7 @@ from apps.catalog.category_attributes.helmet import (
     HELMET_CATEGORY_SLUGS,
 )
 from apps.catalog.category_attributes.motorcycle import (
+    ADVENTURE_EXTRA_ATTRIBUTE_SLUGS,
     MOTORCYCLE_ATTRIBUTE_SLUGS,
     MOTORCYCLE_CATEGORY_SLUGS,
     MOTORCYCLE_HIGHLIGHT_SLUGS,
@@ -67,6 +70,10 @@ from apps.catalog.category_attributes.parts import (
 from apps.catalog.category_attributes.accessories import (
     ACCESSORIES_ATTRIBUTE_SLUGS,
     ACCESSORIES_CATEGORY_SLUGS,
+)
+from apps.catalog.category_attributes.atv import (
+    ATV_ATTRIBUTE_SLUGS,
+    ATV_CATEGORY_SLUGS,
 )
 
 
@@ -222,6 +229,7 @@ class Command(BaseCommand):
             *ELECTRIC_ATTRIBUTE_DATA,
             *PARTS_ATTRIBUTE_DATA,
             *ACCESSORIES_ATTRIBUTE_DATA,
+            *ATV_ATTRIBUTE_DATA,
         ]
 
         for item in all_attribute_data:
@@ -276,6 +284,13 @@ class Command(BaseCommand):
             mappings[category_slug] = MOTORCYCLE_ATTRIBUTE_SLUGS
             highlight_mappings[category_slug] = MOTORCYCLE_HIGHLIGHT_SLUGS
 
+        # Adventure/Touring tipi motosikletlerde anlamlı olan ek donanım
+        # alanları (telefon bağlantısı, ön cam, arka portbagaj, navigasyon
+        # desteği) — sadece "adventure" kategorisine ekleniyor.
+        mappings["adventure"] = (
+            MOTORCYCLE_ATTRIBUTE_SLUGS + ADVENTURE_EXTRA_ATTRIBUTE_SLUGS
+        )
+
         for category_slug in HELMET_CATEGORY_SLUGS:
                 mappings[category_slug] = HELMET_ATTRIBUTE_SLUGS
 
@@ -306,6 +321,9 @@ class Command(BaseCommand):
 
         for category_slug in ACCESSORIES_CATEGORY_SLUGS:
                 mappings[category_slug] = ACCESSORIES_ATTRIBUTE_SLUGS
+
+        for category_slug in ATV_CATEGORY_SLUGS:
+                mappings[category_slug] = ATV_ATTRIBUTE_SLUGS
 
         connection_count = 0
 
@@ -366,6 +384,7 @@ class Command(BaseCommand):
             *MOTORCYCLE_ATTRIBUTE_OPTION_DATA,
             *ECOMMERCE_ATTRIBUTE_OPTION_DATA,
             *PARTS_ATTRIBUTE_OPTION_DATA,
+            *ATV_ATTRIBUTE_OPTION_DATA,
         ]
 
         option_count = 0

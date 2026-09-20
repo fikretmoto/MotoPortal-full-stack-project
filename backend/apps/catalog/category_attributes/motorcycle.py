@@ -89,6 +89,17 @@ MOTORCYCLE_ATTRIBUTE_SLUGS = [
     
 ]
 
+# Adventure/Touring tipi motosikletlerde anlamlı olan, ama Naked/Racing
+# gibi diğer motosiklet alt kategorilerinde alakasız kalacak ek donanım
+# alanları. Sadece "adventure" kategorisine eklenir, tüm
+# MOTORCYCLE_CATEGORY_SLUGS ağacına değil.
+ADVENTURE_EXTRA_ATTRIBUTE_SLUGS = [
+    "telefon-baglantisi",
+    "on-cam",
+    "arka-portbagaj",
+    "navigasyon-destegi",
+]
+
 MOTORCYCLE_HIGHLIGHT_SLUGS = [
     "model-yili",
     "motor-hacmi",
