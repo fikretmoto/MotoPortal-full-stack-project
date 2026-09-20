@@ -558,7 +558,7 @@ def _merge_display_attributes(attributes_data):
         used_slugs.update(boyut_slugs)
 
     raf_kapasitesi_slugs = ["on-raf-kapasitesi", "arka-raf-kapasitesi"]
-    if all(slug in by_slug for slug in raf_kapasitesi_slugs):
+    if all(by_slug.get(slug, {}).get("value") for slug in raf_kapasitesi_slugs):
         on_deger = by_slug["on-raf-kapasitesi"]["value"]
         arka_deger = by_slug["arka-raf-kapasitesi"]["value"]
         on_birim = by_slug["on-raf-kapasitesi"].get("unit") or ""
