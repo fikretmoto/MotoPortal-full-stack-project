@@ -153,6 +153,34 @@ CATEGORY_DATA = [
         "slug": "fren-sistemi",
         "parent_slug": "yedek-parca",
     },
+
+    {
+    "name": "Fren Balatası",
+    "slug": "fren-balatasi",
+    "parent_slug": "fren-sistemi",
+},
+
+{
+        "name": "Fren Diski",
+        "slug": "fren-diski",
+        "parent_slug": "fren-sistemi",
+    },
+    {
+        "name": "Fren Kaliperi",
+        "slug": "fren-kaliperi",
+        "parent_slug": "fren-sistemi",
+    },
+    {
+        "name": "Fren Pompası",
+        "slug": "fren-pompasi",
+        "parent_slug": "fren-sistemi",
+    },
+    {
+        "name": "Fren Hortumu",
+        "slug": "fren-hortumu",
+        "parent_slug": "fren-sistemi",
+    },
+
     {
         "name": "Motor Parçaları",
         "slug": "motor-parcalari",

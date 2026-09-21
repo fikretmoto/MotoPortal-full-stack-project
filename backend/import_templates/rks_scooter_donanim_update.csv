@@ -1,0 +1,13 @@
+﻿name,slug,brand_slug,category_slug,product_code,price,discount_price,currency,stock_status,short_description,description,is_featured,is_active,model-yili,renk,mensei-ulke,uretici,oem-kodu,mpn,ean,upc,motor-hacmi,silindir-sayisi,motor-tipi,sogutma-sistemi,supap-sayisi,sikistirma-orani,maksimum-guc,maksimum-guc-devri,maksimum-tork,maksimum-tork-devri,maksimum-hiz-min,Maksimum-hiz-max,sanziman-tipi,vites-sayisi,debriyaj-tipi,son-aktarma-tipi,yakit-turu,yakit-sistemi,yakit-deposu,yakit-tuketimi-min,yakit-tuketimi-max,yakit-deposu-konumu,uzunluk,genislik,yukseklik,dingil-mesafesi,sele-yuksekligi,yerden-yukseklik,bos-agirlik,tasima-kapasitesi,sele-alti-bagaj-hacmi,on-fren,arka-fren,el-freni,on-suspansiyon,arka-suspansiyon,on-lastik,arka-lastik,on-jant,arka-jant,aku,far-tipi,gosterge-paneli,telefon-baglantisi,navigasyon-destegi,usb-sarj-girisi,anahtarsiz-calistirma,duz-taban,on-cam,start-stop-sistemi,idling-stop,akilli-anahtar,arka-portbagaj,ayak-marsi,on-saklama-gozu,abs,cbs,cekis-kontrolu,immobilizer,garanti-suresi,sertifikalar,bakim-talimati,kullanim-talimati,paket-icerigi
+RKS SRX 50,rks-srx-50,rks,50cc-scooter,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,LED,Dijital,,,,,,,,,,,,,,,,,,,,,
+RKS Icon 50 ST,rks-icon-50-st,rks,50cc-scooter,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,LED,Dijital,,,,,,,,,,,,,,TRUE,,,,,,,
+RKS LT50 Pro Plus,rks-lt50-pro-plus,rks,50cc-scooter,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,LED,Dijital,,,TRUE,,,,,,,,,,,TRUE,,,,,,,
+RKS Rosa 50 Pro,rks-rosa-50-pro,rks,50cc-scooter,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,LED,Dijital,,,,,,,,,,,,,,TRUE,,,,,,,
+RKS Parmida 50,rks-parmida-50,rks,50cc-scooter,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,LED,Dijital,,,,,,,,,,,,,,TRUE,,,,,,,
+RKS Neon125,rks-neon125,rks,125cc-scooter,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,LED,Dijital,,,,,,,,,,,,,,TRUE,,,,,,,
+RKS VPS125 Pro,rks-vps125-pro,rks,125cc-scooter,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,LED,Dijital,,,,,,,,,,,,,,,,,,,,,
+RKS DES125,rks-des125,rks,125cc-scooter,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,LED,Dijital,,,,,,,,,,,,,,TRUE,,,,,,,
+RKS VRS125 Pro,rks-vrs125-pro,rks,125cc-scooter,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,LED,Dijital,,,,,,,,,,,,,,,,,,,,,
+RKS LTR125,rks-ltr125,rks,125cc-scooter,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,LED,Dijital,,,,,,,,,,,,,,,,,,,,,
+RKS LTM125,rks-ltm125,rks,125cc-scooter,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,LED,Dijital,,,,,,,,,,,,,,,,,,,,,
+RKS Spontini 110,rks-spontini-110,rks,50cc-scooter,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,LED,Dijital,,,,,,,,,,TRUE,,,,,,,,,,,
