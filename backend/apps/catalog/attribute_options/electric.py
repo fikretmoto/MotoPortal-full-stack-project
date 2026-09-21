@@ -1,6 +1,9 @@
 ELECTRIC_ATTRIBUTE_OPTION_DATA = [
     # Motor Gücü
     {"attribute_slug": "elektrikli-motor-gucu", "value": "249W", "display_order": 10},
+    {"attribute_slug": "elektrikli-motor-gucu", "value": "250W", "display_order": 12},
+    {"attribute_slug": "elektrikli-motor-gucu", "value": "500W", "display_order": 14},
+    {"attribute_slug": "elektrikli-motor-gucu", "value": "650W", "display_order": 16},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "1000W", "display_order": 20},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "1200W", "display_order": 30},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "2000W", "display_order": 40},
@@ -23,10 +26,14 @@ ELECTRIC_ATTRIBUTE_OPTION_DATA = [
 
     # Batarya Kapasitesi (Volt'a göre küçükten büyüğe)
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "36V-10A", "display_order": 10},
+    {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "36V-7.8Ah", "display_order": 12},
+    {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "36V-8Ah", "display_order": 14},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "40V-20A", "display_order": 20},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "48V-13A", "display_order": 30},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "48V-13.5A", "display_order": 40},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "48V-15A", "display_order": 50},
+    {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "48V-12Ah", "display_order": 52},
+    {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "48V-20Ah", "display_order": 54},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "60V-20A", "display_order": 60},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-20A", "display_order": 70},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-32A", "display_order": 80},
