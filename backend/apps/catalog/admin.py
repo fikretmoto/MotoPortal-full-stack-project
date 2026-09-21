@@ -402,6 +402,10 @@ class ProductAdmin(admin.ModelAdmin):
         "vehicle_model",
     )
 
+    filter_horizontal = (
+        "tags",
+    )
+
     readonly_fields = (
         "created_at",
         "updated_at",
