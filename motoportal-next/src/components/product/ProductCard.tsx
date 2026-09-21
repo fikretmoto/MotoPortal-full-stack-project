@@ -28,7 +28,7 @@ function ProductBadges({ badges }: { badges: ProductBadge[] }) {
 
   return (
     <div className="absolute left-2 top-2 z-10 flex flex-col gap-1">
-      {badges.slice(0, 2).map((badge) => (
+      {badges.slice(0, 5).map((badge) => (
         <span
           key={badge.type}
           className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide shadow-sm ${
