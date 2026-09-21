@@ -105,6 +105,12 @@ CATEGORY_DATA = [
         "parent_slug": "motosiklet",
     },
 
+    {
+    "name": "Klasik",
+    "slug": "klasik",
+    "parent_slug": "motosiklet",
+},
+
     # Elektrikli alt kategorileri
     {
         "name": "Elektrikli Motosiklet",

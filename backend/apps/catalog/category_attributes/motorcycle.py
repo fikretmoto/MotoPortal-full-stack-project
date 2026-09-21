@@ -14,6 +14,7 @@ MOTORCYCLE_CATEGORY_SLUGS = [
     "chopper",
     "cross",
     "cub",
+    "klasik",
 ]
 
 
