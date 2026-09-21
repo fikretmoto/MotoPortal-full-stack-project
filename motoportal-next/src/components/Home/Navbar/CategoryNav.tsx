@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { featuredPromo } from "@/constant/constant";
 import type { CategoryNode } from "@/services/catalog";
+import CategoryColumnList from "./CategoryColumnList";
 
 type CategoryNavProps = {
   categoryTree: CategoryNode[];
@@ -133,16 +134,8 @@ const CategoryNav = ({ categoryTree }: CategoryNavProps) => {
                   </Link>
 
                   {section.children.length > 0 ? (
-                    <div className="mt-3 flex flex-col gap-2">
-                      {section.children.map((leaf) => (
-                        <Link
-                          key={leaf.slug}
-                          href={`/kategori/${leaf.slug}`}
-                          className="text-[13px] font-semibold text-[oklch(45%_0.02_60)] transition hover:text-[oklch(20%_0.01_60)]"
-                        >
-                          {leaf.name}
-                        </Link>
-                      ))}
+                    <div className="mt-3">
+                      <CategoryColumnList nodes={section.children} />
                     </div>
                   ) : null}
                 </section>
