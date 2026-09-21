@@ -99,6 +99,11 @@ CATEGORY_DATA = [
         "slug": "cross",
         "parent_slug": "motosiklet",
     },
+    {
+        "name": "Cub",
+        "slug": "cub",
+        "parent_slug": "motosiklet",
+    },
 
     # Elektrikli alt kategorileri
     {

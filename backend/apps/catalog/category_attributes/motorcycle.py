@@ -13,6 +13,7 @@ MOTORCYCLE_CATEGORY_SLUGS = [
     "sport",
     "chopper",
     "cross",
+    "cub",
 ]
 
 
