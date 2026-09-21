@@ -2,9 +2,9 @@ TAG_DATA = [
     {"name": "İndirimli Ürünler", "slug": "indirimli-urunler", "description": ""},
     {"name": "Yeni Gelenler", "slug": "yeni-gelenler", "description": ""},
     {"name": "Bitmek Üzere Olanlar", "slug": "bitmek-uzere", "description": ""},
-    {"name": "Outlet / Fırsat", "slug": "outlet-firsat", "description": ""},
+    {"name": "Fırsat", "slug": "outlet-firsat", "description": ""},
     {"name": "Takas Fırsatı", "slug": "takas-firsati", "description": ""},
-    {"name": "Öne Çıkanlar", "slug": "one-cikanlar", "description": ""},
+    {"name": "Öne Çıkan", "slug": "one-cikanlar", "description": ""},
     {"name": "B Ehliyeti ile Sürülebilenler", "slug": "b-ehliyeti-surulebilir", "description": ""},
     {"name": "A1 ile Sürülebilenler", "slug": "a1-surulebilir", "description": ""},
     {"name": "Yakında Gelecek Olanlar", "slug": "yakinda-gelecek", "description": ""},
@@ -15,4 +15,5 @@ TAG_DATA = [
     {"name": "Çok Satan", "slug": "cok-satan", "description": ""},
     {"name": "Sezon Sonu", "slug": "sezon-sonu", "description": ""},
     {"name": "Açık Kutu", "slug": "acik-kutu", "description": ""},
+    {"name": "Editörün Seçtikleri", "slug": "editorun-sectikleri", "description": ""},
 ]
