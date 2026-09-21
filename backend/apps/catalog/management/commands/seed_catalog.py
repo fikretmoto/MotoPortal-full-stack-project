@@ -6,6 +6,7 @@ from apps.catalog.attribute_options.motorcycle import MOTORCYCLE_ATTRIBUTE_OPTIO
 from apps.catalog.attribute_options.ecommerce import ECOMMERCE_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.parts import PARTS_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.atv import ATV_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.electric import ELECTRIC_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attributes.ecommerce import ECOMMERCE_ATTRIBUTE_DATA
 from apps.catalog.attributes.scooter import SCOOTER_ATTRIBUTE_DATA
 
@@ -385,6 +386,7 @@ class Command(BaseCommand):
             *ECOMMERCE_ATTRIBUTE_OPTION_DATA,
             *PARTS_ATTRIBUTE_OPTION_DATA,
             *ATV_ATTRIBUTE_OPTION_DATA,
+            *ELECTRIC_ATTRIBUTE_OPTION_DATA,
         ]
 
         option_count = 0
