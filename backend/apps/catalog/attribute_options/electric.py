@@ -4,6 +4,7 @@ ELECTRIC_ATTRIBUTE_OPTION_DATA = [
     {"attribute_slug": "elektrikli-motor-gucu", "value": "250W", "display_order": 12},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "500W", "display_order": 14},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "650W", "display_order": 16},
+    {"attribute_slug": "elektrikli-motor-gucu", "value": "750W", "display_order": 18},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "1000W", "display_order": 20},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "1200W", "display_order": 30},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "2000W", "display_order": 40},
@@ -26,6 +27,7 @@ ELECTRIC_ATTRIBUTE_OPTION_DATA = [
 
     # Batarya Kapasitesi (Volt'a göre küçükten büyüğe)
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "36V-10Ah", "display_order": 10},
+    {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "36V-7.5Ah", "display_order": 11},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "36V-7.8Ah", "display_order": 12},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "36V-8Ah", "display_order": 14},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "40V-20Ah", "display_order": 20},
@@ -39,6 +41,7 @@ ELECTRIC_ATTRIBUTE_OPTION_DATA = [
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-32Ah", "display_order": 80},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-60Ah", "display_order": 90},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-80Ah", "display_order": 100},
+    {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "48V-30Ah", "display_order": 55},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-100Ah", "display_order": 110},
 
     # Şarj Soketi Tipi
