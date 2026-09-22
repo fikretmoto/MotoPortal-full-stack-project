@@ -507,58 +507,59 @@ def _merge_display_attributes(attributes_data):
     used_slugs = set()
     merged = []
 
-    def _average(slug_min, slug_max):
+    def _min_max_pair(slug_min, slug_max):
         if slug_min not in by_slug or slug_max not in by_slug:
             return None
-        try:
-            min_val = Decimal(str(by_slug[slug_min]["value"]))
-            max_val = Decimal(str(by_slug[slug_max]["value"]))
-        except (InvalidOperation, TypeError):
+
+        min_val = by_slug[slug_min].get("value")
+        max_val = by_slug[slug_max].get("value")
+        if not min_val or not max_val:
             return None
 
-        avg = (min_val + max_val) / 2
-        formatted = format(avg, "f")
-        if "." in formatted:
-            formatted = formatted.rstrip("0").rstrip(".")
-        return formatted
+        unit = by_slug[slug_min].get("unit") or ""
+        return f"{min_val} / {max_val} {unit}".strip()
 
-    hiz_ortalama = _average("maksimum-hiz-min", "maksimum-hiz-max")
-    if hiz_ortalama is not None:
+    hiz_araligi = _min_max_pair("maksimum-hiz-min", "maksimum-hiz-max")
+    if hiz_araligi is not None:
         merged.append({
             **by_slug["maksimum-hiz-min"],
             "slug": "maksimum-hiz",
-            "name": "Ortalama Hız",
-            "value": hiz_ortalama,
+            "name": "Maksimum Hız",
+            "value": hiz_araligi,
+            "unit": "",
         })
         used_slugs.update(["maksimum-hiz-min", "maksimum-hiz-max"])
 
-    yakit_ortalama = _average("yakit-tuketimi-min", "yakit-tuketimi-max")
-    if yakit_ortalama is not None:
+    yakit_araligi = _min_max_pair("yakit-tuketimi-min", "yakit-tuketimi-max")
+    if yakit_araligi is not None:
         merged.append({
             **by_slug["yakit-tuketimi-min"],
             "slug": "yakit-tuketimi",
-            "name": "Ortalama Yakıt Tüketimi",
-            "value": yakit_ortalama,
+            "name": "Yakıt Tüketimi",
+            "value": yakit_araligi,
+            "unit": "",
         })
         used_slugs.update(["yakit-tuketimi-min", "yakit-tuketimi-max"])
 
-    menzil_ortalama = _average("elektrikli-menzil-min", "elektrikli-menzil-max")
-    if menzil_ortalama is not None:
+    menzil_araligi = _min_max_pair("elektrikli-menzil-min", "elektrikli-menzil-max")
+    if menzil_araligi is not None:
         merged.append({
             **by_slug["elektrikli-menzil-min"],
             "slug": "elektrikli-menzil",
-            "name": "Ortalama Menzil",
-            "value": menzil_ortalama,
+            "name": "Menzil",
+            "value": menzil_araligi,
+            "unit": "",
         })
         used_slugs.update(["elektrikli-menzil-min", "elektrikli-menzil-max"])
 
-    sarj_suresi_ortalama = _average("elektrikli-sarj-suresi-min", "elektrikli-sarj-suresi-max")
-    if sarj_suresi_ortalama is not None:
+    sarj_suresi_araligi = _min_max_pair("elektrikli-sarj-suresi-min", "elektrikli-sarj-suresi-max")
+    if sarj_suresi_araligi is not None:
         merged.append({
             **by_slug["elektrikli-sarj-suresi-min"],
             "slug": "elektrikli-sarj-suresi",
-            "name": "Ortalama Şarj Süresi",
-            "value": sarj_suresi_ortalama,
+            "name": "Şarj Süresi",
+            "value": sarj_suresi_araligi,
+            "unit": "",
         })
         used_slugs.update(["elektrikli-sarj-suresi-min", "elektrikli-sarj-suresi-max"])
 
