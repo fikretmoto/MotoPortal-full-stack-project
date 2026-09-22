@@ -30,12 +30,14 @@ ELECTRIC_ATTRIBUTE_SLUGS = [
     "elektrikli-batarya-garantisi",
 
     # Şarj
-    "elektrikli-sarj-suresi",
+    "elektrikli-sarj-suresi-min",
+    "elektrikli-sarj-suresi-max",
     "hizli-sarj-destegi",
     "sarj-soketi-tipi",
 
     # Elektrikli performans
-    "elektrikli-menzil",
+    "elektrikli-menzil-min",
+    "elektrikli-menzil-max",
     "elektrikli-maksimum-hiz",
 
     # Paylaşılan fiziksel özellikler (motorcycle.py'den referans, tekrar tanımlanmadı)

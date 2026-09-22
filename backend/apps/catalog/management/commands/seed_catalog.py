@@ -7,6 +7,7 @@ from apps.catalog.attribute_options.ecommerce import ECOMMERCE_ATTRIBUTE_OPTION_
 from apps.catalog.attribute_options.parts import PARTS_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.atv import ATV_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.electric import ELECTRIC_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.bicycle_common import BICYCLE_COMMON_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attributes.ecommerce import ECOMMERCE_ATTRIBUTE_DATA
 from apps.catalog.attributes.scooter import SCOOTER_ATTRIBUTE_DATA
 
@@ -19,6 +20,7 @@ from apps.catalog.attributes.battery import BATTERY_ATTRIBUTE_DATA
 from apps.catalog.attributes.oil import OIL_ATTRIBUTE_DATA
 from apps.catalog.attributes.tire import TIRE_ATTRIBUTE_DATA
 from apps.catalog.attributes.bicycle import BICYCLE_ATTRIBUTE_DATA
+from apps.catalog.attributes.bicycle_common import BICYCLE_COMMON_ATTRIBUTE_DATA
 from apps.catalog.attributes.electric import ELECTRIC_ATTRIBUTE_DATA
 from apps.catalog.attributes.parts import PARTS_ATTRIBUTE_DATA
 from apps.catalog.attributes.accessories import ACCESSORIES_ATTRIBUTE_DATA
@@ -59,6 +61,7 @@ from apps.catalog.category_attributes.tire import (
 from apps.catalog.category_attributes.bicycle import (
     BICYCLE_ATTRIBUTE_SLUGS,
     BICYCLE_CATEGORY_SLUGS,
+    BICYCLE_COMMON_ATTRIBUTE_SLUGS,
 )
 from apps.catalog.category_attributes.electric import (
     ELECTRIC_ATTRIBUTE_SLUGS,
@@ -227,6 +230,7 @@ class Command(BaseCommand):
             *OIL_ATTRIBUTE_DATA,
             *TIRE_ATTRIBUTE_DATA,
             *BICYCLE_ATTRIBUTE_DATA,
+            *BICYCLE_COMMON_ATTRIBUTE_DATA,
             *ELECTRIC_ATTRIBUTE_DATA,
             *PARTS_ATTRIBUTE_DATA,
             *ACCESSORIES_ATTRIBUTE_DATA,
@@ -317,6 +321,15 @@ class Command(BaseCommand):
         for category_slug in ELECTRIC_CATEGORY_SLUGS:
                 mappings[category_slug] = ELECTRIC_ATTRIBUTE_SLUGS
 
+        # E-Bisiklet, pedal/krank/vites gibi bisiklete özgü mekanik
+        # bileşenleri de olan tek elektrikli kategori — bu yüzden
+        # ortak bisiklet alanları (BICYCLE_COMMON_ATTRIBUTE_SLUGS)
+        # SADECE bu kategoriye ekleniyor, diğer Electric kategorileri
+        # (elektrikli-motosiklet, e-scooter, e-car, vb.) etkilenmiyor.
+        mappings["e-bisiklet"] = (
+            ELECTRIC_ATTRIBUTE_SLUGS + BICYCLE_COMMON_ATTRIBUTE_SLUGS
+        )
+
         for category_slug in PARTS_CATEGORY_SLUGS:
                 mappings[category_slug] = PARTS_ATTRIBUTE_SLUGS
 
@@ -387,6 +400,7 @@ class Command(BaseCommand):
             *PARTS_ATTRIBUTE_OPTION_DATA,
             *ATV_ATTRIBUTE_OPTION_DATA,
             *ELECTRIC_ATTRIBUTE_OPTION_DATA,
+            *BICYCLE_COMMON_ATTRIBUTE_OPTION_DATA,
         ]
 
         option_count = 0

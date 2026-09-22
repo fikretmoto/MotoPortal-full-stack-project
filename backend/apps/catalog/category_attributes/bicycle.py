@@ -13,19 +13,34 @@ BICYCLE_CATEGORY_SLUGS = [
 ]
 
 
+# Normal Bisiklet + E-Bisiklet ortak alanları (motordan bağımsız,
+# çerçeve/mekanik bileşenler). category_attributes/electric.py bu
+# listeyi SADECE "e-bisiklet" kategorisine bağlar — diğer elektrikli
+# araç kategorileri (elektrikli-motosiklet, e-scooter, e-car, vb.)
+# pedal/krank/vites içermediği için bu alanları hiç görmez.
+BICYCLE_COMMON_ATTRIBUTE_SLUGS = [
+    "cerceve-geometrisi",
+    "bisiklet-jant-malzemesi",
+    "krank-seti",
+    "vites-aktarici",
+    "sele-malzemesi",
+]
+
+
 BICYCLE_ATTRIBUTE_SLUGS = [
     *COMMON_ATTRIBUTE_SLUGS,
     *SEARCH_ATTRIBUTE_SLUGS,
+    *BICYCLE_COMMON_ATTRIBUTE_SLUGS,
 
     # Çerçeve
     "cerceve-malzemesi",
     "cerceve-bedeni",
-    "cerceve-geometrisi",
+    # cerceve-geometrisi -> BICYCLE_COMMON_ATTRIBUTE_SLUGS'a taşındı
 
     # Tekerlek ve lastik
     "bisiklet-jant-capi",
     "bisiklet-lastik-genisligi",
-    "bisiklet-jant-malzemesi",
+    # bisiklet-jant-malzemesi -> BICYCLE_COMMON_ATTRIBUTE_SLUGS'a taşındı
 
     # Vites sistemi
     "bisiklet-vites-sayisi",
@@ -41,11 +56,7 @@ BICYCLE_ATTRIBUTE_SLUGS = [
     "bisiklet-arka-suspansiyon",
     "suspansiyon-seyahati",
 
-    # Elektrikli sistem
-    "bisiklet-motor-gucu",
-    "bisiklet-batarya-kapasitesi",
-    "bisiklet-menzil",
-    "bisiklet-sarj-suresi",
+    
 
     # Boyut ve ağırlık
     "bisiklet-agirlik",

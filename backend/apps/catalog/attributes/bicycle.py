@@ -22,17 +22,7 @@ BICYCLE_ATTRIBUTE_DATA = [
         "is_comparable": True,
         "is_searchable": False,
     },
-    {
-        "name": "Çerçeve Geometrisi",
-        "slug": "cerceve-geometrisi",
-        "group_slug": "cerceve",
-        "data_type": "text",
-        "unit": "",
-        "display_order": 5020,
-        "is_filterable": False,
-        "is_comparable": True,
-        "is_searchable": False,
-    },
+    # Çerçeve Geometrisi -> attributes/bicycle_common.py'ye taşındı
 
     # TEKERLEK VE LASTİK
     {
@@ -57,17 +47,7 @@ BICYCLE_ATTRIBUTE_DATA = [
         "is_comparable": True,
         "is_searchable": False,
     },
-    {
-        "name": "Jant Malzemesi",
-        "slug": "bisiklet-jant-malzemesi",
-        "group_slug": "tekerlek-ve-lastik",
-        "data_type": "text",
-        "unit": "",
-        "display_order": 5120,
-        "is_filterable": True,
-        "is_comparable": True,
-        "is_searchable": False,
-    },
+    # Jant Malzemesi -> attributes/bicycle_common.py'ye taşındı
 
     # VİTES SİSTEMİ
     {
@@ -163,51 +143,7 @@ BICYCLE_ATTRIBUTE_DATA = [
         "is_searchable": False,
     },
 
-    # ELEKTRİKLİ SİSTEM (e-bisiklette dolu, normal bisikletlerde boş kalır)
-    {
-        "name": "Motor Gücü",
-        "slug": "bisiklet-motor-gucu",
-        "group_slug": "elektrikli-sistem",
-        "data_type": "integer",
-        "unit": "W",
-        "display_order": 5500,
-        "is_filterable": True,
-        "is_comparable": True,
-        "is_searchable": False,
-    },
-    {
-        "name": "Batarya Kapasitesi",
-        "slug": "bisiklet-batarya-kapasitesi",
-        "group_slug": "elektrikli-sistem",
-        "data_type": "integer",
-        "unit": "Wh",
-        "display_order": 5510,
-        "is_filterable": True,
-        "is_comparable": True,
-        "is_searchable": False,
-    },
-    {
-        "name": "Menzil",
-        "slug": "bisiklet-menzil",
-        "group_slug": "elektrikli-sistem",
-        "data_type": "integer",
-        "unit": "km",
-        "display_order": 5520,
-        "is_filterable": True,
-        "is_comparable": True,
-        "is_searchable": False,
-    },
-    {
-        "name": "Şarj Süresi",
-        "slug": "bisiklet-sarj-suresi",
-        "group_slug": "elektrikli-sistem",
-        "data_type": "decimal",
-        "unit": "saat",
-        "display_order": 5530,
-        "is_filterable": False,
-        "is_comparable": True,
-        "is_searchable": False,
-    },
+    # ELEKTRİKLİ SİSTEM kaldırıldı — e-bisiklet zaten elektrikli-* şemasını kullanıyor
 
     # BİSİKLET BOYUT VE AĞIRLIK
     {

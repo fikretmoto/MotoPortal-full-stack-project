@@ -542,6 +542,26 @@ def _merge_display_attributes(attributes_data):
         })
         used_slugs.update(["yakit-tuketimi-min", "yakit-tuketimi-max"])
 
+    menzil_ortalama = _average("elektrikli-menzil-min", "elektrikli-menzil-max")
+    if menzil_ortalama is not None:
+        merged.append({
+            **by_slug["elektrikli-menzil-min"],
+            "slug": "elektrikli-menzil",
+            "name": "Ortalama Menzil",
+            "value": menzil_ortalama,
+        })
+        used_slugs.update(["elektrikli-menzil-min", "elektrikli-menzil-max"])
+
+    sarj_suresi_ortalama = _average("elektrikli-sarj-suresi-min", "elektrikli-sarj-suresi-max")
+    if sarj_suresi_ortalama is not None:
+        merged.append({
+            **by_slug["elektrikli-sarj-suresi-min"],
+            "slug": "elektrikli-sarj-suresi",
+            "name": "Ortalama Şarj Süresi",
+            "value": sarj_suresi_ortalama,
+        })
+        used_slugs.update(["elektrikli-sarj-suresi-min", "elektrikli-sarj-suresi-max"])
+
     boyut_slugs = ["uzunluk", "genislik", "yukseklik"]
     if all(slug in by_slug for slug in boyut_slugs):
         merged.append({

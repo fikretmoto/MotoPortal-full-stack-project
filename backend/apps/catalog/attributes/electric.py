@@ -71,12 +71,23 @@ ELECTRIC_ATTRIBUTE_DATA = [
 
     # ŞARJ
     {
-        "name": "Şarj Süresi",
-        "slug": "elektrikli-sarj-suresi",
+        "name": "Şarj Süresi (Min)",
+        "slug": "elektrikli-sarj-suresi-min",
         "group_slug": "sarj",
         "data_type": "decimal",
         "unit": "saat",
         "display_order": 6200,
+        "is_filterable": False,
+        "is_comparable": True,
+        "is_searchable": False,
+    },
+    {
+        "name": "Şarj Süresi (Max)",
+        "slug": "elektrikli-sarj-suresi-max",
+        "group_slug": "sarj",
+        "data_type": "decimal",
+        "unit": "saat",
+        "display_order": 6201,
         "is_filterable": False,
         "is_comparable": True,
         "is_searchable": False,
@@ -106,12 +117,23 @@ ELECTRIC_ATTRIBUTE_DATA = [
 
     # ELEKTRİKLİ PERFORMANS
     {
-        "name": "Menzil",
-        "slug": "elektrikli-menzil",
+        "name": "Menzil (Min)",
+        "slug": "elektrikli-menzil-min",
         "group_slug": "elektrikli-performans",
         "data_type": "integer",
         "unit": "km",
         "display_order": 6300,
+        "is_filterable": True,
+        "is_comparable": True,
+        "is_searchable": False,
+    },
+    {
+        "name": "Menzil (Max)",
+        "slug": "elektrikli-menzil-max",
+        "group_slug": "elektrikli-performans",
+        "data_type": "integer",
+        "unit": "km",
+        "display_order": 6301,
         "is_filterable": True,
         "is_comparable": True,
         "is_searchable": False,
