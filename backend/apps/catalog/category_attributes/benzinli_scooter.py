@@ -2,9 +2,10 @@ from .ecommerce import (
     COMMON_ATTRIBUTE_SLUGS,
     SEARCH_ATTRIBUTE_SLUGS,
 )
+from apps.catalog.attributes.scooter_common import SCOOTER_COMMON_ATTRIBUTE_SLUGS
 
 
-SCOOTER_CATEGORY_SLUGS = [
+BENZINLI_SCOOTER_CATEGORY_SLUGS = [
     "scooter",
     "50cc-scooter",
     "125cc-scooter",
@@ -14,9 +15,10 @@ SCOOTER_CATEGORY_SLUGS = [
 ]
 
 
-SCOOTER_ATTRIBUTE_SLUGS = [
+BENZINLI_SCOOTER_ATTRIBUTE_SLUGS = [
     *COMMON_ATTRIBUTE_SLUGS,
     *SEARCH_ATTRIBUTE_SLUGS,
+    *SCOOTER_COMMON_ATTRIBUTE_SLUGS,
 
     # Motor
     "motor-hacmi",
@@ -31,8 +33,6 @@ SCOOTER_ATTRIBUTE_SLUGS = [
     "maksimum-guc-devri",
     "maksimum-tork",
     "maksimum-tork-devri",
-    "maksimum-hiz-min",
-    "maksimum-hiz-max",
 
     # Şanzıman ve aktarma
     "sanziman-tipi",
@@ -47,57 +47,16 @@ SCOOTER_ATTRIBUTE_SLUGS = [
     "yakit-tuketimi-max",
     "yakit-deposu-konumu",
 
-    # Boyutlar ve ağırlık
-    "uzunluk",
-    "genislik",
-    "yukseklik",
-    "dingil-mesafesi",
-    "sele-yuksekligi",
-    "yerden-yukseklik",
-    "bos-agirlik",
-    "tasima-kapasitesi",
-    "sele-alti-bagaj-hacmi",
-
-    # Fren ve güvenlik
-    "on-fren",
-    "arka-fren",
-    "abs",
-    "cbs",
-    "el-freni",
-    "cekis-kontrolu",
-    "immobilizer",
-
-    # Süspansiyon
-    "on-suspansiyon",
-    "arka-suspansiyon",
-
-    # Jant ve lastik
-    "on-lastik",
-    "arka-lastik",
-    "on-jant",
-    "arka-jant",
-
-    # Elektrik ve elektronik
+    # Elektrik (benzinli-özel: 12V marş aküsü)
     "aku",
-    "far-tipi",
-    "gosterge-paneli",
-    "telefon-baglantisi",
-    "navigasyon-destegi",
 
-    # Scooter'a özel donanım
-    "duz-taban",
-    "on-cam",
+    # Scooter'a özel donanım (motor-bağımlı)
     "start-stop-sistemi",
     "idling-stop",
-    "akilli-anahtar",
-    "anahtarsiz-calistirma",
-    "usb-sarj-girisi",
-    "arka-portbagaj",
     "ayak-marsi",
-    "on-saklama-gozu",
 ]
 
-SCOOTER_HIGHLIGHT_SLUGS = [
+BENZINLI_SCOOTER_HIGHLIGHT_SLUGS = [
     "model-yili",
     "motor-hacmi",
     "yakit-deposu",
