@@ -1,0 +1,13 @@
+from .bicycle import BICYCLE_ATTRIBUTE_SLUGS
+from .electric import ELECTRIC_CORE_ATTRIBUTE_SLUGS
+
+
+E_BIKE_CATEGORY_SLUGS = [
+    "e-bisiklet",
+]
+
+
+E_BIKE_ATTRIBUTE_SLUGS = [
+    *BICYCLE_ATTRIBUTE_SLUGS,
+    *ELECTRIC_CORE_ATTRIBUTE_SLUGS,
+]

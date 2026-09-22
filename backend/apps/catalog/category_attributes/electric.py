@@ -7,18 +7,13 @@ from .ecommerce import (
 ELECTRIC_CATEGORY_SLUGS = [
     "elektrikli",
     "elektrikli-motosiklet",
-    "e-scooter",
-    "e-bisiklet",
-    "e-car",
-    "e-kasali",
-    "e-market-tipi",
 ]
 
 
-ELECTRIC_ATTRIBUTE_SLUGS = [
-    *COMMON_ATTRIBUTE_SLUGS,
-    *SEARCH_ATTRIBUTE_SLUGS,
-
+# Tüm elektrikli araç tiplerinin (e-scooter, e-bisiklet, e-kasali,
+# e-market-tipi, e-car) kendi category_attributes dosyalarında import
+# ettiği, motor/batarya/şarj/menzil + gösterge paneli çekirdek havuzu.
+ELECTRIC_CORE_ATTRIBUTE_SLUGS = [
     # Elektrik motoru
     "elektrikli-motor-gucu",
     "elektrikli-motor-tipi",
@@ -40,7 +35,21 @@ ELECTRIC_ATTRIBUTE_SLUGS = [
     "elektrikli-menzil-max",
     "elektrikli-maksimum-hiz",
 
-    # Paylaşılan fiziksel özellikler (motorcycle.py'den referans, tekrar tanımlanmadı)
+    # Gösterge (fiziksel havuzu olmayan elektrikli araç tiplerinde de
+    # kullanılabilsin diye çekirdeğe dahil edildi)
+    "gosterge-paneli",
+]
+
+
+ELECTRIC_ATTRIBUTE_SLUGS = [
+    *COMMON_ATTRIBUTE_SLUGS,
+    *SEARCH_ATTRIBUTE_SLUGS,
+    *ELECTRIC_CORE_ATTRIBUTE_SLUGS,
+
+    # Paylaşılan fiziksel özellikler — sadece "elektrikli-motosiklet"
+    # için (diğer elektrikli araç tipleri artık kendi fiziksel
+    # havuzlarını kullanıyor: e-scooter -> scooter_common,
+    # e-bisiklet -> bicycle ATTRIBUTE_SLUGS).
     "uzunluk",
     "genislik",
     "yukseklik",
@@ -56,5 +65,4 @@ ELECTRIC_ATTRIBUTE_SLUGS = [
     "on-jant",
     "arka-jant",
     "far-tipi",
-    "gosterge-paneli",
 ]

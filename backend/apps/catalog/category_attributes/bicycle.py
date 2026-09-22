@@ -14,16 +14,20 @@ BICYCLE_CATEGORY_SLUGS = [
 
 
 # Normal Bisiklet + E-Bisiklet ortak alanları (motordan bağımsız,
-# çerçeve/mekanik bileşenler). category_attributes/electric.py bu
-# listeyi SADECE "e-bisiklet" kategorisine bağlar — diğer elektrikli
-# araç kategorileri (elektrikli-motosiklet, e-scooter, e-car, vb.)
-# pedal/krank/vites içermediği için bu alanları hiç görmez.
+# çerçeve/mekanik bileşenler + boyutlar). category_attributes/e_bike.py
+# BICYCLE_ATTRIBUTE_SLUGS'ın tamamını (bu liste dahil) "e-bisiklet"
+# kategorisine bağlar — diğer elektrikli araç kategorileri
+# (elektrikli-motosiklet, e-scooter, e-car, vb.) pedal/krank/vites
+# içermediği için bu alanları hiç görmez.
 BICYCLE_COMMON_ATTRIBUTE_SLUGS = [
     "cerceve-geometrisi",
     "bisiklet-jant-malzemesi",
     "krank-seti",
     "vites-aktarici",
     "sele-malzemesi",
+    "uzunluk",
+    "genislik",
+    "yukseklik",
 ]
 
 

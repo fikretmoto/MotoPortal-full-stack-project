@@ -21,16 +21,36 @@ from apps.catalog.attributes.oil import OIL_ATTRIBUTE_DATA
 from apps.catalog.attributes.tire import TIRE_ATTRIBUTE_DATA
 from apps.catalog.attributes.bicycle import BICYCLE_ATTRIBUTE_DATA
 from apps.catalog.attributes.bicycle_common import BICYCLE_COMMON_ATTRIBUTE_DATA
-from apps.catalog.attributes.electric import ELECTRIC_ATTRIBUTE_DATA
+from apps.catalog.attributes.electric_common import ELECTRIC_ATTRIBUTE_DATA
 from apps.catalog.attributes.parts import PARTS_ATTRIBUTE_DATA
 from apps.catalog.attributes.accessories import ACCESSORIES_ATTRIBUTE_DATA
 from apps.catalog.brands import BRAND_DATA
 from apps.catalog.categories import CATEGORY_DATA
 from apps.catalog.tags import TAG_DATA
-from apps.catalog.category_attributes.scooter import (
-    SCOOTER_ATTRIBUTE_SLUGS,
-    SCOOTER_CATEGORY_SLUGS,
-    SCOOTER_HIGHLIGHT_SLUGS,
+from apps.catalog.category_attributes.benzinli_scooter import (
+    BENZINLI_SCOOTER_ATTRIBUTE_SLUGS,
+    BENZINLI_SCOOTER_CATEGORY_SLUGS,
+    BENZINLI_SCOOTER_HIGHLIGHT_SLUGS,
+)
+from apps.catalog.category_attributes.e_scooter import (
+    E_SCOOTER_ATTRIBUTE_SLUGS,
+    E_SCOOTER_CATEGORY_SLUGS,
+)
+from apps.catalog.category_attributes.e_bike import (
+    E_BIKE_ATTRIBUTE_SLUGS,
+    E_BIKE_CATEGORY_SLUGS,
+)
+from apps.catalog.category_attributes.e_kasali import (
+    E_KASALI_ATTRIBUTE_SLUGS,
+    E_KASALI_CATEGORY_SLUGS,
+)
+from apps.catalog.category_attributes.e_market_tipi import (
+    E_MARKET_TIPI_ATTRIBUTE_SLUGS,
+    E_MARKET_TIPI_CATEGORY_SLUGS,
+)
+from apps.catalog.category_attributes.e_car import (
+    E_CAR_ATTRIBUTE_SLUGS,
+    E_CAR_CATEGORY_SLUGS,
 )
 from apps.catalog.category_attributes.helmet import (
     HELMET_ATTRIBUTE_SLUGS,
@@ -61,7 +81,6 @@ from apps.catalog.category_attributes.tire import (
 from apps.catalog.category_attributes.bicycle import (
     BICYCLE_ATTRIBUTE_SLUGS,
     BICYCLE_CATEGORY_SLUGS,
-    BICYCLE_COMMON_ATTRIBUTE_SLUGS,
 )
 from apps.catalog.category_attributes.electric import (
     ELECTRIC_ATTRIBUTE_SLUGS,
@@ -299,9 +318,9 @@ class Command(BaseCommand):
         for category_slug in HELMET_CATEGORY_SLUGS:
                 mappings[category_slug] = HELMET_ATTRIBUTE_SLUGS
 
-        for category_slug in SCOOTER_CATEGORY_SLUGS:
-                mappings[category_slug] = SCOOTER_ATTRIBUTE_SLUGS
-                highlight_mappings[category_slug] = SCOOTER_HIGHLIGHT_SLUGS
+        for category_slug in BENZINLI_SCOOTER_CATEGORY_SLUGS:
+                mappings[category_slug] = BENZINLI_SCOOTER_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = BENZINLI_SCOOTER_HIGHLIGHT_SLUGS
 
         for category_slug in APPAREL_CATEGORY_SLUGS:
                 mappings[category_slug] = APPAREL_ATTRIBUTE_SLUGS
@@ -321,14 +340,20 @@ class Command(BaseCommand):
         for category_slug in ELECTRIC_CATEGORY_SLUGS:
                 mappings[category_slug] = ELECTRIC_ATTRIBUTE_SLUGS
 
-        # E-Bisiklet, pedal/krank/vites gibi bisiklete özgü mekanik
-        # bileşenleri de olan tek elektrikli kategori — bu yüzden
-        # ortak bisiklet alanları (BICYCLE_COMMON_ATTRIBUTE_SLUGS)
-        # SADECE bu kategoriye ekleniyor, diğer Electric kategorileri
-        # (elektrikli-motosiklet, e-scooter, e-car, vb.) etkilenmiyor.
-        mappings["e-bisiklet"] = (
-            ELECTRIC_ATTRIBUTE_SLUGS + BICYCLE_COMMON_ATTRIBUTE_SLUGS
-        )
+        for category_slug in E_SCOOTER_CATEGORY_SLUGS:
+                mappings[category_slug] = E_SCOOTER_ATTRIBUTE_SLUGS
+
+        for category_slug in E_BIKE_CATEGORY_SLUGS:
+                mappings[category_slug] = E_BIKE_ATTRIBUTE_SLUGS
+
+        for category_slug in E_KASALI_CATEGORY_SLUGS:
+                mappings[category_slug] = E_KASALI_ATTRIBUTE_SLUGS
+
+        for category_slug in E_MARKET_TIPI_CATEGORY_SLUGS:
+                mappings[category_slug] = E_MARKET_TIPI_ATTRIBUTE_SLUGS
+
+        for category_slug in E_CAR_CATEGORY_SLUGS:
+                mappings[category_slug] = E_CAR_ATTRIBUTE_SLUGS
 
         for category_slug in PARTS_CATEGORY_SLUGS:
                 mappings[category_slug] = PARTS_ATTRIBUTE_SLUGS
