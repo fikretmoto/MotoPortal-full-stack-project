@@ -125,7 +125,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {priceText && (
               <div className="flex items-baseline gap-2">
                 <p
-                  className={`font-mono text-xs font-bold tabular-nums ${
+                  className={`font-mono text-base font-bold tabular-nums ${
                     isPromoted ? "text-orange-600" : "text-foreground"
                   }`}
                 >
