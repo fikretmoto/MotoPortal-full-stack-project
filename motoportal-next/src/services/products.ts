@@ -21,6 +21,7 @@ export type ProductEditData = {
   is_active: boolean;
   instagram_url: string | null;
   whatsapp_number: string | null;
+  cover_image_url: string | null;
   attributes: ProductAttributeValues;
 };
 

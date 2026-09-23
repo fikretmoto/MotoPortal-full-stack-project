@@ -10,6 +10,7 @@ from .views import (
     CategoryBrandListAPIView,
     DashboardProductListAPIView,
     FavoriteListAPIView,
+    ProductCoverImageUploadAPIView,
     FavoriteToggleAPIView,
     HomepageBandByTagAPIView,
     HomepageBandListAPIView,
@@ -126,6 +127,12 @@ urlpatterns = [
         "products/<slug:slug>/edit/",
         ProductUpdateAPIView.as_view(),
         name="product-update",
+    ),
+
+    path(
+        "products/<slug:slug>/cover-image/",
+        ProductCoverImageUploadAPIView.as_view(),
+        name="product-cover-image-upload",
     ),
 
     path(

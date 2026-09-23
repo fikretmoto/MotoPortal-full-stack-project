@@ -394,6 +394,37 @@ def get_display_name(obj):
     return title
 
 
+class ProductCoverImageSerializer(serializers.ModelSerializer):
+    """
+    Dashboard'dan kapak görseli yükleme için ayrı, dar kapsamlı
+    serializer — sadece cover_image alanını kabul eder (multipart).
+    """
+    cover_image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Product
+        fields = (
+            "cover_image",
+            "cover_image_url",
+        )
+        extra_kwargs = {
+            "cover_image": {"write_only": True},
+        }
+
+    def get_cover_image_url(self, obj):
+        if not obj.cover_image:
+            return None
+
+        request = self.context.get("request")
+
+        if request:
+            return request.build_absolute_uri(
+                obj.cover_image.url
+            )
+
+        return obj.cover_image.url
+
+
 class DashboardProductListSerializer(serializers.ModelSerializer):
     """
     Dashboard ürün listesi için hafif serializer — müşteri-tarafı
@@ -819,6 +850,7 @@ class ProductWriteSerializer(serializers.ModelSerializer):
         write_only=True,
         required=False,
     )
+    cover_image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
@@ -838,6 +870,7 @@ class ProductWriteSerializer(serializers.ModelSerializer):
             "instagram_url",
             "whatsapp_number",
             "cover_image",
+            "cover_image_url",
             "is_featured",
             "is_active",
             "attributes",
@@ -845,6 +878,22 @@ class ProductWriteSerializer(serializers.ModelSerializer):
         read_only_fields = (
             "id",
         )
+        extra_kwargs = {
+            "cover_image": {"write_only": True},
+        }
+
+    def get_cover_image_url(self, obj):
+        if not obj.cover_image:
+            return None
+
+        request = self.context.get("request")
+
+        if request:
+            return request.build_absolute_uri(
+                obj.cover_image.url
+            )
+
+        return obj.cover_image.url
 
     def create(self, validated_data):
         validated_data["is_active"] = False

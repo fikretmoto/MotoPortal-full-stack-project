@@ -2,6 +2,7 @@ from django.db.models import Prefetch
 from rest_framework import generics, permissions
 from .permissions import CanManageProducts, IsCustomerRole
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.permissions import AllowAny
@@ -16,6 +17,7 @@ from .serializers import (
     CategoryTreeSerializer,
     DashboardProductListSerializer,
     FavoriteSerializer,
+    ProductCoverImageSerializer,
     ProductDetailSerializer,
     ProductListSerializer,
     ProductWriteSerializer,
@@ -267,12 +269,35 @@ class ProductCreateAPIView(generics.CreateAPIView):
     )
 
 
-class ProductUpdateAPIView(generics.RetrieveUpdateAPIView):
+class ProductUpdateAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductWriteSerializer
     lookup_field = "slug"
     queryset = Product.objects.all()
     permission_classes = (
          CanManageProducts,
+    )
+
+    def perform_destroy(self, instance):
+        """
+        Gerçek DB silme değil, soft-delete: Product'a referans veren
+        7 model de CASCADE olduğu için gerçek silme müşteri
+        yorumlarını/favorilerini/attribute verisini geri dönüşsüz
+        siler. is_active=False, "yayından kaldırma" gibi davranır.
+        """
+        instance.is_active = False
+        instance.save(update_fields=["is_active"])
+
+
+class ProductCoverImageUploadAPIView(generics.UpdateAPIView):
+    serializer_class = ProductCoverImageSerializer
+    lookup_field = "slug"
+    queryset = Product.objects.all()
+    permission_classes = (
+        CanManageProducts,
+    )
+    parser_classes = (
+        MultiPartParser,
+        FormParser,
     )
 
 class CategoryAttributesAPIView(generics.GenericAPIView):

@@ -6,6 +6,7 @@ import { CategorySelector } from "./CategorySelector";
 import { DynamicAttributeFields } from "./DynamicAttributeFields";
 import { BasicProductFields, type BasicProductValues } from "./BasicProductFields";
 import { PricingFields, type PricingValues } from "./PricingFields";
+import { CoverImageField } from "./CoverImageField";
 import type { AttributeValue } from "./AttributeField";
 import { Button } from "@/components/ui/button";
 import {
@@ -92,6 +93,8 @@ export function ProductForm({ categories, brands, initialData }: ProductFormProp
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [pendingCoverImageFile, setPendingCoverImageFile] =
+    useState<File | null>(null);
 
   useEffect(() => {
     if (!selectedCategorySlug) {
@@ -254,6 +257,32 @@ export function ProductForm({ categories, brands, initialData }: ProductFormProp
       }
 
       const saved = await response.json();
+
+      if (!isEditMode && pendingCoverImageFile) {
+        try {
+          const formData = new FormData();
+          formData.append("cover_image", pendingCoverImageFile);
+
+          const imageResponse = await fetch(
+            `/api/products/${saved.slug}/cover-image`,
+            {
+              method: "PATCH",
+              body: formData,
+            }
+          );
+
+          if (!imageResponse.ok) {
+            alert(
+              "Ürün kaydedildi, görseli düzenleme sayfasından tekrar deneyebilirsiniz."
+            );
+          }
+        } catch {
+          alert(
+            "Ürün kaydedildi, görseli düzenleme sayfasından tekrar deneyebilirsiniz."
+          );
+        }
+      }
+
       router.push(`/dashboard/products/${saved.slug}/edit`);
       router.refresh();
     } catch {
@@ -265,6 +294,12 @@ export function ProductForm({ categories, brands, initialData }: ProductFormProp
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8 max-w-3xl">
+      <CoverImageField
+        slug={initialData?.slug}
+        initialImageUrl={initialData?.cover_image_url}
+        onFileSelected={setPendingCoverImageFile}
+      />
+
       <CategorySelector
         categories={categories}
         value={selectedCategorySlug}
