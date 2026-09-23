@@ -8,6 +8,7 @@ from .views import (
     CategoryListAPIView,
     CategoryTreeAPIView,
     CategoryBrandListAPIView,
+    DashboardProductListAPIView,
     FavoriteListAPIView,
     FavoriteToggleAPIView,
     HomepageBandByTagAPIView,
@@ -107,6 +108,12 @@ urlpatterns = [
         "products/create/",
         ProductCreateAPIView.as_view(),
         name="product-create",
+    ),
+
+    path(
+        "products/dashboard/",
+        DashboardProductListAPIView.as_view(),
+        name="product-dashboard-list",
     ),
 
     path(

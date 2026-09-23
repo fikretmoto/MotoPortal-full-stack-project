@@ -14,6 +14,7 @@ from .serializers import (
     CategoryAttributesResponseSerializer,
     CategorySerializer,
     CategoryTreeSerializer,
+    DashboardProductListSerializer,
     FavoriteSerializer,
     ProductDetailSerializer,
     ProductListSerializer,
@@ -22,7 +23,7 @@ from .serializers import (
     HomepageBandSerializer,
     SiteContentSerializer,
     InstallmentOptionSerializer,
-    
+
 )
 
 
@@ -207,6 +208,35 @@ class ProductListAPIView(generics.ListAPIView):
                 ),
             )
         )
+
+class DashboardProductListAPIView(generics.ListAPIView):
+    """
+    Dashboard ürün listesi — aktif/pasif (onay bekleyen) tüm ürünleri
+    döner. ProductListAPIView'ın aksine is_active filtresi yok.
+
+    Not: Product modelinde şu an bir "sahiplik" (dealer/owner) alanı
+    yok, bu yüzden bu liste "benim ürünlerim" değil, sistemdeki TÜM
+    ürünleri döner. CanManageProducts izni bunu sadece yönetim
+    rollerine (super_admin/admin/editor/dealer) açar.
+    """
+    serializer_class = DashboardProductListSerializer
+    permission_classes = (
+        CanManageProducts,
+    )
+    pagination_class = None
+
+    def get_queryset(self):
+        return (
+            Product.objects
+            .select_related(
+                "brand",
+                "category",
+            )
+            .order_by(
+                "-created_at",
+            )
+        )
+
 
 class ProductDetailAPIView(generics.RetrieveAPIView):
     serializer_class = ProductDetailSerializer

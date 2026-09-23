@@ -394,6 +394,52 @@ def get_display_name(obj):
     return title
 
 
+class DashboardProductListSerializer(serializers.ModelSerializer):
+    """
+    Dashboard ürün listesi için hafif serializer — müşteri-tarafı
+    alanları (badges/rating/favorite) içermez, is_active durumunu
+    (ProductListSerializer'ın aksine) gizlemez.
+    """
+    display_name = serializers.SerializerMethodField()
+    cover_image_url = serializers.SerializerMethodField()
+    brand_name = serializers.CharField(source="brand.name", read_only=True)
+    category_name = serializers.CharField(source="category.name", read_only=True)
+
+    class Meta:
+        model = Product
+        fields = (
+            "id",
+            "name",
+            "display_name",
+            "slug",
+            "brand_name",
+            "category_name",
+            "cover_image_url",
+            "price",
+            "discount_price",
+            "currency",
+            "stock_status",
+            "is_active",
+            "created_at",
+        )
+
+    def get_display_name(self, obj):
+        return get_display_name(obj)
+
+    def get_cover_image_url(self, obj):
+        if not obj.cover_image:
+            return None
+
+        request = self.context.get("request")
+
+        if request:
+            return request.build_absolute_uri(
+                obj.cover_image.url
+            )
+
+        return obj.cover_image.url
+
+
 class ProductListSerializer(ProductBadgeMixin, ProductRatingMixin, ProductFavoriteMixin, serializers.ModelSerializer):
     brand = BrandSerializer(read_only=True)
     category = CategorySerializer(read_only=True)

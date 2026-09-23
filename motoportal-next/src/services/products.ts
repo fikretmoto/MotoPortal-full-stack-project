@@ -47,3 +47,43 @@ export async function getProductForEdit(
 
   return response.json();
 }
+
+export type DashboardProductListItem = {
+  id: number;
+  name: string;
+  display_name: string;
+  slug: string;
+  brand_name: string;
+  category_name: string;
+  cover_image_url: string | null;
+  price: string;
+  discount_price: string | null;
+  currency: string;
+  stock_status: string;
+  is_active: boolean;
+  created_at: string;
+};
+
+export async function getDashboardProducts(): Promise<
+  DashboardProductListItem[]
+> {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("access_token")?.value;
+
+  if (!accessToken) {
+    return [];
+  }
+
+  const response = await fetch(`${API_URL}/products/dashboard/`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    return [];
+  }
+
+  return response.json();
+}
