@@ -24,6 +24,7 @@ ELECTRIC_ATTRIBUTE_OPTION_DATA = [
     {"attribute_slug": "elektrikli-batarya-tipi", "value": "Li-ion", "display_order": 10},
     {"attribute_slug": "elektrikli-batarya-tipi", "value": "LFP (Lityum Demir Fosfat)", "display_order": 20},
     {"attribute_slug": "elektrikli-batarya-tipi", "value": "Kurşun-Asit", "display_order": 30},
+    {"attribute_slug": "elektrikli-batarya-tipi", "value": "Grafen", "display_order": 40},
 
     # Batarya Kapasitesi (Volt'a göre küçükten büyüğe)
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "36V-10Ah", "display_order": 10},
@@ -38,6 +39,7 @@ ELECTRIC_ATTRIBUTE_OPTION_DATA = [
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "48V-20Ah", "display_order": 54},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "60V-20Ah", "display_order": 60},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-20Ah", "display_order": 70},
+    {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-35Ah", "display_order": 75},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-32Ah", "display_order": 80},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-60Ah", "display_order": 90},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-80Ah", "display_order": 100},
