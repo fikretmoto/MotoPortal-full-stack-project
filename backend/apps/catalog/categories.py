@@ -469,6 +469,11 @@ CATEGORY_DATA = [
                     "slug": "kasa-koruma-dusme-demiri",
                     "parent_slug": "aksesuar",
                 },
+            {
+                "name": "ATV/UTV Aksesuarları",
+                "slug": "atv-utv-aksesuarlari",
+                "parent_slug": "aksesuar",
+            },
 
 
 

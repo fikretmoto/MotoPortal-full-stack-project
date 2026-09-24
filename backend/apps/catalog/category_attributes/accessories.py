@@ -5,6 +5,10 @@ from .ecommerce import (
 
 
 ACCESSORIES_CATEGORY_SLUGS = [
+    "bisiklet-aksesuarlari",
+    "motosiklet-aksesuarlari",
+    "elektrikli-aksesuarlari",
+    "atv-utv-aksesuarlari",
     "canta-ve-bagaj-sistemleri",
     "on-cam-ruzgarlik",
     "kilit-ve-guvenlik",
@@ -26,4 +30,6 @@ ACCESSORIES_ATTRIBUTE_SLUGS = [
     "aksesuar-menzil",
     "aksesuar-pil-omru",
     "video-cozunurlugu",
+    "uyumluluk-tipi",
+    "montaj-tipi",
 ]
