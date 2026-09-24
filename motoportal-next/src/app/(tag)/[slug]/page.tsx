@@ -37,7 +37,7 @@ const ALL_TAGS: TagPill[] = (() => {
 })();
 
 const SCOPE_CATEGORIES: Record<string, string[]> = {
-  ekipman: ["ekipman", "canta-ve-bagaj-sistemleri", "kilit-ve-guvenlik"],
+  ekipman: ["ekipman"],
   bakim: ["bakim-ve-temizlik"],
 };
 

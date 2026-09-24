@@ -52,8 +52,6 @@ export const gearCategories: CategoryCard[] = [
   { name: "Bot", href: "/kategori/motosiklet-botu" },
   { name: "Yağmurluk", href: "/kategori/yagmurluk" },
   { name: "Koruma Ekipmanı", href: "/kategori/koruma-ekipmani" },
-  { name: "Çanta", href: "/kategori/canta-ve-bagaj-sistemleri" },
-  { name: "Kilit & Zincir", href: "/kategori/kilit-ve-guvenlik" },
 ];
 
 /* ---- BLOK C: bakım/temizlik tag'leri + bakım/temizlik kategorileri ---- */
