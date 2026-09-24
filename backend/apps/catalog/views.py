@@ -9,7 +9,7 @@ from rest_framework.permissions import AllowAny
 
 from .filters import ProductFilter
 
-from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductAttributeValue, ProductReview, HomepageBand, SiteContent, InstallmentOption, Favorite
+from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductAttributeValue, ProductReview, HomepageBand, SiteContent, InstallmentOption, Favorite, VehicleModel
 from .serializers import (
    BrandSerializer,
     CategoryAttributesResponseSerializer,
@@ -25,6 +25,7 @@ from .serializers import (
     HomepageBandSerializer,
     SiteContentSerializer,
     InstallmentOptionSerializer,
+    VehicleModelSerializer,
 
 )
 
@@ -210,6 +211,28 @@ class ProductListAPIView(generics.ListAPIView):
                 ),
             )
         )
+
+class VehicleModelListAPIView(generics.ListAPIView):
+    """
+    Dashboard'da dealer'ın Araç Modeli seçimi için salt-okunur liste,
+    markaya göre filtrelenebilir (?brand=<slug>). Yeni VehicleModel
+    oluşturma bu view'ın kapsamında değil.
+    """
+    serializer_class = VehicleModelSerializer
+    permission_classes = (
+        CanManageProducts,
+    )
+    pagination_class = None
+
+    def get_queryset(self):
+        queryset = VehicleModel.objects.filter(is_active=True)
+
+        brand_slug = self.request.query_params.get("brand")
+        if brand_slug:
+            queryset = queryset.filter(brand__slug=brand_slug)
+
+        return queryset.order_by("name")
+
 
 class DashboardProductListAPIView(generics.ListAPIView):
     """

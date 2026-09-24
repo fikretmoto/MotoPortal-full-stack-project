@@ -25,6 +25,7 @@ from .models import (
     SiteContent,
     InstallmentOption,
     ProductResource,
+    VehicleModel,
 )
 
 
@@ -156,6 +157,21 @@ class CategoryTreeSerializer(serializers.ModelSerializer):
         active_children = obj.children.filter(is_active=True).order_by("id")
         return CategoryTreeSerializer(active_children, many=True).data
     
+
+class VehicleModelSerializer(serializers.ModelSerializer):
+    """
+    Dashboard'da dealer'ın Araç Modeli seçimi için salt-okunur liste —
+    yeni VehicleModel oluşturma bu serializer'ın kapsamında değil.
+    """
+    class Meta:
+        model = VehicleModel
+        fields = (
+            "id",
+            "name",
+            "slug",
+            "brand",
+        )
+
 
 class BrandSerializer(serializers.ModelSerializer):
     logo_url = serializers.SerializerMethodField()
@@ -851,6 +867,11 @@ class ProductWriteSerializer(serializers.ModelSerializer):
         required=False,
     )
     cover_image_url = serializers.SerializerMethodField()
+    vehicle_model = serializers.PrimaryKeyRelatedField(
+        queryset=VehicleModel.objects.all(),
+        required=False,
+        allow_null=True,
+    )
 
     class Meta:
         model = Product
@@ -860,6 +881,7 @@ class ProductWriteSerializer(serializers.ModelSerializer):
             "slug",
             "brand",
             "category",
+            "vehicle_model",
             "product_code",
             "price",
             "discount_price",
@@ -951,6 +973,27 @@ class ProductWriteSerializer(serializers.ModelSerializer):
                     ),
                 }
             )
+
+        vehicle_model = attrs.get(
+            "vehicle_model",
+            getattr(self.instance, "vehicle_model", None),
+        )
+
+        if vehicle_model is not None:
+            vehicle_category = attrs.get(
+                "category",
+                getattr(self.instance, "category", None),
+            )
+
+            if vehicle_category is None or not vehicle_category.is_vehicle_category():
+                raise serializers.ValidationError(
+                    {
+                        "vehicle_model": (
+                            "Araç modeli sadece Taşıtlar kategorisindeki "
+                            "ürünlerde kullanılabilir."
+                        ),
+                    }
+                )
 
         raw_attributes = attrs.get("attributes")
 

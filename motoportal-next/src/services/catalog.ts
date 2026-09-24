@@ -218,6 +218,37 @@ export async function getCategories(): Promise<Category[]> {
 
 
 
+export type VehicleModel = {
+  id: number;
+  name: string;
+  slug: string;
+  brand: number;
+};
+
+/**
+ * "vehicle-models/" backend endpoint'i CanManageProducts ile korumalı
+ * olduğu için (dealer'a özel, herkese açık değil), diğer fonksiyonların
+ * aksine Django'ya doğrudan değil, Next.js'in kendi proxy route'una
+ * (/api/vehicle-models) istek atar — httpOnly JWT cookie'si orada
+ * sunucu tarafında okunup Bearer header'a çevriliyor.
+ */
+export async function getVehicleModels(
+  brandSlug: string
+): Promise<VehicleModel[]> {
+  const response = await fetch(
+    `/api/vehicle-models?brand=${encodeURIComponent(brandSlug)}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    return [];
+  }
+
+  return response.json();
+}
+
 export async function getBrands(): Promise<Brand[]> {
   const response = await fetch(`${API_URL}/brands/`, {
     cache: "no-store",

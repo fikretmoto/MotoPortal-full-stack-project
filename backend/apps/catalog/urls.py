@@ -21,6 +21,7 @@ from .views import (
     ProductReviewListCreateAPIView,
     ProductUpdateAPIView,
     SiteContentAPIView,
+    VehicleModelListAPIView,
 )
 
 
@@ -115,6 +116,12 @@ urlpatterns = [
         "products/dashboard/",
         DashboardProductListAPIView.as_view(),
         name="product-dashboard-list",
+    ),
+
+    path(
+        "vehicle-models/",
+        VehicleModelListAPIView.as_view(),
+        name="vehicle-model-list",
     ),
 
     path(

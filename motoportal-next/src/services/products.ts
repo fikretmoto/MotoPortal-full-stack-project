@@ -10,6 +10,7 @@ export type ProductEditData = {
   slug: string;
   brand: number;
   category: number;
+  vehicle_model: number | null;
   product_code: string;
   price: string;
   discount_price: string | null;

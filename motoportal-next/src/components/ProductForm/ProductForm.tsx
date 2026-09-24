@@ -7,13 +7,16 @@ import { DynamicAttributeFields } from "./DynamicAttributeFields";
 import { BasicProductFields, type BasicProductValues } from "./BasicProductFields";
 import { PricingFields, type PricingValues } from "./PricingFields";
 import { CoverImageField } from "./CoverImageField";
+import { VehicleModelSelector } from "./VehicleModelSelector";
 import type { AttributeValue } from "./AttributeField";
 import { Button } from "@/components/ui/button";
 import {
   getCategoryAttributes,
+  getVehicleModels,
   type Brand,
   type Category,
   type CategoryAttributesResponse,
+  type VehicleModel,
 } from "@/services/catalog";
 import type { ProductEditData } from "@/services/products";
 
@@ -22,6 +25,29 @@ type ProductFormProps = {
   brands: Brand[];
   initialData?: ProductEditData;
 };
+
+const VEHICLE_ROOT_CATEGORY_SLUG = "tasitlar";
+
+/**
+ * Bir kategorinin Taşıtlar kökü altında olup olmadığını, zaten yüklü
+ * olan düz kategori listesindeki parent zincirini yürüyerek kontrol
+ * eder — backend'deki Category.is_vehicle_category()'nin frontend
+ * karşılığı (ek bir API çağrısı gerektirmez).
+ */
+function isVehicleCategory(
+  categories: Category[],
+  categoryId: number | undefined
+): boolean {
+  if (!categoryId) return false;
+
+  let current = categories.find((c) => c.id === categoryId);
+
+  while (current?.parent) {
+    current = categories.find((c) => c.id === current!.parent);
+  }
+
+  return current?.slug === VEHICLE_ROOT_CATEGORY_SLUG;
+}
 
 const EMPTY_BASIC_VALUES: BasicProductValues = {
   name: "",
@@ -96,6 +122,30 @@ export function ProductForm({ categories, brands, initialData }: ProductFormProp
   const [pendingCoverImageFile, setPendingCoverImageFile] =
     useState<File | null>(null);
 
+  const [vehicleModelId, setVehicleModelId] = useState<number | null>(
+    initialData?.vehicle_model ?? null
+  );
+  const [vehicleModels, setVehicleModels] = useState<VehicleModel[]>([]);
+
+  useEffect(() => {
+    if (!basicValues.brandSlug) {
+      setVehicleModels([]);
+      return;
+    }
+
+    let isCancelled = false;
+
+    getVehicleModels(basicValues.brandSlug).then((data) => {
+      if (!isCancelled) {
+        setVehicleModels(data);
+      }
+    });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [basicValues.brandSlug]);
+
   useEffect(() => {
     if (!selectedCategorySlug) {
       setCategoryAttributes(null);
@@ -141,6 +191,14 @@ export function ProductForm({ categories, brands, initialData }: ProductFormProp
     (brand) => brand.slug === basicValues.brandSlug
   )?.id;
 
+  const isVehicleCategorySelected = isVehicleCategory(
+    categories,
+    selectedCategoryId
+  );
+  const effectiveVehicleModelId = isVehicleCategorySelected
+    ? vehicleModelId
+    : null;
+
   function sanitizeAttributeValue(value: AttributeValue): AttributeValue {
     if (Array.isArray(value)) {
       return value.filter((item) => item !== "");
@@ -182,6 +240,7 @@ export function ProductForm({ categories, brands, initialData }: ProductFormProp
         slug: basicValues.slug,
         category: selectedCategoryId,
         brand: selectedBrandId,
+        vehicle_model: effectiveVehicleModelId,
         product_code: basicValues.productCode,
         short_description: basicValues.shortDescription,
         description: basicValues.description,
@@ -199,6 +258,8 @@ export function ProductForm({ categories, brands, initialData }: ProductFormProp
     if (basicValues.slug !== initialData.slug) payload.slug = basicValues.slug;
     if (selectedCategoryId !== initialData.category) payload.category = selectedCategoryId;
     if (selectedBrandId !== initialData.brand) payload.brand = selectedBrandId;
+    if (effectiveVehicleModelId !== (initialData.vehicle_model ?? null))
+      payload.vehicle_model = effectiveVehicleModelId;
     if (basicValues.productCode !== initialData.product_code)
       payload.product_code = basicValues.productCode;
     if (basicValues.shortDescription !== initialData.short_description)
@@ -305,6 +366,14 @@ export function ProductForm({ categories, brands, initialData }: ProductFormProp
         value={selectedCategorySlug}
         onChange={setSelectedCategorySlug}
       />
+
+      {isVehicleCategorySelected && (
+        <VehicleModelSelector
+          vehicleModels={vehicleModels}
+          value={vehicleModelId}
+          onChange={setVehicleModelId}
+        />
+      )}
 
       <BasicProductFields
         brands={brands}
