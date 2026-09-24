@@ -55,3 +55,31 @@ export const gearCategories: CategoryCard[] = [
   { name: "Çanta", href: "/kategori/canta-ve-bagaj-sistemleri" },
   { name: "Kilit & Zincir", href: "/kategori/kilit-ve-guvenlik" },
 ];
+
+/* ---- BLOK C: bakım/temizlik tag'leri + bakım/temizlik kategorileri ---- */
+
+export const bakimTags: TagPill[] = [
+  { label: "İndirimli Ürünler", href: "/indirimli-urunler?scope=bakim" },
+  { label: "Yeni Gelenler", href: "/yeni-gelenler?scope=bakim" },
+  { label: "Bitmek Üzere Olanlar", href: "/bitmek-uzere?scope=bakim" },
+  { label: "Fırsat", href: "/outlet-firsat?scope=bakim" },
+  { label: "Öne Çıkan", href: "/one-cikanlar?scope=bakim" },
+  { label: "Editörün Seçtikleri", href: "/editorun-sectikleri?scope=bakim" },
+  { label: "Sıfır Faizli Taksit", href: "/sifir-faizli-taksit?scope=bakim" },
+  { label: "Ücretsiz Kargo", href: "/ucretsiz-kargo?scope=bakim" },
+  { label: "Şehir Merkezi Ücretsiz Kargo", href: "/sehir-merkezi-ucretsiz-kargo?scope=bakim" },
+  { label: "Çok Satan", href: "/cok-satan?scope=bakim" },
+  { label: "Sezon Sonu", href: "/sezon-sonu?scope=bakim" },
+  { label: "Açık Kutu", href: "/acik-kutu?scope=bakim" },
+];
+
+export const bakimCategories: CategoryCard[] = [
+  { name: "Temizlik Ürünleri", href: "/kategori/temizlik-urunleri" },
+  { name: "Motor Yağı", href: "/kategori/motor-yagi" },
+  { name: "Zincir Yağı", href: "/kategori/zincir-yagi" },
+  { name: "Şanzıman Yağı", href: "/kategori/sanziman-yagi" },
+  { name: "2T Yağı", href: "/kategori/2t-yagi" },
+  { name: "Fork Yağı", href: "/kategori/fork-yagi" },
+  { name: "Fren Hidroliği", href: "/kategori/fren-hidroligi" },
+  { name: "Soğutma Sıvısı", href: "/kategori/sogutma-sivisi" },
+];
