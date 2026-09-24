@@ -1,0 +1,36 @@
+import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+type RouteParams = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function POST(request: Request, { params }: RouteParams) {
+  const { slug } = await params;
+
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("access_token")?.value;
+
+  if (!accessToken) {
+    return NextResponse.json(
+      { detail: "Oturum açmanız gerekiyor." },
+      { status: 401 }
+    );
+  }
+
+  const formData = await request.formData();
+
+  const djangoResponse = await fetch(`${API_URL}/products/${slug}/images/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: formData,
+  });
+
+  const data = await djangoResponse.json();
+
+  return NextResponse.json(data, { status: djangoResponse.status });
+}

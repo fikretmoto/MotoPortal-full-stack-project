@@ -17,6 +17,8 @@ from .views import (
     InstallmentOptionListAPIView,
     ProductCreateAPIView,
     ProductDetailAPIView,
+    ProductImageCreateAPIView,
+    ProductImageDeleteAPIView,
     ProductListAPIView,
     ProductReviewListCreateAPIView,
     ProductUpdateAPIView,
@@ -140,6 +142,18 @@ urlpatterns = [
         "products/<slug:slug>/cover-image/",
         ProductCoverImageUploadAPIView.as_view(),
         name="product-cover-image-upload",
+    ),
+
+    path(
+        "products/<slug:slug>/images/",
+        ProductImageCreateAPIView.as_view(),
+        name="product-image-create",
+    ),
+
+    path(
+        "products/images/<int:pk>/",
+        ProductImageDeleteAPIView.as_view(),
+        name="product-image-delete",
     ),
 
     path(

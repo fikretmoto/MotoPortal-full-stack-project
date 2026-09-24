@@ -441,6 +441,57 @@ class ProductCoverImageSerializer(serializers.ModelSerializer):
         return obj.cover_image.url
 
 
+class ProductImageWriteSerializer(serializers.ModelSerializer):
+    """
+    Dashboard'dan galeri resmi ekleme için — sadece düzenleme modunda
+    kullanılır (ürünün zaten kaydedilmiş olması gerekir). Silme ayrı
+    bir view'da (gerçek DELETE, ProductImage'a referans veren başka
+    bir model olmadığı için soft-delete gerekmiyor).
+    """
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ProductImage
+        fields = (
+            "id",
+            "image",
+            "image_url",
+            "alt_text",
+            "is_primary",
+            "display_order",
+        )
+        extra_kwargs = {
+            "image": {"write_only": True},
+            "display_order": {"required": False},
+        }
+
+    def get_image_url(self, obj):
+        if not obj.image:
+            return None
+
+        request = self.context.get("request")
+
+        if request:
+            return request.build_absolute_uri(obj.image.url)
+
+        return obj.image.url
+
+    def create(self, validated_data):
+        product = self.context["product"]
+
+        if "display_order" not in validated_data:
+            last_order = (
+                ProductImage.objects
+                .filter(product=product)
+                .order_by("-display_order")
+                .values_list("display_order", flat=True)
+                .first()
+            )
+            validated_data["display_order"] = (last_order or 0) + 1
+
+        return ProductImage.objects.create(product=product, **validated_data)
+
+
 class DashboardProductListSerializer(serializers.ModelSerializer):
     """
     Dashboard ürün listesi için hafif serializer — müşteri-tarafı
@@ -872,6 +923,7 @@ class ProductWriteSerializer(serializers.ModelSerializer):
         required=False,
         allow_null=True,
     )
+    images = ProductImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
@@ -893,6 +945,7 @@ class ProductWriteSerializer(serializers.ModelSerializer):
             "whatsapp_number",
             "cover_image",
             "cover_image_url",
+            "images",
             "is_featured",
             "is_active",
             "attributes",

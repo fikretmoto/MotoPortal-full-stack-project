@@ -4,6 +4,14 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export type ProductAttributeValues = Record<string, string | string[]>;
 
+export type ProductImage = {
+  id: number;
+  image_url: string | null;
+  alt_text: string;
+  is_primary: boolean;
+  display_order: number;
+};
+
 export type ProductEditData = {
   id: number;
   name: string;
@@ -23,6 +31,7 @@ export type ProductEditData = {
   instagram_url: string | null;
   whatsapp_number: string | null;
   cover_image_url: string | null;
+  images: ProductImage[];
   attributes: ProductAttributeValues;
 };
 

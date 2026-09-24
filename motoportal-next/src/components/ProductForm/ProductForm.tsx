@@ -7,6 +7,7 @@ import { DynamicAttributeFields } from "./DynamicAttributeFields";
 import { BasicProductFields, type BasicProductValues } from "./BasicProductFields";
 import { PricingFields, type PricingValues } from "./PricingFields";
 import { CoverImageField } from "./CoverImageField";
+import { ProductImageGallery } from "./ProductImageGallery";
 import { VehicleModelSelector } from "./VehicleModelSelector";
 import type { AttributeValue } from "./AttributeField";
 import { Button } from "@/components/ui/button";
@@ -360,6 +361,13 @@ export function ProductForm({ categories, brands, initialData }: ProductFormProp
         initialImageUrl={initialData?.cover_image_url}
         onFileSelected={setPendingCoverImageFile}
       />
+
+      {isEditMode && initialData && (
+        <ProductImageGallery
+          slug={initialData.slug}
+          initialImages={initialData.images}
+        />
+      )}
 
       <CategorySelector
         categories={categories}

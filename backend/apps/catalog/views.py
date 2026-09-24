@@ -9,7 +9,7 @@ from rest_framework.permissions import AllowAny
 
 from .filters import ProductFilter
 
-from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductAttributeValue, ProductReview, HomepageBand, SiteContent, InstallmentOption, Favorite, VehicleModel
+from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductAttributeValue, ProductImage, ProductReview, HomepageBand, SiteContent, InstallmentOption, Favorite, VehicleModel
 from .serializers import (
    BrandSerializer,
     CategoryAttributesResponseSerializer,
@@ -19,6 +19,7 @@ from .serializers import (
     FavoriteSerializer,
     ProductCoverImageSerializer,
     ProductDetailSerializer,
+    ProductImageWriteSerializer,
     ProductListSerializer,
     ProductWriteSerializer,
     ProductReviewSerializer,
@@ -211,6 +212,40 @@ class ProductListAPIView(generics.ListAPIView):
                 ),
             )
         )
+
+class ProductImageCreateAPIView(generics.CreateAPIView):
+    """
+    Dashboard'dan galeri resmi ekleme — sadece düzenleme modunda
+    kullanılır (ürün slug'ı zaten var olmalı).
+    """
+    serializer_class = ProductImageWriteSerializer
+    permission_classes = (
+        CanManageProducts,
+    )
+    parser_classes = (
+        MultiPartParser,
+        FormParser,
+    )
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context["product"] = generics.get_object_or_404(
+            Product,
+            slug=self.kwargs["slug"],
+        )
+        return context
+
+
+class ProductImageDeleteAPIView(generics.DestroyAPIView):
+    """
+    Galeri resmi silme — gerçek DB silme (ProductImage'a referans
+    veren başka bir model yok, CASCADE zinciri riski yok).
+    """
+    queryset = ProductImage.objects.all()
+    permission_classes = (
+        CanManageProducts,
+    )
+
 
 class VehicleModelListAPIView(generics.ListAPIView):
     """
