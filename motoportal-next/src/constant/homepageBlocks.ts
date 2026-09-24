@@ -81,3 +81,33 @@ export const bakimCategories: CategoryCard[] = [
   { name: "Fren Hidroliği", href: "/kategori/fren-hidroligi" },
   { name: "Soğutma Sıvısı", href: "/kategori/sogutma-sivisi" },
 ];
+
+/* ---- BLOK D: aksesuar tag'leri + aksesuar kategorileri ---- */
+
+export const aksesuarTags: TagPill[] = [
+  { label: "İndirimli Ürünler", href: "/indirimli-urunler?scope=aksesuar" },
+  { label: "Yeni Gelenler", href: "/yeni-gelenler?scope=aksesuar" },
+  { label: "Bitmek Üzere Olanlar", href: "/bitmek-uzere?scope=aksesuar" },
+  { label: "Fırsat", href: "/outlet-firsat?scope=aksesuar" },
+  { label: "Öne Çıkan", href: "/one-cikanlar?scope=aksesuar" },
+  { label: "Editörün Seçtikleri", href: "/editorun-sectikleri?scope=aksesuar" },
+  { label: "Sıfır Faizli Taksit", href: "/sifir-faizli-taksit?scope=aksesuar" },
+  { label: "Ücretsiz Kargo", href: "/ucretsiz-kargo?scope=aksesuar" },
+  { label: "Şehir Merkezi Ücretsiz Kargo", href: "/sehir-merkezi-ucretsiz-kargo?scope=aksesuar" },
+  { label: "Çok Satan", href: "/cok-satan?scope=aksesuar" },
+  { label: "Sezon Sonu", href: "/sezon-sonu?scope=aksesuar" },
+  { label: "Açık Kutu", href: "/acik-kutu?scope=aksesuar" },
+];
+
+export const aksesuarCategories: CategoryCard[] = [
+  { name: "Bisiklet Aksesuarları", href: "/kategori/bisiklet-aksesuarlari" },
+  { name: "Motosiklet Aksesuarları", href: "/kategori/motosiklet-aksesuarlari" },
+  { name: "Elektrikli Aksesuarları", href: "/kategori/elektrikli-aksesuarlari" },
+  { name: "ATV/UTV Aksesuarları", href: "/kategori/atv-utv-aksesuarlari" },
+  { name: "Çanta ve Bagaj Sistemleri", href: "/kategori/canta-ve-bagaj-sistemleri" },
+  { name: "Ön Cam / Rüzgarlık", href: "/kategori/on-cam-ruzgarlik" },
+  { name: "Kilit ve Güvenlik", href: "/kategori/kilit-ve-guvenlik" },
+  { name: "Intercom / Bluetooth İletişim", href: "/kategori/intercom-bluetooth-iletisim" },
+  { name: "Sele Kılıfı ve Örtü", href: "/kategori/sele-kilifi-ve-ortu" },
+  { name: "Kamera ve Navigasyon", href: "/kategori/kamera-ve-navigasyon" },
+];

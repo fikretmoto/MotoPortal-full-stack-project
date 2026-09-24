@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getProductsByTag,  getProductsByTagAndCategories, getProductsOnDiscount } from "@/services/catalog";
 import ProductCard from "@/components/product/ProductCard";
-import { campaignTags, gearTags, bakimTags } from "@/constant/homepageBlocks";
+import { campaignTags, gearTags, bakimTags, aksesuarTags } from "@/constant/homepageBlocks";
 import type { TagPill } from "@/components/Home/TagCategoryBlock/TagCategoryBlock";
 
 type Props = {
@@ -23,7 +23,7 @@ function toBaseHref(href: string): string {
 }
 
 const ALL_TAGS: TagPill[] = (() => {
-  const merged = [...campaignTags, ...gearTags, ...bakimTags];
+  const merged = [...campaignTags, ...gearTags, ...bakimTags, ...aksesuarTags];
   const seen = new Map<string, TagPill>();
 
   for (const tag of merged) {
@@ -39,6 +39,7 @@ const ALL_TAGS: TagPill[] = (() => {
 const SCOPE_CATEGORIES: Record<string, string[]> = {
   ekipman: ["ekipman"],
   bakim: ["bakim-ve-temizlik"],
+  aksesuar: ["aksesuar"],
 };
 
 export async function generateStaticParams() {

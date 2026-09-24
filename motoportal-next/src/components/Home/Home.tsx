@@ -1,5 +1,5 @@
 import TagCategoryBlock from "./TagCategoryBlock/TagCategoryBlock";
-import { campaignTags, motorcycleCategories, gearTags, gearCategories, bakimTags, bakimCategories,} from "@/constant/homepageBlocks";
+import { campaignTags, motorcycleCategories, gearTags, gearCategories, bakimTags, bakimCategories, aksesuarTags, aksesuarCategories,} from "@/constant/homepageBlocks";
 
 import Footer from "./Footer/Footer";
 
@@ -25,6 +25,11 @@ const Home = () => {
         title="Bakım ve Temizlik Fırsatları"
         tags={bakimTags}
         categories={bakimCategories}
+      />
+      <TagCategoryBlock
+        title="Aksesuar Fırsatları"
+        tags={aksesuarTags}
+        categories={aksesuarCategories}
       />
       <Footer />
     </>
