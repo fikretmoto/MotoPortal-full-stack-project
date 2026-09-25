@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import { getCategories, getProductsByCategory } from "@/services/catalog";
 import ProductCard from "@/components/product/ProductCard";
 import BisikletAksesuarlariHub from "@/components/category/BisikletAksesuarlariHub";
+import TemizlikUrunleriHub from "@/components/category/TemizlikUrunleriHub";
 
-const BISIKLET_AKSESUAR_HUB_SLUG = "bisiklet-aksesuarlari";
+const HUB_PAGES: Record<string, () => React.ReactNode> = {
+  "bisiklet-aksesuarlari": () => <BisikletAksesuarlariHub />,
+  "temizlik-urunleri": () => <TemizlikUrunleriHub />,
+};
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -29,8 +33,8 @@ export default async function CategoryPage({ params, searchParams }: Props) {
   const { slug } = await params;
   const { view } = await searchParams;
 
-  if (slug === BISIKLET_AKSESUAR_HUB_SLUG && view !== "all") {
-    return <BisikletAksesuarlariHub />;
+  if (view !== "all" && HUB_PAGES[slug]) {
+    return HUB_PAGES[slug]();
   }
 
   const categories = await getCategories();
