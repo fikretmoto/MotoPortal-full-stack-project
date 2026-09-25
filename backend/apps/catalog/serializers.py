@@ -39,6 +39,18 @@ TAG_BADGE_NAMES = {
     "Fırsat": "deal",
      "Takas Fırsatı": "trade_opportunity",
      "Ücretsiz Kargo": "free_shipping",
+    "A1 ile Sürülebilenler": "a1_license",
+    "B Ehliyeti ile Sürülebilenler": "b_license",
+    "Şehir Merkezi Ücretsiz Kargo": "free_shipping_city",
+}
+
+# Bazı tag'lerin rozetteki görünen metni, tag'in tam adından daha
+# kısa olsun diye buradan override ediliyor — burada olmayan tag'ler
+# için rozet metni tag.name ile birebir aynı kalır.
+TAG_BADGE_LABEL_OVERRIDES = {
+    "A1 ile Sürülebilenler": "A1 Ehliyet",
+    "B Ehliyeti ile Sürülebilenler": "B Ehliyet",
+    "Şehir Merkezi Ücretsiz Kargo": "Şehir İçi Ücretsiz Kargo",
 }
 
 
@@ -77,7 +89,8 @@ class ProductBadgeMixin:
         for tag in obj.tags.all():
             badge_type = TAG_BADGE_NAMES.get(tag.name)
             if badge_type:
-                badges.append({"type": badge_type, "label": tag.name})
+                label = TAG_BADGE_LABEL_OVERRIDES.get(tag.name, tag.name)
+                badges.append({"type": badge_type, "label": label})
 
         has_zero_rate_installment = InstallmentOption.objects.filter(
             rate=0,

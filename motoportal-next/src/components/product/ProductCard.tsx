@@ -19,6 +19,9 @@ const BADGE_STYLES: Record<string, string> = {
   trade_opportunity: "bg-blue-600 text-white",
   free_shipping: "bg-teal-600 text-white",
   installment_deal: "bg-indigo-600 text-white",
+  a1_license: "bg-cyan-600 text-white",
+  b_license: "bg-sky-700 text-white",
+  free_shipping_city: "bg-teal-700 text-white",
 };
 
 function ProductBadges({ badges }: { badges: ProductBadge[] }) {
