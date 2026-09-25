@@ -5,7 +5,24 @@ from .ecommerce import (
 
 
 ACCESSORIES_CATEGORY_SLUGS = [
-    "bisiklet-aksesuarlari",
+    # Bisiklet Aksesuarları artık üst kategori (16 yaprak alt
+    # kategoriye ayrıldı) — kendisi değil, yaprakları şemaya dahil.
+    "bisiklet-kilitleri",
+    "bisiklet-cantalari",
+    "bisiklet-sepetleri",
+    "bisiklet-aydinlatma",
+    "bisiklet-telefon-tutuculari",
+    "bisiklet-bilgisayarlari",
+    "bisiklet-camurluklari",
+    "bisiklet-matara",
+    "bisiklet-ayakliklari",
+    "bisiklet-pompa-sisirme",
+    "bisiklet-tamir-bakim",
+    "bisiklet-bagaj-tasima",
+    "bisiklet-zil-korna",
+    "bisiklet-guvenlik-gorunurluk",
+    "bisiklet-konfor",
+    "bisiklet-arac-tasima",
     "motosiklet-aksesuarlari",
     "elektrikli-aksesuarlari",
     "atv-utv-aksesuarlari",
