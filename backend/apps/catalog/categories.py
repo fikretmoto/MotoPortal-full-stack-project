@@ -277,6 +277,74 @@ CATEGORY_DATA = [
         "slug": "temizlik-urunleri",
         "parent_slug": "bakim-ve-temizlik",
     },
+
+    # Temizlik Ürünleri dalları
+    {"name": "Motosiklet Temizliği", "slug": "motosiklet-temizligi", "parent_slug": "temizlik-urunleri"},
+    {"name": "Zincir Temizliği", "slug": "zincir-temizligi", "parent_slug": "temizlik-urunleri"},
+    {"name": "Kask ve Vizör Bakımı", "slug": "kask-ve-vizor-bakimi", "parent_slug": "temizlik-urunleri"},
+    {"name": "Parlatma ve Koruma", "slug": "parlatma-ve-koruma", "parent_slug": "temizlik-urunleri"},
+    {"name": "Fırça ve Bezler", "slug": "firca-ve-bezler", "parent_slug": "temizlik-urunleri"},
+    {"name": "Bakım Setleri", "slug": "bakim-setleri", "parent_slug": "temizlik-urunleri"},
+    {"name": "Hava Filtresi Bakımı", "slug": "hava-filtresi-bakimi", "parent_slug": "temizlik-urunleri"},
+
+    # Motosiklet Temizliği yaprakları
+    {"name": "Motosiklet Şampuanları", "slug": "motosiklet-sampuanlari", "parent_slug": "motosiklet-temizligi"},
+    {"name": "Genel Temizleyiciler", "slug": "genel-temizleyiciler", "parent_slug": "motosiklet-temizligi"},
+    {"name": "Köpük Temizleyiciler", "slug": "kopuk-temizleyiciler", "parent_slug": "motosiklet-temizligi"},
+    {"name": "Yağ ve Kir Sökücüler", "slug": "yag-ve-kir-sokuculer", "parent_slug": "motosiklet-temizligi"},
+    {"name": "Jant Temizleyiciler", "slug": "jant-temizleyiciler", "parent_slug": "motosiklet-temizligi"},
+    {"name": "Lastik Temizleyiciler", "slug": "lastik-temizleyiciler", "parent_slug": "motosiklet-temizligi"},
+    {"name": "Motor & Metal Temizleyiciler", "slug": "motor-metal-temizleyiciler", "parent_slug": "motosiklet-temizligi"},
+    {"name": "Plastik & Grenaj Temizleyiciler", "slug": "plastik-grenaj-temizleyiciler", "parent_slug": "motosiklet-temizligi"},
+
+    # Zincir Temizliği yaprakları
+    {"name": "Zincir Temizleyici", "slug": "zincir-temizleyici", "parent_slug": "zincir-temizligi"},
+    {"name": "Zincir Yağ Sökücü/Degreaser", "slug": "zincir-yag-sokucu-degreaser", "parent_slug": "zincir-temizligi"},
+    {"name": "Zincir Temizleme Spreyi", "slug": "zincir-temizleme-spreyi", "parent_slug": "zincir-temizligi"},
+    {"name": "Zincir Fırçası", "slug": "zincir-fircasi", "parent_slug": "zincir-temizligi"},
+    {"name": "Zincir Temizlik Seti", "slug": "zincir-temizlik-seti", "parent_slug": "zincir-temizligi"},
+
+    # Kask ve Vizör Bakımı yaprakları
+    {"name": "Kask Temizleyiciler", "slug": "kask-temizleyiciler", "parent_slug": "kask-ve-vizor-bakimi"},
+    {"name": "Vizör Temizleyiciler", "slug": "vizor-temizleyiciler", "parent_slug": "kask-ve-vizor-bakimi"},
+    {"name": "Vizör Bezleri", "slug": "vizor-bezleri", "parent_slug": "kask-ve-vizor-bakimi"},
+    {"name": "Anti-Fog/Buğu Önleyiciler", "slug": "anti-fog-bugu-onleyiciler", "parent_slug": "kask-ve-vizor-bakimi"},
+    {"name": "Kask İç Temizleyiciler", "slug": "kask-ic-temizleyiciler", "parent_slug": "kask-ve-vizor-bakimi"},
+    {"name": "Kask Bakım Setleri", "slug": "kask-bakim-setleri", "parent_slug": "kask-ve-vizor-bakimi"},
+
+    # Parlatma ve Koruma yaprakları
+    {"name": "Pasta", "slug": "pasta", "parent_slug": "parlatma-ve-koruma"},
+    {"name": "Cila", "slug": "cila", "parent_slug": "parlatma-ve-koruma"},
+    {"name": "Sprey Cila", "slug": "sprey-cila", "parent_slug": "parlatma-ve-koruma"},
+    {"name": "Wax", "slug": "wax", "parent_slug": "parlatma-ve-koruma"},
+    {"name": "Boya Koruyucular", "slug": "boya-koruyucular", "parent_slug": "parlatma-ve-koruma"},
+    {"name": "Seramik/Yüzey Koruma", "slug": "seramik-yuzey-koruma", "parent_slug": "parlatma-ve-koruma"},
+    {"name": "Plastik Koruyucular", "slug": "plastik-koruyucular", "parent_slug": "parlatma-ve-koruma"},
+    {"name": "Metal Parlatıcılar", "slug": "metal-parlaticilar", "parent_slug": "parlatma-ve-koruma"},
+    {"name": "Krom Parlatıcılar", "slug": "krom-parlaticilar", "parent_slug": "parlatma-ve-koruma"},
+
+    # Fırça ve Bezler yaprakları
+    {"name": "Zincir Fırçaları", "slug": "zincir-fircalari", "parent_slug": "firca-ve-bezler"},
+    {"name": "Jant Fırçaları", "slug": "jant-fircalari", "parent_slug": "firca-ve-bezler"},
+    {"name": "Detay Fırçaları", "slug": "detay-fircalari", "parent_slug": "firca-ve-bezler"},
+    {"name": "Yıkama Fırçaları", "slug": "yikama-fircalari", "parent_slug": "firca-ve-bezler"},
+    {"name": "Mikrofiber Bezler", "slug": "mikrofiber-bezler", "parent_slug": "firca-ve-bezler"},
+    {"name": "Kurulama Bezleri", "slug": "kurulama-bezleri", "parent_slug": "firca-ve-bezler"},
+    {"name": "Süngerler", "slug": "sungerler", "parent_slug": "firca-ve-bezler"},
+    {"name": "Temizlik Eldivenleri", "slug": "temizlik-eldivenleri", "parent_slug": "firca-ve-bezler"},
+
+    # Bakım Setleri yaprakları (Kask Bakım Setleri kasıtlı olarak
+    # burada değil — Kask ve Vizör Bakımı dalında zaten var)
+    {"name": "Zincir Bakım Setleri", "slug": "zincir-bakim-setleri", "parent_slug": "bakim-setleri"},
+    {"name": "Motosiklet Yıkama Setleri", "slug": "motosiklet-yikama-setleri", "parent_slug": "bakim-setleri"},
+    {"name": "Detaylı Temizlik Setleri", "slug": "detayli-temizlik-setleri", "parent_slug": "bakim-setleri"},
+    {"name": "Genel Bakım Setleri", "slug": "genel-bakim-setleri", "parent_slug": "bakim-setleri"},
+
+    # Hava Filtresi Bakımı yaprakları
+    {"name": "Hava Filtresi Temizleyiciler", "slug": "hava-filtresi-temizleyiciler", "parent_slug": "hava-filtresi-bakimi"},
+    {"name": "Hava Filtresi Yağları", "slug": "hava-filtresi-yaglari", "parent_slug": "hava-filtresi-bakimi"},
+    {"name": "Hava Filtresi Bakım Setleri", "slug": "hava-filtresi-bakim-setleri", "parent_slug": "hava-filtresi-bakimi"},
+
     {
         "name": "Bakım Ürünleri",
         "slug": "bakim-urunleri",

@@ -25,6 +25,7 @@ from apps.catalog.attributes.bicycle_common import BICYCLE_COMMON_ATTRIBUTE_DATA
 from apps.catalog.attributes.electric_common import ELECTRIC_ATTRIBUTE_DATA
 from apps.catalog.attributes.parts import PARTS_ATTRIBUTE_DATA
 from apps.catalog.attributes.accessories import ACCESSORIES_ATTRIBUTE_DATA
+from apps.catalog.attributes.cleaning import CLEANING_ATTRIBUTE_DATA
 from apps.catalog.brands import BRAND_DATA
 from apps.catalog.categories import CATEGORY_DATA
 from apps.catalog.tags import TAG_DATA
@@ -98,6 +99,10 @@ from apps.catalog.category_attributes.accessories import (
 from apps.catalog.category_attributes.atv import (
     ATV_ATTRIBUTE_SLUGS,
     ATV_CATEGORY_SLUGS,
+)
+from apps.catalog.category_attributes.cleaning import (
+    CLEANING_ATTRIBUTE_SLUGS,
+    CLEANING_CATEGORY_SLUGS,
 )
 
 
@@ -255,6 +260,7 @@ class Command(BaseCommand):
             *PARTS_ATTRIBUTE_DATA,
             *ACCESSORIES_ATTRIBUTE_DATA,
             *ATV_ATTRIBUTE_DATA,
+            *CLEANING_ATTRIBUTE_DATA,
         ]
 
         for item in all_attribute_data:
@@ -364,6 +370,9 @@ class Command(BaseCommand):
 
         for category_slug in ATV_CATEGORY_SLUGS:
                 mappings[category_slug] = ATV_ATTRIBUTE_SLUGS
+
+        for category_slug in CLEANING_CATEGORY_SLUGS:
+                mappings[category_slug] = CLEANING_ATTRIBUTE_SLUGS
 
         connection_count = 0
 
