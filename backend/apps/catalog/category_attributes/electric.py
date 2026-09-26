@@ -66,3 +66,13 @@ ELECTRIC_ATTRIBUTE_SLUGS = [
     "arka-jant",
     "far-tipi",
 ]
+
+
+ELECTRIC_HIGHLIGHT_SLUGS = [
+    "elektrikli-motor-gucu",
+    "elektrikli-batarya-kapasitesi",
+    "elektrikli-menzil-min",
+    "elektrikli-maksimum-hiz",
+    "elektrikli-sarj-suresi-min",
+    "elektrikli-batarya-tipi",
+]

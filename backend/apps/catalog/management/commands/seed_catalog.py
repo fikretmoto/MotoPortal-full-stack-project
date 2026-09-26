@@ -87,6 +87,7 @@ from apps.catalog.category_attributes.bicycle import (
 from apps.catalog.category_attributes.electric import (
     ELECTRIC_ATTRIBUTE_SLUGS,
     ELECTRIC_CATEGORY_SLUGS,
+    ELECTRIC_HIGHLIGHT_SLUGS,
 )
 from apps.catalog.category_attributes.parts import (
     PARTS_ATTRIBUTE_SLUGS,
@@ -346,21 +347,27 @@ class Command(BaseCommand):
 
         for category_slug in ELECTRIC_CATEGORY_SLUGS:
                 mappings[category_slug] = ELECTRIC_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = ELECTRIC_HIGHLIGHT_SLUGS
 
         for category_slug in E_SCOOTER_CATEGORY_SLUGS:
                 mappings[category_slug] = E_SCOOTER_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = ELECTRIC_HIGHLIGHT_SLUGS
 
         for category_slug in E_BIKE_CATEGORY_SLUGS:
                 mappings[category_slug] = E_BIKE_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = ELECTRIC_HIGHLIGHT_SLUGS
 
         for category_slug in E_KASALI_CATEGORY_SLUGS:
                 mappings[category_slug] = E_KASALI_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = ELECTRIC_HIGHLIGHT_SLUGS
 
         for category_slug in E_MARKET_TIPI_CATEGORY_SLUGS:
                 mappings[category_slug] = E_MARKET_TIPI_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = ELECTRIC_HIGHLIGHT_SLUGS
 
         for category_slug in E_CAR_CATEGORY_SLUGS:
                 mappings[category_slug] = E_CAR_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = ELECTRIC_HIGHLIGHT_SLUGS
 
         for category_slug in PARTS_CATEGORY_SLUGS:
                 mappings[category_slug] = PARTS_ATTRIBUTE_SLUGS
