@@ -42,9 +42,9 @@ export default function FavoriteButton({
       onClick={handleClick}
       disabled={isPending}
       aria-label={isFavorited ? "Favorilerden çıkar" : "Favorilere ekle"}
-      className="flex h-8 w-8 items-center justify-center rounded-full bg-card/90 shadow-sm transition hover:scale-105 disabled:opacity-50"
+      className="flex h-6 w-6 items-center justify-center rounded-full bg-card/90 shadow-sm transition hover:scale-105 disabled:opacity-50 sm:h-8 sm:w-8"
     >
-      <span className={isFavorited ? "text-danger" : "text-fg-subtle"}>
+      <span className={`text-sm sm:text-base ${isFavorited ? "text-danger" : "text-fg-subtle"}`}>
         {isFavorited ? "♥" : "♡"}
       </span>
     </button>

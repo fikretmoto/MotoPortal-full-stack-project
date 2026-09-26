@@ -74,7 +74,7 @@ export default function TestKartPage() {
   return (
     <div className="min-h-screen bg-[#f4f3f1] p-10">
       <h1 className="mb-6 text-xl font-bold">Ürün Kartı — Test</h1>
-      <div className="flex flex-wrap gap-6">
+      <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-6">
         {sampleProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

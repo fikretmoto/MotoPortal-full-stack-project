@@ -45,7 +45,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     <>
       <h1 className="mb-6 text-2xl font-bold">{category?.name}</h1>
 
-      <div className="flex flex-wrap gap-6">
+      <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-6">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

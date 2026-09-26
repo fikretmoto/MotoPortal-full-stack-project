@@ -196,7 +196,7 @@ export default function BrandProductsSection({
           <p className="text-sm text-fg-muted">Hiçbir ürün eşleşmedi.</p>
         )}
 
-        <div className="flex flex-wrap gap-6">
+        <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-6">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

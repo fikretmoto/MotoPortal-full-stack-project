@@ -30,11 +30,11 @@ function ProductBadges({ badges }: { badges: ProductBadge[] }) {
   }
 
   return (
-    <div className="absolute left-2 top-2 z-10 flex flex-col gap-1">
+    <div className="absolute left-1.5 top-1.5 z-10 flex flex-col gap-0.5 sm:left-2 sm:top-2 sm:gap-1">
       {badges.slice(0, 5).map((badge) => (
         <span
           key={badge.type}
-          className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide shadow-sm ${
+          className={`rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide shadow-sm sm:px-2.5 sm:py-1 sm:text-[10px] ${
             BADGE_STYLES[badge.type] ?? "bg-surface-hover text-white"
           }`}
         >
@@ -82,14 +82,14 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/products/${product.slug}`} className="group block">
       <Card
-        className={`w-[320px] gap-0 overflow-hidden rounded-2xl p-0 border-transparent transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg ${
+        className={`w-full gap-0 overflow-hidden rounded-2xl p-0 border-transparent transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg [--card-spacing:--spacing(2.5)] sm:w-[320px] sm:[--card-spacing:--spacing(4)] ${
           isPromoted ? "hover:border-orange-500/40" : "hover:border-border"
         } ${soldOut ? "opacity-70 grayscale" : ""}`}
       >
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface">
           <ProductBadges badges={product.badges} />
 
-          <div className="absolute right-2 top-2 z-10">
+          <div className="absolute right-1.5 top-1.5 z-10 sm:right-2 sm:top-2">
             <FavoriteButton
               slug={product.slug}
               initialIsFavorited={product.is_favorited}
@@ -102,7 +102,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               alt={product.name}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 25vw, 70vw"
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 25vw, 45vw"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center text-sm text-fg-subtle">
@@ -111,14 +111,14 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
 
-        <CardContent className="flex h-full min-h-[180px] flex-col pb-1 pt-2">
-          <div className="min-h-[3.75rem]">
-            <h3 className="line-clamp-2 text-sm font-semibold tracking-tight text-primary">
+        <CardContent className="flex h-full min-h-[150px] flex-col pb-1 pt-1.5 sm:min-h-[180px] sm:pt-2">
+          <div className="min-h-[2.75rem] sm:min-h-[3.75rem]">
+            <h3 className="line-clamp-2 text-xs font-semibold tracking-tight text-primary sm:text-sm">
               {product.display_name || product.name}
             </h3>
 
             {product.short_description && (
-              <p className="font-motoportal-tagline line-clamp-2 text-[12px] font-semibold leading-tight tracking-tight text-fg-muted">
+              <p className="font-motoportal-tagline line-clamp-2 text-[10px] font-semibold leading-tight tracking-tight text-fg-muted sm:text-[12px]">
                 {product.short_description}
               </p>
             )}
@@ -126,9 +126,9 @@ export default function ProductCard({ product }: ProductCardProps) {
 
           <div className="mt-auto">
             {priceText && (
-              <div className="flex items-baseline gap-2">
+              <div className="flex items-baseline gap-1.5 sm:gap-2">
                 <p
-                  className={`font-mono text-base font-bold tabular-nums ${
+                  className={`font-mono text-sm font-bold tabular-nums sm:text-base ${
                     isPromoted ? "text-orange-600" : "text-foreground"
                   }`}
                 >
@@ -136,14 +136,14 @@ export default function ProductCard({ product }: ProductCardProps) {
                 </p>
 
                 {oldPriceText && (
-                  <p className="font-mono text-[10px] tabular-nums text-fg-subtle line-through">
+                  <p className="font-mono text-[9px] tabular-nums text-fg-subtle line-through sm:text-[10px]">
                     {oldPriceText}
                   </p>
                 )}
               </div>
             )}
 
-            <div className="mt-2 flex h-4 items-center gap-1 border-t border-line pt-2 text-xs text-fg-subtle">
+            <div className="mt-1.5 flex h-4 items-center gap-1 border-t border-line pt-1.5 text-[10px] text-fg-subtle sm:mt-2 sm:pt-2 sm:text-xs">
               {product.average_rating !== null && (
                 <>
                   <span className="text-amber-500">★</span>
@@ -156,7 +156,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <button
               type="button"
               disabled={soldOut}
-              className={`mt-2 w-full rounded-lg py-2 text-xs font-semibold transition ${
+              className={`mt-1.5 w-full rounded-lg py-1.5 text-[11px] font-semibold transition sm:mt-2 sm:py-2 sm:text-xs ${
                 soldOut
                   ? "cursor-not-allowed bg-surface-hover text-fg-subtle"
                   : "bg-surface-hover text-foreground hover:bg-primary hover:text-primary-foreground"
