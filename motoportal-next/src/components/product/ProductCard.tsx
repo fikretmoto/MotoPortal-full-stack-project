@@ -24,14 +24,68 @@ const BADGE_STYLES: Record<string, string> = {
   free_shipping_city: "bg-teal-700 text-white",
 };
 
-function ProductBadges({ badges }: { badges: ProductBadge[] }) {
+// Sol-üst köşe: en "acil" bilgi (stok durumu > indirim > yeni).
+const TOP_LEFT_BADGE_PRIORITY: string[][] = [
+  ["out_of_stock", "low_stock"],
+  ["discount"],
+  ["new"],
+];
+
+// Sağ-üst köşe (favori ikonunun altında): editöryel/onay tipi rozetler.
+const TOP_RIGHT_BADGE_PRIORITY: string[][] = [
+  ["featured"],
+  ["editors_pick"],
+  ["deal"],
+  ["trade_opportunity"],
+  ["installment_deal"],
+  ["free_shipping", "free_shipping_city"],
+  ["a1_license", "b_license"],
+];
+
+const MAX_BADGES_PER_SLOT = 2;
+
+function pickBadgesByPriority(
+  badges: ProductBadge[],
+  priorityGroups: string[][],
+  limit: number
+): ProductBadge[] {
+  const picked: ProductBadge[] = [];
+
+  for (const group of priorityGroups) {
+    if (picked.length >= limit) {
+      break;
+    }
+
+    const match = badges.find((badge) => group.includes(badge.type));
+    if (match) {
+      picked.push(match);
+    }
+  }
+
+  return picked;
+}
+
+function getBadgeSlots(badges: ProductBadge[]) {
+  return {
+    topLeft: pickBadgesByPriority(badges, TOP_LEFT_BADGE_PRIORITY, MAX_BADGES_PER_SLOT),
+    topRight: pickBadgesByPriority(badges, TOP_RIGHT_BADGE_PRIORITY, MAX_BADGES_PER_SLOT),
+  };
+}
+
+function BadgeStack({
+  badges,
+  className,
+}: {
+  badges: ProductBadge[];
+  className: string;
+}) {
   if (badges.length === 0) {
     return null;
   }
 
   return (
-    <div className="absolute left-1.5 top-1.5 z-10 flex flex-col gap-0.5 sm:left-2 sm:top-2 sm:gap-1">
-      {badges.slice(0, 5).map((badge) => (
+    <div className={className}>
+      {badges.map((badge) => (
         <span
           key={badge.type}
           className={`rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide shadow-sm sm:px-2.5 sm:py-1 sm:text-[10px] ${
@@ -79,6 +133,10 @@ export default function ProductCard({ product }: ProductCardProps) {
       (badge) => badge.type === "discount" || badge.type === "deal"
     );
 
+  const { topLeft: topLeftBadges, topRight: topRightBadges } = getBadgeSlots(
+    product.badges
+  );
+
   return (
     <Link href={`/products/${product.slug}`} className="group block">
       <Card
@@ -86,13 +144,20 @@ export default function ProductCard({ product }: ProductCardProps) {
           isPromoted ? "hover:border-orange-500/40" : "hover:border-border"
         } ${soldOut ? "opacity-70 grayscale" : ""}`}
       >
-        <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface">
-          <ProductBadges badges={product.badges} />
+        <div className="relative aspect-[3/4] w-full overflow-hidden bg-surface">
+          <BadgeStack
+            badges={topLeftBadges}
+            className="absolute left-1.5 top-1.5 z-10 flex flex-col gap-0.5 sm:left-2 sm:top-2 sm:gap-1"
+          />
 
-          <div className="absolute right-1.5 top-1.5 z-10 sm:right-2 sm:top-2">
+          <div className="absolute right-1.5 top-1.5 z-10 flex flex-col items-end gap-1 sm:right-2 sm:top-2">
             <FavoriteButton
               slug={product.slug}
               initialIsFavorited={product.is_favorited}
+            />
+            <BadgeStack
+              badges={topRightBadges}
+              className="flex flex-col items-end gap-0.5 sm:gap-1"
             />
           </div>
 

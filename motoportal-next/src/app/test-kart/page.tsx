@@ -68,6 +68,33 @@ const sampleProducts: Product[] = [
     review_count: 45,
     is_favorited: false,
   },
+  {
+    id: 4,
+    name: "KTM Duke 390 — çok rozetli test ürünü",
+    display_name: "KTM Duke 390 — çok rozetli test ürünü",
+    slug: "ktm-duke-390-cok-rozetli",
+    brand: { id: 4, name: "KTM", slug: "ktm", logo_url: null, country: "Avusturya", founded_year: 1934, website: "", description: "", is_active: true },
+    category: { id: 2, name: "Motosiklet", slug: "motosiklet", parent: null, parent_name: null, is_active: true },
+    short_description: "Sol-üst ve sağ-üst rozet önceliklendirmesini test etmek için 6 rozetli örnek",
+    cover_image_url: null,
+    is_featured: true,
+    is_active: true,
+    price: "420000",
+    discount_price: "378000",
+    currency: "TRY",
+    stock_status: "low_stock",
+    badges: [
+      { type: "new", label: "Yeni" },
+      { type: "low_stock", label: "Son 2 Adet" },
+      { type: "discount", label: "%10 İndirim" },
+      { type: "featured", label: "Öne Çıkan" },
+      { type: "editors_pick", label: "Editörün Seçtikleri" },
+      { type: "free_shipping", label: "Ücretsiz Kargo" },
+    ],
+    average_rating: 4.8,
+    review_count: 21,
+    is_favorited: true,
+  },
 ];
 
 export default function TestKartPage() {
