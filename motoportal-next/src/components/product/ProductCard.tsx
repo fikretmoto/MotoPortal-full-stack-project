@@ -16,6 +16,7 @@ const BADGE_STYLES: Record<string, string> = {
   featured: "bg-elevated text-white",
   editors_pick: "bg-purple-600 text-white",
   deal: "bg-orange-600 text-white",
+  best_seller: "bg-rose-600 text-white",
   trade_opportunity: "bg-blue-600 text-white",
   free_shipping: "bg-teal-600 text-white",
   installment_deal: "bg-indigo-600 text-white",
@@ -24,23 +25,30 @@ const BADGE_STYLES: Record<string, string> = {
   free_shipping_city: "bg-teal-700 text-white",
 };
 
-// Sol-üst köşe: en "acil" bilgi (stok durumu > indirim > yeni).
+// Sol-üst köşe: en "acil" bilgi (stok durumu > yeni). "discount"
+// artık burada gösterilmiyor.
 const TOP_LEFT_BADGE_PRIORITY: string[][] = [
   ["out_of_stock", "low_stock"],
-  ["discount"],
   ["new"],
 ];
 
-// Sağ-üst köşe (favori ikonunun altında): editöryel/onay tipi rozetler.
-const TOP_RIGHT_BADGE_PRIORITY: string[][] = [
-  ["featured"],
-  ["editors_pick"],
-  ["deal"],
-  ["trade_opportunity"],
-  ["installment_deal"],
-  ["free_shipping", "free_shipping_city"],
-  ["a1_license", "b_license"],
-];
+// Sağ-üst köşe (favori ikonunun altında): editöryel/onay tipi
+// rozetler. a1_license/b_license sadece araç kategorisindeki
+// ürünlerde 5. öncelik olarak eklenir.
+function getTopRightBadgePriority(isVehicle: boolean): string[][] {
+  const priority: string[][] = [
+    ["featured"],
+    ["deal"],
+    ["best_seller"],
+    ["editors_pick"],
+  ];
+
+  if (isVehicle) {
+    priority.push(["a1_license", "b_license"]);
+  }
+
+  return priority;
+}
 
 const MAX_BADGES_PER_SLOT = 2;
 
@@ -65,10 +73,14 @@ function pickBadgesByPriority(
   return picked;
 }
 
-function getBadgeSlots(badges: ProductBadge[]) {
+function getBadgeSlots(badges: ProductBadge[], isVehicle: boolean) {
   return {
     topLeft: pickBadgesByPriority(badges, TOP_LEFT_BADGE_PRIORITY, MAX_BADGES_PER_SLOT),
-    topRight: pickBadgesByPriority(badges, TOP_RIGHT_BADGE_PRIORITY, MAX_BADGES_PER_SLOT),
+    topRight: pickBadgesByPriority(
+      badges,
+      getTopRightBadgePriority(isVehicle),
+      MAX_BADGES_PER_SLOT
+    ),
   };
 }
 
@@ -134,7 +146,8 @@ export default function ProductCard({ product }: ProductCardProps) {
     );
 
   const { topLeft: topLeftBadges, topRight: topRightBadges } = getBadgeSlots(
-    product.badges
+    product.badges,
+    product.category.is_vehicle
   );
 
   return (
@@ -144,10 +157,10 @@ export default function ProductCard({ product }: ProductCardProps) {
           isPromoted ? "hover:border-orange-500/40" : "hover:border-border"
         } ${soldOut ? "opacity-70 grayscale" : ""}`}
       >
-        <div className="relative aspect-[3/4] w-full overflow-hidden bg-surface">
+        <div className="relative aspect-square w-full overflow-hidden bg-surface">
           <BadgeStack
             badges={topLeftBadges}
-            className="absolute left-1.5 top-1.5 z-10 flex flex-col gap-0.5 sm:left-2 sm:top-2 sm:gap-1"
+            className="absolute left-1.5 top-1.5 z-10 flex flex-col items-start gap-0.5 sm:left-2 sm:top-2 sm:gap-1"
           />
 
           <div className="absolute right-1.5 top-1.5 z-10 flex flex-col items-end gap-1 sm:right-2 sm:top-2">

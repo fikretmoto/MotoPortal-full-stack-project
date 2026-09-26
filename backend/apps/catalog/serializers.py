@@ -37,6 +37,7 @@ TAG_BADGE_NAMES = {
     "Öne Çıkan": "featured",
     "Editörün Seçtikleri": "editors_pick",
     "Fırsat": "deal",
+    "Çok Satan": "best_seller",
      "Takas Fırsatı": "trade_opportunity",
      "Ücretsiz Kargo": "free_shipping",
     "A1 ile Sürülebilenler": "a1_license",
@@ -141,6 +142,7 @@ class CategorySerializer(serializers.ModelSerializer):
         source="parent.name",
         read_only=True,
     )
+    is_vehicle = serializers.SerializerMethodField()
 
     class Meta:
         model = Category
@@ -151,7 +153,11 @@ class CategorySerializer(serializers.ModelSerializer):
             "parent",
             "parent_name",
             "is_active",
+            "is_vehicle",
         )
+
+    def get_is_vehicle(self, obj):
+        return obj.is_vehicle_category()
 
 
 class CategoryTreeSerializer(serializers.ModelSerializer):

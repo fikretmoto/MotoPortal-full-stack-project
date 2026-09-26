@@ -77,7 +77,7 @@ export default async function TagPage({ params, searchParams }: Props) {
     ? await getProductsOnDiscount()
     : await getProductsByTag(slug);
   return (
-    <div className="mx-auto max-w-6xl px-6 py-10">
+    <>
       <nav className="mb-4 text-sm text-fg-muted">
         <Link href="/" className="hover:text-primary">
           Anasayfa
@@ -87,11 +87,11 @@ export default async function TagPage({ params, searchParams }: Props) {
 
       <h1 className="mb-6 text-2xl font-bold">{tag.label}</h1>
 
-      <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-6">
+      <div className="grid grid-cols-2 gap-px sm:flex sm:flex-wrap">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-    </div>
+    </>
   );
 }

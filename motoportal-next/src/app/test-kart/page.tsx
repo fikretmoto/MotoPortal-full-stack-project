@@ -8,7 +8,7 @@ const sampleProducts: Product[] = [
     display_name: "Honda PCX 125",
     slug: "honda-pcx-125",
     brand: { id: 1, name: "Honda", slug: "honda", logo_url: null, country: "Japonya", founded_year: 1948, website: "", description: "", is_active: true },
-    category: { id: 1, name: "Scooter", slug: "scooter", parent: null, parent_name: null, is_active: true },
+    category: { id: 1, name: "Scooter", slug: "scooter", parent: null, parent_name: null, is_active: true, is_vehicle: true },
     short_description: "Şehir içi kullanım için ideal scooter",
     cover_image_url: null,
     is_featured: true,
@@ -31,7 +31,7 @@ const sampleProducts: Product[] = [
     display_name: "Yamaha NMAX 155",
     slug: "yamaha-nmax-155",
     brand: { id: 2, name: "Yamaha", slug: "yamaha", logo_url: null, country: "Japonya", founded_year: 1955, website: "", description: "", is_active: true },
-    category: { id: 1, name: "Scooter", slug: "scooter", parent: null, parent_name: null, is_active: true },
+    category: { id: 1, name: "Scooter", slug: "scooter", parent: null, parent_name: null, is_active: true, is_vehicle: true },
     short_description: "",
     cover_image_url: null,
     is_featured: false,
@@ -51,7 +51,7 @@ const sampleProducts: Product[] = [
     display_name: "Arora Beatrix 150 — çok uzun bir ürün adı burada nasıl kırpılıyor test",
     slug: "arora-beatrix-150",
     brand: { id: 3, name: "Arora", slug: "arora", logo_url: null, country: "Türkiye", founded_year: 2010, website: "", description: "", is_active: true },
-    category: { id: 2, name: "Motosiklet", slug: "motosiklet", parent: null, parent_name: null, is_active: true },
+    category: { id: 2, name: "Motosiklet", slug: "motosiklet", parent: null, parent_name: null, is_active: true, is_vehicle: true },
     short_description: "",
     cover_image_url: null,
     is_featured: false,
@@ -74,8 +74,8 @@ const sampleProducts: Product[] = [
     display_name: "KTM Duke 390 — çok rozetli test ürünü",
     slug: "ktm-duke-390-cok-rozetli",
     brand: { id: 4, name: "KTM", slug: "ktm", logo_url: null, country: "Avusturya", founded_year: 1934, website: "", description: "", is_active: true },
-    category: { id: 2, name: "Motosiklet", slug: "motosiklet", parent: null, parent_name: null, is_active: true },
-    short_description: "Sol-üst ve sağ-üst rozet önceliklendirmesini test etmek için 6 rozetli örnek",
+    category: { id: 2, name: "Motosiklet", slug: "motosiklet", parent: null, parent_name: null, is_active: true, is_vehicle: true },
+    short_description: "discount hariç tutma + araç kategorisinde Ehliyet (5. öncelik) testi",
     cover_image_url: null,
     is_featured: true,
     is_active: true,
@@ -87,8 +87,8 @@ const sampleProducts: Product[] = [
       { type: "new", label: "Yeni" },
       { type: "low_stock", label: "Son 2 Adet" },
       { type: "discount", label: "%10 İndirim" },
-      { type: "featured", label: "Öne Çıkan" },
       { type: "editors_pick", label: "Editörün Seçtikleri" },
+      { type: "a1_license", label: "A1 Ehliyet" },
       { type: "free_shipping", label: "Ücretsiz Kargo" },
     ],
     average_rating: 4.8,
@@ -101,7 +101,7 @@ export default function TestKartPage() {
   return (
     <div className="min-h-screen bg-[#f4f3f1] p-10">
       <h1 className="mb-6 text-xl font-bold">Ürün Kartı — Test</h1>
-      <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-6">
+      <div className="grid grid-cols-2 gap-px sm:flex sm:flex-wrap">
         {sampleProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

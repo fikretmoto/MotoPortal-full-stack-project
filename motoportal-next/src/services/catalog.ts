@@ -13,6 +13,7 @@ export type Category = {
   parent: number | null;
   parent_name: string | null;
   is_active: boolean;
+  is_vehicle: boolean;
 };
 
 
