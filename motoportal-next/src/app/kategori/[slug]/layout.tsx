@@ -75,7 +75,9 @@ export default async function CategorySlugLayout({
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
       <nav className="mb-4 text-sm text-fg-muted">
-        <span>Anasayfa</span>
+        <Link href="/" className="hover:text-primary">
+          Anasayfa
+        </Link>
         {trail.map((ancestor) => (
           <span key={ancestor.id}>
             {" / "}

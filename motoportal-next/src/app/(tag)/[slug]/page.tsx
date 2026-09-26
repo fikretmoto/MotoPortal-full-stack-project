@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductsByTag,  getProductsByTagAndCategories, getProductsOnDiscount } from "@/services/catalog";
 import ProductCard from "@/components/product/ProductCard";
@@ -78,7 +79,10 @@ export default async function TagPage({ params, searchParams }: Props) {
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
       <nav className="mb-4 text-sm text-fg-muted">
-        <span>Anasayfa</span> / <span className="text-foreground">{tag.label}</span>
+        <Link href="/" className="hover:text-primary">
+          Anasayfa
+        </Link>{" "}
+        / <span className="text-foreground">{tag.label}</span>
       </nav>
 
       <h1 className="mb-6 text-2xl font-bold">{tag.label}</h1>
