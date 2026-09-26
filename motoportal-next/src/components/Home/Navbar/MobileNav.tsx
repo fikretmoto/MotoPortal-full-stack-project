@@ -7,28 +7,76 @@ import { useState } from "react";
 import {
   headerActions,
   mainMenuItems,
-  mobileMenuSections,
+  megaMenuSupplementaryLinks,
   topBarContent,
 } from "@/constant/constant";
+import type { CategoryNode } from "@/services/catalog";
+
+const ROOT_ORDER = ["tasitlar", "ekipman", "aksesuar", "bakim-ve-temizlik", "yedek-parca"];
+
+type MobileCategoryTreeProps = {
+  nodes: CategoryNode[];
+  depth?: number;
+  onNavigate: () => void;
+};
+
+const MobileCategoryTree = ({ nodes, depth = 0, onNavigate }: MobileCategoryTreeProps) => {
+  if (nodes.length === 0) {
+    return null;
+  }
+
+  return (
+    <div
+      className="space-y-2"
+      style={depth > 0 ? { marginLeft: depth * 12 } : undefined}
+    >
+      {nodes.map((node) => (
+        <div key={node.slug}>
+          <Link
+            href={`/kategori/${node.slug}`}
+            onClick={onNavigate}
+            className="flex items-center justify-between rounded-xl px-3 py-3 text-sm text-white/86 transition hover:bg-white/6 hover:text-white"
+          >
+            <span>{node.name}</span>
+          </Link>
+
+          {node.children.length > 0 ? (
+            <MobileCategoryTree
+              nodes={node.children}
+              depth={depth + 1}
+              onNavigate={onNavigate}
+            />
+          ) : null}
+        </div>
+      ))}
+    </div>
+  );
+};
 
 type MobileNavProps = {
   showNav: boolean;
   toggleNav: () => void;
   closeNav: () => void;
+  categoryTree: CategoryNode[];
 };
 
 const MobileNav = ({
   showNav,
   toggleNav,
   closeNav,
+  categoryTree,
 }: MobileNavProps) => {
   const [openSections, setOpenSections] = useState<string[]>([]);
 
-  const toggleSection = (sectionTitle: string) => {
+  const sortedRoots = [...categoryTree].sort(
+    (a, b) => ROOT_ORDER.indexOf(a.slug) - ROOT_ORDER.indexOf(b.slug)
+  );
+
+  const toggleSection = (sectionSlug: string) => {
     setOpenSections((previousState) =>
-      previousState.includes(sectionTitle)
-        ? previousState.filter((title) => title !== sectionTitle)
-        : [...previousState, sectionTitle],
+      previousState.includes(sectionSlug)
+        ? previousState.filter((slug) => slug !== sectionSlug)
+        : [...previousState, sectionSlug],
     );
   };
 
@@ -117,21 +165,21 @@ const MobileNav = ({
 
             <div className="max-h-[72vh] overflow-y-auto px-3 py-3">
               <div className="space-y-3">
-                {mobileMenuSections.map((section) => {
-                  const isOpen = openSections.includes(section.title);
+                {sortedRoots.map((root) => {
+                  const isOpen = openSections.includes(root.slug);
 
                   return (
                     <div
-                      key={section.title}
+                      key={root.slug}
                       className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]"
                     >
                       <button
                         type="button"
-                        onClick={() => toggleSection(section.title)}
+                        onClick={() => toggleSection(root.slug)}
                         className="flex w-full items-center justify-between px-4 py-4 text-left"
                       >
                         <span className="text-sm font-semibold uppercase tracking-[0.08em] text-white">
-                          {section.title}
+                          {root.name}
                         </span>
                         <ChevronDown
                           className={`h-4 w-4 text-white/68 transition ${
@@ -142,28 +190,54 @@ const MobileNav = ({
 
                       {isOpen ? (
                         <div className="border-t border-white/10 px-4 py-3">
-                          <div className="space-y-2">
-                            {section.items.map((item) => (
-                              <Link
-                                key={item.label}
-                                href={item.href}
-                                onClick={closeMenu}
-                                className="flex items-center justify-between rounded-xl px-3 py-3 text-sm text-white/86 transition hover:bg-white/6 hover:text-white"
-                              >
-                                <span>{item.label}</span>
-                                {item.badge ? (
-                                  <span className="rounded-md bg-primary px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-primary-foreground">
-                                    {item.badge}
-                                  </span>
-                                ) : null}
-                              </Link>
-                            ))}
-                          </div>
+                          <MobileCategoryTree
+                            nodes={root.children}
+                            onNavigate={closeMenu}
+                          />
                         </div>
                       ) : null}
                     </div>
                   );
                 })}
+
+                <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
+                  <button
+                    type="button"
+                    onClick={() => toggleSection("ozel")}
+                    className="flex w-full items-center justify-between px-4 py-4 text-left"
+                  >
+                    <span className="text-sm font-semibold uppercase tracking-[0.08em] text-white">
+                      Özel
+                    </span>
+                    <ChevronDown
+                      className={`h-4 w-4 text-white/68 transition ${
+                        openSections.includes("ozel") ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {openSections.includes("ozel") ? (
+                    <div className="border-t border-white/10 px-4 py-3">
+                      <div className="space-y-2">
+                        {megaMenuSupplementaryLinks.map((item) => (
+                          <Link
+                            key={item.label}
+                            href={item.href}
+                            onClick={closeMenu}
+                            className="flex items-center justify-between rounded-xl px-3 py-3 text-sm text-white/86 transition hover:bg-white/6 hover:text-white"
+                          >
+                            <span>{item.label}</span>
+                            {item.badge ? (
+                              <span className="rounded-md bg-primary px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-primary-foreground">
+                                {item.badge}
+                              </span>
+                            ) : null}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
           </div>

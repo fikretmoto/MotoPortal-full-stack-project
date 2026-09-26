@@ -11,7 +11,7 @@ const Navbar = async () => {
     <header className="relative z-50 bg-[#050505] text-white">
       <UtilityBar />
       <TopBar />
-      <ResponsiveNav />
+      <ResponsiveNav categoryTree={categoryTree} />
       <CategoryNav categoryTree={categoryTree} />
     </header>
   );

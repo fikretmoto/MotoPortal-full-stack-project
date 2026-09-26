@@ -2,10 +2,15 @@
 
 import { useState } from "react";
 
+import type { CategoryNode } from "@/services/catalog";
 import MainNav from "./MainNav";
 import MobileNav from "./MobileNav";
 
-const ResponsiveNav = () => {
+type ResponsiveNavProps = {
+  categoryTree: CategoryNode[];
+};
+
+const ResponsiveNav = ({ categoryTree }: ResponsiveNavProps) => {
   const [showNav, setShowNav] = useState(false);
 
   const toggleNavHandler = () => {
@@ -24,6 +29,7 @@ const ResponsiveNav = () => {
         showNav={showNav}
         toggleNav={toggleNavHandler}
         closeNav={closeNavHandler}
+        categoryTree={categoryTree}
       />
     </>
   );
