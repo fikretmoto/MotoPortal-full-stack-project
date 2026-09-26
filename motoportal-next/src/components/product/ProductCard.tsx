@@ -25,11 +25,10 @@ const BADGE_STYLES: Record<string, string> = {
   free_shipping_city: "bg-teal-700 text-white",
 };
 
-// Sol-üst köşe: en "acil" bilgi (stok durumu > yeni). "discount"
-// artık burada gösterilmiyor.
+// Sol-üst köşe: en "acil" bilgi (stok durumu). "discount" ve "new"
+// artık hiçbir yerde gösterilmiyor.
 const TOP_LEFT_BADGE_PRIORITY: string[][] = [
   ["out_of_stock", "low_stock"],
-  ["new"],
 ];
 
 // Sağ-üst köşe (favori ikonunun altında): editöryel/onay tipi
