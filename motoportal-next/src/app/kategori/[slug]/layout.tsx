@@ -74,7 +74,7 @@ export default async function CategorySlugLayout({
 
   
   return (
-    <div className="mx-auto max-w-6xl px-6 py-10">
+    <div className="mx-auto max-w-6xl px-1.5 py-10 lg:px-6">
       <nav className="mb-4 text-sm text-fg-muted">
         <Link href="/" className="hover:text-primary">
           Anasayfa

@@ -15,11 +15,11 @@ export default async function TagLayout({
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-6xl px-6 pt-10">
+      <div className="mx-auto max-w-6xl px-1.5 pt-10 lg:px-6">
         <TagPillNav />
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 py-10">
+      <div className="mx-auto max-w-6xl px-1.5 py-10 lg:px-6">
         <MobileTagCategoryDrawer categories={topLevelCategories} />
 
         <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">

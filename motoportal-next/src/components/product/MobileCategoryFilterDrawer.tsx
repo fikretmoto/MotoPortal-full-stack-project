@@ -24,7 +24,7 @@ export default function MobileCategoryFilterDrawer(props: Props) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="sticky top-0 z-10 -mx-6 mb-4 border-b border-line bg-background px-6 py-2 lg:hidden">
+    <div className="sticky top-0 z-10 -mx-1.5 mb-4 border-b border-line bg-background px-1.5 py-2 lg:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
         <button
           type="button"
