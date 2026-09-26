@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { getBrands, getCategories, getBrandsByCategory, getCategoryAttributes } from "@/services/catalog";
 import type { AttributeGroupWithAttributes, Brand, Category } from "@/services/catalog";
 import VehicleSearchBox from "@/components/product/VehicleSearchBox";
-import CategoryFilterSidebar from "@/components/product/CategoryFilterSidebar";
+import CategorySidebarContent from "@/components/product/CategorySidebarContent";
+import MobileCategoryFilterDrawer from "@/components/product/MobileCategoryFilterDrawer";
 
 
 const VEHICLE_ROOT_SLUGS = ["tasitlar"];
@@ -96,41 +97,28 @@ export default async function CategorySlugLayout({
     <VehicleSearchBox childCategories={ownChildren} brands={brands} />
   )}
 
-       <div className="flex gap-8">
-        {(sidebarItems.length > 0 || !isVehicle) && (
-  <aside className={isVehicle ? "w-48 flex-none" : "w-72 flex-none"}>
-    {sidebarItems.length > 0 && (
-      <>
-        <Link
-          href={`/kategori/${sidebarHeaderCategory.slug}`}
-          className="mb-3 block text-sm font-bold uppercase text-foreground hover:text-primary"
-        >
-          {sidebarHeaderCategory.name}
-        </Link>
-        <nav className="flex flex-col gap-2">
-          {sidebarItems.map((item) => (
-            <Link
-              key={item.id}
-              href={`/kategori/${item.slug}`}
-              className={
-                item.id === category.id
-                  ? "text-sm font-bold text-primary"
-                  : "text-sm text-fg-muted hover:text-primary"
-              }
-            >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
-      </>
-    )}
+       {(sidebarItems.length > 0 || !isVehicle) && (
+        <MobileCategoryFilterDrawer
+          sidebarItems={sidebarItems}
+          sidebarHeaderCategory={sidebarHeaderCategory}
+          activeCategoryId={category.id}
+          isVehicle={isVehicle}
+          attributeGroups={attributeGroups}
+          categoryBrands={categoryBrands}
+        />
+      )}
 
-    {!isVehicle && (
-      <CategoryFilterSidebar
-        attributeGroups={attributeGroups}
-        brands={categoryBrands}
-      />
-    )}
+       <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
+        {(sidebarItems.length > 0 || !isVehicle) && (
+  <aside className={`hidden lg:block ${isVehicle ? "w-48 flex-none" : "w-72 flex-none"}`}>
+    <CategorySidebarContent
+      sidebarItems={sidebarItems}
+      sidebarHeaderCategory={sidebarHeaderCategory}
+      activeCategoryId={category.id}
+      isVehicle={isVehicle}
+      attributeGroups={attributeGroups}
+      categoryBrands={categoryBrands}
+    />
   </aside>
 )}
 
