@@ -1,6 +1,7 @@
-import Link from "next/link";
 import { getCategories } from "@/services/catalog";
 import TagPillNav from "@/components/product/TagPillNav";
+import TagCategoryList from "@/components/product/TagCategoryList";
+import MobileTagCategoryDrawer from "@/components/product/MobileTagCategoryDrawer";
 
 export default async function TagLayout({
   children,
@@ -8,6 +9,9 @@ export default async function TagLayout({
   children: React.ReactNode;
 }) {
   const categories = await getCategories();
+  const topLevelCategories = categories.filter(
+    (category) => category.parent === null
+  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -15,27 +19,16 @@ export default async function TagLayout({
         <TagPillNav />
       </div>
 
-      <div className="mx-auto flex max-w-6xl gap-8 px-6 py-10">
-        <aside className="w-48 flex-none">
-          <h2 className="mb-3 text-sm font-bold uppercase text-foreground">
-            Tüm Kategoriler
-          </h2>
-                    <nav className="flex flex-col gap-2">
-            {categories
-              .filter((category) => category.parent === null)
-              .map((category) => (
-                <Link
-                  key={category.id}
-                  href={`/kategori/${category.slug}`}
-                  className="text-sm text-fg-muted hover:text-primary"
-                >
-                  {category.name}
-                </Link>
-              ))}
-          </nav>
-        </aside>
+      <div className="mx-auto max-w-6xl px-6 py-10">
+        <MobileTagCategoryDrawer categories={topLevelCategories} />
 
-        <main className="flex-1">{children}</main>
+        <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
+          <aside className="hidden w-48 flex-none lg:block">
+            <TagCategoryList categories={topLevelCategories} />
+          </aside>
+
+          <main className="flex-1">{children}</main>
+        </div>
       </div>
     </div>
   );
