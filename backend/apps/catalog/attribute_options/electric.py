@@ -7,6 +7,7 @@ ELECTRIC_ATTRIBUTE_OPTION_DATA = [
     {"attribute_slug": "elektrikli-motor-gucu", "value": "750W", "display_order": 18},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "1000W", "display_order": 20},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "1200W", "display_order": 30},
+    {"attribute_slug": "elektrikli-motor-gucu", "value": "1800W", "display_order": 35},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "2000W", "display_order": 40},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "3000W", "display_order": 50},
 
@@ -39,7 +40,10 @@ ELECTRIC_ATTRIBUTE_OPTION_DATA = [
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "48V-20Ah", "display_order": 54},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "48V-30Ah", "display_order": 55},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "60V-20Ah", "display_order": 60},
+    {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "60V-32Ah", "display_order": 65},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-20Ah", "display_order": 70},
+    {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-23Ah", "display_order": 72},
+    {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-26Ah", "display_order": 74},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-32Ah", "display_order": 75},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-35Ah", "display_order": 80},
     {"attribute_slug": "elektrikli-batarya-kapasitesi", "value": "72V-45Ah", "display_order": 85},

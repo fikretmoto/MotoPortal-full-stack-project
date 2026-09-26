@@ -58,6 +58,7 @@ MOTORCYCLE_ATTRIBUTE_OPTION_DATA = [
 
     # Gösterge Paneli
     {"attribute_slug": "gosterge-paneli", "value": "Analog", "display_order": 10},
+    {"attribute_slug": "gosterge-paneli", "value": "LED", "display_order": 15},
     {"attribute_slug": "gosterge-paneli", "value": "Dijital", "display_order": 20},
     {"attribute_slug": "gosterge-paneli", "value": "Hibrit (Analog+Dijital)", "display_order": 30},
     {"attribute_slug": "gosterge-paneli", "value": "TFT Ekran", "display_order": 40},
