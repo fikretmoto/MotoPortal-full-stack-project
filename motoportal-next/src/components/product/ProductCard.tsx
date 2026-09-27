@@ -84,9 +84,9 @@ function getBadgeSlots(badges: ProductBadge[], isVehicle: boolean) {
 }
 
 const BADGE_SPAN_CLASS: Record<"pill" | "vertical", string> = {
-  pill: "rounded-full px-2 py-0.5 text-[9px] font-semibold capitalize tracking-wide shadow-sm sm:px-2.5 sm:py-1 sm:text-[10px]",
-  vertical:
-    "flex w-6 items-center justify-center rounded-sm px-2 py-2 text-[13px] font-semibold capitalize tracking-widest shadow-sm [writing-mode:vertical-rl]  sm:py-2.5",
+  pill: "rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide shadow-sm sm:px-2.5 sm:py-1 sm:text-[10px]",
+ vertical:
+    "flex w-5 items-center justify-center rounded-sm px-0.5 py-2 text-[8px] font-semibold capitalize tracking-wide shadow-sm [writing-mode:vertical-rl] sm:w-6 sm:py-2.5 sm:text-[9px]",
 };
 
 function BadgeStack({
@@ -106,19 +106,13 @@ function BadgeStack({
     <div className={className}>
       {badges.map((badge) => (
         <span
-          key={badge.type}
-          className={`${BADGE_SPAN_CLASS[variant]} ${
-            BADGE_STYLES[badge.type] ?? "bg-surface-hover text-white"
-          }`}
-        >
-          {variant === "vertical" ? (
-            <span className="lowercase first-letter:uppercase">
-              {badge.label}
-            </span>
-          ) : (
-            badge.label
-          )}
-        </span>
+  key={badge.type}
+  className={`${BADGE_SPAN_CLASS[variant]} ${
+    BADGE_STYLES[badge.type] ?? "bg-surface-hover text-white"
+  }`}
+>
+  {badge.label}
+</span>
       ))}
     </div>
   );
