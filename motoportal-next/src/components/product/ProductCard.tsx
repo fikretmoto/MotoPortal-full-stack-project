@@ -83,12 +83,20 @@ function getBadgeSlots(badges: ProductBadge[], isVehicle: boolean) {
   };
 }
 
+const BADGE_SPAN_CLASS: Record<"pill" | "vertical", string> = {
+  pill: "rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide shadow-sm sm:px-2.5 sm:py-1 sm:text-[10px]",
+  vertical:
+    "flex w-5 items-center justify-center rounded-sm px-0.5 py-1.5 text-[8px] font-semibold uppercase tracking-tighter shadow-sm [writing-mode:vertical-rl] sm:w-6 sm:text-[9px]",
+};
+
 function BadgeStack({
   badges,
   className,
+  variant = "pill",
 }: {
   badges: ProductBadge[];
   className: string;
+  variant?: "pill" | "vertical";
 }) {
   if (badges.length === 0) {
     return null;
@@ -99,7 +107,7 @@ function BadgeStack({
       {badges.map((badge) => (
         <span
           key={badge.type}
-          className={`rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide shadow-sm sm:px-2.5 sm:py-1 sm:text-[10px] ${
+          className={`${BADGE_SPAN_CLASS[variant]} ${
             BADGE_STYLES[badge.type] ?? "bg-surface-hover text-white"
           }`}
         >
@@ -170,6 +178,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <BadgeStack
               badges={topRightBadges}
               className="flex flex-col items-end gap-0.5 sm:gap-1"
+              variant="vertical"
             />
           </div>
 
