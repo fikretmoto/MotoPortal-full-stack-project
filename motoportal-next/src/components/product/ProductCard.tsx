@@ -85,7 +85,7 @@ function getBadgeSlots(badges: ProductBadge[], isVehicle: boolean) {
 const BADGE_SPAN_CLASS: Record<"pill" | "vertical", string> = {
   pill: "rounded-full px-2 py-0.5 text-[8px] font-semibold uppercase tracking-wide shadow-sm sm:px-1.5 sm:py-1 sm:text-[10px]",
  vertical:
-    "flex w-5 items-center justify-center rounded-sm px-2 py-2 text-[11px] font-semibold text-transform:uppercase tracking-widest shadow-sm [writing-mode:vertical-rl] sm:w-6 sm:py-2.5",
+    "flex w-5 items-center justify-center rounded-sm px-2 py-2 text-[11px] font-semibold capitalize tracking-widest shadow-sm [writing-mode:vertical-rl] sm:w-6 sm:py-2.5",
 };
 
 function BadgeStack({
