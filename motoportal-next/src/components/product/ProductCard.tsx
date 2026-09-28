@@ -28,7 +28,9 @@ const BADGE_STYLES: Record<string, string> = {
 // Sol-üst köşe: en "acil" bilgi (stok durumu). "discount" ve "new"
 // artık hiçbir yerde gösterilmiyor.
 const TOP_LEFT_BADGE_PRIORITY: string[][] = [
-  ["out_of_stock", "low_stock"],
+   ["featured"],
+  ["deal"],
+  ["best_seller"],
 ];
 
 // Sağ-üst köşe (favori ikonunun altında): editöryel/onay tipi
@@ -36,9 +38,6 @@ const TOP_LEFT_BADGE_PRIORITY: string[][] = [
 // ürünlerde 5. öncelik olarak eklenir.
 function getTopRightBadgePriority(isVehicle: boolean): string[][] {
   const priority: string[][] = [
-    ["featured"],
-    ["deal"],
-    ["best_seller"],
     ["editors_pick"],
   ];
 
@@ -86,7 +85,7 @@ function getBadgeSlots(badges: ProductBadge[], isVehicle: boolean) {
 const BADGE_SPAN_CLASS: Record<"pill" | "vertical", string> = {
   pill: "rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide shadow-sm sm:px-2.5 sm:py-1 sm:text-[12px]",
  vertical:
-    "flex w-5 items-center justify-center rounded-sm px-2 py-2 text-[11px] font-semibold text-transform:uppercase tracking-widest shadow-sm [writing-mode:vertical-rl] sm:w-6 sm:py-2.5 ",
+    "flex w-5 items-center justify-center rounded-sm px-2 py-2 text-[11px] font-semibold text-transform:uppercase tracking-widest shadow-sm [writing-mode:vertical-rl] sm:w-6 sm:py-2.5",
 };
 
 function BadgeStack({
