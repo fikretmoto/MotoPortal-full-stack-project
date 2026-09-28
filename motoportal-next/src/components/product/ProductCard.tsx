@@ -13,7 +13,7 @@ const BADGE_STYLES: Record<string, string> = {
   discount: "bg-red-600 text-white",
   out_of_stock: "bg-gray-500 text-white",
   low_stock: "bg-amber-500 text-white",
-  featured: "bg-elevated text-white",
+  featured: "bg-slate-800 text-white",
   editors_pick: "bg-purple-600 text-white",
   deal: "bg-orange-600 text-white",
   best_seller: "bg-rose-600 text-white",
@@ -48,7 +48,7 @@ function getTopRightBadgePriority(isVehicle: boolean): string[][] {
   return priority;
 }
 
-const MAX_BADGES_PER_SLOT = 2;
+const MAX_BADGES_PER_SLOT = 4;
 
 function pickBadgesByPriority(
   badges: ProductBadge[],
