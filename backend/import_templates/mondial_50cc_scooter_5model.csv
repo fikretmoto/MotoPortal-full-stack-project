@@ -1,0 +1,6 @@
+﻿name,slug,product_code,brand_slug,category_slug,price,discount_price,currency,stock_status,short_description,description,is_featured,is_active,motor-tipi,motor-hacmi,yakit-sistemi,sikistirma-orani,maksimum-guc,sanziman-tipi,sogutma-sistemi,maksimum-hiz-max,debriyaj-tipi
+Mondial Wing 50i,mondial-wing-50i,,mondial,50cc-scooter,,,,,,,,TRUE,Tek Silindir,50,Enjeksiyon,"10,5:1","2,5",Otomatik,Hava Soğutmalı,45,
+Mondial Rio 50,mondial-rio-50,,mondial,50cc-scooter,,,,,,,,TRUE,Tek Silindir,50,Enjeksiyon,"10,5:1","2,1",Otomatik,Hava Soğutmalı,45,
+Mondial Turismo 50i,mondial-turismo-50i,,mondial,50cc-scooter,,,,,,,,TRUE,Tek Silindir,50,Enjeksiyon,"10,0:1","2,4",Otomatik,Hava Soğutmalı,45,Santrifüj
+Mondial Exon 50,mondial-exon-50,,mondial,50cc-scooter,,,,,,,,TRUE,Tek Silindir,50,Enjeksiyon,"10,5:1","2,1",Otomatik,Hava Soğutmalı,45,
+Mondial 50 ZNU i,mondial-50-znu-i,,mondial,50cc-scooter,,,,,,,,TRUE,Tek Silindir,50,,"10,5:1","2,2",Otomatik,Hava Soğutmalı,,
