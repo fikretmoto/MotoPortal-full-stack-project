@@ -1,0 +1,7 @@
+﻿name,slug,product_code,brand_slug,category_slug,price,discount_price,currency,stock_status,short_description,description,is_featured,is_active,motor-tipi,motor-hacmi,yakit-sistemi,sikistirma-orani,maksimum-guc,sanziman-tipi,sogutma-sistemi,maksimum-hiz-max,debriyaj-tipi
+Mondial Fury 110i,mondial-fury-110i,,mondial,125cc-scooter,,,,,,,,TRUE,Tek Silindir,108,Enjeksiyon,"9,5:1","5,15",Otomatik,Hava Soğutmalı,75,Santrifüj
+Mondial Lavinia Pro,mondial-lavinia-pro,,mondial,125cc-scooter,,,,,,,,TRUE,Tek Silindir,124,Enjeksiyon,"9,5:1","6,8",Otomatik,Hava Soğutmalı,85,Santrifüj
+Mondial Velomax,mondial-velomax,,mondial,125cc-scooter,,,,,,,,TRUE,Tek Silindir,125,Enjeksiyon,"12,2:1","10,8",Otomatik,Sıvı Soğutmalı,80,Santrifüj
+Mondial Fuzion 125,mondial-fuzion-125,,mondial,125cc-scooter,,,,,,,,TRUE,Tek Silindir,125,Enjeksiyon,"9,5:1","6,8",Otomatik,Hava Soğutmalı,93,Santrifüj
+Mondial Exon 125,mondial-exon-125,,mondial,125cc-scooter,,,,,,,,TRUE,Tek Silindir,125,Enjeksiyon,"8,6:1","6,5",Otomatik,Hava Soğutmalı,85,Santrifüj
+Mondial Lungo 125,mondial-lungo-125,,mondial,125cc-scooter,,,,,,,,TRUE,Tek Silindir,125,Enjeksiyon,"9,5:1","6,8",Otomatik,Hava Soğutmalı,85,Santrifüj
