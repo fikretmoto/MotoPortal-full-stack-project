@@ -1,79 +1,93 @@
+"use client";
+
+import { useMemo } from "react";
 import type { ProductVariant } from "@/services/catalog";
+import {
+  VARIANT_AXIS_LABELS,
+  getActiveAxes,
+  getAxisValues,
+  isAxisValueAvailable,
+  type AxisSelection,
+  type VariantAxisField,
+} from "@/lib/productVariants";
+import VariantColorPill from "./VariantColorPill";
 
 type ProductVariantSelectorProps = {
+  /** Zaten is_active=true olanlara filtrelenmiş variant listesi. */
   variants: ProductVariant[];
-  selectedVariantId: number | null;
-  onSelect: (variantId: number) => void;
+  selection: AxisSelection;
+  onSelect: (axis: VariantAxisField, value: string) => void;
 };
 
 export default function ProductVariantSelector({
   variants,
-  selectedVariantId,
+  selection,
   onSelect,
 }: ProductVariantSelectorProps) {
-  if (variants.length === 0) {
+  const axisRows = useMemo(() => {
+    const activeAxes = getActiveAxes(variants);
+
+    return activeAxes.map((axis) => ({
+      axis,
+      values: getAxisValues(variants, axis).map((value) => ({
+        value,
+        isAvailable: isAxisValueAvailable(variants, axis, value, selection),
+      })),
+    }));
+  }, [variants, selection]);
+
+  if (variants.length === 0 || axisRows.length === 0) {
     return null;
   }
 
   return (
-    <div className="mt-10">
-      <h3 className="text-lg font-semibold text-foreground">
-        Seçenekler
-      </h3>
+    <div className="mt-10 flex flex-col gap-5">
+      {axisRows.map(({ axis, values }) => (
+        <div key={axis}>
+          <h3 className="text-sm font-semibold text-foreground">
+            {VARIANT_AXIS_LABELS[axis]}
+            {selection[axis] && (
+              <span className="ml-2 font-normal text-fg-muted">
+                {selection[axis]}
+              </span>
+            )}
+          </h3>
 
-      <div className="mt-4 flex flex-wrap gap-3">
-        {variants.map((variant) => {
-          const isSelected = variant.id === selectedVariantId;
+          <div className="mt-2 flex flex-wrap gap-2">
+            {values.map(({ value, isAvailable }) => {
+              const isSelected = selection[axis] === value;
 
-          const details = [
-            variant.size && `Beden: ${variant.size}`,
-            variant.trim && `Donanım: ${variant.trim}`,
-            variant.capacity && `Kapasite: ${variant.capacity}`,
-            variant.wheel_size && `Jant: ${variant.wheel_size}`,
-            variant.material && `Malzeme: ${variant.material}`,
-            variant.bundle && variant.bundle,
-          ].filter(Boolean);
+              if (axis === "color") {
+                return (
+                  <VariantColorPill
+                    key={value}
+                    colorName={value}
+                    isSelected={isSelected}
+                    isAvailable={isAvailable}
+                    onSelect={() => onSelect(axis, value)}
+                  />
+                );
+              }
 
-          return (
-            <button
-              key={variant.id}
-              type="button"
-              onClick={() => onSelect(variant.id)}
-              disabled={!variant.is_in_stock}
-              className={`min-w-[140px] rounded-xl border px-4 py-3 text-left shadow-sm transition ${
-                isSelected
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-line bg-card hover:border-fg-subtle hover:shadow-md"
-              } ${!variant.is_in_stock ? "cursor-not-allowed opacity-50" : ""}`}
-            >
-              {variant.color && (
-                <p className="font-semibold">{variant.color}</p>
-              )}
-
-              {details.map((detail) => (
-                <p
-                  key={detail}
-                  className={`mt-1 text-sm ${
-                    isSelected ? "text-primary-foreground/80" : "text-fg-muted"
-                  }`}
+              return (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => onSelect(axis, value)}
+                  disabled={!isAvailable}
+                  className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+                    isSelected
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-line bg-card text-foreground hover:border-fg-subtle"
+                  } ${!isAvailable ? "cursor-not-allowed opacity-40" : ""}`}
                 >
-                  {detail}
-                </p>
-              ))}
-
-              <p
-                className={`mt-2 text-xs ${
-                  isSelected ? "text-primary-foreground/70" : "text-fg-subtle"
-                }`}
-              >
-                {variant.is_in_stock
-                  ? `${variant.stock_quantity} adet stokta`
-                  : "Stok yok"}
-              </p>
-            </button>
-          );
-        })}
-      </div>
+                  {value}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

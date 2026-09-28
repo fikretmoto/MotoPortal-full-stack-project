@@ -1,7 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { ProductDetail, ProductReview } from "@/services/catalog";
+import {
+  getActiveVariants,
+  getDefaultSelection,
+  resolveVariant,
+  type AxisSelection,
+  type VariantAxisField,
+} from "@/lib/productVariants";
 
 import ProductPrice from "./ProductPrice";
 import ProductStock from "./ProductStock";
@@ -18,18 +25,23 @@ export default function ProductHeroAttributes({
   product,
   reviews,
 }: ProductHeroAttributesProps) {
-  const defaultVariant =
-    product.variants.find((variant) => variant.is_default) ??
-    product.variants[0] ??
-    null;
-
-  const [selectedVariantId, setSelectedVariantId] = useState<number | null>(
-    defaultVariant?.id ?? null
+  const activeVariants = useMemo(
+    () => getActiveVariants(product.variants),
+    [product.variants]
   );
 
-  const selectedVariant =
-    product.variants.find((variant) => variant.id === selectedVariantId) ??
-    null;
+  const [selection, setSelection] = useState<AxisSelection>(() =>
+    getDefaultSelection(activeVariants)
+  );
+
+  const handleSelect = (axis: VariantAxisField, value: string) => {
+    setSelection((previous) => ({ ...previous, [axis]: value }));
+  };
+
+  const selectedVariant = useMemo(
+    () => resolveVariant(activeVariants, selection),
+    [activeVariants, selection]
+  );
 
   const displayPrice =
     selectedVariant?.price != null
@@ -97,9 +109,9 @@ export default function ProductHeroAttributes({
 
       {/* SATIR 6: Varyant seçimi (renk, cc vb.) */}
       <ProductVariantSelector
-        variants={product.variants}
-        selectedVariantId={selectedVariantId}
-        onSelect={setSelectedVariantId}
+        variants={activeVariants}
+        selection={selection}
+        onSelect={handleSelect}
       />
 
       {/* SATIR 7: Ürün Detayları başlığı + öne çıkan özellik kartları */}
