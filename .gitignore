@@ -6,6 +6,8 @@ backend/.env
 
 # Django local database
 backend/db.sqlite3
+backend/catalog_production_dump*.json
+backend/catalog_production_dump*.bak
 
 # Django media
 backend/media/
