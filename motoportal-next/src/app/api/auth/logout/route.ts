@@ -19,7 +19,13 @@ export async function POST(request: Request) {
     }
   }
 
-  const response = NextResponse.redirect(new URL("/login", request.url));
+  // status: 303 -- varsayılan 307, orijinal metodu (POST) korur ve
+  // tarayıcı /login'e de POST ile gider (405 Method Not Allowed).
+  // 303 tarayıcıyı takip eden istekte her zaman GET'e zorlar.
+  const response = NextResponse.redirect(
+    new URL("/login", request.url),
+    { status: 303 }
+  );
 
   response.cookies.delete("access_token");
   response.cookies.delete("refresh_token");

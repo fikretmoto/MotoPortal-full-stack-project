@@ -20,7 +20,25 @@ export async function POST(request: Request) {
 
   const { access, refresh } = await djangoResponse.json();
 
-  const response = NextResponse.json({ success: true });
+  // Rol bazlı yönlendirme için (login/page.tsx) kullanıcının rolünü
+  // de dönüyoruz — JWT payload'ında role claim'i yok (SimpleJWT
+  // varsayılanı), bu yüzden ayrı bir /auth/me/ isteği gerekiyor.
+  let role: string | null = null;
+
+  try {
+    const meResponse = await fetch(`${API_URL}/auth/me/`, {
+      headers: { Authorization: `Bearer ${access}` },
+    });
+
+    if (meResponse.ok) {
+      const me = await meResponse.json();
+      role = me.role ?? null;
+    }
+  } catch {
+    role = null;
+  }
+
+  const response = NextResponse.json({ success: true, role });
 
   response.cookies.set("access_token", access, {
     httpOnly: true,

@@ -51,6 +51,13 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    # ModelSerializer'ın email için otomatik ürettiği UniqueValidator
+    # (İngilizce/karma "Kullanıcı with this E-posta Adresi already
+    # exists." mesajını üretiyordu) devre dışı bırakıldı —
+    # benzersizlik kontrolü sadece aşağıdaki validate_email()'de,
+    # özel Türkçe mesajla yapılsın diye.
+    email = serializers.EmailField(validators=[])
+
     password = serializers.CharField(
         write_only=True,
         style={

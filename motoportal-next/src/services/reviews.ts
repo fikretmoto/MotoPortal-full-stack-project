@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import type { Product } from "./catalog";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -63,4 +64,33 @@ export async function submitReview(
     success: false,
     error: "Yorum gönderilemedi. Lütfen tekrar deneyin.",
   };
+}
+
+export type MyReview = {
+  id: number;
+  product: Product;
+  rating: number;
+  comment: string;
+  is_approved: boolean;
+  created_at: string;
+};
+
+export async function getMyReviews(): Promise<MyReview[]> {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("access_token")?.value;
+
+  if (!accessToken) {
+    return [];
+  }
+
+  const response = await fetch(`${API_URL}/reviews/mine/`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    return [];
+  }
+
+  return response.json();
 }

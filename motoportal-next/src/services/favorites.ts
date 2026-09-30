@@ -1,8 +1,35 @@
 "use server";
 
 import { cookies } from "next/headers";
+import type { Product } from "./catalog";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+export type Favorite = {
+  id: number;
+  product: Product;
+  created_at: string;
+};
+
+export async function getMyFavorites(): Promise<Favorite[]> {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("access_token")?.value;
+
+  if (!accessToken) {
+    return [];
+  }
+
+  const response = await fetch(`${API_URL}/favorites/`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    return [];
+  }
+
+  return response.json();
+}
 
 export type ToggleFavoriteResult = {
   success: boolean;

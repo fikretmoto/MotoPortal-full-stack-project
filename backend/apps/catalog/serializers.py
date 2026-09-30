@@ -1514,3 +1514,29 @@ class FavoriteSerializer(serializers.ModelSerializer):
             "product",
             "created_at",
         )
+
+
+class MyReviewSerializer(serializers.ModelSerializer):
+    # ProductReviewSerializer'daki product alanı düz PK referansı;
+    # burada FavoriteSerializer'daki gibi ürünü tam gösterecek
+    # şekilde nest ediyoruz (isim/görsel/fiyat/link için).
+    product = ProductListSerializer(read_only=True)
+
+    class Meta:
+        model = ProductReview
+        fields = (
+            "id",
+            "product",
+            "rating",
+            "comment",
+            "is_approved",
+            "created_at",
+        )
+        read_only_fields = (
+            "id",
+            "product",
+            "rating",
+            "comment",
+            "is_approved",
+            "created_at",
+        )

@@ -17,6 +17,7 @@ from .serializers import (
     CategoryTreeSerializer,
     DashboardProductListSerializer,
     FavoriteSerializer,
+    MyReviewSerializer,
     ProductCoverImageSerializer,
     ProductDetailSerializer,
     ProductImageWriteSerializer,
@@ -508,6 +509,28 @@ class FavoriteListAPIView(generics.ListAPIView):
     def get_queryset(self):
         return (
             Favorite.objects
+            .filter(user=self.request.user)
+            .select_related(
+                "product",
+                "product__brand",
+                "product__category",
+            )
+            .order_by("-created_at")
+        )
+
+
+class MyReviewListAPIView(generics.ListAPIView):
+    """
+    GET: giriş yapmış kullanıcının kendi yaptığı yorumları
+    (tüm ürünler genelinde) listeler.
+    """
+    serializer_class = MyReviewSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = None
+
+    def get_queryset(self):
+        return (
+            ProductReview.objects
             .filter(user=self.request.user)
             .select_related(
                 "product",

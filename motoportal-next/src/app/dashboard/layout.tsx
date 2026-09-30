@@ -3,6 +3,11 @@ import { getCurrentUser } from "@/services/auth";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 
+// Backend'deki CanManageProducts permission'ıyla aynı rol listesi
+// (apps/catalog/permissions.py) — bu, ikinci savunma katmanı
+// (middleware.ts, /auth/me/ ile) ile birlikte çalışır.
+const DASHBOARD_ALLOWED_ROLES = ["super_admin", "admin", "editor", "dealer"];
+
 export default async function DashboardLayout({
   children,
 }: {
@@ -12,6 +17,10 @@ export default async function DashboardLayout({
 
   if (!user) {
     redirect("/login");
+  }
+
+  if (!DASHBOARD_ALLOWED_ROLES.includes(user.role)) {
+    redirect("/erisim-engellendi");
   }
 
   return (

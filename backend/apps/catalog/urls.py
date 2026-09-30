@@ -15,6 +15,7 @@ from .views import (
     HomepageBandByTagAPIView,
     HomepageBandListAPIView,
     InstallmentOptionListAPIView,
+    MyReviewListAPIView,
     ProductCreateAPIView,
     ProductDetailAPIView,
     ProductImageCreateAPIView,
@@ -172,5 +173,11 @@ urlpatterns = [
         "favorites/",
         FavoriteListAPIView.as_view(),
         name="favorite-list",
+    ),
+
+    path(
+        "reviews/mine/",
+        MyReviewListAPIView.as_view(),
+        name="my-review-list",
     ),
 ]

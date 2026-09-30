@@ -1,12 +1,13 @@
 "use client";
 
 import { Suspense, useState } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const nextPath = searchParams.get("next") || "/dashboard";
+  const explicitNextPath = searchParams.get("next");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,13 +26,18 @@ function LoginForm() {
         body: JSON.stringify({ email, password }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const data = await response.json();
         setError(data.detail || "Giriş başarısız.");
         return;
       }
 
-      router.push(nextPath);
+      // ?next= parametresi varsa (örn. middleware'den yönlendirilmiş
+      // korumalı bir sayfa) her zaman ona öncelik ver. Yoksa role göre
+      // varsayılan alana git: müşteri -> /hesabim, diğerleri -> /dashboard.
+      const defaultPath = data.role === "customer" ? "/hesabim" : "/dashboard";
+      router.push(explicitNextPath || defaultPath);
       router.refresh();
     } catch {
       setError("Bir hata oluştu, lütfen tekrar deneyin.");
@@ -87,6 +93,13 @@ function LoginForm() {
         >
           {isSubmitting ? "Giriş yapılıyor..." : "Giriş Yap"}
         </button>
+
+        <p className="text-center text-sm text-fg-muted">
+          Hesabın yok mu?{" "}
+          <Link href="/register" className="font-medium text-primary hover:underline">
+            Kayıt Ol
+          </Link>
+        </p>
       </form>
     </div>
   );
