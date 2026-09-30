@@ -73,6 +73,7 @@ export function DashboardSidebar({ user }: DashboardSidebarProps) {
         </div>
 
         <form action="/api/auth/logout" method="POST">
+          <input type="hidden" name="next" value={pathname} />
           <button
             type="submit"
             className="w-full rounded-lg border border-sidebar-border px-3 py-2 text-xs font-semibold text-sidebar-foreground transition hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"

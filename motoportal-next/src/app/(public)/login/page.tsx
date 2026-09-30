@@ -34,9 +34,11 @@ function LoginForm() {
       }
 
       // ?next= parametresi varsa (örn. middleware'den yönlendirilmiş
-      // korumalı bir sayfa) her zaman ona öncelik ver. Yoksa role göre
-      // varsayılan alana git: müşteri -> /hesabim, diğerleri -> /dashboard.
-      const defaultPath = data.role === "customer" ? "/hesabim" : "/dashboard";
+      // korumalı bir sayfa, ya da header'dan next ile gelinen bir sayfa)
+      // her zaman ona öncelik ver. Yoksa: müşteri anasayfada kalır
+      // (Amazon/Trendyol'daki gibi — /hesabim'e sadece bilinçli tıklarsa
+      // gider), diğer roller kendi iş arayüzü olan /dashboard'a gider.
+      const defaultPath = data.role === "customer" ? "/" : "/dashboard";
       router.push(explicitNextPath || defaultPath);
       router.refresh();
     } catch {

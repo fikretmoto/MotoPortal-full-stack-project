@@ -3,21 +3,25 @@ import {
   Heart,
   Scale,
   Search,
-  UserRound,
 } from "lucide-react";
 
 import {
   headerActions,
   topBarContent,
 } from "@/constant/constant";
+import type { CurrentUser } from "@/services/auth";
+import UserMenu from "./UserMenu";
 
 const iconMap = {
   heart: Heart,
   scale: Scale,
-  user: UserRound,
 };
 
-const MainNav = () => {
+type MainNavProps = {
+  user: CurrentUser | null;
+};
+
+const MainNav = ({ user }: MainNavProps) => {
   return (
     <>
       {/* MOBİL — sadece arama, ikonlar yok */}
@@ -89,6 +93,8 @@ const MainNav = () => {
                 </Link>
               );
             })}
+
+            <UserMenu user={user} />
           </div>
         </div>
       </div>

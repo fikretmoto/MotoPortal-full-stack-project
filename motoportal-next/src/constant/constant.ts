@@ -9,7 +9,7 @@ export type NavItem = {
 export type HeaderAction = {
   label: string;
   href: string;
-  icon: "heart" | "scale" | "user";
+  icon: "heart" | "scale";
   badge?: string;
 };
 
@@ -58,11 +58,6 @@ export const headerActions: HeaderAction[] = [
     href: "#",
     icon: "scale",
     badge: "0",
-  },
-  {
-    label: "Giriş Yap",
-    href: "#",
-    icon: "user",
   },
 ];
 

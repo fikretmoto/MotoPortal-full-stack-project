@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 function flattenErrors(data: unknown): string[] {
   if (!data || typeof data !== "object") {
@@ -26,8 +26,10 @@ function flattenErrors(data: unknown): string[] {
   return messages.length > 0 ? messages : ["Kayıt başarısız."];
 }
 
-export default function RegisterPage() {
+function RegisterForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const explicitNextPath = searchParams.get("next");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -78,7 +80,10 @@ export default function RegisterPage() {
       }
 
       const loginData = await loginResponse.json();
-      router.push(loginData.role === "customer" ? "/hesabim" : "/dashboard");
+      // login/page.tsx ile aynı mantık: next varsa öncelikli, yoksa
+      // müşteri anasayfada kalır, diğer roller /dashboard'a gider.
+      const defaultPath = loginData.role === "customer" ? "/" : "/dashboard";
+      router.push(explicitNextPath || defaultPath);
       router.refresh();
     } catch {
       setErrors(["Bir hata oluştu, lütfen tekrar deneyin."]);
@@ -200,5 +205,13 @@ export default function RegisterPage() {
         </p>
       </form>
     </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={null}>
+      <RegisterForm />
+    </Suspense>
   );
 }

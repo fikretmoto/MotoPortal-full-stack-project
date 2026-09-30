@@ -47,4 +47,9 @@ path(
         ChangePasswordAPIView.as_view(),
         name="change-password",
     ),
+    path(
+        "logout/",
+        LogoutAPIView.as_view(),
+        name="logout",
+    ),
 ]

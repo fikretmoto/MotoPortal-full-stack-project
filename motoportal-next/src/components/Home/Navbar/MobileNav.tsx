@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -11,6 +12,7 @@ import {
   topBarContent,
 } from "@/constant/constant";
 import type { CategoryNode } from "@/services/catalog";
+import type { CurrentUser } from "@/services/auth";
 
 const ROOT_ORDER = ["tasitlar", "ekipman", "aksesuar", "bakim-ve-temizlik", "yedek-parca"];
 
@@ -58,6 +60,7 @@ type MobileNavProps = {
   toggleNav: () => void;
   closeNav: () => void;
   categoryTree: CategoryNode[];
+  user: CurrentUser | null;
 };
 
 const MobileNav = ({
@@ -65,7 +68,9 @@ const MobileNav = ({
   toggleNav,
   closeNav,
   categoryTree,
+  user,
 }: MobileNavProps) => {
+  const pathname = usePathname();
   const [openSections, setOpenSections] = useState<string[]>([]);
 
   const sortedRoots = [...categoryTree].sort(
@@ -160,6 +165,31 @@ const MobileNav = ({
                     {action.label}
                   </Link>
                 ))}
+
+                {user ? (
+                  <form
+                    action="/api/auth/logout"
+                    method="POST"
+                    className="contents"
+                  >
+                    <input type="hidden" name="next" value={pathname} />
+                    <button
+                      type="submit"
+                      onClick={closeMenu}
+                      className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-3 text-center text-xs font-medium text-white/82"
+                    >
+                      Çıkış Yap
+                    </button>
+                  </form>
+                ) : (
+                  <Link
+                    href={`/login?next=${encodeURIComponent(pathname)}`}
+                    onClick={closeMenu}
+                    className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-3 text-center text-xs font-medium text-white/82"
+                  >
+                    Giriş Yap
+                  </Link>
+                )}
               </div>
             </div>
 
