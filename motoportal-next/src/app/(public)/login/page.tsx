@@ -69,9 +69,17 @@ function LoginForm() {
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium">
-            Şifre
-          </label>
+          <div className="flex items-center justify-between">
+            <label htmlFor="password" className="block text-sm font-medium">
+              Şifre
+            </label>
+            <Link
+              href="/sifre-unuttum"
+              className="text-xs font-medium text-primary hover:underline"
+            >
+              Şifremi unuttum
+            </Link>
+          </div>
           <input
             id="password"
             type="password"

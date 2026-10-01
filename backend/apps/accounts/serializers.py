@@ -1,10 +1,16 @@
 
+import random
+
+from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import send_mail
+from django.utils import timezone
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import (
     urlsafe_base64_decode,
     urlsafe_base64_encode,
 )
+from datetime import timedelta
 
 from typing import Any, cast
 from django.contrib.auth import get_user_model
@@ -12,6 +18,36 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
+
+
+EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES = 15
+
+
+def generate_and_send_verification_code(user) -> None:
+    code = str(random.randint(100000, 999999))
+
+    user.email_verification_code = code
+    user.email_verification_code_expires_at = (
+        timezone.now()
+        + timedelta(minutes=EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES)
+    )
+    user.save(
+        update_fields=(
+            "email_verification_code",
+            "email_verification_code_expires_at",
+        )
+    )
+
+    send_mail(
+        subject="MotoPortal e-posta doğrulama kodunuz",
+        message=(
+            f"MotoPortal doğrulama kodunuz: {code}\n\n"
+            f"Bu kod {EMAIL_VERIFICATION_CODE_LIFETIME_MINUTES} dakika "
+            "geçerlidir."
+        ),
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=[user.email],
+    )
 
 
 User = get_user_model()
@@ -134,10 +170,98 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         password = data.pop("password")
 
-        return User.objects.create_user(
+        user = User.objects.create_user(
             password=password,
+            is_active=False,
             **data,
         )
+
+        generate_and_send_verification_code(user)
+
+        return user
+
+
+class VerifyEmailSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    code = serializers.CharField()
+
+    def validate(self, attrs):
+        email = attrs["email"].strip().lower()
+        code = attrs["code"].strip()
+
+        user = User.objects.filter(email__iexact=email).first()
+
+        if user is None:
+            raise serializers.ValidationError(
+                {"email": "Bu e-posta adresiyle kayıtlı bir hesap bulunamadı."}
+            )
+
+        if user.email_verified:
+            raise serializers.ValidationError(
+                {"email": "Bu hesap zaten doğrulanmış."}
+            )
+
+        if (
+            not user.email_verification_code
+            or user.email_verification_code != code
+        ):
+            raise serializers.ValidationError(
+                {"code": "Doğrulama kodu hatalı."}
+            )
+
+        if (
+            not user.email_verification_code_expires_at
+            or user.email_verification_code_expires_at < timezone.now()
+        ):
+            raise serializers.ValidationError(
+                {"code": "Doğrulama kodunun süresi dolmuş. Yeni bir kod isteyin."}
+            )
+
+        attrs["user"] = user
+        return attrs
+
+    def save(self, **kwargs):
+        user = self.validated_data["user"]  # type: ignore
+
+        user.is_active = True
+        user.email_verified = True
+        user.email_verification_code = None
+        user.email_verification_code_expires_at = None
+        user.save(
+            update_fields=(
+                "is_active",
+                "email_verified",
+                "email_verification_code",
+                "email_verification_code_expires_at",
+            )
+        )
+
+        return user
+
+
+class ResendVerificationSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+    def validate_email(self, value: str) -> str:
+        return value.strip().lower()
+
+    def save(self, **kwargs):
+        email = self.validated_data["email"]  # type: ignore
+
+        user = User.objects.filter(
+            email__iexact=email,
+            email_verified=False,
+        ).first()
+
+        # Kullanıcı yoksa ya da zaten doğrulanmışsa sessizce hiçbir şey
+        # yapmıyoruz (password-reset akışındaki gibi) -- böylece bu
+        # endpoint hangi e-postaların kayıtlı olduğunu açığa çıkarmaz.
+        if user is None:
+            return None
+
+        generate_and_send_verification_code(user)
+
+        return user
 
 
 class ProfileUpdateSerializer(serializers.ModelSerializer):
@@ -329,19 +453,15 @@ class PasswordResetRequestSerializer(serializers.Serializer):
             user
         )
 
-        request = self.context.get("request")
-
-        reset_path = (
-            "/api/auth/password-reset-confirm/"
+        # Link doğrudan backend API'sine değil, kullanıcının şifreyi
+        # gireceği FRONTEND sayfasına gitmeli -- password-reset-confirm
+        # view'ı sadece POST kabul ediyor, bir tarayıcıda tıklanabilir
+        # değil (405 döner). /sifre-sifirla sayfası bu değerleri
+        # okuyup API'ye POST atıyor.
+        reset_url = (
+            f"{settings.FRONTEND_URL}/sifre-sifirla"
             f"?uid={uid}&token={token}"
         )
-
-        if request is not None:
-            reset_url = request.build_absolute_uri(
-                reset_path
-            )
-        else:
-            reset_url = reset_path
 
         user.email_user(
             subject="MotoPortal şifre sıfırlama",

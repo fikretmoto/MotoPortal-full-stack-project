@@ -45,6 +45,19 @@ class User(AbstractUser):
         verbose_name="E-posta Doğrulandı mı?",
     )
 
+    email_verification_code = models.CharField(
+        max_length=6,
+        null=True,
+        blank=True,
+        verbose_name="E-posta Doğrulama Kodu",
+    )
+
+    email_verification_code_expires_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name="Doğrulama Kodu Son Kullanma Tarihi",
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Oluşturulma Tarihi",

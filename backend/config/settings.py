@@ -180,6 +180,13 @@ REST_FRAMEWORK = {
         "rest_framework.filters.SearchFilter",
         "rest_framework.filters.OrderingFilter",
     ),
+
+    "DEFAULT_THROTTLE_RATES": {
+        # apps/accounts/throttling.py -- brute-force/spam koruması.
+        "verify-email": "5/15m",
+        "resend-verification-minute": "1/min",
+        "resend-verification-hour": "5/hour",
+    },
 }
 
 
@@ -211,13 +218,32 @@ SIMPLE_JWT = {
 }
 
 
-EMAIL_BACKEND = (
-    "django.core.mail.backends.console.EmailBackend"
+# Development'ta varsayılan console backend (email konsola yazdırılır).
+# Production'da .env.production (Render environment variable paneli)
+# üzerinden EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+# ve EMAIL_HOST/EMAIL_PORT/EMAIL_HOST_USER/EMAIL_HOST_PASSWORD
+# set edilerek gerçek SMTP'ye (örn. SendGrid) geçilir.
+EMAIL_BACKEND = os.environ.get(
+    "EMAIL_BACKEND",
+    "django.core.mail.backends.console.EmailBackend",
 )
 
-DEFAULT_FROM_EMAIL = "noreply@motoportal.com"
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "587"))
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "True") == "True"
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+
+DEFAULT_FROM_EMAIL = os.environ.get(
+    "DEFAULT_FROM_EMAIL",
+    "noreply@motoportal.com",
+)
 
 PASSWORD_RESET_TIMEOUT = 60 * 60
+
+# Şifre sıfırlama/email doğrulama linklerinin işaret ettiği Next.js
+# frontend'inin kök URL'i (backend API'si değil).
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 
 
 CORS_ALLOWED_ORIGINS = [

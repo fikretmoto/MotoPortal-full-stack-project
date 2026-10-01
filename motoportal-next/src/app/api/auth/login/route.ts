@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { fetchRoleForAccessToken, setAuthCookies } from "@/services/auth";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -23,38 +24,10 @@ export async function POST(request: Request) {
   // Rol bazlı yönlendirme için (login/page.tsx) kullanıcının rolünü
   // de dönüyoruz — JWT payload'ında role claim'i yok (SimpleJWT
   // varsayılanı), bu yüzden ayrı bir /auth/me/ isteği gerekiyor.
-  let role: string | null = null;
-
-  try {
-    const meResponse = await fetch(`${API_URL}/auth/me/`, {
-      headers: { Authorization: `Bearer ${access}` },
-    });
-
-    if (meResponse.ok) {
-      const me = await meResponse.json();
-      role = me.role ?? null;
-    }
-  } catch {
-    role = null;
-  }
+  const role = await fetchRoleForAccessToken(access);
 
   const response = NextResponse.json({ success: true, role });
-
-  response.cookies.set("access_token", access, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    maxAge: 60 * 15, // 15 dakika — Django'daki ACCESS_TOKEN_LIFETIME ile aynı
-  });
-
-  response.cookies.set("refresh_token", refresh, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 30, // 30 gün — Django'daki REFRESH_TOKEN_LIFETIME ile aynı
-  });
+  setAuthCookies(response, access, refresh);
 
   return response;
 }

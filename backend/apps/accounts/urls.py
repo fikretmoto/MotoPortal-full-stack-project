@@ -6,6 +6,8 @@ from .views import (
     MeAPIView,
     ProfileUpdateAPIView,
     RegisterAPIView,
+    ResendVerificationAPIView,
+    VerifyEmailAPIView,
     PasswordResetConfirmAPIView,
 PasswordResetRequestAPIView,
 )
@@ -31,6 +33,16 @@ path(
         "register/",
         RegisterAPIView.as_view(),
         name="register",
+    ),
+    path(
+        "verify-email/",
+        VerifyEmailAPIView.as_view(),
+        name="verify-email",
+    ),
+    path(
+        "resend-verification/",
+        ResendVerificationAPIView.as_view(),
+        name="resend-verification",
     ),
     path(
         "me/",
