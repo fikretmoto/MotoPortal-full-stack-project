@@ -10,6 +10,7 @@ from apps.catalog.attribute_options.electric import ELECTRIC_ATTRIBUTE_OPTION_DA
 from apps.catalog.attribute_options.bicycle_common import BICYCLE_COMMON_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.accessories import ACCESSORIES_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.e_market_tipi import E_MARKET_TIPI_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.e_kasali import E_KASALI_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attributes.ecommerce import ECOMMERCE_ATTRIBUTE_DATA
 from apps.catalog.attributes.scooter import SCOOTER_ATTRIBUTE_DATA
 
@@ -28,6 +29,7 @@ from apps.catalog.attributes.parts import PARTS_ATTRIBUTE_DATA
 from apps.catalog.attributes.accessories import ACCESSORIES_ATTRIBUTE_DATA
 from apps.catalog.attributes.cleaning import CLEANING_ATTRIBUTE_DATA
 from apps.catalog.attributes.e_market_tipi import E_MARKET_TIPI_ATTRIBUTE_DATA
+from apps.catalog.attributes.e_kasali import E_KASALI_ATTRIBUTE_DATA
 from apps.catalog.brands import BRAND_DATA
 from apps.catalog.categories import CATEGORY_DATA
 from apps.catalog.tags import TAG_DATA
@@ -265,6 +267,7 @@ class Command(BaseCommand):
             *ATV_ATTRIBUTE_DATA,
             *CLEANING_ATTRIBUTE_DATA,
             *E_MARKET_TIPI_ATTRIBUTE_DATA,
+            *E_KASALI_ATTRIBUTE_DATA,
         ]
 
         for item in all_attribute_data:
@@ -448,6 +451,7 @@ class Command(BaseCommand):
             *BICYCLE_COMMON_ATTRIBUTE_OPTION_DATA,
             *ACCESSORIES_ATTRIBUTE_OPTION_DATA,
             *E_MARKET_TIPI_ATTRIBUTE_OPTION_DATA,
+            *E_KASALI_ATTRIBUTE_OPTION_DATA,
         ]
 
         option_count = 0

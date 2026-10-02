@@ -47,7 +47,7 @@ DJANGO_APPS = [
 
 
 THIRD_PARTY_APPS = [
-    "rest_framework","django_filters", "drf_spectacular", "rest_framework_simplejwt.token_blacklist", "corsheaders", "cloudinary", "cloudinary_storage",
+    "rest_framework","django_filters", "drf_spectacular", "rest_framework_simplejwt.token_blacklist", "corsheaders", "cloudinary", "cloudinary_storage", "anymail",
 ]
 
 LOCAL_APPS = [
@@ -218,25 +218,20 @@ SIMPLE_JWT = {
 }
 
 
-# Development'ta varsayılan console backend (email konsola yazdırılır).
-# Production'da .env.production (Render environment variable paneli)
-# üzerinden EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
-# ve EMAIL_HOST/EMAIL_PORT/EMAIL_HOST_USER/EMAIL_HOST_PASSWORD
-# set edilerek gerçek SMTP'ye (örn. SendGrid) geçilir.
-EMAIL_BACKEND = os.environ.get(
-    "EMAIL_BACKEND",
-    "django.core.mail.backends.console.EmailBackend",
-)
+# Render'ın ücretsiz planı giden SMTP (port 587) bağlantılarını
+# engelliyor, bu yüzden SMTP yerine Resend'in HTTPS/API tabanlı
+# gönderimini django-anymail üzerinden kullanıyoruz. apps/accounts/
+# serializers.py'deki send_mail()/email_user() çağrıları değişmedi --
+# backend değişikliği bu iki satırla şeffaf şekilde gerçekleşiyor.
+EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
 
-EMAIL_HOST = os.environ.get("EMAIL_HOST", "")
-EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "587"))
-EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "True") == "True"
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+ANYMAIL = {
+    "RESEND_API_KEY": os.environ.get("RESEND_API_KEY"),
+}
 
 DEFAULT_FROM_EMAIL = os.environ.get(
     "DEFAULT_FROM_EMAIL",
-    "noreply@motoportal.com",
+    "onboarding@resend.dev",
 )
 
 PASSWORD_RESET_TIMEOUT = 60 * 60

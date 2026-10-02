@@ -7,6 +7,7 @@ ELECTRIC_ATTRIBUTE_OPTION_DATA = [
     {"attribute_slug": "elektrikli-motor-gucu", "value": "750W", "display_order": 18},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "1000W", "display_order": 20},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "1200W", "display_order": 30},
+    {"attribute_slug": "elektrikli-motor-gucu", "value": "1500W", "display_order": 30},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "1800W", "display_order": 35},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "2000W", "display_order": 40},
     {"attribute_slug": "elektrikli-motor-gucu", "value": "3000W", "display_order": 50},

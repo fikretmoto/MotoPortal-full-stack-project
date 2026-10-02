@@ -72,7 +72,9 @@ ELECTRIC_HIGHLIGHT_SLUGS = [
     "elektrikli-motor-gucu",
     "elektrikli-batarya-kapasitesi",
     "elektrikli-menzil-min",
+    "elektrikli-menzil-max",
     "elektrikli-maksimum-hiz",
     "elektrikli-sarj-suresi-min",
+    "elektrikli-sarj-suresi-max",
     "elektrikli-batarya-tipi",
 ]
