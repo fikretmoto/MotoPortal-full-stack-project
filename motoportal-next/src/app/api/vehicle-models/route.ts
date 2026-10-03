@@ -1,3 +1,4 @@
+import { getValidAccessToken } from "@/services/auth";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
@@ -5,7 +6,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function GET(request: Request) {
   const cookieStore = await cookies();
-  const accessToken = cookieStore.get("access_token")?.value;
+  const accessToken = await getValidAccessToken(cookieStore);
 
   if (!accessToken) {
     return NextResponse.json(

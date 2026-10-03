@@ -85,3 +85,58 @@ export async function fetchRoleForAccessToken(
     return null;
   }
 }
+
+// access_token cookie'si süresi dolup silindiyse, refresh_token ile
+// arka planda sessizce yeni bir access_token almak için. Route
+// handler'lar içinde çağrılmalı (cookieStore.set burada çalışır).
+export async function getValidAccessToken(
+  cookieStore: Awaited<ReturnType<typeof cookies>>
+): Promise<string | null> {
+  const existing = cookieStore.get("access_token")?.value;
+  if (existing) {
+    return existing;
+  }
+
+  const refreshToken = cookieStore.get("refresh_token")?.value;
+  if (!refreshToken) {
+    return null;
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/token/refresh/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ refresh: refreshToken }),
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const data = await response.json();
+
+    cookieStore.set("access_token", data.access, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 15,
+    });
+
+    // ROTATE_REFRESH_TOKENS=True olduğu için backend yeni bir refresh
+    // token da döndürüyor, eskisi blacklist'e düşüyor.
+    if (data.refresh) {
+      cookieStore.set("refresh_token", data.refresh, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+        maxAge: 60 * 60 * 24 * 30,
+      });
+    }
+
+    return data.access;
+  } catch {
+    return null;
+  }
+}

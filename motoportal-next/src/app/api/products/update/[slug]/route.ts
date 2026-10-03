@@ -1,5 +1,8 @@
+
+import { getValidAccessToken } from "@/lib/services/auth";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -10,8 +13,8 @@ type RouteParams = {
 export async function PATCH(request: Request, { params }: RouteParams) {
   const { slug } = await params;
 
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get("access_token")?.value;
+    const cookieStore = await cookies();
+  const accessToken = await getValidAccessToken(cookieStore);
 
   if (!accessToken) {
     return NextResponse.json(
@@ -39,8 +42,8 @@ export async function PATCH(request: Request, { params }: RouteParams) {
 export async function DELETE(request: Request, { params }: RouteParams) {
   const { slug } = await params;
 
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get("access_token")?.value;
+    const cookieStore = await cookies();
+  const accessToken = await getValidAccessToken(cookieStore);
 
   if (!accessToken) {
     return NextResponse.json(

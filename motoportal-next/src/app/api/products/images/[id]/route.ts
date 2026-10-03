@@ -1,3 +1,4 @@
+import { getValidAccessToken } from "@/services/auth";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
@@ -11,7 +12,7 @@ export async function DELETE(request: Request, { params }: RouteParams) {
   const { id } = await params;
 
   const cookieStore = await cookies();
-  const accessToken = cookieStore.get("access_token")?.value;
+  const accessToken = await getValidAccessToken(cookieStore);
 
   if (!accessToken) {
     return NextResponse.json(
