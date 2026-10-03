@@ -86,12 +86,50 @@ export async function fetchRoleForAccessToken(
   }
 }
 
-// Aynı anda birden fazla istek (örn. kapak resmi + galeri resmi aynı
-// anda yüklenirken) buraya düşerse, hepsi AYNI refresh işlemini
-// paylaşsın — her biri kendi /token/refresh/ isteğini atarsa, ikincisi
-// backend'in ROTATE_REFRESH_TOKENS ayarı yüzünden "blacklisted" hatası
-// alır (ilk istek eski refresh token'ı geçersiz kılmış olur).
-let refreshPromise: Promise<string | null> | null = null;
+// Aynı refresh_token için aynı anda birden fazla istek gelirse, AĞ
+// isteğini (tek bir /token/refresh/ çağrısı) paylaşsınlar — ama
+// cookie'yi her çağıran kendi cookieStore'una kendisi yazacak, bu
+// yüzden sonuç burada sadece {access, refresh} olarak paylaşılıyor,
+// cookie yazma işlemi paylaşılmıyor. refresh_token değerine göre
+// anahtarlanıyor, böylece farklı kullanıcıların eşzamanlı istekleri
+// birbirine karışmıyor.
+const refreshPromises = new Map<
+  string,
+  Promise<{ access: string; refresh?: string } | null>
+>();
+
+async function performRefresh(
+  refreshToken: string
+): Promise<{ access: string; refresh?: string } | null> {
+  let promise = refreshPromises.get(refreshToken);
+
+  if (!promise) {
+    promise = (async () => {
+      try {
+        const response = await fetch(`${API_URL}/token/refresh/`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ refresh: refreshToken }),
+        });
+
+        if (!response.ok) {
+          return null;
+        }
+
+        const data = await response.json();
+        return { access: data.access, refresh: data.refresh };
+      } catch {
+        return null;
+      } finally {
+        refreshPromises.delete(refreshToken);
+      }
+    })();
+
+    refreshPromises.set(refreshToken, promise);
+  }
+
+  return promise;
+}
 
 export async function getValidAccessToken(
   cookieStore: Awaited<ReturnType<typeof cookies>>
@@ -106,47 +144,31 @@ export async function getValidAccessToken(
     return null;
   }
 
-  if (!refreshPromise) {
-    refreshPromise = (async () => {
-      try {
-        const response = await fetch(`${API_URL}/token/refresh/`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ refresh: refreshToken }),
-        });
-
-        if (!response.ok) {
-          return null;
-        }
-
-        const data = await response.json();
-
-        cookieStore.set("access_token", data.access, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "lax",
-          path: "/",
-          maxAge: 60 * 15,
-        });
-
-        if (data.refresh) {
-          cookieStore.set("refresh_token", data.refresh, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
-            path: "/",
-            maxAge: 60 * 60 * 24 * 30,
-          });
-        }
-
-        return data.access;
-      } catch {
-        return null;
-      } finally {
-        refreshPromise = null;
-      }
-    })();
+  const result = await performRefresh(refreshToken);
+  if (!result) {
+    return null;
   }
 
-  return refreshPromise;
+  // Her çağıran, aldığı sonucu KENDİ cookieStore'una yazıyor — bu
+  // sayede aynı anda gelen her isteğin kendi tarayıcı yanıtı da
+  // güncel cookie'leri taşıyor, sadece ilki değil.
+  cookieStore.set("access_token", result.access, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: 60 * 15,
+  });
+
+  if (result.refresh) {
+    cookieStore.set("refresh_token", result.refresh, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30,
+    });
+  }
+
+  return result.access;
 }
