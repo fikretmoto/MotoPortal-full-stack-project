@@ -15,6 +15,27 @@ const HESABIM_ALLOWED_ROLES = ["customer"];
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+async function tryRefresh(
+  refreshToken: string
+): Promise<{ access: string; refresh?: string } | null> {
+  try {
+    const response = await fetch(`${API_URL}/token/refresh/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ refresh: refreshToken }),
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const data = await response.json();
+    return { access: data.access, refresh: data.refresh };
+  } catch {
+    return null;
+  }
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -25,7 +46,25 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const accessToken = request.cookies.get("access_token")?.value;
+  let accessToken = request.cookies.get("access_token")?.value;
+
+  // access_token cookie'si yoksa (süresi dolup silindiyse), refresh_token
+  // ile arka planda sessizce yeni bir access_token almayı dene — sayfa
+  // gezinmesinde artık login'e atmak yerine kullanıcıyı içeride tutar.
+  let refreshedAccess: string | null = null;
+  let refreshedRefresh: string | undefined;
+
+  if (!accessToken) {
+    const refreshToken = request.cookies.get("refresh_token")?.value;
+    if (refreshToken) {
+      const result = await tryRefresh(refreshToken);
+      if (result) {
+        accessToken = result.access;
+        refreshedAccess = result.access;
+        refreshedRefresh = result.refresh;
+      }
+    }
+  }
 
   if (!accessToken) {
     const loginUrl = new URL("/login", request.url);
@@ -34,19 +73,19 @@ export async function middleware(request: NextRequest) {
   }
 
   try {
-    const response = await fetch(`${API_URL}/auth/me/`, {
+    const meResponse = await fetch(`${API_URL}/auth/me/`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
 
-    if (!response.ok) {
+    if (!meResponse.ok) {
       const loginUrl = new URL("/login", request.url);
       loginUrl.searchParams.set("next", pathname);
       return NextResponse.redirect(loginUrl);
     }
 
-    const user = await response.json();
+    const user = await meResponse.json();
 
     if (isDashboard && !DASHBOARD_ALLOWED_ROLES.includes(user.role)) {
       return NextResponse.redirect(
@@ -64,7 +103,31 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  return NextResponse.next();
+  const response = NextResponse.next();
+
+  // Refresh başarılı olduysa, yeni token'ları tarayıcıya geri yaz —
+  // böylece sonraki istekler de taze access_token'ı kullanır.
+  if (refreshedAccess) {
+    response.cookies.set("access_token", refreshedAccess, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 15,
+    });
+
+    if (refreshedRefresh) {
+      response.cookies.set("refresh_token", refreshedRefresh, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+        maxAge: 60 * 60 * 24 * 30,
+      });
+    }
+  }
+
+  return response;
 }
 
 export const config = {
