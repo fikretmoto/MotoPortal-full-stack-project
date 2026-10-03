@@ -54,7 +54,7 @@ export async function middleware(request: NextRequest) {
   let refreshedAccess: string | null = null;
   let refreshedRefresh: string | undefined;
 
-  if (!accessToken) {
+    if (!accessToken) {
     const refreshToken = request.cookies.get("refresh_token")?.value;
     if (refreshToken) {
       const result = await tryRefresh(refreshToken);
@@ -62,10 +62,14 @@ export async function middleware(request: NextRequest) {
         accessToken = result.access;
         refreshedAccess = result.access;
         refreshedRefresh = result.refresh;
+        // Aynı istek içinde sayfa render edilirken (Server Component'lar)
+        // taze token'ı görebilsin diye, request'in kendi cookie'sini de
+        // güncelliyoruz — sadece tarayıcıya geri yazmak yetmiyor.
+        request.cookies.set("access_token", result.access);
       }
     }
   }
-
+  
   if (!accessToken) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("next", pathname);
