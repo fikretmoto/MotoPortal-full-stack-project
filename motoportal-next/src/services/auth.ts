@@ -86,9 +86,13 @@ export async function fetchRoleForAccessToken(
   }
 }
 
-// access_token cookie'si süresi dolup silindiyse, refresh_token ile
-// arka planda sessizce yeni bir access_token almak için. Route
-// handler'lar içinde çağrılmalı (cookieStore.set burada çalışır).
+// Aynı anda birden fazla istek (örn. kapak resmi + galeri resmi aynı
+// anda yüklenirken) buraya düşerse, hepsi AYNI refresh işlemini
+// paylaşsın — her biri kendi /token/refresh/ isteğini atarsa, ikincisi
+// backend'in ROTATE_REFRESH_TOKENS ayarı yüzünden "blacklisted" hatası
+// alır (ilk istek eski refresh token'ı geçersiz kılmış olur).
+let refreshPromise: Promise<string | null> | null = null;
+
 export async function getValidAccessToken(
   cookieStore: Awaited<ReturnType<typeof cookies>>
 ): Promise<string | null> {
@@ -102,41 +106,47 @@ export async function getValidAccessToken(
     return null;
   }
 
-  try {
-    const response = await fetch(`${API_URL}/token/refresh/`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ refresh: refreshToken }),
-    });
+  if (!refreshPromise) {
+    refreshPromise = (async () => {
+      try {
+        const response = await fetch(`${API_URL}/token/refresh/`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ refresh: refreshToken }),
+        });
 
-    if (!response.ok) {
-      return null;
-    }
+        if (!response.ok) {
+          return null;
+        }
 
-    const data = await response.json();
+        const data = await response.json();
 
-    cookieStore.set("access_token", data.access, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: 60 * 15,
-    });
+        cookieStore.set("access_token", data.access, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "lax",
+          path: "/",
+          maxAge: 60 * 15,
+        });
 
-    // ROTATE_REFRESH_TOKENS=True olduğu için backend yeni bir refresh
-    // token da döndürüyor, eskisi blacklist'e düşüyor.
-    if (data.refresh) {
-      cookieStore.set("refresh_token", data.refresh, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        path: "/",
-        maxAge: 60 * 60 * 24 * 30,
-      });
-    }
+        if (data.refresh) {
+          cookieStore.set("refresh_token", data.refresh, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            path: "/",
+            maxAge: 60 * 60 * 24 * 30,
+          });
+        }
 
-    return data.access;
-  } catch {
-    return null;
+        return data.access;
+      } catch {
+        return null;
+      } finally {
+        refreshPromise = null;
+      }
+    })();
   }
+
+  return refreshPromise;
 }
