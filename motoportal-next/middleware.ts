@@ -69,7 +69,7 @@ export async function middleware(request: NextRequest) {
       }
     }
   }
-  
+
   if (!accessToken) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("next", pathname);
@@ -107,7 +107,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const response = NextResponse.next();
+    const response = NextResponse.next({ request });
 
   // Refresh başarılı olduysa, yeni token'ları tarayıcıya geri yaz —
   // böylece sonraki istekler de taze access_token'ı kullanır.
