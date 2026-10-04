@@ -12,7 +12,7 @@ export async function POST(request: Request, { params }: RouteParams) {
   const { slug } = await params;
 
   const cookieStore = await cookies();
-  const accessToken = await getValidAccessToken(cookieStore);
+  const accessToken = await getValidAccessToken(cookieStore, "products/[slug]/images");
 
   if (!accessToken) {
     return NextResponse.json(

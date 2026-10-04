@@ -6,7 +6,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function GET(request: Request) {
   const cookieStore = await cookies();
-  const accessToken = await getValidAccessToken(cookieStore);
+  const accessToken = await getValidAccessToken(cookieStore, "vehicle-models");
 
   if (!accessToken) {
     return NextResponse.json(

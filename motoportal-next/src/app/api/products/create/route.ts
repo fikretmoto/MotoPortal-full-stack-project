@@ -9,7 +9,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function POST(request: Request) {
   const cookieStore = await cookies();
-  const accessToken = await getValidAccessToken(cookieStore);
+  const accessToken = await getValidAccessToken(cookieStore, "products/create");
 
   if (!accessToken) {
     return NextResponse.json(

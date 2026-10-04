@@ -1,5 +1,5 @@
 
-import { getValidAccessToken } from "@/lib/services/auth";
+import { getValidAccessToken } from "@/services/auth";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 

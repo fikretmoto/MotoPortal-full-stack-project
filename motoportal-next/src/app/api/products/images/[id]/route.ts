@@ -12,7 +12,7 @@ export async function DELETE(request: Request, { params }: RouteParams) {
   const { id } = await params;
 
   const cookieStore = await cookies();
-  const accessToken = await getValidAccessToken(cookieStore);
+  const accessToken = await getValidAccessToken(cookieStore, "products/images/[id]-DELETE");
 
   if (!accessToken) {
     return NextResponse.json(

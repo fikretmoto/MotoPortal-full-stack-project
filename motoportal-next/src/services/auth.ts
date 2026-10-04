@@ -99,11 +99,16 @@ const refreshPromises = new Map<
 >();
 
 async function performRefresh(
-  refreshToken: string
+  refreshToken: string,
+  callerTag: string = "unknown"
 ): Promise<{ access: string; refresh?: string } | null> {
+  const ts = () => new Date().toISOString();
   let promise = refreshPromises.get(refreshToken);
 
   if (!promise) {
+    console.log(
+      `[AUTH-DEBUG ${ts()}] caller=${callerTag} | /token/refresh/ isteği ATILIYOR (yeni)`
+    );
     promise = (async () => {
       try {
         const response = await fetch(`${API_URL}/token/refresh/`, {
@@ -112,13 +117,20 @@ async function performRefresh(
           body: JSON.stringify({ refresh: refreshToken }),
         });
 
+        console.log(
+          `[AUTH-DEBUG ${ts()}] caller=${callerTag} | /token/refresh/ HTTP status=${response.status}`
+        );
+
         if (!response.ok) {
           return null;
         }
 
         const data = await response.json();
         return { access: data.access, refresh: data.refresh };
-      } catch {
+      } catch (err) {
+        console.log(
+          `[AUTH-DEBUG ${ts()}] caller=${callerTag} | /token/refresh/ EXCEPTION: ${err}`
+        );
         return null;
       } finally {
         refreshPromises.delete(refreshToken);
@@ -126,26 +138,68 @@ async function performRefresh(
     })();
 
     refreshPromises.set(refreshToken, promise);
+  } else {
+    console.log(
+      `[AUTH-DEBUG ${ts()}] caller=${callerTag} | mevcut /token/refresh/ promise'ine KATILDI (ağ isteği atmadı)`
+    );
   }
 
   return promise;
 }
 
 export async function getValidAccessToken(
-  cookieStore: Awaited<ReturnType<typeof cookies>>
+  cookieStore: Awaited<ReturnType<typeof cookies>>,
+  callerTag: string = "unknown"
 ): Promise<string | null> {
+  const ts = () => new Date().toISOString();
+  console.log(
+    `[AUTH-DEBUG ${ts()}] getValidAccessToken çağrıldı | caller=${callerTag}`
+  );
+
   const existing = cookieStore.get("access_token")?.value;
+  console.log(
+    `[AUTH-DEBUG ${ts()}] caller=${callerTag} | access_token var mı=${!!existing}` +
+      (existing ? ` | son8=...${existing.slice(-8)}` : "")
+  );
+
   if (existing) {
+    console.log(
+      `[AUTH-DEBUG ${ts()}] caller=${callerTag} | SONUÇ: mevcut access_token döndürüldü, refresh yok`
+    );
     return existing;
   }
 
   const refreshToken = cookieStore.get("refresh_token")?.value;
+  console.log(
+    `[AUTH-DEBUG ${ts()}] caller=${callerTag} | refresh_token var mı=${!!refreshToken}`
+  );
+
   if (!refreshToken) {
+    console.log(
+      `[AUTH-DEBUG ${ts()}] caller=${callerTag} | SONUÇ: null (refresh_token da yok)`
+    );
     return null;
   }
 
-  const result = await performRefresh(refreshToken);
+  const alreadyInFlight = refreshPromises.has(refreshToken);
+  console.log(
+    `[AUTH-DEBUG ${ts()}] caller=${callerTag} | refresh ${
+      alreadyInFlight ? "paylaşılan promise'e katılıyor" : "YENİ başlatılıyor"
+    } (Map boyutu önce=${refreshPromises.size})`
+  );
+
+  const result = await performRefresh(refreshToken, callerTag);
+
+  console.log(
+    `[AUTH-DEBUG ${ts()}] caller=${callerTag} | performRefresh sonucu=${
+      result ? "BAŞARILI" : "BAŞARISIZ/null"
+    }` + (result ? ` | yeni access son8=...${result.access.slice(-8)}` : "")
+  );
+
   if (!result) {
+    console.log(
+      `[AUTH-DEBUG ${ts()}] caller=${callerTag} | SONUÇ: null (refresh başarısız)`
+    );
     return null;
   }
 
@@ -169,6 +223,10 @@ export async function getValidAccessToken(
       maxAge: 60 * 60 * 24 * 30,
     });
   }
+
+  console.log(
+    `[AUTH-DEBUG ${ts()}] caller=${callerTag} | SONUÇ: yeni access_token döndürüldü (son8=...${result.access.slice(-8)})`
+  );
 
   return result.access;
 }

@@ -38,6 +38,7 @@ async function tryRefresh(
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const ts = () => new Date().toISOString();
 
   const isDashboard = pathname.startsWith("/dashboard");
   const isHesabim = pathname.startsWith("/hesabim");
@@ -46,7 +47,13 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  console.log(`[MW-DEBUG ${ts()}] pathname=${pathname} | middleware tetiklendi`);
+
   let accessToken = request.cookies.get("access_token")?.value;
+  console.log(
+    `[MW-DEBUG ${ts()}] pathname=${pathname} | access_token var mı=${!!accessToken}` +
+      (accessToken ? ` | son8=...${accessToken.slice(-8)}` : "")
+  );
 
   // access_token cookie'si yoksa (süresi dolup silindiyse), refresh_token
   // ile arka planda sessizce yeni bir access_token almayı dene — sayfa
@@ -56,8 +63,17 @@ export async function middleware(request: NextRequest) {
 
     if (!accessToken) {
     const refreshToken = request.cookies.get("refresh_token")?.value;
+    console.log(
+      `[MW-DEBUG ${ts()}] pathname=${pathname} | refresh_token var mı=${!!refreshToken}`
+    );
     if (refreshToken) {
+      console.log(`[MW-DEBUG ${ts()}] pathname=${pathname} | refresh deneniyor`);
       const result = await tryRefresh(refreshToken);
+      console.log(
+        `[MW-DEBUG ${ts()}] pathname=${pathname} | refresh sonucu=${
+          result ? "BAŞARILI" : "BAŞARISIZ/null"
+        }`
+      );
       if (result) {
         accessToken = result.access;
         refreshedAccess = result.access;
@@ -71,6 +87,9 @@ export async function middleware(request: NextRequest) {
   }
 
   if (!accessToken) {
+    console.log(
+      `[MW-DEBUG ${ts()}] pathname=${pathname} | SONUÇ: login'e yönlendiriliyor (access_token yok/refresh başarısız)`
+    );
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("next", pathname);
     return NextResponse.redirect(loginUrl);
@@ -83,7 +102,14 @@ export async function middleware(request: NextRequest) {
       },
     });
 
+    console.log(
+      `[MW-DEBUG ${ts()}] pathname=${pathname} | /auth/me/ HTTP status=${meResponse.status}`
+    );
+
     if (!meResponse.ok) {
+      console.log(
+        `[MW-DEBUG ${ts()}] pathname=${pathname} | SONUÇ: login'e yönlendiriliyor (/auth/me/ başarısız)`
+      );
       const loginUrl = new URL("/login", request.url);
       loginUrl.searchParams.set("next", pathname);
       return NextResponse.redirect(loginUrl);
@@ -92,20 +118,34 @@ export async function middleware(request: NextRequest) {
     const user = await meResponse.json();
 
     if (isDashboard && !DASHBOARD_ALLOWED_ROLES.includes(user.role)) {
+      console.log(
+        `[MW-DEBUG ${ts()}] pathname=${pathname} | SONUÇ: erisim-engellendi'ye yönlendiriliyor (role=${user.role})`
+      );
       return NextResponse.redirect(
         new URL("/erisim-engellendi", request.url)
       );
     }
 
     if (isHesabim && !HESABIM_ALLOWED_ROLES.includes(user.role)) {
+      console.log(
+        `[MW-DEBUG ${ts()}] pathname=${pathname} | SONUÇ: dashboard'a yönlendiriliyor (customer değil)`
+      );
       return NextResponse.redirect(new URL("/dashboard", request.url));
     }
-  } catch {
+  } catch (err) {
     // Backend'e ulaşılamazsa burada sert biçimde engellemiyoruz —
     // dashboard/layout.tsx ve hesabim/layout.tsx aynı kontrolü kendi
     // taraflarında zaten bağımsız olarak tekrar yapacak.
+    console.log(
+      `[MW-DEBUG ${ts()}] pathname=${pathname} | SONUÇ: EXCEPTION yakalandı, devam ediliyor (fail-open): ${err}`
+    );
     return NextResponse.next();
   }
+
+  console.log(
+    `[MW-DEBUG ${ts()}] pathname=${pathname} | SONUÇ: devam ediyor (erişim izni verildi)` +
+      (refreshedAccess ? " | token yenilendi" : "")
+  );
 
     const response = NextResponse.next({ request });
 
