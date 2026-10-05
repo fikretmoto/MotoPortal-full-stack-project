@@ -159,7 +159,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/products/${product.slug}`} className="group block">
       <Card
-        className={`w-full gap-0 overflow-hidden rounded-2xl p-0 border-transparent transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg [--card-spacing:--spacing(2.5)] sm:w-[320px] sm:[--card-spacing:--spacing(4)] ${
+        className={`w-full gap-0 overflow-hidden rounded-2xl p-0 border-transparent transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg [--card-spacing:--spacing(2.5)]  sm:[--card-spacing:--spacing(4)] ${
           isPromoted ? "hover:border-orange-500/40" : "hover:border-border"
         } ${soldOut ? "opacity-70 grayscale" : ""}`}
       >
