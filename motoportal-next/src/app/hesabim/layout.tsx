@@ -1,8 +1,16 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/services/auth";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { AccountSidebar } from "@/components/account/AccountSidebar";
 import Navbar from "@/components/Home/Navbar/Navbar";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 // /hesabim, dealer/admin panelinden (dashboard) tamamen ayrı bir
 // müşteri alanı — sadece customer rolüne açık. middleware.ts'teki

@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import ProductCard from "@/components/product/ProductCard";
 import type { Product } from "@/services/catalog";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const sampleProducts: Product[] = [
   {

@@ -39,6 +39,9 @@ const archivo = Archivo({
 
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://motoportal.com.tr"
+  ),
   title: {
     template: "%s | MotoPortal",
     default: "MotoPortal",
@@ -46,6 +49,18 @@ export const metadata: Metadata = {
   description: "Motor tutkunlarının dijital durağı",
   verification: {
     google: "jbr5m5E_8ykbpAxddBx1IPdrR1d6nYojYJMiJ0lNAJY",
+  },
+  openGraph: {
+    siteName: "MotoPortal",
+    locale: "tr_TR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
