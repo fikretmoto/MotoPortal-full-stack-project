@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 if (!API_URL) {
@@ -203,7 +205,10 @@ export type ProductReview = {
 
 
 
-export async function getCategories(): Promise<Category[]> {
+// React cache() ile sarmalı: generateMetadata (getCategoryBySlug
+// üzerinden) ve sayfa gövdesi aynı render pass'te bu fonksiyonu
+// çağırırsa, gerçek fetch tek seferde yapılır.
+export const getCategories = cache(async (): Promise<Category[]> => {
   const response = await fetch(`${API_URL}/categories/`, {
     cache: "no-store",
   });
@@ -215,7 +220,18 @@ export async function getCategories(): Promise<Category[]> {
   }
 
   return response.json();
-}
+});
+
+// generateMetadata'daki getCategories()+.find() tekrarını tek bir
+// yerde toplar; getCategories() zaten cache()'li olduğu için sayfa
+// gövdesindeki ayrı getCategories()+.find() çağrısıyla aynı fetch'i
+// paylaşır.
+export const getCategoryBySlug = cache(
+  async (slug: string): Promise<Category | null> => {
+    const categories = await getCategories();
+    return categories.find((c) => c.slug === slug) ?? null;
+  }
+);
 
 
 
@@ -444,27 +460,36 @@ export async function getProductsOnDiscount(): Promise<Product[]> {
 
   return data.results;
 }
-export async function getProductBySlug(
-  slug: string
-): Promise<ProductDetail> {
-  const response = await fetch(
-    `${API_URL}/products/${slug}/`,
-    {
-      cache: "no-store",
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(
-      `Ürün detayı alınamadı. HTTP ${response.status}`
+// React cache() ile sarmalı: generateMetadata() ve sayfa gövdesi aynı
+// slug için bu fonksiyonu çağırdığında (aynı render pass içinde),
+// gerçek fetch sadece bir kez yapılır -- `cache: "no-store"` fetch
+// seçeneğiyle Next'in otomatik request memoization'ının davranışı
+// garanti olmadığı için (farklı Next sürümlerinde değişebiliyor),
+// burada React'ın kendi cache()'ine güveniyoruz.
+export const getProductBySlug = cache(
+  async (slug: string): Promise<ProductDetail> => {
+    const response = await fetch(
+      `${API_URL}/products/${slug}/`,
+      {
+        cache: "no-store",
+      }
     );
+
+    if (!response.ok) {
+      throw new Error(
+        `Ürün detayı alınamadı. HTTP ${response.status}`
+      );
+    }
+
+    return response.json();
   }
-
-  return response.json();
-}
+);
 
 
-export async function getBrandBySlug(slug: string): Promise<Brand> {
+// React cache() ile sarmalı: marka sayfasının generateMetadata'sı bu
+// fonksiyonu kullanıyor, aynı render pass içinde tekrar çağrılırsa
+// (örn. ileride sayfa gövdesi de buna geçerse) fetch tekrarlanmaz.
+export const getBrandBySlug = cache(async (slug: string): Promise<Brand> => {
   const response = await fetch(
     `${API_URL}/brands/${slug}/`,
     {
@@ -479,7 +504,7 @@ export async function getBrandBySlug(slug: string): Promise<Brand> {
   }
 
   return response.json();
-}
+});
 
 
 export type AttributeOption = {

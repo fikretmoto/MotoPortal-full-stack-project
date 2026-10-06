@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import ProductHero from "@/components/product/ProductHero";
@@ -24,12 +25,64 @@ import {
   getProductReviews,
   type ProductDetail,
 } from "@/services/catalog";
+import { buildProductTitle, buildProductDescription } from "@/lib/seo";
 
 type ProductDetailPageProps = {
   params: Promise<{
     slug: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+}: ProductDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  let product: ProductDetail;
+  try {
+    // getProductBySlug React cache() ile sarmalı (services/catalog.ts)
+    // -- aşağıdaki sayfa gövdesi aynı slug için tekrar çağırdığında
+    // gerçek fetch tekrarlanmıyor.
+    product = await getProductBySlug(slug);
+  } catch {
+    return {
+      title: "Ürün bulunamadı",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
+  const title = buildProductTitle(product);
+  const description = buildProductDescription(title, product);
+  const canonical = `/products/${slug}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "website",
+      ...(product.cover_image_url
+        ? { images: [{ url: product.cover_image_url, alt: title }] }
+        : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(product.cover_image_url
+        ? { images: [product.cover_image_url] }
+        : {}),
+    },
+  };
+}
 
 export default async function ProductDetailPage({
   params,

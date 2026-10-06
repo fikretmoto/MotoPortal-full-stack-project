@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductsByTag,  getProductsByTagAndCategories, getProductsOnDiscount } from "@/services/catalog";
+import { buildTagDescription } from "@/lib/seo";
 import ProductCard from "@/components/product/ProductCard";
 import { campaignTags, gearTags, bakimTags, aksesuarTags } from "@/constant/homepageBlocks";
 import type { TagPill } from "@/components/Home/TagCategoryBlock/TagCategoryBlock";
@@ -55,8 +56,38 @@ export async function generateMetadata({
   const { slug } = await params;
   const tag = ALL_TAGS.find((t) => t.href === `/${slug}`);
 
+  if (!tag) {
+    return {
+      title: "Sayfa bulunamadı",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
+  const title = tag.label;
+  const description = buildTagDescription(tag.label);
+  // ?scope= her zaman dışlanıyor -- kanonik her zaman taban (scope'suz) path.
+  const canonical = `/${slug}`;
+
   return {
-    title: tag ? tag.label : undefined,
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
