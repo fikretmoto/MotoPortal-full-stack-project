@@ -136,8 +136,8 @@ type CategoryTitleInput = {
 
 export function buildCategoryTitle(category: CategoryTitleInput): string {
   const phrase = category.is_vehicle
-    ? `${category.name} Modelleri ve Fiyatları`
-    : `${category.name} Fiyatları ve Modelleri`;
+    ? `${category.name} – Modeller ve Fiyatlar`
+    : `${category.name} – Ürünler ve Fiyatlar`;
 
   return truncateAtWord(phrase, TITLE_MAX_LENGTH);
 }
@@ -145,11 +145,20 @@ export function buildCategoryTitle(category: CategoryTitleInput): string {
 type CategoryDescriptionInput = {
   name: string;
   parent_name: string | null;
+  is_vehicle: boolean;
 };
 
 export function buildCategoryDescription(
   category: CategoryDescriptionInput
 ): string {
+  if (!category.is_vehicle) {
+    const template = `${category.name} ürünlerini ve fiyatlarını MotoPortal'da incele ve karşılaştır.`;
+
+    return template.length > DESCRIPTION_MAX_LENGTH
+      ? `${truncateAtWord(template, DESCRIPTION_MAX_LENGTH - 1)}…`
+      : template;
+  }
+
   const subject = category.parent_name
     ? `${category.name} · ${category.parent_name}`
     : category.name;
