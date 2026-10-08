@@ -478,8 +478,11 @@ CATEGORY_DATA = [
                                 "parent_slug": "ekipman",
                             },
 
-                            
-                    
+    {"name": "Tulum", "slug": "tulum", "parent_slug": "ekipman"},
+    {"name": "Termal İçlik", "slug": "termal-iclik", "parent_slug": "ekipman"},
+    {"name": "Bone & Boyunluk", "slug": "bone-boyunluk", "parent_slug": "ekipman"},
+    {"name": "Kask İçi Bone", "slug": "kask-ici-bone", "parent_slug": "bone-boyunluk"},
+    {"name": "Boyunluk / Bandana", "slug": "boyunluk-bandana", "parent_slug": "bone-boyunluk"},
 
 
 

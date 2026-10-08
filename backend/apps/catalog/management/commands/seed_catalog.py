@@ -11,6 +11,8 @@ from apps.catalog.attribute_options.bicycle_common import BICYCLE_COMMON_ATTRIBU
 from apps.catalog.attribute_options.accessories import ACCESSORIES_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.e_market_tipi import E_MARKET_TIPI_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.e_kasali import E_KASALI_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.apparel_common import APPAREL_COMMON_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.apparel_jacket import APPAREL_JACKET_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attributes.ecommerce import ECOMMERCE_ATTRIBUTE_DATA
 from apps.catalog.attributes.scooter import SCOOTER_ATTRIBUTE_DATA
 
@@ -18,7 +20,8 @@ from apps.catalog.attribute_groups import ATTRIBUTE_GROUP_DATA
 from apps.catalog.attributes.helmet import HELMET_ATTRIBUTE_DATA
 from apps.catalog.attributes.motorcycle import MOTORCYCLE_ATTRIBUTE_DATA
 from apps.catalog.attributes.atv import ATV_ATTRIBUTE_DATA
-from apps.catalog.attributes.apparel import APPAREL_ATTRIBUTE_DATA
+from apps.catalog.attributes.apparel_common import APPAREL_COMMON_ATTRIBUTE_DATA
+from apps.catalog.attributes.apparel_jacket import APPAREL_JACKET_ATTRIBUTE_DATA
 from apps.catalog.attributes.battery import BATTERY_ATTRIBUTE_DATA
 from apps.catalog.attributes.oil import OIL_ATTRIBUTE_DATA
 from apps.catalog.attributes.tire import TIRE_ATTRIBUTE_DATA
@@ -68,9 +71,10 @@ from apps.catalog.category_attributes.motorcycle import (
     MOTORCYCLE_CATEGORY_SLUGS,
     MOTORCYCLE_HIGHLIGHT_SLUGS,
 )
-from apps.catalog.category_attributes.apparel import (
-    APPAREL_ATTRIBUTE_SLUGS,
-    APPAREL_CATEGORY_SLUGS,
+from apps.catalog.category_attributes.apparel_jacket import (
+    APPAREL_JACKET_ATTRIBUTE_SLUGS,
+    APPAREL_JACKET_CATEGORY_SLUGS,
+    APPAREL_JACKET_HIGHLIGHT_SLUGS,
 )
 from apps.catalog.category_attributes.battery import (
     BATTERY_ATTRIBUTE_SLUGS,
@@ -255,7 +259,8 @@ class Command(BaseCommand):
             *HELMET_ATTRIBUTE_DATA,
             *SCOOTER_ATTRIBUTE_DATA,
             *ECOMMERCE_ATTRIBUTE_DATA,
-            *APPAREL_ATTRIBUTE_DATA,
+            *APPAREL_COMMON_ATTRIBUTE_DATA,
+            *APPAREL_JACKET_ATTRIBUTE_DATA,
             *BATTERY_ATTRIBUTE_DATA,
             *OIL_ATTRIBUTE_DATA,
             *TIRE_ATTRIBUTE_DATA,
@@ -336,8 +341,9 @@ class Command(BaseCommand):
                 mappings[category_slug] = BENZINLI_SCOOTER_ATTRIBUTE_SLUGS
                 highlight_mappings[category_slug] = BENZINLI_SCOOTER_HIGHLIGHT_SLUGS
 
-        for category_slug in APPAREL_CATEGORY_SLUGS:
-                mappings[category_slug] = APPAREL_ATTRIBUTE_SLUGS
+        for category_slug in APPAREL_JACKET_CATEGORY_SLUGS:
+                mappings[category_slug] = APPAREL_JACKET_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = APPAREL_JACKET_HIGHLIGHT_SLUGS
 
         for category_slug in BATTERY_CATEGORY_SLUGS:
                 mappings[category_slug] = BATTERY_ATTRIBUTE_SLUGS
@@ -452,6 +458,8 @@ class Command(BaseCommand):
             *ACCESSORIES_ATTRIBUTE_OPTION_DATA,
             *E_MARKET_TIPI_ATTRIBUTE_OPTION_DATA,
             *E_KASALI_ATTRIBUTE_OPTION_DATA,
+            *APPAREL_COMMON_ATTRIBUTE_OPTION_DATA,
+            *APPAREL_JACKET_ATTRIBUTE_OPTION_DATA,
         ]
 
         option_count = 0
