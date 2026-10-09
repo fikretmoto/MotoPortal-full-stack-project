@@ -13,6 +13,14 @@ from apps.catalog.attribute_options.e_market_tipi import E_MARKET_TIPI_ATTRIBUTE
 from apps.catalog.attribute_options.e_kasali import E_KASALI_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.apparel_common import APPAREL_COMMON_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.apparel_jacket import APPAREL_JACKET_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.apparel_pants import APPAREL_PANTS_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.apparel_gloves import APPAREL_GLOVES_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.apparel_boots import APPAREL_BOOTS_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.apparel_rain import APPAREL_RAIN_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.apparel_suit import APPAREL_SUIT_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.apparel_base_layer import APPAREL_BASE_LAYER_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.headwear import HEADWEAR_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.protection import PROTECTION_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attributes.ecommerce import ECOMMERCE_ATTRIBUTE_DATA
 from apps.catalog.attributes.scooter import SCOOTER_ATTRIBUTE_DATA
 
@@ -22,6 +30,14 @@ from apps.catalog.attributes.motorcycle import MOTORCYCLE_ATTRIBUTE_DATA
 from apps.catalog.attributes.atv import ATV_ATTRIBUTE_DATA
 from apps.catalog.attributes.apparel_common import APPAREL_COMMON_ATTRIBUTE_DATA
 from apps.catalog.attributes.apparel_jacket import APPAREL_JACKET_ATTRIBUTE_DATA
+from apps.catalog.attributes.apparel_pants import APPAREL_PANTS_ATTRIBUTE_DATA
+from apps.catalog.attributes.apparel_gloves import APPAREL_GLOVES_ATTRIBUTE_DATA
+from apps.catalog.attributes.apparel_boots import APPAREL_BOOTS_ATTRIBUTE_DATA
+from apps.catalog.attributes.apparel_rain import APPAREL_RAIN_ATTRIBUTE_DATA
+from apps.catalog.attributes.apparel_suit import APPAREL_SUIT_ATTRIBUTE_DATA
+from apps.catalog.attributes.apparel_base_layer import APPAREL_BASE_LAYER_ATTRIBUTE_DATA
+from apps.catalog.attributes.headwear import HEADWEAR_ATTRIBUTE_DATA
+from apps.catalog.attributes.protection import PROTECTION_ATTRIBUTE_DATA
 from apps.catalog.attributes.battery import BATTERY_ATTRIBUTE_DATA
 from apps.catalog.attributes.oil import OIL_ATTRIBUTE_DATA
 from apps.catalog.attributes.tire import TIRE_ATTRIBUTE_DATA
@@ -75,6 +91,49 @@ from apps.catalog.category_attributes.apparel_jacket import (
     APPAREL_JACKET_ATTRIBUTE_SLUGS,
     APPAREL_JACKET_CATEGORY_SLUGS,
     APPAREL_JACKET_HIGHLIGHT_SLUGS,
+)
+from apps.catalog.category_attributes.apparel_pants import (
+    APPAREL_PANTS_ATTRIBUTE_SLUGS,
+    APPAREL_PANTS_CATEGORY_SLUGS,
+    APPAREL_PANTS_HIGHLIGHT_SLUGS,
+)
+from apps.catalog.category_attributes.apparel_gloves import (
+    APPAREL_GLOVES_ATTRIBUTE_SLUGS,
+    APPAREL_GLOVES_CATEGORY_SLUGS,
+    APPAREL_GLOVES_HIGHLIGHT_SLUGS,
+)
+from apps.catalog.category_attributes.apparel_boots import (
+    APPAREL_BOOTS_ATTRIBUTE_SLUGS,
+    APPAREL_BOOTS_CATEGORY_SLUGS,
+    APPAREL_BOOTS_HIGHLIGHT_SLUGS,
+)
+from apps.catalog.category_attributes.apparel_rain import (
+    APPAREL_RAIN_ATTRIBUTE_SLUGS,
+    APPAREL_RAIN_CATEGORY_SLUGS,
+    APPAREL_RAIN_HIGHLIGHT_SLUGS,
+)
+from apps.catalog.category_attributes.apparel_suit import (
+    APPAREL_SUIT_ATTRIBUTE_SLUGS,
+    APPAREL_SUIT_CATEGORY_SLUGS,
+    APPAREL_SUIT_HIGHLIGHT_SLUGS,
+)
+from apps.catalog.category_attributes.apparel_base_layer import (
+    APPAREL_BASE_LAYER_ATTRIBUTE_SLUGS,
+    APPAREL_BASE_LAYER_CATEGORY_SLUGS,
+    APPAREL_BASE_LAYER_HIGHLIGHT_SLUGS,
+)
+from apps.catalog.category_attributes.headwear import (
+    HEADWEAR_ATTRIBUTE_SLUGS,
+    HEADWEAR_CATEGORY_SLUGS,
+    HEADWEAR_HIGHLIGHT_SLUGS,
+)
+from apps.catalog.category_attributes.protection import (
+    PROTECTION_ATTRIBUTE_SLUGS,
+    PROTECTION_CATEGORY_SLUGS,
+    PROTECTION_HIGHLIGHT_SLUGS,
+    ZIRHLI_GOMLEK_YELEK_ATTRIBUTE_SLUGS,
+    ZIRHLI_GOMLEK_YELEK_CATEGORY_SLUGS,
+    ZIRHLI_GOMLEK_YELEK_HIGHLIGHT_SLUGS,
 )
 from apps.catalog.category_attributes.battery import (
     BATTERY_ATTRIBUTE_SLUGS,
@@ -261,6 +320,14 @@ class Command(BaseCommand):
             *ECOMMERCE_ATTRIBUTE_DATA,
             *APPAREL_COMMON_ATTRIBUTE_DATA,
             *APPAREL_JACKET_ATTRIBUTE_DATA,
+            *APPAREL_PANTS_ATTRIBUTE_DATA,
+            *APPAREL_GLOVES_ATTRIBUTE_DATA,
+            *APPAREL_BOOTS_ATTRIBUTE_DATA,
+            *APPAREL_RAIN_ATTRIBUTE_DATA,
+            *APPAREL_SUIT_ATTRIBUTE_DATA,
+            *APPAREL_BASE_LAYER_ATTRIBUTE_DATA,
+            *HEADWEAR_ATTRIBUTE_DATA,
+            *PROTECTION_ATTRIBUTE_DATA,
             *BATTERY_ATTRIBUTE_DATA,
             *OIL_ATTRIBUTE_DATA,
             *TIRE_ATTRIBUTE_DATA,
@@ -344,6 +411,42 @@ class Command(BaseCommand):
         for category_slug in APPAREL_JACKET_CATEGORY_SLUGS:
                 mappings[category_slug] = APPAREL_JACKET_ATTRIBUTE_SLUGS
                 highlight_mappings[category_slug] = APPAREL_JACKET_HIGHLIGHT_SLUGS
+
+        for category_slug in APPAREL_PANTS_CATEGORY_SLUGS:
+                mappings[category_slug] = APPAREL_PANTS_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = APPAREL_PANTS_HIGHLIGHT_SLUGS
+
+        for category_slug in APPAREL_GLOVES_CATEGORY_SLUGS:
+                mappings[category_slug] = APPAREL_GLOVES_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = APPAREL_GLOVES_HIGHLIGHT_SLUGS
+
+        for category_slug in APPAREL_BOOTS_CATEGORY_SLUGS:
+                mappings[category_slug] = APPAREL_BOOTS_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = APPAREL_BOOTS_HIGHLIGHT_SLUGS
+
+        for category_slug in APPAREL_RAIN_CATEGORY_SLUGS:
+                mappings[category_slug] = APPAREL_RAIN_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = APPAREL_RAIN_HIGHLIGHT_SLUGS
+
+        for category_slug in APPAREL_SUIT_CATEGORY_SLUGS:
+                mappings[category_slug] = APPAREL_SUIT_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = APPAREL_SUIT_HIGHLIGHT_SLUGS
+
+        for category_slug in APPAREL_BASE_LAYER_CATEGORY_SLUGS:
+                mappings[category_slug] = APPAREL_BASE_LAYER_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = APPAREL_BASE_LAYER_HIGHLIGHT_SLUGS
+
+        for category_slug in HEADWEAR_CATEGORY_SLUGS:
+                mappings[category_slug] = HEADWEAR_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = HEADWEAR_HIGHLIGHT_SLUGS
+
+        for category_slug in PROTECTION_CATEGORY_SLUGS:
+                mappings[category_slug] = PROTECTION_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = PROTECTION_HIGHLIGHT_SLUGS
+
+        for category_slug in ZIRHLI_GOMLEK_YELEK_CATEGORY_SLUGS:
+                mappings[category_slug] = ZIRHLI_GOMLEK_YELEK_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = ZIRHLI_GOMLEK_YELEK_HIGHLIGHT_SLUGS
 
         for category_slug in BATTERY_CATEGORY_SLUGS:
                 mappings[category_slug] = BATTERY_ATTRIBUTE_SLUGS
@@ -460,6 +563,14 @@ class Command(BaseCommand):
             *E_KASALI_ATTRIBUTE_OPTION_DATA,
             *APPAREL_COMMON_ATTRIBUTE_OPTION_DATA,
             *APPAREL_JACKET_ATTRIBUTE_OPTION_DATA,
+            *APPAREL_PANTS_ATTRIBUTE_OPTION_DATA,
+            *APPAREL_GLOVES_ATTRIBUTE_OPTION_DATA,
+            *APPAREL_BOOTS_ATTRIBUTE_OPTION_DATA,
+            *APPAREL_RAIN_ATTRIBUTE_OPTION_DATA,
+            *APPAREL_SUIT_ATTRIBUTE_OPTION_DATA,
+            *APPAREL_BASE_LAYER_ATTRIBUTE_OPTION_DATA,
+            *HEADWEAR_ATTRIBUTE_OPTION_DATA,
+            *PROTECTION_ATTRIBUTE_OPTION_DATA,
         ]
 
         option_count = 0

@@ -156,7 +156,7 @@ Havuzdan: cinsiyet, kalip, reflektor
 Highlight: yagmurluk-tipi, paketlenebilir, reflektor, dikis-bantli
 
 ### Tulum — apparel_suit (tulum)
-Havuzdan: ortak 9 + en-17092-sinifi, omuz-dirsek-koruma, sirt-koruma, diz-koruma, diz-slider, airbag
+Havuzdan: ortak 9 + en-17092-sinifi, dis-kumas-detayi, omuz-dirsek-koruma, sirt-koruma, gogus-koruma, diz-koruma, diz-slider, airbag
 
 | Alan | Slug | data_type | Seçenekler |
 |---|---|---|---|
