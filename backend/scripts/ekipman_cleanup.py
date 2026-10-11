@@ -24,7 +24,7 @@ icinde calisir; herhangi bir hata olursa (ornegin PROTECT kisitlamasi
 yuzunden) hicbir sey silinmeden islem geri alinir.
 """
 
-DRY_RUN = True
+DRY_RUN = False
 
 
 from django.db import connection, transaction
