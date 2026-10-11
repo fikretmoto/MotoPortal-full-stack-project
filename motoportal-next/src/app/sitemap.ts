@@ -121,6 +121,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
       priority: 1,
     },
+    {
+      url: `${SITE_URL}/iletisim`,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
     ...categories
       .filter((c) => c.is_active && categorySlugsWithProducts.has(c.slug))
       .map((c) => ({

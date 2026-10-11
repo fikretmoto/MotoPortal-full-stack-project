@@ -39,23 +39,9 @@ const UtilityBar = () => {
 
           <Link
             href="/iletisim"
-            className="border-r border-white/10 px-4 transition hover:text-white"
-          >
-            İletişim
-          </Link>
-
-          <Link
-            href="/siparis-takibi"
-            className="border-r border-white/10 px-4 transition hover:text-white"
-          >
-            Sipariş Takibi
-          </Link>
-
-          <Link
-            href="/yardim"
             className="pl-4 transition hover:text-white"
           >
-            Yardım Merkezi
+            İletişim
           </Link>
         </nav>
       </div>
