@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MessageCircle, Phone, Navigation } from "lucide-react";
+import {Phone, Navigation } from "lucide-react";
 
 const IletisimHero = () => {
   return (
@@ -19,13 +19,11 @@ const IletisimHero = () => {
         </nav>
 
         <h1 className="m-0 max-w-[760px] font-[family-name:var(--font-barlow-condensed)] text-[56px] leading-[1.02] font-bold tracking-[0.5px]">
-          Showroom&apos;umuza gelin, motosikletinizi birlikte seçelim.
+          Aradığınız motosikleti bulalım, size ulaştıralım.
         </h1>
 
         <p className="m-0 max-w-[640px] text-[18px] leading-[1.55] text-[oklch(85%_0.01_60)]">
-          İzmir Bayraklı&apos;daki MotoPortal mağazasında motosiklet, scooter,
-          ATV ve ekipmanları yerinde görebilir, test sürüşü ve taksit
-          seçenekleri için bize ulaşabilirsiniz.
+        Sitemizdeki her ürün mağazamızda stokta olmayabilir. Mağazamıza uğrayın ya da bizi arayın; ilgilendiğiniz ürün için ana distribütör firmayla iletişime geçip tedariği sağlayalım ve ürünü size ulaştıralım.
         </p>
 
         <div className="mt-[12px] flex flex-wrap gap-[12px]">
@@ -35,7 +33,20 @@ const IletisimHero = () => {
             rel="noopener noreferrer"
             className="inline-flex min-h-[48px] items-center gap-[10px] rounded-[10px] bg-[#D9531E] px-[22px] text-[16px] font-semibold text-white no-underline"
           >
-            <MessageCircle size={20} aria-hidden="true" />
+            <svg
+  aria-hidden="true"
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  strokeWidth="2"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <path d="M3 21l1.6-4.8A8.5 8.5 0 1 1 7.8 19.4z" />
+  <path d="M9 10.5c.4 1.6 2 3.2 3.6 3.6l1.2-1.2 2 1-.6 1.6c-3.4.2-7.4-3.8-7.2-7.2l1.6-.6 1 2z" />
+</svg>
             WhatsApp&apos;tan yazın
           </a>
 
