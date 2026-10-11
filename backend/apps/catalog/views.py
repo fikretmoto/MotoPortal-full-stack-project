@@ -124,11 +124,18 @@ class BrandListAPIView(generics.ListAPIView):
     pagination_class = None
 
     def get_queryset(self):
-        return (
-            Brand.objects
-            .filter(is_active=True)
-            .order_by("name")
-        )
+        queryset = Brand.objects.filter(is_active=True)
+
+        if self.request.query_params.get("has_products") == "true":
+            brand_ids = (
+                Product.objects
+                .filter(is_active=True)
+                .values_list("brand_id", flat=True)
+                .distinct()
+            )
+            queryset = queryset.filter(id__in=brand_ids)
+
+        return queryset.order_by("name")
 
 
 class BrandDetailAPIView(generics.RetrieveAPIView):

@@ -1,4 +1,22 @@
-import { MapPin, Phone, Mail, Clock, Camera, ArrowUpRight } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, ArrowUpRight } from "lucide-react";
+
+const InstagramIcon = () => (
+  <svg
+    aria-hidden="true"
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect x="2" y="2" width="20" height="20" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="0.6" />
+  </svg>
+);
 
 const iconChipClassName =
   "flex h-[44px] w-[44px] flex-none items-center justify-center rounded-[10px] bg-[oklch(95%_0.03_45)] text-[oklch(50%_0.17_35)]";
@@ -86,7 +104,7 @@ const IletisimInfoCards = () => {
         className={`${cardClassName} items-center text-foreground no-underline`}
       >
         <div className={iconChipClassName}>
-          <Camera size={22} aria-hidden="true" />
+          <InstagramIcon />
         </div>
         <div className="flex flex-1 flex-col gap-[2px]">
           <div className={labelClassName}>Instagram</div>

@@ -282,6 +282,22 @@ export async function getBrands(): Promise<Brand[]> {
   return data;
 }
 
+export async function getBrandsWithProducts(): Promise<Brand[]> {
+  const response = await fetch(`${API_URL}/brands/?has_products=true`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `Markalar alınamadı. HTTP durum kodu: ${response.status}`
+    );
+  }
+
+  const data: Brand[] = await response.json();
+
+  return data;
+}
+
 
 
 export async function getBrandsByCategory(

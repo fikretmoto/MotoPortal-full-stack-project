@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { getBrands } from "@/services/catalog";
+import { getBrandsWithProducts } from "@/services/catalog";
 
 const IletisimBrandStrip = async () => {
-  const brands = await getBrands();
-  const activeBrands = brands.filter((brand) => brand.is_active);
+  const brands = await getBrandsWithProducts();
 
   return (
     <section className="px-[24px] pt-[32px] pb-[72px]">
@@ -12,7 +11,7 @@ const IletisimBrandStrip = async () => {
           Mağazamızda bulabileceğiniz markalar
         </h2>
         <div className="flex flex-wrap gap-[10px]">
-          {activeBrands.map((brand) => (
+          {brands.map((brand) => (
             <Link
               key={brand.slug}
               href={`/marka/${brand.slug}`}
