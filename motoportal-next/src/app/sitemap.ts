@@ -14,7 +14,7 @@ import {
 
 export const revalidate = 3600;
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://motoportal.com.tr";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.motoportal.com.tr";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 type PaginatedResponse<T> = {
