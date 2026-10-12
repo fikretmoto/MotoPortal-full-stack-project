@@ -1,4 +1,5 @@
 BRAND_DATA = [
+    {"name": "A-Pro", "slug": "a-pro", "country": "İtalya", "founded_year": None, "website": "", "description": "İtalyan motosiklet giyim ve ekipman markası."},
     {"name": "Abush", "slug": "abush", "country": "Türkiye", "founded_year": None, "website": "", "description": ""},
     {"name": "Aprilia", "slug": "aprilia", "country": "İtalya", "founded_year": 1945, "website": "", "description": ""},
     {"name": "Arora", "slug": "arora", "country": "Türkiye", "founded_year": None, "website": "", "description": ""},
