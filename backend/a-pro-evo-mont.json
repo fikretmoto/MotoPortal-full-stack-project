@@ -1,0 +1,121 @@
+{
+  "format_version": 1,
+  "product": {
+    "slug": "a-pro-evo-mont",
+    "name": "A pro evo mont",
+    "product_code": null,
+    "brand_slug": "a-pro",
+    "category_slug": "motosiklet-montu",
+    "vehicle_model": null,
+    "price": "5500.00",
+    "discount_price": "4500.00",
+    "currency": "TRY",
+    "stock_status": "in_stock",
+    "short_description": "“Sıfır, çıkarılabilir termal astarlı 3 mevsim touring mont. Koruyucu cepli, koruyucular dahil değildir.”",
+    "description": "A-Pro Evo serisi tekstil motosiklet montu. Sıfır, kullanılmamış üründür. Çıkarılabilir HotLife termal astarı sayesinde serin havalarda da rahatlıkla kullanılabilir. Omuz, dirsek ve sırt bölgelerinde koruyucu cepleri bulunur. Ürün uzun süre stokta beklediği için orijinal koruyucular çıkarılmıştır; dilediğiniz CE sertifikalı koruyucuyu ayrıca satın alıp kolayca takabilirsiniz. Su geçirmez değildir.",
+    "instagram_url": "https://instagram.com/motoportaltr",
+    "whatsapp_number": "905534512259",
+    "cover_image": null,
+    "is_featured": false,
+    "is_active": true
+  },
+  "tags": [],
+  "attribute_values": [
+    {
+      "attribute_slug": "airbag",
+      "value": "Yok"
+    },
+    {
+      "attribute_slug": "ana-malzeme",
+      "value": "Tekstil"
+    },
+    {
+      "attribute_slug": "ayarlanabilir-bel-kol",
+      "value": "true"
+    },
+    {
+      "attribute_slug": "baglanti-fermuari",
+      "value": "Uzun (Tam Çevre)"
+    },
+    {
+      "attribute_slug": "bakim-talimati",
+      "value": "Elde yıkayın, makinede yıkamayın. Maksimum 40°C. Suda bekletmeyin, sıkmayın; askıda kurutun. Tamamen kurumadan kaldırmayın. Ütülemeyin, kuru temizleme ve çamaşır suyu kullanmayın. Sert kimyasal kullanmayın. Yıkamadan önce tüm koruyucuları çıkarın."
+    },
+    {
+      "attribute_slug": "cinsiyet",
+      "value": "Erkek"
+    },
+    {
+      "attribute_slug": "garanti-suresi",
+      "value": "2 yıl"
+    },
+    {
+      "attribute_slug": "gogus-koruma",
+      "value": "Yok"
+    },
+    {
+      "attribute_slug": "havalandirma-fermuarlari",
+      "value": "true"
+    },
+    {
+      "attribute_slug": "kalip",
+      "value": "Standart"
+    },
+    {
+      "attribute_slug": "kullanim-talimati",
+      "value": "Elde yıkayın, makinede yıkamayın. Maksimum 40°C. Suda bekletmeyin, sıkmayın; askıda kurutun. Tamamen kurumadan kaldırmayın. Ütülemeyin, kuru temizleme ve çamaşır suyu kullanmayın. Sert kimyasal kullanmayın. Yıkamadan önce tüm koruyucuları çıkarın."
+    },
+    {
+      "attribute_slug": "mensei-ulke",
+      "value": "italyan"
+    },
+    {
+      "attribute_slug": "mont-tipi",
+      "value": "Mont"
+    },
+    {
+      "attribute_slug": "omuz-dirsek-koruma",
+      "value": "Yok"
+    },
+    {
+      "attribute_slug": "reflektor",
+      "value": "true"
+    },
+    {
+      "attribute_slug": "renk",
+      "value": "Gri"
+    },
+    {
+      "attribute_slug": "sezon",
+      "value": "3 Mevsim"
+    },
+    {
+      "attribute_slug": "sirt-koruma",
+      "value": "Dahil – Seviye 1"
+    },
+    {
+      "attribute_slug": "su-gecirmez-ic-cep",
+      "value": "true"
+    },
+    {
+      "attribute_slug": "su-gecirmez-membran",
+      "value": "Yok"
+    },
+    {
+      "attribute_slug": "surus-tarzi",
+      "value": "Touring-Adventure"
+    },
+    {
+      "attribute_slug": "termal-astar",
+      "value": "Çıkarılabilir"
+    },
+    {
+      "attribute_slug": "uretici",
+      "value": "italya"
+    }
+  ],
+  "variants": [],
+  "images": [],
+  "highlight_images": [],
+  "resources": []
+}
