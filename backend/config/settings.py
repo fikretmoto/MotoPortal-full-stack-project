@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 from dotenv import load_dotenv
+from django.core.exceptions import ImproperlyConfigured
 import dj_database_url
 from pathlib import Path
 from datetime import timedelta
@@ -20,6 +21,31 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
+
+# Guvenlik kilidi: DATABASE_URL production'i (render.com) gosteriyorsa,
+# ya Render'in kendi altyapisinda calisiyor olmaliyiz (RENDER=true,
+# platform tarafindan otomatik enjekte edilir) ya da run_production.ps1
+# uzerinden bilerek baglanilmis olmaliyiz (ALLOW_PRODUCTION=1, script
+# bunu kendi try/finally'siyle set edip siliyor). Ikisi de yoksa, bu
+# muhtemelen onceki bir run_production.ps1 calismasindan kalan bir
+# DATABASE_URL sizintisidir -- Django hic baslamadan patlat.
+_database_url = os.environ.get("DATABASE_URL", "")
+_is_render_database = "render.com" in _database_url
+_is_running_on_render = os.environ.get("RENDER") == "true"
+_production_access_allowed = os.environ.get("ALLOW_PRODUCTION") == "1"
+
+if (
+    _is_render_database
+    and not _is_running_on_render
+    and not _production_access_allowed
+):
+    raise ImproperlyConfigured(
+        "DATABASE_URL production (render.com) veritabanini gosteriyor "
+        "ama ne RENDER=true ne de ALLOW_PRODUCTION=1 set edilmis. Bu "
+        "muhtemelen onceki bir run_production.ps1 calismasindan kalan "
+        "bir ortam degiskeni sizintisi. Gercekten production'a "
+        "baglanmak istiyorsan scripts/run_production.ps1 kullan."
+    )
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/

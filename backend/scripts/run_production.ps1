@@ -100,11 +100,41 @@ if ($confirmation -ne "evet") {
     exit 1
 }
 
-$env:DATABASE_URL = $databaseUrl
-if ($cloudinaryUrl) {
-    $env:CLOUDINARY_URL = $cloudinaryUrl
+$previousDatabaseUrl = $env:DATABASE_URL
+$previousCloudinaryUrl = $env:CLOUDINARY_URL
+$hadDatabaseUrl = Test-Path Env:\DATABASE_URL
+$hadCloudinaryUrl = Test-Path Env:\CLOUDINARY_URL
+
+try {
+    $env:DATABASE_URL = $databaseUrl
+    $env:ALLOW_PRODUCTION = "1"
+    if ($cloudinaryUrl) {
+        $env:CLOUDINARY_URL = $cloudinaryUrl
+    }
+
+    python manage.py @ManageArgs
+    $exitCode = $LASTEXITCODE
+}
+finally {
+    # DATABASE_URL/CLOUDINARY_URL/ALLOW_PRODUCTION bu PowerShell
+    # oturumunun process ortam degiskenleridir -- script "bitince"
+    # kendiliginden silinmezler. Bunlari her zaman eski haline
+    # dondurmezsek, aynı terminaldeki SONRAKI "local" komutlar
+    # (runserver, shell, changepassword...) sessizce production'a
+    # baglanmaya devam eder.
+    if ($hadDatabaseUrl) {
+        $env:DATABASE_URL = $previousDatabaseUrl
+    } else {
+        Remove-Item Env:\DATABASE_URL -ErrorAction SilentlyContinue
+    }
+
+    if ($hadCloudinaryUrl) {
+        $env:CLOUDINARY_URL = $previousCloudinaryUrl
+    } else {
+        Remove-Item Env:\CLOUDINARY_URL -ErrorAction SilentlyContinue
+    }
+
+    Remove-Item Env:\ALLOW_PRODUCTION -ErrorAction SilentlyContinue
 }
 
-python manage.py @ManageArgs
-
-exit $LASTEXITCODE
+exit $exitCode

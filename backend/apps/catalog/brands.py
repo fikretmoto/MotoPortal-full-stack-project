@@ -119,7 +119,7 @@ BRAND_DATA = [
     {"name": "Torc", "slug": "torc", "country": "ABD", "founded_year": None, "website": "", "description": ""},
     {"name": "Sway", "slug": "sway", "country": "", "founded_year": None, "website": "", "description": ""},
     {"name": "CGM", "slug": "cgm", "country": "İtalya", "founded_year": None, "website": "", "description": ""},
-    {"name": "Rev'it", "slug": "revit", "country": "Hollanda", "founded_year": None, "website": "", "description": ""},
+    {"name": "REVIT", "slug": "revit", "country": "Hollanda", "founded_year": None, "website": "", "description": ""},
     {"name": "Dainese", "slug": "dainese", "country": "İtalya", "founded_year": None, "website": "", "description": ""},
     {"name": "Alpinestars", "slug": "alpinestars", "country": "İtalya", "founded_year": None, "website": "", "description": ""},
     {"name": "Held", "slug": "held", "country": "Almanya", "founded_year": None, "website": "", "description": ""},
@@ -136,7 +136,8 @@ BRAND_DATA = [
     {"name": "Venom", "slug": "venom", "country": "Türkiye", "founded_year": None, "website": "", "description": ""},
     {"name": "Forma", "slug": "forma", "country": "İtalya", "founded_year": None, "website": "", "description": ""},
     {"name": "Sena", "slug": "sena", "country": "ABD", "founded_year": None, "website": "", "description": ""},
-
+  
+        
         # Çanta / Bagaj Markaları
     {"name": "Kappa", "slug": "kappa", "country": "İtalya", "founded_year": None, "website": "", "description": ""},
     {"name": "SW-Motech", "slug": "sw-motech", "country": "Almanya", "founded_year": None, "website": "", "description": ""},
