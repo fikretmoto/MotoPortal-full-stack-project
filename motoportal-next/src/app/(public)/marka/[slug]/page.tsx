@@ -116,7 +116,7 @@ export default async function BrandPage({ params, searchParams }: Props) {
       <div className="relative h-40 w-full bg-elevated sm:h-48">
         {BRAND_LOGOS[slug] && (
           <div className="absolute left-1/2 top-full -mt-12 -translate-x-1/2">
-            <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-inverted bg-inverted shadow-lg">
+            <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-line bg-elevated shadow-lg">
               <Image
                 src={BRAND_LOGOS[slug]}
                 alt={brand.name}

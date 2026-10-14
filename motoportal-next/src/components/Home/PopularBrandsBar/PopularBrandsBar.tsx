@@ -96,7 +96,7 @@ const PopularBrandsBar = () => {
                   aria-label={brand.name}
                   className="group flex flex-col items-center gap-2 sm:gap-2.5"
                 >
-                  <span className="flex h-9 w-full items-center justify-center rounded-md bg-inverted px-2">
+                  <span className="flex h-9 w-full items-center justify-center rounded-md border border-line bg-elevated px-2 transition hover:bg-muted">
                     <Image
                       src={brand.logo}
                       alt={brand.name}
