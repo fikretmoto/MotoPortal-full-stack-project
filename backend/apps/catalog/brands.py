@@ -136,8 +136,9 @@ BRAND_DATA = [
     {"name": "Venom", "slug": "venom", "country": "Türkiye", "founded_year": None, "website": "", "description": ""},
     {"name": "Forma", "slug": "forma", "country": "İtalya", "founded_year": None, "website": "", "description": ""},
     {"name": "Sena", "slug": "sena", "country": "ABD", "founded_year": None, "website": "", "description": ""},
-  
-        
+    {"name": "Hevik", "slug": "hevik", "country": "İtalya", "founded_year": None, "website": "", "description": "İtalyan motosiklet giyim ve ekipman markası."},
+    {"name": "Forte GT", "slug": "forte-gt", "country": "Türkiye", "founded_year": None, "website": "", "description": "Türk motosiklet giyim ve ekipman markası."},  
+   
         # Çanta / Bagaj Markaları
     {"name": "Kappa", "slug": "kappa", "country": "İtalya", "founded_year": None, "website": "", "description": ""},
     {"name": "SW-Motech", "slug": "sw-motech", "country": "Almanya", "founded_year": None, "website": "", "description": ""},
