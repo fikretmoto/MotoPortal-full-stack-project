@@ -1,4 +1,10 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { Brand, AttributeGroupWithAttributes } from "@/services/catalog";
+import { parseFacets, stringifyFacets } from "@/lib/facets";
+import { PRODUCT_GRID_ANCHOR_ID } from "./Pagination";
 
 const FEATURE_TAGS = [
   { name: "Ücretsiz Kargo", slug: "ucretsiz-kargo" },
@@ -41,6 +47,92 @@ export default function CategoryFilterSidebar({
   attributeGroups,
   brands,
 }: Props) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const selectedBrands = (searchParams.get("brand") ?? "")
+    .split(",")
+    .filter(Boolean);
+  const selectedFacets = parseFacets(searchParams.get("facets"));
+
+  const urlPriceMin = searchParams.get("price_min") ?? "";
+  const urlPriceMax = searchParams.get("price_max") ?? "";
+  const [priceMin, setPriceMin] = useState(urlPriceMin);
+  const [priceMax, setPriceMax] = useState(urlPriceMax);
+
+  // Geri/ileri gezinme ya da başka bir filtre URL'yi değiştirdiğinde
+  // fiyat input'larının yerel taslak değerini URL ile senkron tut.
+  useEffect(() => {
+    setPriceMin(urlPriceMin);
+    setPriceMax(urlPriceMax);
+  }, [urlPriceMin, urlPriceMax]);
+
+  function navigateWithParams(mutate: (params: URLSearchParams) => void) {
+    const params = new URLSearchParams(searchParams.toString());
+    mutate(params);
+    params.delete("page");
+
+    const queryString = params.toString();
+    router.push(
+      `${pathname}${queryString ? `?${queryString}` : ""}#${PRODUCT_GRID_ANCHOR_ID}`
+    );
+  }
+
+  function toggleBrand(slug: string) {
+    navigateWithParams((params) => {
+      const next = selectedBrands.includes(slug)
+        ? selectedBrands.filter((s) => s !== slug)
+        : [...selectedBrands, slug];
+
+      if (next.length > 0) {
+        params.set("brand", next.join(","));
+      } else {
+        params.delete("brand");
+      }
+    });
+  }
+
+  function toggleFacetOption(attributeSlug: string, value: string) {
+    navigateWithParams((params) => {
+      const current = selectedFacets[attributeSlug] ?? [];
+      const nextValues = current.includes(value)
+        ? current.filter((v) => v !== value)
+        : [...current, value];
+
+      const nextFacets = { ...selectedFacets, [attributeSlug]: nextValues };
+      const stringified = stringifyFacets(nextFacets);
+
+      if (stringified) {
+        params.set("facets", stringified);
+      } else {
+        params.delete("facets");
+      }
+    });
+  }
+
+  function applyPrice() {
+    navigateWithParams((params) => {
+      if (priceMin) {
+        params.set("price_min", priceMin);
+      } else {
+        params.delete("price_min");
+      }
+
+      if (priceMax) {
+        params.set("price_max", priceMax);
+      } else {
+        params.delete("price_max");
+      }
+    });
+  }
+
+  function handlePriceKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Enter") {
+      applyPrice();
+    }
+  }
+
   const filterableAttributes = attributeGroups
     .flatMap((group) => group.attributes)
     .filter(
@@ -54,12 +146,20 @@ export default function CategoryFilterSidebar({
           <input
             type="number"
             placeholder="Min"
+            value={priceMin}
+            onChange={(e) => setPriceMin(e.target.value)}
+            onBlur={applyPrice}
+            onKeyDown={handlePriceKeyDown}
             className="w-full rounded-md border border-line px-2 py-1.5 text-sm"
           />
           <span className="text-fg-subtle">-</span>
           <input
             type="number"
             placeholder="Max"
+            value={priceMax}
+            onChange={(e) => setPriceMax(e.target.value)}
+            onBlur={applyPrice}
+            onKeyDown={handlePriceKeyDown}
             className="w-full rounded-md border border-line px-2 py-1.5 text-sm"
           />
         </div>
@@ -72,7 +172,12 @@ export default function CategoryFilterSidebar({
               key={brand.id}
               className="flex items-center gap-2 text-sm text-fg-muted"
             >
-              <input type="checkbox" className="rounded border-line" />
+              <input
+                type="checkbox"
+                className="rounded border-line"
+                checked={selectedBrands.includes(brand.slug)}
+                onChange={() => toggleBrand(brand.slug)}
+              />
               {brand.name}
             </label>
           ))}
@@ -86,7 +191,16 @@ export default function CategoryFilterSidebar({
               key={option.id}
               className="flex items-center gap-2 text-sm text-fg-muted"
             >
-              <input type="checkbox" className="rounded border-line" />
+              <input
+                type="checkbox"
+                className="rounded border-line"
+                checked={(selectedFacets[attribute.slug] ?? []).includes(
+                  option.value
+                )}
+                onChange={() =>
+                  toggleFacetOption(attribute.slug, option.value)
+                }
+              />
               {option.value}
             </label>
           ))}

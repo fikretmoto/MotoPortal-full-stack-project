@@ -342,139 +342,140 @@ HTTP ${response.status}`
 
 
 
+export type ProductPage = {
+  results: Product[];
+  count: number;
+};
+
+export type ProductQueryParams = {
+  category?: string;
+  brand?: string;
+  tag?: string;
+  on_discount?: boolean;
+  facets?: string;
+  price_min?: string;
+  price_max?: string;
+  page?: number;
+};
+
+// Tum kategori/etiket/marka urun listeleme fonksiyonlarinin ortak
+// cikis noktasi -- backend'deki ProductFilter'in kabul ettigi query
+// parametreleriyle birebir orantili. page=1 icin ?page hic yazilmaz
+// (DRF zaten varsayilan olarak sayfa 1'i doner, URL'de gereksiz
+// parametre birikmesin diye).
+async function fetchProductPage(
+  params: ProductQueryParams
+): Promise<ProductPage> {
+  const query = new URLSearchParams();
+
+  if (params.category) query.set("category", params.category);
+  if (params.brand) query.set("brand", params.brand);
+  if (params.tag) query.set("tag", params.tag);
+  if (params.on_discount) query.set("on_discount", "true");
+  if (params.facets) query.set("facets", params.facets);
+  if (params.price_min) query.set("price_min", params.price_min);
+  if (params.price_max) query.set("price_max", params.price_max);
+  if (params.page && params.page > 1) {
+    query.set("page", String(params.page));
+  }
+
+  const queryString = query.toString();
+  const response = await fetch(
+    `${API_URL}/products/${queryString ? `?${queryString}` : ""}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  // Gecersiz/asiri page (DRF PageNumberPagination bunu 404 yapar) ya
+  // da baska bir hata -- cokmek yerine bos sonuc donuyoruz, cagiran
+  // taraf (sayfa bileseni) bunu "urun yok" olarak gosterir.
+  if (!response.ok) {
+    return { results: [], count: 0 };
+  }
+
+  const data: PaginatedResponse<Product> = await response.json();
+
+  return { results: data.results, count: data.count };
+}
+
+// VehicleSearchBox'taki marka->model dropdown'u icin: bir markanin
+// TUM urunlerini (sayfalama sinirina takilmadan) dondurur. `next`
+// linkini sonuna kadar takip eder (sitemap.ts'teki
+// getAllActiveProducts ile ayni desen).
 export async function getProductsByBrand(
   brandSlug: string
 ): Promise<Product[]> {
-  const response = await fetch(
-    `${API_URL}/products/?brand=${brandSlug}`,
-    {
-      cache: "no-store",
-    }
-  );
+  const products: Product[] = [];
+  let page = 1;
 
-  if (!response.ok) {
-    return [];
+  while (true) {
+    const { results, count } = await fetchProductPage({
+      brand: brandSlug,
+      page,
+    });
+
+    products.push(...results);
+
+    if (products.length >= count || results.length === 0) {
+      break;
+    }
+
+    page += 1;
   }
 
-  const data: PaginatedResponse<Product> = await response.json();
-
-  return data.results;
+  return products;
 }
 
-
-export async function getProductsByBrandFiltered(
+export async function getProductsByBrandPage(
   brandSlug: string,
   params: {
     category?: string;
-    priceMin?: string;
-    priceMax?: string;
+    price_min?: string;
+    price_max?: string;
     facets?: string;
+    page?: number;
   }
-): Promise<Product[]> {
-  const query = new URLSearchParams({ brand: brandSlug });
-  if (params.category) query.set("category", params.category);
-  if (params.facets) query.set("facets", params.facets);
-
-  const response = await fetch(`${API_URL}/products/?${query.toString()}`, {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    return [];
-  }
-
-  const data: PaginatedResponse<Product> = await response.json();
-  let results = data.results;
-
-  if (params.priceMin) {
-    results = results.filter(
-      (p) => p.price && Number(p.price) >= Number(params.priceMin)
-    );
-  }
-  if (params.priceMax) {
-    results = results.filter(
-      (p) => p.price && Number(p.price) <= Number(params.priceMax)
-    );
-  }
-
-  return results;
+): Promise<ProductPage> {
+  return fetchProductPage({ brand: brandSlug, ...params });
 }
+
 export async function getProductsByTag(
-  tagSlug: string
-): Promise<Product[]> {
-  const response = await fetch(
-    `${API_URL}/products/?tag=${tagSlug}`,
-    {
-      cache: "no-store",
-    }
-  );
-
-  if (!response.ok) {
-    return [];
-  }
-
-  const data: PaginatedResponse<Product> = await response.json();
-
-  return data.results;
+  tagSlug: string,
+  page = 1
+): Promise<ProductPage> {
+  return fetchProductPage({ tag: tagSlug, page });
 }
-
 
 export async function getProductsByTagAndCategories(
   tagSlug: string,
-  categorySlugs: string[]
-): Promise<Product[]> {
-  const categoryParam = categorySlugs.join(",");
-
-  const response = await fetch(
-    `${API_URL}/products/?tag=${tagSlug}&category=${categoryParam}`,
-    {
-      cache: "no-store",
-    }
-  );
-
-  if (!response.ok) {
-    return [];
-  }
-
-  const data: PaginatedResponse<Product> = await response.json();
-
-  return data.results;
+  categorySlugs: string[],
+  page = 1
+): Promise<ProductPage> {
+  return fetchProductPage({
+    tag: tagSlug,
+    category: categorySlugs.join(","),
+    page,
+  });
 }
 
 export async function getProductsByCategory(
-  categorySlug: string
-): Promise<Product[]> {
-  const response = await fetch(
-    `${API_URL}/products/?category=${categorySlug}`,
-    {
-      cache: "no-store",
-    }
-  );
-
-  if (!response.ok) {
-    return [];
-  }
-
-  const data: PaginatedResponse<Product> = await response.json();
-
-  return data.results;
+  categorySlug: string,
+  params: {
+    brand?: string;
+    price_min?: string;
+    price_max?: string;
+    facets?: string;
+    page?: number;
+  } = {}
+): Promise<ProductPage> {
+  return fetchProductPage({ category: categorySlug, ...params });
 }
 
-export async function getProductsOnDiscount(): Promise<Product[]> {
-  const response = await fetch(
-    `${API_URL}/products/?on_discount=true`,
-    {
-      cache: "no-store",
-    }
-  );
-
-  if (!response.ok) {
-    return [];
-  }
-
-  const data: PaginatedResponse<Product> = await response.json();
-
-  return data.results;
+export async function getProductsOnDiscount(
+  page = 1
+): Promise<ProductPage> {
+  return fetchProductPage({ on_discount: true, page });
 }
 // React cache() ile sarmalı: generateMetadata() ve sayfa gövdesi aynı
 // slug için bu fonksiyonu çağırdığında (aynı render pass içinde),

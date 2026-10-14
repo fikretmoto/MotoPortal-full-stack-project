@@ -1,12 +1,17 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { AttributeGroupWithAttributes, Product } from "@/services/catalog";
 import {
   getCategoryAttributes,
-  getProductsByBrandFiltered,
+  getProductsByBrandPage,
 } from "@/services/catalog";
 import ProductCard from "./ProductCard";
+import Pagination, {
+  PRODUCT_GRID_ANCHOR_ID,
+  PRODUCTS_PAGE_SIZE,
+} from "./Pagination";
 import {
   Sheet,
   SheetContent,
@@ -17,17 +22,31 @@ import {
 
 type Props = {
   brandSlug: string;
-  products: Product[];
+  allProducts: Product[];
+  initialProducts: Product[];
+  initialCount: number;
+  initialPage: number;
 };
 
 export default function BrandProductsSection({
   brandSlug,
-  products: initialProducts,
+  allProducts,
+  initialProducts,
+  initialCount,
+  initialPage,
 }: Props) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [count, setCount] = useState(initialCount);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(initialPage);
 
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [priceMinInput, setPriceMinInput] = useState("");
+  const [priceMaxInput, setPriceMaxInput] = useState("");
   const [priceMin, setPriceMin] = useState("");
   const [priceMax, setPriceMax] = useState("");
   const [selectedFacets, setSelectedFacets] = useState<Record<string, string[]>>({});
@@ -36,10 +55,12 @@ export default function BrandProductsSection({
     AttributeGroupWithAttributes[]
   >([]);
 
-  // İlk yüklemedeki ürünlerden kategori listesi + sayıları çıkar (sadece görsel liste için)
+  // Markanın TÜM ürünlerinden (getProductsByBrand artık sayfalama
+  // sınırına takılmadan hepsini getiriyor) kategori listesi + sayıları
+  // çıkar -- ızgarada o an görünen sayfaya bağlı değil.
   const categories = useMemo(() => {
     const map = new Map<string, { slug: string; name: string; count: number }>();
-    for (const product of initialProducts) {
+    for (const product of allProducts) {
       const existing = map.get(product.category.slug);
       if (existing) {
         existing.count += 1;
@@ -52,15 +73,37 @@ export default function BrandProductsSection({
       }
     }
     return Array.from(map.values());
-  }, [initialProducts]);
+  }, [allProducts]);
+
+  function goToPage(targetPage: number) {
+    setPage(targetPage);
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (targetPage > 1) {
+      params.set("page", String(targetPage));
+    } else {
+      params.delete("page");
+    }
+    const queryString = params.toString();
+    router.replace(
+      `${pathname}${queryString ? `?${queryString}` : ""}`,
+      { scroll: false }
+    );
+
+    document
+      .getElementById(PRODUCT_GRID_ANCHOR_ID)
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
   function toggleCategory(slug: string) {
+    setPage(1);
     setSelectedCategories((prev) =>
       prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug]
     );
   }
 
   function toggleFacetValue(attributeSlug: string, value: string) {
+    setPage(1);
     setSelectedFacets((prev) => {
       const current = prev[attributeSlug] ?? [];
       const next = current.includes(value)
@@ -75,6 +118,27 @@ export default function BrandProductsSection({
       }
       return updated;
     });
+  }
+
+  function applyPriceMin() {
+    if (priceMinInput === priceMin) return;
+    setPage(1);
+    setPriceMin(priceMinInput);
+  }
+
+  function applyPriceMax() {
+    if (priceMaxInput === priceMax) return;
+    setPage(1);
+    setPriceMax(priceMaxInput);
+  }
+
+  function handlePriceKeyDown(
+    event: React.KeyboardEvent<HTMLInputElement>,
+    apply: () => void
+  ) {
+    if (event.key === "Enter") {
+      apply();
+    }
   }
 
   // Tek kategori seçiliyken o kategorinin attribute'larını çek
@@ -102,7 +166,9 @@ export default function BrandProductsSection({
     };
   }, [selectedCategories]);
 
-  // Herhangi bir filtre değişince backend'den ürünleri yeniden çek
+  // Herhangi bir filtre ya da sayfa değişince backend'den ürünleri
+  // yeniden çek. Fiyat artık backend'e gidiyor (Coalesce(discount_price,
+  // price) ile) -- client-side süzme yok.
   useEffect(() => {
     const facetsParam = Object.entries(selectedFacets)
       .map(([slug, values]) => `${slug}:${values.join("|")}`)
@@ -110,15 +176,21 @@ export default function BrandProductsSection({
 
     setLoading(true);
 
-    getProductsByBrandFiltered(brandSlug, {
+    getProductsByBrandPage(brandSlug, {
       category: selectedCategories.join(","),
-      priceMin,
-      priceMax,
-      facets: facetsParam,
+      price_min: priceMin || undefined,
+      price_max: priceMax || undefined,
+      facets: facetsParam || undefined,
+      page,
     })
-      .then((result) => setProducts(result))
+      .then((result) => {
+        setProducts(result.results);
+        setCount(result.count);
+      })
       .finally(() => setLoading(false));
-  }, [brandSlug, selectedCategories, priceMin, priceMax, selectedFacets]);
+  }, [brandSlug, selectedCategories, priceMin, priceMax, selectedFacets, page]);
+
+  const totalPages = Math.max(1, Math.ceil(count / PRODUCTS_PAGE_SIZE));
 
   const filterableAttributes = categoryAttributes
     .flatMap((group) => group.attributes)
@@ -160,16 +232,20 @@ export default function BrandProductsSection({
           <input
             type="number"
             placeholder="Min"
-            value={priceMin}
-            onChange={(e) => setPriceMin(e.target.value)}
+            value={priceMinInput}
+            onChange={(e) => setPriceMinInput(e.target.value)}
+            onBlur={applyPriceMin}
+            onKeyDown={(e) => handlePriceKeyDown(e, applyPriceMin)}
             className="w-full rounded-md border border-line px-2 py-1.5 text-sm"
           />
           <span className="text-fg-subtle">-</span>
           <input
             type="number"
             placeholder="Max"
-            value={priceMax}
-            onChange={(e) => setPriceMax(e.target.value)}
+            value={priceMaxInput}
+            onChange={(e) => setPriceMaxInput(e.target.value)}
+            onBlur={applyPriceMax}
+            onKeyDown={(e) => handlePriceKeyDown(e, applyPriceMax)}
             className="w-full rounded-md border border-line px-2 py-1.5 text-sm"
           />
         </div>
@@ -236,11 +312,20 @@ export default function BrandProductsSection({
           <p className="text-sm text-fg-muted">Hiçbir ürün eşleşmedi.</p>
         )}
 
-        <div className="grid grid-cols-2 gap-1.5 lg:grid-cols-3">
+        <div
+          id={PRODUCT_GRID_ANCHOR_ID}
+          className="grid grid-cols-2 gap-1.5 lg:grid-cols-3"
+        >
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          onNavigate={goToPage}
+        />
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import {
   getBrands,
   getBrandBySlug,
   getProductsByBrand,
+  getProductsByBrandPage,
   type Brand,
 } from "@/services/catalog";
 import { buildBrandTitle, buildBrandDescription } from "@/lib/seo";
@@ -13,7 +14,13 @@ import { BRAND_LOGOS } from "@/constant/brandLogos";
 
 type Props = {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ page?: string }>;
 };
+
+function parsePage(raw: string | undefined): number {
+  const parsed = Number(raw);
+  return Number.isFinite(parsed) && parsed > 0 ? Math.floor(parsed) : 1;
+}
 
 export async function generateStaticParams() {
   const brands = await getBrands();
@@ -22,8 +29,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
+  searchParams,
 }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const { page: rawPage } = await searchParams;
+  const page = parsePage(rawPage);
 
   let brand: Brand;
   try {
@@ -43,7 +53,8 @@ export async function generateMetadata({
 
   const title = buildBrandTitle(brand);
   const description = buildBrandDescription(brand);
-  const canonical = `/marka/${slug}`;
+  const canonical =
+    page > 1 ? `/marka/${slug}?page=${page}` : `/marka/${slug}`;
 
   return {
     title,
@@ -69,8 +80,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function BrandPage({ params }: Props) {
+export default async function BrandPage({ params, searchParams }: Props) {
   const { slug } = await params;
+  const { page: rawPage } = await searchParams;
+  const page = parsePage(rawPage);
+
   const brands = await getBrands();
   const brand = brands.find((b) => b.slug === slug);
 
@@ -78,7 +92,16 @@ export default async function BrandPage({ params }: Props) {
     notFound();
   }
 
-  const products = await getProductsByBrand(slug);
+  // Marka sayfasının kategori filtresi markanın TÜM ürünlerinden
+  // gelmeli (Mondial scooter'ları dahil) -- bu yüzden tüm sayfaları
+  // gezen getProductsByBrand burada ayrıca, sadece bu listeyi (ve
+  // üstteki "X ürün" toplamını) türetmek için çağrılıyor. Izgaranın
+  // kendisi ayrı, URL'deki ?page'e uyan getProductsByBrandPage'den
+  // besleniyor -- aksi halde ilk render'da tüm ürünler görünüp client
+  // tarafında sayfa 1'e "zıplardı".
+  const allProducts = await getProductsByBrand(slug);
+  const { results: initialProducts, count: initialCount } =
+    await getProductsByBrandPage(slug, { page });
 
   const subtitleParts: string[] = [];
   if (brand.founded_year) {
@@ -115,11 +138,17 @@ export default async function BrandPage({ params }: Props) {
           </p>
         )}
 
-        <p className="text-sm text-fg-muted">{products.length} ürün</p>
+        <p className="text-sm text-fg-muted">{allProducts.length} ürün</p>
       </div>
 
         <div className="mx-auto mt-8 max-w-6xl px-1.5 lg:px-6">
-        <BrandProductsSection brandSlug={slug} products={products} />
+        <BrandProductsSection
+          brandSlug={slug}
+          allProducts={allProducts}
+          initialProducts={initialProducts}
+          initialCount={initialCount}
+          initialPage={page}
+        />
       </div>
     </>
   );

@@ -94,7 +94,11 @@ export default async function CategorySlugLayout({
 
 
    {isVehicle && (
-    <VehicleSearchBox childCategories={ownChildren} brands={brands} />
+    <VehicleSearchBox
+      childCategories={ownChildren}
+      brands={brands}
+      currentCategorySlug={slug}
+    />
   )}
 
        {(sidebarItems.length > 0 || !isVehicle) && (

@@ -8,6 +8,7 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.permissions import AllowAny
 
 from .filters import ProductFilter
+from .pagination import ProductPageNumberPagination
 
 from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductAttributeValue, ProductImage, ProductReview, HomepageBand, SiteContent, InstallmentOption, Favorite, VehicleModel
 from .serializers import (
@@ -172,6 +173,7 @@ class CategoryBrandListAPIView(generics.ListAPIView):
 
 class ProductListAPIView(generics.ListAPIView):
     serializer_class = ProductListSerializer
+    pagination_class = ProductPageNumberPagination
 
     filter_backends = (
         DjangoFilterBackend,
@@ -196,8 +198,13 @@ class ProductListAPIView(generics.ListAPIView):
         "category__name",
     )
 
+    # "id" sona eklendi: aynı created_at degerine sahip urunlerde
+    # (ozellikle toplu seed'lerde) sayfa sinirlarinda deterministik
+    # olmayan siralama, bazi urunlerin sayfa 2/3'te tekrar etmesine ya
+    # da hic gorunmemesine yol acabiliyordu.
     ordering = (
         "-created_at",
+        "id",
     )
 
     def get_queryset(self):

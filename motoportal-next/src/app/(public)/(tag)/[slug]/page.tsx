@@ -4,13 +4,22 @@ import { notFound } from "next/navigation";
 import { getProductsByTag,  getProductsByTagAndCategories, getProductsOnDiscount } from "@/services/catalog";
 import { buildTagDescription } from "@/lib/seo";
 import ProductCard from "@/components/product/ProductCard";
+import Pagination, {
+  PRODUCT_GRID_ANCHOR_ID,
+  PRODUCTS_PAGE_SIZE,
+} from "@/components/product/Pagination";
 import { campaignTags, gearTags, bakimTags, aksesuarTags } from "@/constant/homepageBlocks";
 import type { TagPill } from "@/components/Home/TagCategoryBlock/TagCategoryBlock";
 
 type Props = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ scope?: string }>;
+  searchParams: Promise<{ scope?: string; page?: string }>;
 };
+
+function parsePage(raw: string | undefined): number {
+  const parsed = Number(raw);
+  return Number.isFinite(parsed) && parsed > 0 ? Math.floor(parsed) : 1;
+}
 
 /**
  * Bantların pill href'leri "?scope=..." soneki taşıyabiliyor
@@ -52,8 +61,10 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
+  searchParams,
 }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const { page: rawPage } = await searchParams;
   const tag = ALL_TAGS.find((t) => t.href === `/${slug}`);
 
   if (!tag) {
@@ -68,8 +79,10 @@ export async function generateMetadata({
 
   const title = tag.label;
   const description = buildTagDescription(tag.label);
+  const page = parsePage(rawPage);
   // ?scope= her zaman dışlanıyor -- kanonik her zaman taban (scope'suz) path.
-  const canonical = `/${slug}`;
+  // Sadece sayfa numarası (page>1) kendi canonical'ını taşır.
+  const canonical = page > 1 ? `/${slug}?page=${page}` : `/${slug}`;
 
   return {
     title,
@@ -93,20 +106,33 @@ export async function generateMetadata({
 
 export default async function TagPage({ params, searchParams }: Props) {
   const { slug } = await params;
-  const { scope } = await searchParams;
+  const { scope, page: rawPage } = await searchParams;
   const tag = ALL_TAGS.find((t) => t.href === `/${slug}`);
 
   if (!tag) {
     notFound();
   }
 
+  const page = parsePage(rawPage);
   const scopeCategories = scope ? SCOPE_CATEGORIES[scope] : undefined;
 
-  const products = scopeCategories
-    ? await getProductsByTagAndCategories(slug, scopeCategories)
+  const { results: products, count } = scopeCategories
+    ? await getProductsByTagAndCategories(slug, scopeCategories, page)
     : slug === "indirimli-urunler"
-    ? await getProductsOnDiscount()
-    : await getProductsByTag(slug);
+    ? await getProductsOnDiscount(page)
+    : await getProductsByTag(slug, page);
+
+  const totalPages = Math.max(1, Math.ceil(count / PRODUCTS_PAGE_SIZE));
+
+  function buildHref(targetPage: number): string {
+    const query = new URLSearchParams();
+    if (scope) query.set("scope", scope);
+    if (targetPage > 1) query.set("page", String(targetPage));
+
+    const queryString = query.toString();
+    return `/${slug}${queryString ? `?${queryString}` : ""}`;
+  }
+
   return (
     <>
       <nav className="mb-4 text-sm text-fg-muted">
@@ -118,11 +144,26 @@ export default async function TagPage({ params, searchParams }: Props) {
 
       <h1 className="mb-6 text-2xl font-bold">{tag.label}</h1>
 
-      <div className="grid grid-cols-2 gap-1.5 lg:grid-cols-3">
+      <div
+        id={PRODUCT_GRID_ANCHOR_ID}
+        className="grid grid-cols-2 gap-1.5 lg:grid-cols-3"
+      >
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+
+      {products.length === 0 && (
+        <p className="py-10 text-center text-sm text-fg-muted">
+          Bu kriterlere uyan ürün bulunamadı.
+        </p>
+      )}
+
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages}
+        buildHref={buildHref}
+      />
     </>
   );
 }

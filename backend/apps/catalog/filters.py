@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.functions import Coalesce
 from django_filters import rest_framework as filters
 
 from .models import Category, Product
@@ -10,8 +11,7 @@ class ProductFilter(filters.FilterSet):
     )
 
     brand = filters.CharFilter(
-        field_name="brand__slug",
-        lookup_expr="iexact",
+        method="filter_brand",
     )
 
     featured = filters.BooleanFilter(
@@ -31,6 +31,14 @@ class ProductFilter(filters.FilterSet):
         method="filter_facets",
     )
 
+    price_min = filters.NumberFilter(
+        method="filter_price_min",
+    )
+
+    price_max = filters.NumberFilter(
+        method="filter_price_max",
+    )
+
     class Meta:
         model = Product
         fields = (
@@ -40,6 +48,34 @@ class ProductFilter(filters.FilterSet):
             "tag",
             "on_discount",
             "facets",
+            "price_min",
+            "price_max",
+        )
+
+    def filter_brand(self, queryset, name, value):
+        slugs = [s.strip() for s in value.split(",") if s.strip()]
+
+        if not slugs:
+            return queryset
+
+        return queryset.filter(brand__slug__in=slugs)
+
+    def with_effective_price(self, queryset):
+        if "effective_price" in queryset.query.annotations:
+            return queryset
+
+        return queryset.annotate(
+            effective_price=Coalesce("discount_price", "price"),
+        )
+
+    def filter_price_min(self, queryset, name, value):
+        return self.with_effective_price(queryset).filter(
+            effective_price__gte=value,
+        )
+
+    def filter_price_max(self, queryset, name, value):
+        return self.with_effective_price(queryset).filter(
+            effective_price__lte=value,
         )
 
     def filter_on_discount(self, queryset, name, value):
