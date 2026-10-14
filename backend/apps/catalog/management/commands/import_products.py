@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 import csv
-import re
-import unicodedata
 from collections import defaultdict
 from dataclasses import dataclass, field
 from decimal import Decimal, InvalidOperation
@@ -25,6 +23,7 @@ from apps.catalog.models import (
     ProductCurrency,
     ProductStockStatus,
 )
+from apps.catalog.utils.text import normalize_match_value
 
 BASE_PRODUCT_COLUMNS = {
     "name",
@@ -1066,22 +1065,7 @@ class ProductCSVImporter:
         self,
         value: str,
     ) -> str:
-        normalized = unicodedata.normalize("NFKD", value.strip().casefold())
-        ascii_text = "".join(
-            character
-            for character in normalized
-            if not unicodedata.combining(character)
-        )
-        ascii_text = (
-            ascii_text
-            .replace("ı", "i")
-            .replace("ş", "s")
-            .replace("ğ", "g")
-            .replace("ü", "u")
-            .replace("ö", "o")
-            .replace("ç", "c")
-        )
-        return re.sub(r"[^a-z0-9]+", "", ascii_text)
+        return normalize_match_value(value)
 
     def resolve_stock_status(
         self,

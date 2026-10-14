@@ -9,6 +9,7 @@ from rest_framework.permissions import AllowAny
 
 from .filters import ProductFilter
 from .pagination import ProductPageNumberPagination
+from .utils.text import normalize_match_value
 
 from .models import AttributeOption, Brand, Category, CategoryAttribute, Product, ProductAttributeValue, ProductImage, ProductReview, HomepageBand, SiteContent, InstallmentOption, Favorite, VehicleModel
 from .serializers import (
@@ -29,6 +30,7 @@ from .serializers import (
     SiteContentSerializer,
     InstallmentOptionSerializer,
     VehicleModelSerializer,
+    get_display_name,
 
 )
 
@@ -293,6 +295,14 @@ class DashboardProductListAPIView(generics.ListAPIView):
     yok, bu yüzden bu liste "benim ürünlerim" değil, sistemdeki TÜM
     ürünleri döner. CanManageProducts izni bunu sadece yönetim
     rollerine (super_admin/admin/editor/dealer) açar.
+
+    ?q= ile arama: ad, display_name, marka, kategori, ürün kodu ve MPN
+    (attribute) alanlarında, Türkçe karakter/büyük-küçük harf farkından
+    bağımsız (normalize_match_value) arar. Birden fazla kelime girilirse
+    her kelime ayrı ayrı (AND) eşleşmeli. Sayfalama yok, bu yüzden
+    filtreleme DB'de değil Python tarafında yapılıyor -- ILIKE
+    Postgres'in "C" collation'ında Türkçe büyük/küçük harf
+    dönüşümünü doğru yapmıyor (örn. 'İ' -> 'i' eşlemiyor).
     """
     serializer_class = DashboardProductListSerializer
     permission_classes = (
@@ -307,10 +317,67 @@ class DashboardProductListAPIView(generics.ListAPIView):
                 "brand",
                 "category",
             )
+            .prefetch_related(
+                Prefetch(
+                    "attribute_values",
+                    queryset=ProductAttributeValue.objects.filter(
+                        attribute__slug="model-yili",
+                    ),
+                    to_attr="model_yili_prefetch",
+                ),
+                Prefetch(
+                    "attribute_values",
+                    queryset=ProductAttributeValue.objects.filter(
+                        attribute__slug="mpn",
+                    ),
+                    to_attr="mpn_prefetch",
+                ),
+            )
             .order_by(
                 "-created_at",
             )
         )
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        query = request.query_params.get("q", "").strip()
+
+        if query:
+            words = [
+                normalize_match_value(word)
+                for word in query.split()
+                if word.strip()
+            ]
+            queryset = [
+                product
+                for product in queryset
+                if self._matches_search(product, words)
+            ]
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def _matches_search(self, product, words):
+        mpn_value = (
+            product.mpn_prefetch[0].value
+            if product.mpn_prefetch
+            else ""
+        )
+
+        haystack = normalize_match_value(" ".join(
+            part
+            for part in (
+                product.name,
+                get_display_name(product),
+                product.brand.name,
+                product.category.name,
+                product.product_code or "",
+                mpn_value,
+            )
+            if part
+        ))
+
+        return all(word in haystack for word in words)
 
 
 class ProductDetailAPIView(generics.RetrieveAPIView):

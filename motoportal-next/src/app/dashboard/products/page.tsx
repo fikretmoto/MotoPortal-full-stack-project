@@ -1,26 +1,38 @@
 import Link from "next/link";
 import { getDashboardProducts } from "@/services/products";
 import { DashboardProductRow } from "@/components/dashboard/DashboardProductRow";
+import { DashboardProductSearch } from "@/components/dashboard/DashboardProductSearch";
 import { Card } from "@/components/ui/card";
 
-export default async function DashboardProductsPage() {
-  const products = await getDashboardProducts();
+type Props = {
+  searchParams: Promise<{ q?: string }>;
+};
+
+export default async function DashboardProductsPage({
+  searchParams,
+}: Props) {
+  const { q } = await searchParams;
+  const products = await getDashboardProducts(q);
 
   return (
     <div className="p-6">
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-xl font-bold">Ürün Listesi</h1>
-        <Link
-          href="/dashboard/products/new"
-          className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
-        >
-          + Yeni Ürün Ekle
-        </Link>
+
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <DashboardProductSearch />
+          <Link
+            href="/dashboard/products/new"
+            className="rounded-lg bg-primary px-4 py-2 text-center text-sm font-semibold text-primary-foreground transition hover:opacity-90"
+          >
+            + Yeni Ürün Ekle
+          </Link>
+        </div>
       </div>
 
       {products.length === 0 ? (
         <Card className="p-8 text-center text-sm text-fg-muted">
-          Henüz ürün yok.
+          {q ? "Aramanıza uygun ürün bulunamadı." : "Henüz ürün yok."}
         </Card>
       ) : (
         <Card className="overflow-hidden p-0">

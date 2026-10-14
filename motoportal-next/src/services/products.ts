@@ -75,9 +75,9 @@ export type DashboardProductListItem = {
   created_at: string;
 };
 
-export async function getDashboardProducts(): Promise<
-  DashboardProductListItem[]
-> {
+export async function getDashboardProducts(
+  query?: string
+): Promise<DashboardProductListItem[]> {
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("access_token")?.value;
 
@@ -85,12 +85,21 @@ export async function getDashboardProducts(): Promise<
     return [];
   }
 
-  const response = await fetch(`${API_URL}/products/dashboard/`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    cache: "no-store",
-  });
+  const searchParams = new URLSearchParams();
+  if (query) {
+    searchParams.set("q", query);
+  }
+  const queryString = searchParams.toString();
+
+  const response = await fetch(
+    `${API_URL}/products/dashboard/${queryString ? `?${queryString}` : ""}`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      cache: "no-store",
+    }
+  );
 
   if (!response.ok) {
     return [];

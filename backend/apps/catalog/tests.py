@@ -928,12 +928,12 @@ class ProductRoleAuthorizationTests(TestCase):
             f"/api/products/{self.existing_product.slug}/edit/"
         )
 
-          self.user = User.objects.create_user(
-            email="tester@motoportal.com",
-            password="Str0ngPassw0rd!",
-            role=UserRole.ADMIN,
-        )
-
+        self.users_by_role = {
+            role: User.objects.create_user(
+                email=f"tester-{role}@motoportal.com",
+                password="Str0ngPassw0rd!",
+                role=role,
+            )
             for role in (
                 UserRole.SUPER_ADMIN,
                 UserRole.ADMIN,
