@@ -118,7 +118,7 @@ export default async function BrandPage({ params }: Props) {
         <p className="text-sm text-fg-muted">{products.length} ürün</p>
       </div>
 
-      <div className="mt-8">
+        <div className="mx-auto mt-8 max-w-6xl px-1.5 lg:px-6">
         <BrandProductsSection brandSlug={slug} products={products} />
       </div>
     </>
