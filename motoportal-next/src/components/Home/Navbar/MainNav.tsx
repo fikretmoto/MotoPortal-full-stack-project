@@ -2,15 +2,14 @@ import Link from "next/link";
 import {
   Heart,
   Scale,
-  Search,
 } from "lucide-react";
 
 import {
   headerActions,
-  topBarContent,
 } from "@/constant/constant";
 import type { CurrentUser } from "@/services/auth";
 import UserMenu from "./UserMenu";
+import NavSearchForm from "./NavSearchForm";
 
 const iconMap = {
   heart: Heart,
@@ -26,23 +25,7 @@ const MainNav = ({ user }: MainNavProps) => {
     <>
       {/* MOBİL — sadece arama, ikonlar yok */}
       <div className="border-b border-[oklch(90%_0.006_70)] bg-white px-4 py-3 sm:px-6 lg:hidden">
-        <form
-          role="search"
-          className="flex items-center overflow-hidden rounded-xl border-2 border-[oklch(20%_0.01_60)] bg-white"
-        >
-          <input
-            type="search"
-            placeholder={topBarContent.searchPlaceholder}
-            className="h-11 min-w-0 flex-1 bg-white px-4 text-sm text-[oklch(20%_0.01_60)] outline-none placeholder:text-[oklch(55%_0.01_60)]"
-          />
-          <button
-            type="button"
-            aria-label={topBarContent.searchButtonLabel}
-            className="inline-flex h-11 w-12 items-center justify-center bg-[oklch(62%_0.19_35)] text-white transition hover:bg-[oklch(56%_0.19_35)]"
-          >
-            <Search className="h-4 w-4" />
-          </button>
-        </form>
+        <NavSearchForm variant="mobile" />
       </div>
 
       {/* MASAÜSTÜ — arama + Favorilerim/Karşılaştır/Giriş Yap */}
@@ -50,23 +33,7 @@ const MainNav = ({ user }: MainNavProps) => {
         <div className="mx-auto grid max-w-[1560px] grid-cols-[1fr_minmax(420px,680px)_1fr] items-center gap-6 px-4 py-5 sm:px-6 lg:px-8">
           <div aria-hidden="true" />
 
-          <form
-            role="search"
-            className="flex items-center overflow-hidden rounded-xl border-2 border-[oklch(20%_0.01_60)] bg-white"
-          >
-            <input
-              type="search"
-              placeholder={topBarContent.searchPlaceholder}
-              className="h-13 min-w-0 flex-1 bg-white px-5 text-base text-[oklch(20%_0.01_60)] outline-none placeholder:text-[oklch(55%_0.01_60)]"
-            />
-            <button
-              type="button"
-              aria-label={topBarContent.searchButtonLabel}
-              className="inline-flex h-13 w-14 items-center justify-center bg-[oklch(62%_0.19_35)] text-white transition hover:bg-[oklch(56%_0.19_35)]"
-            >
-              <Search className="h-5 w-5" />
-            </button>
-          </form>
+          <NavSearchForm variant="desktop" />
 
           <div className="flex items-center justify-end gap-7">
             {headerActions.map((action) => {

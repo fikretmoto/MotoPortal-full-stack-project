@@ -4,7 +4,7 @@ from .permissions import CanManageProducts, IsCustomerRole
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import AllowAny
 
 from .filters import ProductFilter
@@ -179,18 +179,10 @@ class ProductListAPIView(generics.ListAPIView):
 
     filter_backends = (
         DjangoFilterBackend,
-        SearchFilter,
         OrderingFilter,
     )
 
     filterset_class = ProductFilter
-
-    search_fields = (
-        "name",
-        "brand__name",
-        "category__name",
-        "short_description",
-    )
 
     ordering_fields = (
         "name",
@@ -227,8 +219,27 @@ class ProductListAPIView(generics.ListAPIView):
                     ),
                     to_attr="model_yili_prefetch",
                 ),
+                Prefetch(
+                    "attribute_values",
+                    queryset=ProductAttributeValue.objects.filter(
+                        attribute__slug="mpn",
+                    ),
+                    to_attr="mpn_prefetch",
+                ),
             )
         )
+
+    def filter_queryset(self, queryset):
+        queryset = super().filter_queryset(queryset)
+
+        # ProductFilter.filter_q() queryset'i search_rank ile annotate
+        # ediyor, ama OrderingFilter (filter_backends'te sonra calisiyor)
+        # bunu "-created_at, id" ile eziyor -- q varken alaka siralamasini
+        # (search_rank) en son burada yeniden uyguluyoruz.
+        if self.request.query_params.get("q", "").strip():
+            queryset = queryset.order_by("search_rank", "-created_at", "id")
+
+        return queryset
 
 class ProductImageCreateAPIView(generics.CreateAPIView):
     """

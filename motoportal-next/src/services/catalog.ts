@@ -355,6 +355,7 @@ export type ProductQueryParams = {
   facets?: string;
   price_min?: string;
   price_max?: string;
+  q?: string;
   page?: number;
 };
 
@@ -375,6 +376,7 @@ async function fetchProductPage(
   if (params.facets) query.set("facets", params.facets);
   if (params.price_min) query.set("price_min", params.price_min);
   if (params.price_max) query.set("price_max", params.price_max);
+  if (params.q) query.set("q", params.q);
   if (params.page && params.page > 1) {
     query.set("page", String(params.page));
   }
@@ -476,6 +478,17 @@ export async function getProductsOnDiscount(
   page = 1
 ): Promise<ProductPage> {
   return fetchProductPage({ on_discount: true, page });
+}
+
+export async function getProductsBySearch(
+  q: string,
+  page = 1
+): Promise<ProductPage> {
+  if (!q.trim()) {
+    return { results: [], count: 0 };
+  }
+
+  return fetchProductPage({ q, page });
 }
 // React cache() ile sarmalı: generateMetadata() ve sayfa gövdesi aynı
 // slug için bu fonksiyonu çağırdığında (aynı render pass içinde),
