@@ -244,7 +244,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               className={`mt-1.5 w-full rounded-lg py-1.5 text-[11px] font-semibold transition sm:mt-2 sm:py-2 sm:text-xs ${
                 soldOut
                   ? "cursor-not-allowed bg-surface-hover text-fg-subtle"
-                  : "bg-surface-hover text-foreground hover:bg-primary hover:text-primary-foreground"
+                  : "bg-surface-hover text-foreground hover:bg-primary hover:text-primary-foreground active:bg-primary active:text-primary-foreground"
               }`}
             >
               {soldOut ? "Tükendi" : "İncele"}
