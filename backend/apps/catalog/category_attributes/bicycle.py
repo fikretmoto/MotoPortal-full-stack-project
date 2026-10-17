@@ -10,6 +10,10 @@ BICYCLE_CATEGORY_SLUGS = [
     "yol-bisikleti",
     "sehir-bisikleti",
     "cocuk-bisikleti",
+    "tur-trekking-bisikleti",
+    "katlanir-bisiklet",
+    "gravel-bisikleti",
+    "bmx",
 ]
 
 
