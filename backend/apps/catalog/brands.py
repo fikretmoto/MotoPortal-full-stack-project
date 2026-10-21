@@ -96,6 +96,7 @@ BRAND_DATA = [
 
         # Ekipman Markaları (Kask/Giyim)
     {"name": "AGV", "slug": "agv", "country": "İtalya", "founded_year": None, "website": "", "description": ""},
+    {"name": "Cyril", "slug": "cyril", "country": "", "founded_year": None, "website": "", "description": ""},
     {"name": "Shoei", "slug": "shoei", "country": "Japonya", "founded_year": None, "website": "", "description": ""},
     {"name": "Arai", "slug": "arai", "country": "Japonya", "founded_year": None, "website": "", "description": ""},
     {"name": "Schuberth", "slug": "schuberth", "country": "Almanya", "founded_year": None, "website": "", "description": ""},
@@ -130,6 +131,7 @@ BRAND_DATA = [
     {"name": "Blauer", "slug": "blauer", "country": "İtalya", "founded_year": None, "website": "", "description": ""},
     {"name": "Clover", "slug": "clover", "country": "İtalya", "founded_year": None, "website": "", "description": ""},
     {"name": "Knox", "slug": "knox", "country": "İngiltere", "founded_year": None, "website": "", "description": ""},
+    {"name": "Scoyco", "slug": "scoyco", "country": "Çin", "founded_year": 2003, "website": "", "description": "Foshan (Guangdong) merkezli motosiklet sürüş ekipmanı markası. Mont, pantolon, eldiven, bot ve koruma ekipmanları üretir."},
     {"name": "Shima", "slug": "shima", "country": "Polonya", "founded_year": None, "website": "", "description": ""},
     {"name": "Prosev", "slug": "prosev", "country": "Türkiye", "founded_year": None, "website": "", "description": ""},
     {"name": "Prohel", "slug": "prohel", "country": "Türkiye", "founded_year": None, "website": "", "description": ""},

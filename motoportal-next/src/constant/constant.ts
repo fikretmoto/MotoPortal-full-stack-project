@@ -191,7 +191,7 @@ export const footerGroups: FooterGroup[] = [
     title: "Kurumsal",
     links: [
       { label: "Hakkımızda", href: "#" },
-      { label: "İletişim", href: "#" },
+      { label: "İletişim", href: "/iletisim" },
       { label: "Kariyer", href: "#" },
       { label: "Gizlilik Politikası", href: "#" },
       { label: "Kullanım Şartları", href: "#" },
