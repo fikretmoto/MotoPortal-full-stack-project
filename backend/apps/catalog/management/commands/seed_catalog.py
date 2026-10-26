@@ -19,6 +19,7 @@ from apps.catalog.attribute_options.apparel_boots import APPAREL_BOOTS_ATTRIBUTE
 from apps.catalog.attribute_options.apparel_rain import APPAREL_RAIN_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.apparel_suit import APPAREL_SUIT_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.apparel_base_layer import APPAREL_BASE_LAYER_ATTRIBUTE_OPTION_DATA
+from apps.catalog.attribute_options.apparel_casual_jacket import APPAREL_CASUAL_JACKET_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.headwear import HEADWEAR_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attribute_options.protection import PROTECTION_ATTRIBUTE_OPTION_DATA
 from apps.catalog.attributes.ecommerce import ECOMMERCE_ATTRIBUTE_DATA
@@ -30,6 +31,7 @@ from apps.catalog.attributes.motorcycle import MOTORCYCLE_ATTRIBUTE_DATA
 from apps.catalog.attributes.atv import ATV_ATTRIBUTE_DATA
 from apps.catalog.attributes.apparel_common import APPAREL_COMMON_ATTRIBUTE_DATA
 from apps.catalog.attributes.apparel_jacket import APPAREL_JACKET_ATTRIBUTE_DATA
+from apps.catalog.attributes.apparel_casual_jacket import  APPAREL_CASUAL_JACKET_ATTRIBUTE_DATA
 from apps.catalog.attributes.apparel_pants import APPAREL_PANTS_ATTRIBUTE_DATA
 from apps.catalog.attributes.apparel_gloves import APPAREL_GLOVES_ATTRIBUTE_DATA
 from apps.catalog.attributes.apparel_boots import APPAREL_BOOTS_ATTRIBUTE_DATA
@@ -122,6 +124,14 @@ from apps.catalog.category_attributes.apparel_base_layer import (
     APPAREL_BASE_LAYER_CATEGORY_SLUGS,
     APPAREL_BASE_LAYER_HIGHLIGHT_SLUGS,
 )
+
+
+from apps.catalog.category_attributes.apparel_casual_jacket import (
+    APPAREL_CASUAL_JACKET_ATTRIBUTE_SLUGS,
+    APPAREL_CASUAL_JACKET_CATEGORY_SLUGS,
+    APPAREL_CASUAL_JACKET_HIGHLIGHT_SLUGS,
+)
+
 from apps.catalog.category_attributes.headwear import (
     HEADWEAR_ATTRIBUTE_SLUGS,
     HEADWEAR_CATEGORY_SLUGS,
@@ -320,6 +330,7 @@ class Command(BaseCommand):
             *ECOMMERCE_ATTRIBUTE_DATA,
             *APPAREL_COMMON_ATTRIBUTE_DATA,
             *APPAREL_JACKET_ATTRIBUTE_DATA,
+            *APPAREL_CASUAL_JACKET_ATTRIBUTE_DATA,
             *APPAREL_PANTS_ATTRIBUTE_DATA,
             *APPAREL_GLOVES_ATTRIBUTE_DATA,
             *APPAREL_BOOTS_ATTRIBUTE_DATA,
@@ -435,6 +446,12 @@ class Command(BaseCommand):
         for category_slug in APPAREL_BASE_LAYER_CATEGORY_SLUGS:
                 mappings[category_slug] = APPAREL_BASE_LAYER_ATTRIBUTE_SLUGS
                 highlight_mappings[category_slug] = APPAREL_BASE_LAYER_HIGHLIGHT_SLUGS
+
+        
+        for category_slug in APPAREL_CASUAL_JACKET_CATEGORY_SLUGS:
+                mappings[category_slug] = APPAREL_CASUAL_JACKET_ATTRIBUTE_SLUGS
+                highlight_mappings[category_slug] = APPAREL_CASUAL_JACKET_HIGHLIGHT_SLUGS
+
 
         for category_slug in HEADWEAR_CATEGORY_SLUGS:
                 mappings[category_slug] = HEADWEAR_ATTRIBUTE_SLUGS
@@ -569,6 +586,7 @@ class Command(BaseCommand):
             *APPAREL_RAIN_ATTRIBUTE_OPTION_DATA,
             *APPAREL_SUIT_ATTRIBUTE_OPTION_DATA,
             *APPAREL_BASE_LAYER_ATTRIBUTE_OPTION_DATA,
+            *APPAREL_CASUAL_JACKET_ATTRIBUTE_OPTION_DATA,
             *HEADWEAR_ATTRIBUTE_OPTION_DATA,
             *PROTECTION_ATTRIBUTE_OPTION_DATA,
         ]

@@ -92,7 +92,7 @@ BRAND_DATA = [
     {"name": "Gazelle", "slug": "gazelle", "country": "Hollanda", "founded_year": None, "website": "", "description": ""},
     {"name": "Zontes", "slug": "zontes", "country": "Çin", "founded_year": 2003, "website": "", "description": ""},
     {"name": "Benda", "slug": "benda", "country": "Çin", "founded_year": 2016, "website": "", "description": ""},
-
+    {"name": "Uğur", "slug": "ugur", "country": "Türkiye", "founded_year": None, "website": "", "description": ""},
 
         # Ekipman Markaları (Kask/Giyim)
     {"name": "AGV", "slug": "agv", "country": "İtalya", "founded_year": None, "website": "", "description": ""},

@@ -73,9 +73,17 @@ const MobileNav = ({
   const pathname = usePathname();
   const [openSections, setOpenSections] = useState<string[]>([]);
 
-  const sortedRoots = [...categoryTree].sort(
-    (a, b) => ROOT_ORDER.indexOf(a.slug) - ROOT_ORDER.indexOf(b.slug)
-  );
+  const sortedRoots = categoryTree
+  .filter((root) => root.slug !== "magaza")
+  .sort((a, b) => {
+    const aIndex = ROOT_ORDER.indexOf(a.slug);
+    const bIndex = ROOT_ORDER.indexOf(b.slug);
+
+    return (
+      (aIndex === -1 ? Number.MAX_SAFE_INTEGER : aIndex) -
+      (bIndex === -1 ? Number.MAX_SAFE_INTEGER : bIndex)
+    );
+  });
 
   const toggleSection = (sectionSlug: string) => {
     setOpenSections((previousState) =>

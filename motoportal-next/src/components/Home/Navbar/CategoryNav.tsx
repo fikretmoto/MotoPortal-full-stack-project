@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
-import { featuredPromo } from "@/constant/constant";
+import { featuredPromo, mainMenuItems } from "@/constant/constant";
 import type { CategoryNode } from "@/services/catalog";
 import CategoryColumnList from "./CategoryColumnList";
 
@@ -42,9 +42,17 @@ const CategoryNav = ({ categoryTree }: CategoryNavProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeRootSlug, setActiveRootSlug] = useState(ROOT_ORDER[0]);
 
-  const sortedRoots = [...categoryTree].sort(
-    (a, b) => ROOT_ORDER.indexOf(a.slug) - ROOT_ORDER.indexOf(b.slug)
-  );
+  const sortedRoots = categoryTree
+  .filter((root) => root.slug !== "magaza")
+  .sort((a, b) => {
+    const aIndex = ROOT_ORDER.indexOf(a.slug);
+    const bIndex = ROOT_ORDER.indexOf(b.slug);
+
+    return (
+      (aIndex === -1 ? Number.MAX_SAFE_INTEGER : aIndex) -
+      (bIndex === -1 ? Number.MAX_SAFE_INTEGER : bIndex)
+    );
+  });
 
   const activeRoot =
     sortedRoots.find((root) => root.slug === activeRootSlug) ?? sortedRoots[0] ?? null;
@@ -88,11 +96,18 @@ const CategoryNav = ({ categoryTree }: CategoryNavProps) => {
           </div>
 
           <Link
-            href="#blog"
-            className="border-b-[3px] border-transparent py-4 text-[oklch(88%_0.01_60)] transition hover:text-white"
-          >
-            Blog
-          </Link>
+  href="/magaza"
+  className="border-b-[3px] border-transparent py-4 text-[oklch(88%_0.01_60)] transition hover:text-white"
+>
+  Mağaza
+</Link>
+
+<Link
+  href="#blog"
+  className="border-b-[3px] border-transparent py-4 text-[oklch(88%_0.01_60)] transition hover:text-white"
+>
+  Blog
+</Link>
         </nav>
       </div>
 

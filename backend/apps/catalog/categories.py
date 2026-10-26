@@ -1,5 +1,25 @@
 CATEGORY_DATA = [
     # Ana kategoriler
+
+
+        # Mağaza ve alt kategorileri
+    {
+        "name": "Mağaza",
+        "slug": "magaza",
+        "parent_slug": None,
+    },
+    {
+        "name": "Giyim",
+        "slug": "giyim",
+        "parent_slug": "magaza",
+    },
+
+        {
+        "name": "Ceket",
+        "slug": "ceket",
+        "parent_slug": "giyim",
+    },
+    
     {
         "name": "Taşıtlar",
         "slug": "tasitlar",
