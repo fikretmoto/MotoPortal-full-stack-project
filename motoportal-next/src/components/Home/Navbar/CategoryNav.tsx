@@ -95,12 +95,12 @@ const CategoryNav = ({ categoryTree }: CategoryNavProps) => {
             </button>
           </div>
 
-          <Link
+          {/*<Link
   href="/magaza"
   className="border-b-[3px] border-transparent py-4 text-[oklch(88%_0.01_60)] transition hover:text-white"
 >
   Mağaza
-</Link>
+</Link>*/}
 
 <Link
   href="#blog"
