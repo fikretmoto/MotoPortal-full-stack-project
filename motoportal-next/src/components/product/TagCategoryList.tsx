@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Category } from "@/services/catalog";
+import { getCategoryHref } from "@/lib/category-path";
 
 type Props = {
   categories: Category[];
@@ -15,7 +16,7 @@ export default function TagCategoryList({ categories }: Props) {
         {categories.map((category) => (
           <Link
             key={category.id}
-            href={`/kategori/${category.slug}`}
+            href={getCategoryHref(category.slug, categories)}
             className="text-sm text-fg-muted hover:text-primary"
           >
             {category.name}

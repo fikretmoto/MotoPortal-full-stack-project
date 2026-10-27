@@ -150,7 +150,10 @@ const CategoryNav = ({ categoryTree }: CategoryNavProps) => {
 
                   {section.children.length > 0 ? (
                     <div className="mt-3">
-                      <CategoryColumnList nodes={section.children} />
+                      <CategoryColumnList
+                        nodes={section.children}
+                        parentPath={[section.slug]}
+                      />
                     </div>
                   ) : null}
                 </section>

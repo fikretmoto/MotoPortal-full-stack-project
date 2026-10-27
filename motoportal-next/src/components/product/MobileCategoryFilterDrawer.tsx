@@ -14,6 +14,7 @@ import type { AttributeGroupWithAttributes, Brand, Category } from "@/services/c
 type Props = {
   sidebarItems: Category[];
   sidebarHeaderCategory: Category;
+  allCategories: Category[];
   activeCategoryId: number;
   isVehicle: boolean;
   attributeGroups: AttributeGroupWithAttributes[];

@@ -5,6 +5,7 @@ import {
   getProductsByCategory,
 } from "@/services/catalog";
 import { buildCategoryTitle, buildCategoryDescription } from "@/lib/seo";
+import { getCategorySegments, getCategoryHref } from "@/lib/category-path";
 import ProductCard from "@/components/product/ProductCard";
 import Pagination, {
   PRODUCT_GRID_ANCHOR_ID,
@@ -28,7 +29,7 @@ type SearchParams = {
 };
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
   searchParams: Promise<SearchParams>;
 };
 
@@ -39,7 +40,9 @@ function parsePage(raw: string | undefined): number {
 
 export async function generateStaticParams() {
   const categories = await getCategories();
-  return categories.map((category) => ({ slug: category.slug }));
+  return categories.map((category) => ({
+    slug: getCategorySegments(category.slug, categories),
+  }));
 }
 
 export async function generateMetadata({
@@ -47,11 +50,11 @@ export async function generateMetadata({
   searchParams,
 }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const leafSlug = slug[slug.length - 1];
   const { page: rawPage } = await searchParams;
   // getCategoryBySlug, cache()'li getCategories()'i kullanıyor --
-  // sayfa gövdesindeki ayrı getCategories()+.find() çağrısıyla aynı
-  // fetch'i paylaşır, ?view= gibi query parametrelerine bakılmaz.
-  const category = await getCategoryBySlug(slug);
+  // sayfa gövdesindeki çağrıyla aynı fetch'i paylaşır.
+  const category = await getCategoryBySlug(leafSlug);
 
   if (!category) {
     return {
@@ -66,12 +69,11 @@ export async function generateMetadata({
   const title = buildCategoryTitle(category);
   const description = buildCategoryDescription(category);
   const page = parsePage(rawPage);
-  // Filtre kombinasyonları (brand/price/facets) canonical'a hiç
-  // taşınmıyor -- bilerek, aksi halde filtre permütasyonları kadar
-  // "farklı" URL indexlenebilir hale gelir. Sadece sayfa numarası
-  // kendi canonical'ını taşır.
-  const canonical =
-    page > 1 ? `/kategori/${slug}?page=${page}` : `/kategori/${slug}`;
+  // Filtre kombinasyonları canonical'a taşınmıyor -- bilerek.
+  // Sadece sayfa numarası kendi canonical'ını taşır.
+  const categories = await getCategories();
+  const basePath = getCategoryHref(leafSlug, categories);
+  const canonical = page > 1 ? `${basePath}?page=${page}` : basePath;
 
   return {
     title,
@@ -95,6 +97,7 @@ export async function generateMetadata({
 
 export default async function CategoryPage({ params, searchParams }: Props) {
   const { slug } = await params;
+  const leafSlug = slug[slug.length - 1];
   const {
     view,
     brand,
@@ -104,15 +107,15 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     page: rawPage,
   } = await searchParams;
 
-  if (view !== "all" && HUB_PAGES[slug]) {
-    return HUB_PAGES[slug]();
+  if (view !== "all" && HUB_PAGES[leafSlug]) {
+    return HUB_PAGES[leafSlug]();
   }
 
   const page = parsePage(rawPage);
 
   const categories = await getCategories();
-  const category = categories.find((c) => c.slug === slug);
-  const { results: products, count } = await getProductsByCategory(slug, {
+  const category = categories.find((c) => c.slug === leafSlug);
+  const { results: products, count } = await getProductsByCategory(leafSlug, {
     brand,
     price_min: priceMin,
     price_max: priceMax,
@@ -121,6 +124,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
   });
 
   const totalPages = Math.max(1, Math.ceil(count / PRODUCTS_PAGE_SIZE));
+  const basePath = getCategoryHref(leafSlug, categories);
 
   function buildHref(targetPage: number): string {
     const query = new URLSearchParams();
@@ -132,7 +136,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     if (targetPage > 1) query.set("page", String(targetPage));
 
     const queryString = query.toString();
-    return `/kategori/${slug}${queryString ? `?${queryString}` : ""}`;
+    return `${basePath}${queryString ? `?${queryString}` : ""}`;
   }
 
   return (

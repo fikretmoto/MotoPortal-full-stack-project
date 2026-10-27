@@ -18,11 +18,18 @@ const ROOT_ORDER = ["tasitlar", "ekipman", "aksesuar", "bakim-ve-temizlik", "yed
 
 type MobileCategoryTreeProps = {
   nodes: CategoryNode[];
+  // Bu listenin üstündeki kategorilerin slug'ları (ör. ["motosiklet"])
+  parentPath?: string[];
   depth?: number;
   onNavigate: () => void;
 };
 
-const MobileCategoryTree = ({ nodes, depth = 0, onNavigate }: MobileCategoryTreeProps) => {
+const MobileCategoryTree = ({
+  nodes,
+  parentPath = [],
+  depth = 0,
+  onNavigate,
+}: MobileCategoryTreeProps) => {
   if (nodes.length === 0) {
     return null;
   }
@@ -32,25 +39,30 @@ const MobileCategoryTree = ({ nodes, depth = 0, onNavigate }: MobileCategoryTree
       className="space-y-2"
       style={depth > 0 ? { marginLeft: depth * 12 } : undefined}
     >
-      {nodes.map((node) => (
-        <div key={node.slug}>
-          <Link
-            href={`/kategori/${node.slug}`}
-            onClick={onNavigate}
-            className="flex items-center justify-between rounded-xl px-3 py-3 text-sm text-white/86 transition hover:bg-white/6 hover:text-white"
-          >
-            <span>{node.name}</span>
-          </Link>
+      {nodes.map((node) => {
+        const path = [...parentPath, node.slug];
 
-          {node.children.length > 0 ? (
-            <MobileCategoryTree
-              nodes={node.children}
-              depth={depth + 1}
-              onNavigate={onNavigate}
-            />
-          ) : null}
-        </div>
-      ))}
+        return (
+          <div key={node.slug}>
+            <Link
+              href={`/kategori/${path.join("/")}`}
+              onClick={onNavigate}
+              className="flex items-center justify-between rounded-xl px-3 py-3 text-sm text-white/86 transition hover:bg-white/6 hover:text-white"
+            >
+              <span>{node.name}</span>
+            </Link>
+
+            {node.children.length > 0 ? (
+              <MobileCategoryTree
+                nodes={node.children}
+                parentPath={path}
+                depth={depth + 1}
+                onNavigate={onNavigate}
+              />
+            ) : null}
+          </div>
+        );
+      })}
     </div>
   );
 };

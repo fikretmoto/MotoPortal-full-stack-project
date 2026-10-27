@@ -12,6 +12,7 @@ import {
 import { getProductsByBrand } from "@/services/catalog";
 import type { Category, Brand } from "@/services/catalog";
 import { parseFacets } from "@/lib/facets";
+import { getCategoryHref } from "@/lib/category-path";
 
 const YEARS = Array.from({ length: 2027 - 2005 + 1 }, (_, i) => 2027 - i);
 const YEAR_ATTRIBUTE_SLUG = "model-yili";
@@ -24,12 +25,14 @@ type ModelOption = {
 type VehicleSearchBoxProps = {
   childCategories: Category[];
   brands: Brand[];
+  allCategories: Category[];
   currentCategorySlug: string;
 };
 
 export default function VehicleSearchBox({
   childCategories,
   brands,
+  allCategories,
   currentCategorySlug,
 }: VehicleSearchBoxProps) {
   const router = useRouter();
@@ -100,9 +103,8 @@ export default function VehicleSearchBox({
     }
 
     const queryString = query.toString();
-    router.push(
-      `/kategori/${targetSlug}${queryString ? `?${queryString}` : ""}`
-    );
+    const targetHref = getCategoryHref(targetSlug, allCategories);
+    router.push(`${targetHref}${queryString ? `?${queryString}` : ""}`);
   }
 
   return (

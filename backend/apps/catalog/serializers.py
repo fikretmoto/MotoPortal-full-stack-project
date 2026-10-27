@@ -142,6 +142,10 @@ class CategorySerializer(serializers.ModelSerializer):
         source="parent.name",
         read_only=True,
     )
+    parent_slug = serializers.CharField(
+        source="parent.slug",
+        read_only=True,
+    )
     is_vehicle = serializers.SerializerMethodField()
 
     class Meta:
@@ -152,6 +156,7 @@ class CategorySerializer(serializers.ModelSerializer):
             "slug",
             "parent",
             "parent_name",
+            "parent_slug",
             "is_active",
             "is_vehicle",
         )

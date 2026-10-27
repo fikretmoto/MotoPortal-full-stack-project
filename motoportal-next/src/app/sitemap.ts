@@ -12,6 +12,8 @@ import {
   aksesuarTags,
 } from "@/constant/homepageBlocks";
 
+import { getCategoryHref } from "@/lib/category-path";
+
 export const revalidate = 3600;
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.motoportal.com.tr";
@@ -129,7 +131,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...categories
       .filter((c) => c.is_active && categorySlugsWithProducts.has(c.slug))
       .map((c) => ({
-        url: `${SITE_URL}/kategori/${c.slug}`,
+      url: `${SITE_URL}${getCategoryHref(c.slug, categories)}`,
         changeFrequency: "daily" as const,
         priority: 0.7,
       })),

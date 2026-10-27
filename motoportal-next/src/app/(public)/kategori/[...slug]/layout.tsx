@@ -2,15 +2,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBrands, getCategories, getBrandsByCategory, getCategoryAttributes } from "@/services/catalog";
 import type { AttributeGroupWithAttributes, Brand, Category } from "@/services/catalog";
+import { getCategorySegments, getCategoryHref } from "@/lib/category-path";
 import VehicleSearchBox from "@/components/product/VehicleSearchBox";
 import CategorySidebarContent from "@/components/product/CategorySidebarContent";
 import MobileCategoryFilterDrawer from "@/components/product/MobileCategoryFilterDrawer";
 
-
 const VEHICLE_ROOT_SLUGS = ["tasitlar"];
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
   children: React.ReactNode;
 };
 
@@ -35,12 +35,21 @@ export default async function CategorySlugLayout({
   params,
   children,
 }: Props) {
-  const { slug } = await params;
+  const { slug: segments } = await params;
+  const leafSlug = segments[segments.length - 1];
   const categories = await getCategories();
   const brands = await getBrands();
-  const category = categories.find((c) => c.slug === slug);
+  const category = categories.find((c) => c.slug === leafSlug);
 
   if (!category) {
+    notFound();
+  }
+
+  // URL'deki yol, kategorinin gerçek yoluyla birebir aynı mı?
+  // Değilse (ör. /kategori/yanlis-ust/dag-bisikleti) 404 veriyoruz,
+  // böylece aynı içerik birden fazla URL'de yayınlanmaz.
+  const expectedSegments = getCategorySegments(leafSlug, categories);
+  if (expectedSegments.join("/") !== segments.join("/")) {
     notFound();
   }
 
@@ -56,23 +65,21 @@ export default async function CategorySlugLayout({
   const sidebarItems = ownChildren.length > 0 ? ownChildren : siblingCategories;
   const sidebarHeaderCategory = trail[0];
 
-
   const isVehicle = VEHICLE_ROOT_SLUGS.includes(trail[0].slug);
 
   let attributeGroups: AttributeGroupWithAttributes[] = [];
   let categoryBrands: Brand[] = [];
   if (!isVehicle) {
     try {
-      const categoryAttributes = await getCategoryAttributes(slug);
+      const categoryAttributes = await getCategoryAttributes(leafSlug);
       attributeGroups = categoryAttributes.attribute_groups;
     } catch {
       attributeGroups = [];
     }
 
-    categoryBrands = await getBrandsByCategory(slug);
+    categoryBrands = await getBrandsByCategory(leafSlug);
   }
 
-  
   return (
     <div className="mx-auto max-w-6xl px-1.5 py-10 lg:px-6">
       <nav className="mb-4 text-sm text-fg-muted">
@@ -83,7 +90,7 @@ export default async function CategorySlugLayout({
           <span key={ancestor.id}>
             {" / "}
             <Link
-              href={`/kategori/${ancestor.slug}`}
+              href={getCategoryHref(ancestor.slug, categories)}
               className="hover:text-primary"
             >
               {ancestor.name}
@@ -92,18 +99,19 @@ export default async function CategorySlugLayout({
         ))}
       </nav>
 
+      {isVehicle && (
+        <VehicleSearchBox
+          childCategories={ownChildren}
+          brands={brands}
+          allCategories={categories}
+          currentCategorySlug={leafSlug}
+        />
+      )}
 
-   {isVehicle && (
-    <VehicleSearchBox
-      childCategories={ownChildren}
-      brands={brands}
-      currentCategorySlug={slug}
-    />
-  )}
-
-       {(sidebarItems.length > 0 || !isVehicle) && (
+      {(sidebarItems.length > 0 || !isVehicle) && (
         <MobileCategoryFilterDrawer
           sidebarItems={sidebarItems}
+          allCategories={categories}
           sidebarHeaderCategory={sidebarHeaderCategory}
           activeCategoryId={category.id}
           isVehicle={isVehicle}
@@ -112,19 +120,20 @@ export default async function CategorySlugLayout({
         />
       )}
 
-       <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
+      <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
         {(sidebarItems.length > 0 || !isVehicle) && (
-  <aside className={`hidden lg:block ${isVehicle ? "w-48 flex-none" : "w-72 flex-none"}`}>
-    <CategorySidebarContent
-      sidebarItems={sidebarItems}
-      sidebarHeaderCategory={sidebarHeaderCategory}
-      activeCategoryId={category.id}
-      isVehicle={isVehicle}
-      attributeGroups={attributeGroups}
-      categoryBrands={categoryBrands}
-    />
-  </aside>
-)}
+          <aside className={`hidden lg:block ${isVehicle ? "w-48 flex-none" : "w-72 flex-none"}`}>
+            <CategorySidebarContent
+              sidebarItems={sidebarItems}
+              allCategories={categories}
+              sidebarHeaderCategory={sidebarHeaderCategory}
+              activeCategoryId={category.id}
+              isVehicle={isVehicle}
+              attributeGroups={attributeGroups}
+              categoryBrands={categoryBrands}
+            />
+          </aside>
+        )}
 
         <div className="flex-1">{children}</div>
       </div>

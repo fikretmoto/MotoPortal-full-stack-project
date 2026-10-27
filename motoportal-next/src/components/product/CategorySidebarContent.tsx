@@ -1,10 +1,13 @@
 import Link from "next/link";
 import type { AttributeGroupWithAttributes, Brand, Category } from "@/services/catalog";
+import { getCategoryHref } from "@/lib/category-path";
 import CategoryFilterSidebar from "./CategoryFilterSidebar";
 
 type Props = {
   sidebarItems: Category[];
   sidebarHeaderCategory: Category;
+  // Tüm kategori listesi, tam yolların hesaplanabilmesi için
+  allCategories: Category[];
   activeCategoryId: number;
   isVehicle: boolean;
   attributeGroups: AttributeGroupWithAttributes[];
@@ -14,6 +17,7 @@ type Props = {
 export default function CategorySidebarContent({
   sidebarItems,
   sidebarHeaderCategory,
+  allCategories,
   activeCategoryId,
   isVehicle,
   attributeGroups,
@@ -24,7 +28,7 @@ export default function CategorySidebarContent({
       {sidebarItems.length > 0 && (
         <>
           <Link
-            href={`/kategori/${sidebarHeaderCategory.slug}`}
+            href={getCategoryHref(sidebarHeaderCategory.slug, allCategories)}
             className="mb-3 block text-sm font-bold uppercase text-foreground hover:text-primary"
           >
             {sidebarHeaderCategory.name}
@@ -33,7 +37,7 @@ export default function CategorySidebarContent({
             {sidebarItems.map((item) => (
               <Link
                 key={item.id}
-                href={`/kategori/${item.slug}`}
+                href={getCategoryHref(item.slug, allCategories)}
                 className={
                   item.id === activeCategoryId
                     ? "text-sm font-bold text-primary"
