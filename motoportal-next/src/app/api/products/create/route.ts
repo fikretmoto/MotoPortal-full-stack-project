@@ -1,5 +1,3 @@
-
-
 import { getValidAccessToken } from "@/services/auth";
 
 import { NextResponse } from "next/server";
@@ -29,7 +27,26 @@ export async function POST(request: Request) {
     body: JSON.stringify(body),
   });
 
-  const data = await djangoResponse.json();
+  // Django JSON yerine HTML hata sayfası dönerse çökmek yerine
+  // gövdeyi metin olarak okuyup anlaşılır bir hata döndürüyoruz.
+  const text = await djangoResponse.text();
+
+  let data: unknown;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    console.error(
+      "Django JSON olmayan yanıt döndü:",
+      djangoResponse.status,
+      text.slice(0, 500)
+    );
+    return NextResponse.json(
+      {
+        detail: `Sunucu hatası (${djangoResponse.status}). Django terminalindeki hata satırına bakın.`,
+      },
+      { status: djangoResponse.status >= 400 ? djangoResponse.status : 502 }
+    );
+  }
 
   return NextResponse.json(data, { status: djangoResponse.status });
 }

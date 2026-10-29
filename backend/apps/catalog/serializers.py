@@ -1,5 +1,6 @@
 from decimal import Decimal, InvalidOperation
 from datetime import timedelta
+import uuid
 from django.utils import timezone
 from typing import Any
 
@@ -1279,6 +1280,12 @@ class ProductWriteSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         attribute_updates = validated_data.pop("attributes", None)
+
+         # Boş kodu benzersiz bir değer yerine NULL olarak kaydet.
+        # Model null=True olduğu için birden fazla NULL sorun çıkarmaz.
+        if not validated_data.get("product_code"):
+            validated_data["product_code"] = None
+
         product = super().create(validated_data)
 
         if attribute_updates:

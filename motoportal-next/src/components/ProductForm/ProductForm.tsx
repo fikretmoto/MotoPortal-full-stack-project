@@ -91,7 +91,7 @@ function buildInitialPricingValues(
   if (!data) return EMPTY_PRICING_VALUES;
 
   return {
-    price: data.price,
+    price: data.price ?? "",
     discountPrice: data.discount_price ?? "",
     stockStatus: data.stock_status,
   };

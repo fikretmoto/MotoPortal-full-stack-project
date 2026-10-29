@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { getBrands, getCategories, getBrandsByCategory, getCategoryAttributes } from "@/services/catalog";
 import type { AttributeGroupWithAttributes, Brand, Category } from "@/services/catalog";
 import { getCategorySegments, getCategoryHref } from "@/lib/category-path";
@@ -49,8 +49,10 @@ export default async function CategorySlugLayout({
   // Değilse (ör. /kategori/yanlis-ust/dag-bisikleti) 404 veriyoruz,
   // böylece aynı içerik birden fazla URL'de yayınlanmaz.
   const expectedSegments = getCategorySegments(leafSlug, categories);
+  // Yol kategorinin gerçek yoluyla eşleşmiyorsa (ör. eski /kategori/dag-bisikleti)
+  // doğru adrese kalıcı yönlendirme yapıyoruz.
   if (expectedSegments.join("/") !== segments.join("/")) {
-    notFound();
+    permanentRedirect(getCategoryHref(leafSlug, categories));
   }
 
   const trail = getAncestorTrail(category, categories);
