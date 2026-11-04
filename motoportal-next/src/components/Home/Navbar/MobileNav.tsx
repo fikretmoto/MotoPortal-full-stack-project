@@ -186,6 +186,16 @@ const MobileNav = ({
                   </Link>
                 ))}
 
+                  {user ? (
+                  <Link
+                    href={user.role === "customer" ? "/hesabim" : "/dashboard"}
+                    onClick={closeMenu}
+                    className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-3 text-center text-xs font-medium text-white/82"
+                  >
+                    {user.role === "customer" ? "Hesabım" : "Panelim"}
+                  </Link>
+                ) : null}
+
                 {user ? (
                   <form
                     action="/api/auth/logout"
