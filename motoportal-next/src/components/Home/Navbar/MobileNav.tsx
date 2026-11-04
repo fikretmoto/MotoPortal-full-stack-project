@@ -195,7 +195,7 @@ const MobileNav = ({
                     <input type="hidden" name="next" value={pathname} />
                     <button
                       type="submit"
-                      onClick={closeMenu}
+                     
                       className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-3 text-center text-xs font-medium text-white/82"
                     >
                       Çıkış Yap

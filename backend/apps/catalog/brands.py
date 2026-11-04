@@ -155,4 +155,8 @@ BRAND_DATA = [
     {"name": "TCX", "slug": "tcx", "country": "İtalya", "founded_year": None, "website": "", "description": ""},
     {"name": "Modeka", "slug": "modeka", "country": "Almanya", "founded_year": None, "website": "", "description": ""},
     {"name": "XPD", "slug": "xpd", "country": "İtalya", "founded_year": None, "website": "", "description": ""},
+
+
+
+        {"name": "Castrol", "slug": "castrol", "country": "İngiltere", "founded_year": 1899, "website": "https://www.castrol.com", "description": ""},
 ]
