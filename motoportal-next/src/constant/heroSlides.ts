@@ -39,4 +39,13 @@ export const heroSlides: HeroSlide[] = [
     href: "/products/defender-125",
   },
 
+  {
+    id: "prostreet-125",
+    badge: "Fiyat Performans",
+    title: "Mondial Prostreet 125",
+    highlight: "125cc grubun fiyat açısından en uygun ve kalite olarak segmentinde öne çıkan en iyi kaliteli motosiklet.",
+    image: "/hero/prostreet_125.png",
+    href: "/products/prostreet-125",
+},
+
 ];
