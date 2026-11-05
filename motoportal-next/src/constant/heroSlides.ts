@@ -48,4 +48,13 @@ export const heroSlides: HeroSlide[] = [
     href: "/products/prostreet-125",
 },
 
+{
+    id: "ntorq-125",
+    badge: "İkinci El",
+    title: "TVS Ntorq 125",
+    highlight: "Temiz ikinci el, 2023 model, 5.000 km. Dijital göstergeli 125cc scooter.",
+    image: "/hero/ntorq-125.jfif", // görseli gönderdiğinde dosya adına göre güncellenecek
+    href: "/products/ntorq-125",
+},
+
 ];
