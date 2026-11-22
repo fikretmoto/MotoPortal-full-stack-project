@@ -77,7 +77,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-        "apps.catalog.apps.CatalogConfig", "apps.accounts", 
+        "apps.catalog.apps.CatalogConfig", "apps.accounts", "apps.blog",
         
 ]
 
