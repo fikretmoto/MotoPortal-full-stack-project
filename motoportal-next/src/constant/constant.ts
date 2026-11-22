@@ -71,7 +71,7 @@ export const mainMenuItems: NavItem[] = [
     isMegaTrigger: true,
   },
  // { label: "Mağaza", href: "/magaza" },
-  { label: "Blog", href: "#blog" },
+  { label: "Blog", href: "/blog" },
 ];
 
 

@@ -60,6 +60,8 @@ path(
 
     ),
 
+    path("api/", include("apps.blog.urls")),
+
     path(
         "api/auth/",
         include("apps.accounts.urls"),

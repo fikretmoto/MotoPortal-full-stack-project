@@ -13,6 +13,7 @@ import {
 } from "@/constant/homepageBlocks";
 
 import { getCategoryHref } from "@/lib/category-path";
+import { getBlogPosts } from "@/services/blog";
 
 export const revalidate = 3600;
 
@@ -98,10 +99,13 @@ function getCanonicalTagSlugs(): string[] {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [categories, brands, products] = await Promise.all([
+  // getBlogPosts() hata durumunda kendisi [] döner (services/blog.ts);
+  // blog API'si çökse bile sitemap diğer girdilerle üretilmeye devam eder.
+  const [categories, brands, products, blogPosts] = await Promise.all([
     getCategories(),
     getBrands(),
     getAllActiveProducts(),
+    getBlogPosts(),
   ]);
 
   const tagSlugs = getCanonicalTagSlugs();
@@ -151,6 +155,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${SITE_URL}/products/${p.slug}`,
       changeFrequency: "daily" as const,
       priority: 0.8,
+    })),
+    {
+      url: `${SITE_URL}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.7,
+    },
+    // Liste endpoint'i zaten sadece yayınlanmış yazıları döndürüyor.
+    // published_at null ise lastModified alanı hiç yazılmıyor.
+    ...blogPosts.map((post) => ({
+      url: `${SITE_URL}/blog/${post.slug}`,
+      ...(post.published_at
+        ? { lastModified: new Date(post.published_at) }
+        : {}),
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
     })),
   ];
 

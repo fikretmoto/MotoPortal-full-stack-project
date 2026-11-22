@@ -103,7 +103,7 @@ const CategoryNav = ({ categoryTree }: CategoryNavProps) => {
 </Link>*/}
 
 <Link
-  href="#blog"
+  href="/blog"
   className="border-b-[3px] border-transparent py-4 text-[oklch(88%_0.01_60)] transition hover:text-white"
 >
   Blog
