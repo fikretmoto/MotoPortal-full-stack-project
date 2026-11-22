@@ -29,6 +29,7 @@ export const campaignTags: TagPill[] = [
   { label: "Şehir Merkezi Ücretsiz Kargo", href: "/sehir-merkezi-ucretsiz-kargo" },
   { label: "Çok Satan", href: "/cok-satan" },
   { label: "Editörün Seçtikleri", href: "/editorun-sectikleri" },
+  { label: "Nakite Özel Fiyat", href: "/nakite-ozel-fiyat" },
 ];
 
 export const motorcycleCategories: CategorySlugCard[] = [
