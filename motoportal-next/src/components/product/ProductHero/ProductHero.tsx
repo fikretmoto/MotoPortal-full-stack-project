@@ -18,6 +18,7 @@ export default function ProductHero({
         coverImageUrl={product.cover_image_url}
         images={product.images}
         productName={product.name}
+        videoUrl={product.video_url}
       />
 
       <ProductHeroAttributes product={product} reviews={reviews} />

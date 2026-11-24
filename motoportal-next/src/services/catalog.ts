@@ -175,6 +175,7 @@ export type ProductDetail = Product & {
 
   description: string;
   instagram_url: string | null;
+  video_url: string | null;
   whatsapp_number: string | null;
 
   images: ProductImage[];

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, X } from "lucide-react";
 
 import type { ProductImage } from "@/services/catalog";
 
@@ -9,73 +9,91 @@ type ProductHeroGalleryProps = {
   coverImageUrl?: string | null;
   images: ProductImage[];
   productName: string;
+  videoUrl?: string | null;
 };
 
-type GalleryImage = {
+type GalleryItem = {
   id: string;
-  image_url: string;
-  alt_text: string;
+  type: "image" | "video";
+  src: string;
+  alt: string;
 };
 
 export default function ProductHeroGallery({
   coverImageUrl,
   images,
   productName,
+  videoUrl,
 }: ProductHeroGalleryProps) {
-  const galleryImages = useMemo<GalleryImage[]>(() => {
-    const mappedImages = images
+  const galleryItems = useMemo<GalleryItem[]>(() => {
+    const mappedImages: GalleryItem[] = images
       .filter(
         (image): image is ProductImage & { image_url: string } =>
           Boolean(image.image_url)
       )
       .map((image) => ({
         id: `gallery-${image.id}`,
-        image_url: image.image_url,
-        alt_text: image.alt_text || productName,
+        type: "image",
+        src: image.image_url,
+        alt: image.alt_text || productName,
       }));
 
-    if (!coverImageUrl) {
-      return mappedImages;
+    const imageItems: GalleryItem[] = coverImageUrl
+      ? [
+          {
+            id: "cover-image",
+            type: "image",
+            src: coverImageUrl,
+            alt: productName,
+          },
+          ...mappedImages.filter((image) => image.src !== coverImageUrl),
+        ]
+      : mappedImages;
+
+    // video_url boş/null ise video öğesi hiç eklenmez -- galeri
+    // eskisi gibi sadece görsellerden oluşur.
+    const trimmedVideoUrl = videoUrl?.trim();
+
+    if (!trimmedVideoUrl) {
+      return imageItems;
     }
 
     return [
       {
-        id: "cover-image",
-        image_url: coverImageUrl,
-        alt_text: productName,
+        id: "product-video",
+        type: "video",
+        src: trimmedVideoUrl,
+        alt: `${productName} videosu`,
       },
-      ...mappedImages.filter(
-        (image) => image.image_url !== coverImageUrl
-      ),
+      ...imageItems,
     ];
-  }, [coverImageUrl, images, productName]);
+  }, [coverImageUrl, images, productName, videoUrl]);
 
-  const [selectedImageId, setSelectedImageId] = useState<string | null>(
-    galleryImages[0]?.id ?? null
+  // Varsayılan seçim listenin ilk öğesi: video varsa video (ana
+  // alanda poster görünür, oynatma kullanıcıya bırakılır).
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(
+    galleryItems[0]?.id ?? null
   );
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
-  const resolvedSelectedImageId =
-    selectedImageId &&
-    galleryImages.some((image) => image.id === selectedImageId)
-      ? selectedImageId
-      : galleryImages[0]?.id ?? null;
+  const resolvedSelectedItemId =
+    selectedItemId && galleryItems.some((item) => item.id === selectedItemId)
+      ? selectedItemId
+      : galleryItems[0]?.id ?? null;
 
-  const selectedIndex = galleryImages.findIndex(
-    (image) => image.id === resolvedSelectedImageId
+  const selectedIndex = galleryItems.findIndex(
+    (item) => item.id === resolvedSelectedItemId
   );
 
-  const selectedImage =
-    galleryImages[selectedIndex] ?? galleryImages[0] ?? null;
+  const selectedItem = galleryItems[selectedIndex] ?? galleryItems[0] ?? null;
 
   const goToIndex = useCallback(
     (index: number) => {
-      if (galleryImages.length === 0) return;
-      const nextIndex =
-        (index + galleryImages.length) % galleryImages.length;
-      setSelectedImageId(galleryImages[nextIndex].id);
+      if (galleryItems.length === 0) return;
+      const nextIndex = (index + galleryItems.length) % galleryItems.length;
+      setSelectedItemId(galleryItems[nextIndex].id);
     },
-    [galleryImages]
+    [galleryItems]
   );
 
   const goPrev = useCallback(() => {
@@ -100,7 +118,7 @@ export default function ProductHeroGallery({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isLightboxOpen, goPrev, goNext]);
 
-  if (!selectedImage) {
+  if (!selectedItem) {
     return (
       <div className="flex h-[500px] items-center justify-center rounded-2xl border border-line bg-surface text-fg-muted">
         Görsel Yok
@@ -108,24 +126,40 @@ export default function ProductHeroGallery({
     );
   }
 
-  const hasMultipleImages = galleryImages.length > 1;
+  const hasMultipleItems = galleryItems.length > 1;
+  const posterUrl = coverImageUrl || undefined;
 
   return (
     <div>
       <div className="group relative overflow-hidden rounded-2xl border border-line bg-card">
-        <button
-          type="button"
-          onClick={() => setIsLightboxOpen(true)}
-          className="block w-full cursor-zoom-in"
-        >
-          <img
-            src={selectedImage.image_url}
-            alt={selectedImage.alt_text}
-            className="h-[520px] w-full object-contain p-6"
+        {selectedItem.type === "video" ? (
+          // Video kendi kontrollerini kullanıyor; ana alana tıklamak
+          // lightbox'ı açmıyor (oynat/duraklat tıklamalarıyla çakışmasın).
+          <video
+            key={selectedItem.src}
+            src={selectedItem.src}
+            poster={posterUrl}
+            controls
+            playsInline
+            preload="metadata"
+            aria-label={selectedItem.alt}
+            className="h-[520px] w-full bg-black object-contain"
           />
-        </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setIsLightboxOpen(true)}
+            className="block w-full cursor-zoom-in"
+          >
+            <img
+              src={selectedItem.src}
+              alt={selectedItem.alt}
+              className="h-[520px] w-full object-contain p-6"
+            />
+          </button>
+        )}
 
-        {hasMultipleImages && (
+        {hasMultipleItems && (
           <>
             <button
               type="button"
@@ -148,27 +182,47 @@ export default function ProductHeroGallery({
         )}
       </div>
 
-      {hasMultipleImages && (
+      {hasMultipleItems && (
         <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
-          {galleryImages.map((image) => {
-            const isActive = selectedImage.id === image.id;
+          {galleryItems.map((item) => {
+            const isActive = selectedItem.id === item.id;
 
             return (
               <button
-                key={image.id}
+                key={item.id}
                 type="button"
-                onClick={() => setSelectedImageId(image.id)}
-                className={`shrink-0 overflow-hidden rounded-xl border-2 bg-card transition ${
+                onClick={() => setSelectedItemId(item.id)}
+                aria-label={item.type === "video" ? item.alt : undefined}
+                className={`relative shrink-0 overflow-hidden rounded-xl border-2 bg-card transition ${
                   isActive
                     ? "border-primary"
                     : "border-line hover:border-fg-subtle"
                 }`}
               >
-                <img
-                  src={image.image_url}
-                  alt={image.alt_text}
-                  className="h-24 w-28 object-contain p-2"
-                />
+                {item.type === "video" ? (
+                  <>
+                    {posterUrl ? (
+                      <img
+                        src={posterUrl}
+                        alt=""
+                        className="h-24 w-28 object-contain p-2"
+                      />
+                    ) : (
+                      <div className="h-24 w-28 bg-surface" />
+                    )}
+                    <span className="absolute inset-0 flex items-center justify-center">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white shadow-md">
+                        <Play className="ml-0.5 h-5 w-5 fill-current" />
+                      </span>
+                    </span>
+                  </>
+                ) : (
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    className="h-24 w-28 object-contain p-2"
+                  />
+                )}
               </button>
             );
           })}
@@ -189,20 +243,36 @@ export default function ProductHeroGallery({
             <X className="h-6 w-6" />
           </button>
 
-          {hasMultipleImages && (
+          {hasMultipleItems && (
             <span className="absolute left-1/2 top-6 -translate-x-1/2 text-sm font-medium text-white/80">
-              {selectedIndex + 1} / {galleryImages.length}
+              {selectedIndex + 1} / {galleryItems.length}
             </span>
           )}
 
-          <img
-            src={selectedImage.image_url}
-            alt={selectedImage.alt_text}
-            onClick={(e) => e.stopPropagation()}
-            className="max-h-[85vh] max-w-[90vw] object-contain"
-          />
+          {/* Lightbox'ta video da gösteriliyor: oklarla videoya
+              gelindiğinde kontrollü <video> çıkar. */}
+          {selectedItem.type === "video" ? (
+            <video
+              key={`lightbox-${selectedItem.src}`}
+              src={selectedItem.src}
+              poster={posterUrl}
+              controls
+              playsInline
+              preload="metadata"
+              aria-label={selectedItem.alt}
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[85vh] max-w-[90vw] object-contain"
+            />
+          ) : (
+            <img
+              src={selectedItem.src}
+              alt={selectedItem.alt}
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[85vh] max-w-[90vw] object-contain"
+            />
+          )}
 
-          {hasMultipleImages && (
+          {hasMultipleItems && (
             <>
               <button
                 type="button"

@@ -434,6 +434,7 @@ class ProductAdmin(admin.ModelAdmin):
                     "description",
                     "cover_image",
                     "instagram_url",
+                    "video_url",
                     "whatsapp_number",
                 ),
             },

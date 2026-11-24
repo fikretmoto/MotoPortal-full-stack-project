@@ -359,6 +359,8 @@ class Product(models.Model):
         verbose_name="Instagram Bağlantısı",
     )
 
+    video_url = models.URLField(blank=True, null=True, verbose_name="Video Adresi (mp4)")
+
     whatsapp_number = models.CharField(
         max_length=20,
         null=True,

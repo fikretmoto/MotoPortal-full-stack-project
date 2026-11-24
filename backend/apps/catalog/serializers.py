@@ -897,6 +897,7 @@ class ProductDetailSerializer(ProductBadgeMixin, ProductFavoriteMixin, serialize
             "short_description",
             "description",
             "instagram_url",
+            "video_url",
             "whatsapp_number",
 
             "cover_image_url",
@@ -967,6 +968,7 @@ class ProductWriteSerializer(serializers.ModelSerializer):
             "short_description",
             "description",
             "instagram_url",
+            "video_url",
             "whatsapp_number",
             "cover_image",
             "cover_image_url",
